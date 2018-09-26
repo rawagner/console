@@ -264,7 +264,8 @@ const ConnectedNewVMWizard = props => {
     onHide={props.onHide}
     namespaces={namespaces}
     templates={templates}
-    k8sCreate={props.createVm} />;
+    k8sCreate={props.createVm}
+    namespace={props.namespace} />;
 };
 
 export const VirtualMachinesPage = connect(
@@ -310,7 +311,7 @@ export const VirtualMachinesPage = connect(
       { kind:TemplateModel.kind, isList: true, prop: TemplateModel.kind, namespace: 'kubevirt-templates'}
     ];
     return <Firehose resources={resources} flatten={getFlattenForKind(NamespaceModel.kind)}>
-      <ConnectedNewVMWizard onHide={this._onHide} createVm={k8sCreate} />
+      <ConnectedNewVMWizard onHide={this._onHide} createVm={k8sCreate} namespace={this.props.namespace} />
     </Firehose>;
   }
 
