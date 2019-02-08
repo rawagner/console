@@ -10,6 +10,7 @@ import {
   CDI_KUBEVIRT_IO,
   STORAGE_IMPORT_PVC_NAME,
   isBeingMigrated,
+  getVolumes,
 } from 'kubevirt-web-ui-components';
 
 const MOCK_EMPTY_VM = null;
@@ -23,19 +24,6 @@ export const findPod = (data, vmName, podNamePrefix) => {
   const pods = data.filter(p => p.metadata.name.startsWith(`${podNamePrefix}${vmName}-`));
   const runningPod = pods.find(p => _.get(p, 'status.phase') === 'Running' || _.get(p, 'status.phase') === 'Pending');
   return runningPod ? runningPod : pods.find(p => _.get(p, 'status.phase') === 'Failed' || _.get(p, 'status.phase') === 'Unknown');
-};
-
-export const findImporterPods = (data, vm) => {
-  if (!data) {
-    return null;
-  }
-
-  const dataVolumeTemplates = _.get(vm, 'spec.dataVolumeTemplates', []);
-
-  const datavolumeNames = dataVolumeTemplates.map(dataVolumeTemplate => _.get(dataVolumeTemplate, 'metadata.name', null))
-    .filter(dataVolumeTemplate => dataVolumeTemplate);
-
-  return data.filter(p => datavolumeNames.find(name => p.metadata.labels[`${CDI_KUBEVIRT_IO}/${STORAGE_IMPORT_PVC_NAME}`] === name ) );
 };
 
 export const findVMIMigration = (migrations, vmiName) => {
