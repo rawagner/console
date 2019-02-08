@@ -2,7 +2,6 @@ import React from 'react';
 import * as _ from 'lodash-es';
 import {
   VmDetails,
-  CDI_KUBEVIRT_IO,
   getName,
   getNamespace,
   getResource,
@@ -19,10 +18,10 @@ import {
   NamespaceModel,
   VirtualMachineInstanceMigrationModel,
   VirtualMachineModel,
+  DataVolumeModel,
 } from '../../models/index';
 import {
   findPod,
-  findImporterPods,
   findVMIMigration,
 } from '../utils/resources';
 import { DASHES, VIRT_LAUNCHER_POD_PREFIX } from '../utils/constants';
@@ -69,11 +68,14 @@ const ConnectedVmDetails = ({ obj: vm }) => {
     pods: {
       resource: getResource(PodModel, { namespace, matchExpressions: [{key: 'kubevirt.io', operator: 'Exists' }] }),
     },
-    importerPods: {
-      resource: getResource(PodModel, {namespace, matchLabels: {[CDI_KUBEVIRT_IO]: 'importer'}}),
+    cdiPods: {
+      resource: getResource(PodModel, {namespace, matchLabels: {app: 'containerized-data-importer'}}),
     },
     migrations: {
       resource: getResource(VirtualMachineInstanceMigrationModel, {namespace}),
+    },
+    dataVolumes: {
+      resource: getResource(DataVolumeModel, {namespace}),
     },
   };
 
@@ -85,7 +87,7 @@ const ConnectedVmDetails = ({ obj: vm }) => {
 };
 
 const VmDetails_ = props => {
-  const { vm, pods, importerPods, migrations, vmi } = props;
+  const { vm, pods, cdiPods, migrations, vmi, dataVolumes } = props;
 
   const vmPod = findPod(pods, getName(vm), VIRT_LAUNCHER_POD_PREFIX);
   const migration = vmi ? findVMIMigration(migrations, getName(vmi)) : null;
@@ -111,13 +113,14 @@ const VmDetails_ = props => {
       NamespaceResourceLink={namespaceResourceLink}
       PodResourceLink={podResourceLink}
       launcherPod={findPod(pods, getName(vm), VIRT_LAUNCHER_POD_PREFIX)}
-      importerPods={findImporterPods(importerPods, vm)}
+      cdiPods={cdiPods}
       migration={migration}
       pods={pods}
       vmi={vmi}
       k8sPatch={k8sPatch}
       k8sGet={k8sGet}
       LoadingComponent={LoadingInline}
+      dataVolumes={dataVolumes}
     />);
 };
 

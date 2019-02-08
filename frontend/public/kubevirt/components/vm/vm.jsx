@@ -5,7 +5,6 @@ import {
   getVmStatus,
   VM_STATUS_ALL,
   VM_STATUS_TO_TEXT,
-  CDI_KUBEVIRT_IO,
   getResource,
 } from 'kubevirt-web-ui-components';
 
@@ -18,11 +17,9 @@ import {
   PodModel,
   NamespaceModel,
   VirtualMachineInstanceMigrationModel,
+  DataVolumeModel,
 } from '../../models/index';
-import {
-  getLabelMatcher,
-  findImporterPods, findVMIMigration, findPod,
-} from '../utils/resources';
+import { getLabelMatcher, findVMIMigration, findPod } from '../utils/resources';
 import { DASHES, VIRT_LAUNCHER_POD_PREFIX } from '../utils/constants';
 import { openCreateVmWizard } from '../modals/create-vm-modal';
 import { menuActions } from './menu-actions';
@@ -45,11 +42,14 @@ const VMRow = ({obj: vm}) => {
     pods: {
       resource: getResource(PodModel, {namespace, matchLabels: getLabelMatcher(vm)}),
     },
-    importerPods: {
-      resource: getResource(PodModel, {namespace, matchLabels: {[CDI_KUBEVIRT_IO]: 'importer'}}),
+    cdiPods: {
+      resource: getResource(PodModel, {namespace, matchLabels: {app: 'containerized-data-importer'}}),
     },
     migrations: {
       resource: migrationResources,
+    },
+    dataVolumes: {
+      resource: getResource(DataVolumeModel, {namespace}),
     },
   };
 
@@ -62,9 +62,8 @@ const VMRow = ({obj: vm}) => {
     </div>
     <div className={mainRowSize}>
       <WithResources resourceMap={resourceMap}
-        resourceToProps={({ pods, importerPods, migrations }) => ({
+        resourceToProps={({ pods, migrations }) => ({
           launcherPod: findPod(pods, name, VIRT_LAUNCHER_POD_PREFIX),
-          importerPods: findImporterPods(importerPods, vm),
           migration: findVMIMigration(migrations, name),
         })}
         loaderComponent={() => DASHES}>
