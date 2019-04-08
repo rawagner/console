@@ -73,6 +73,8 @@ const OverviewEventStream = () => <EventStream scrollableElementId="events-body"
 
 const getPrometheusBaseURL = () => window.SERVER_FLAGS.prometheusBaseURL;
 
+const getAlertManagerBaseURL = () => window.SERVER_FLAGS.alertManagerBaseURL;
+
 export class ClusterOverview extends React.Component {
   constructor(props){
     super(props);
@@ -184,6 +186,23 @@ export class ClusterOverview extends React.Component {
       });
   }
 
+  async fetchAlerts() {
+    const url = `${getAlertManagerBaseURL()}/api/v2/alerts`;
+    let alertsResponse;
+    try {
+      alertsResponse = await coFetchJSON(url);
+    } catch (error) {
+      alertsResponse = error;
+    } finally {
+      if (this._isMounted) {
+        this.setState({
+          alertsResponse,
+        });
+        setTimeout(() => this.fetchAlerts(), REFRESH_TIMEOUT);
+      }
+    }
+  }
+
   componentDidMount() {
     this._isMounted = true;
 
@@ -216,6 +235,7 @@ export class ClusterOverview extends React.Component {
 
     this.fetchPrometheusQuery(UTILIZATION_CPU_USED_QUERY, response => this.setUtilizationData('cpuUtilization', response));
     this.fetchPrometheusQuery(UTILIZATION_MEMORY_USED_QUERY, response => this.setUtilizationData('memoryUtilization', response));
+    this.fetchAlerts();
   }
 
   componentWillUnmount() {
@@ -223,7 +243,7 @@ export class ClusterOverview extends React.Component {
   }
 
   render() {
-    const { openshiftClusterVersions, healthData, consumersData, capacityData, utilizationData } = this.state;
+    const { openshiftClusterVersions, healthData, consumersData, capacityData, utilizationData, alertsResponse } = this.state;
 
     const inventoryResourceMapToProps = resources => {
       return {
@@ -242,6 +262,7 @@ export class ClusterOverview extends React.Component {
 
           ...utilizationData,
           complianceData, // TODO: mock, replace by real data and remove from web-ui-components
+          alertsResponse,
         },
       };
     };
