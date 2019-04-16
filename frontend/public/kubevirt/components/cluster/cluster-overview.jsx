@@ -42,6 +42,7 @@ const UTILIZATION_CPU_USED_QUERY = '((sum(node:node_cpu_utilisation:avg1m) / cou
 const UTILIZATION_MEMORY_USED_QUERY = '(sum(kube_node_status_capacity_memory_bytes) - sum(kube_node_status_allocatable_memory_bytes))[60m:5m]'; // TOTAL is reused from CAPACITY_MEMORY_TOTAL_QUERY
 
 const {
+  CEPH_STATUS_QUERY,
   CEPH_OSD_UP_QUERY,
   CEPH_OSD_DOWN_QUERY,
   CAPACITY_STORAGE_TOTAL_BASE_CEPH_METRIC,
@@ -86,27 +87,9 @@ const getAlertManagerBaseURL = () => window.SERVER_FLAGS.alertManagerBaseURL;
 export class ClusterOverview extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      healthData: {
-        data: {},
-        loaded: false,
-      },
-    };
+    this.state = {};
 
-    this.setHealthData = this._setHealthData.bind(this);
     this.getStorageMetrics = this._getStorageMetrics.bind(this);
-  }
-
-  _setHealthData(healthy, message) {
-    this.setState({
-      healthData: {
-        data: {
-          healthy,
-          message,
-        },
-        loaded: true,
-      },
-    });
   }
 
   async _getStorageMetrics() {
@@ -142,20 +125,17 @@ export class ClusterOverview extends React.Component {
     this.fetchAndStore(url, key);
   }
 
-  fetchHealth(callback) {
-    coFetch(`${k8sBasePath}/healthz`)
-      .then(response => response.text())
-      .then(text => text === 'ok' && this._isMounted ? callback(true, 'All systems healthy') : callback(false, text))
-      .catch(() => {
-        if (this._isMounted) {
-          callback(false, 'Cannot get cluster health');
-        }
-      })
-      .then(() => {
-        if (this._isMounted) {
-          setTimeout(() => this.fetchHealth(callback), REFRESH_TIMEOUT);
-        }
-      });
+  fetchHealth() {
+    const handleK8sHealthResponse = async response => {
+      const text = await response.text();
+      return {response : text};
+    };
+    this.fetchAndStore(`${k8sBasePath}/healthz`, 'k8sHealth', handleK8sHealthResponse, coFetch);
+    this.fetchAndStore(
+      `${k8sBasePath}/apis/subresources.${VirtualMachineModel.apiGroup}/${VirtualMachineModel.apiVersion}/healthz`,
+      'kubevirtHealth'
+    );
+    this.fetchPrometheusQuery(CEPH_STATUS_QUERY, 'cephHealth');
   }
 
   fetchAlerts() {
@@ -163,11 +143,13 @@ export class ClusterOverview extends React.Component {
     this.fetchAndStore(url, 'alertsResponse');
   }
 
-
-  async fetchAndStore(url, key) {
+  async fetchAndStore(url, key, responseHandler, fetchMethod = coFetchJSON) {
     let response;
     try {
-      response = await coFetchJSON(url);
+      response = await fetchMethod(url);
+      if (responseHandler) {
+        response = await responseHandler(response);
+      }
     } catch (error) {
       response = error;
     } finally {
@@ -175,7 +157,7 @@ export class ClusterOverview extends React.Component {
         this.setState({
           [key]: response,
         });
-        setTimeout(() => this.fetchAndStore(url, key), REFRESH_TIMEOUT);
+        setTimeout(() => this.fetchAndStore(url, key, responseHandler, fetchMethod), REFRESH_TIMEOUT);
       }
     }
   }
@@ -188,7 +170,7 @@ export class ClusterOverview extends React.Component {
     this.fetchPrometheusQuery(NODE_CONSUMERS_MEMORY_QUERY, 'infraMemoryResults');
     this.fetchPrometheusQuery(NODE_CONSUMERS_CPU_QUERY, 'infraCpuResults');
 
-    this.fetchHealth(this.setHealthData);
+    this.fetchHealth();
 
     this.fetchPrometheusQuery(OPENSHIFT_VERSION_QUERY, 'openshiftClusterVersionResponse');
 
