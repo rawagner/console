@@ -1,7 +1,12 @@
 import React from 'react';
-import { ClusterOverview } from '../cluster/cluster-overview';
+import { connect } from 'react-redux';
+
+import { types } from '../dashboards/dashboard-actions';
+
+import { k8sBasePath } from '../../module/okdk8s';
+import { ClusterOverviewConnected } from '../cluster/cluster-overview';
 import { HorizontalNav, PageHeading } from '../utils/okdutils';
-import { StorageOverview } from '../../../storage/components/storage-overview/storage-overview';
+import { StorageOverviewConnected } from '../../../storage/components/storage-overview/storage-overview';
 import { coFetchJSON } from '../../../co-fetch';
 
 export const REFRESH_TIMEOUT = 5000;
@@ -30,38 +35,84 @@ export const fetchPeriodically = async(url, onFetch, responseHandler, fetchMetho
   } catch (error) {
     response = error;
   } finally {
-    if (onFetch(response)) {
-      setTimeout(() => fetchPeriodically(url, onFetch, responseHandler, fetchMethod), REFRESH_TIMEOUT);
-    }
+    onFetch(response);
+    setTimeout(() => fetchPeriodically(url, onFetch, responseHandler, fetchMethod), REFRESH_TIMEOUT);
   }
 };
 
-export const fetchPrometheusQuery = (query, onFetch) => {
-  const url = `${getPrometheusBaseURL()}/api/v1/query?query=${encodeURIComponent(query)}`;
-  fetchPeriodically(url, onFetch);
-};
+class Dashboards extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fetchPrometheusQueries = this._fetchPrometheusQueries.bind(this);
+    this.fetchAlerts = this._fetchAlerts.bind(this);
+    this.fetchUrl = this._fetchUrl.bind(this);
+    this.fetchPeriodically = this._fetchPeriodically.bind(this);
+    this.clearTimeouts = this._clearTimeouts.bind(this);
+    this.timeouts = {};
+  }
 
-export const fetchAlerts = onFetch => {
-  const url = `${getAlertManagerBaseURL()}/api/v2/alerts?silenced=false&inhibited=false`;
-  fetchPeriodically(url, onFetch);
-};
+  _clearTimeouts() {
+    Object.keys(this.timeouts).forEach(timeout => clearInterval(this.timeouts[timeout]));
+    this.timeouts = {};
+  }
 
-const pages = [
-  {
-    href: '',
-    name: 'Overview',
-    component: ClusterOverview,
-  },
-  {
-    href: 'storage',
-    name: 'Storage',
-    component: StorageOverview,
-  },
-];
+  async _fetchPeriodically(url, onFetch, responseHandler, fetchMethod = coFetchJSON) {
+    let response;
+    try {
+      response = await fetchMethod(url);
+      if (responseHandler) {
+        response = await responseHandler(response);
+      }
+    } catch (error) {
+      response = error;
+    } finally {
+      onFetch(response);
+      this.timeouts[url] = setTimeout(() => fetchPeriodically(url, onFetch, responseHandler, fetchMethod), REFRESH_TIMEOUT);
+    }
+  }
 
-export const Dashboards = props => (
-  <React.Fragment>
-    <PageHeading title="Dashboards" detail={true} />
-    <HorizontalNav match={props.match} pages={pages} noStatusBox />
-  </React.Fragment>
-);
+  _fetchPrometheusQueries(queries) {
+    queries.forEach(query => {
+      const url = `${getPrometheusBaseURL()}/api/v1/query?query=${encodeURIComponent(query)}`;
+      this.fetchPeriodically(url, response => this.props.setPrometheusResult(query, response));
+    });
+  }
+
+  _fetchAlerts() {
+    const url = `${getAlertManagerBaseURL()}/api/v2/alerts?silenced=false&inhibited=false`;
+    this.fetchPeriodically(url, this.props.setAlertsResult);
+  }
+
+  _fetchUrl(url, responseHandler, fetchMethod) {
+    this.fetchPeriodically(`${k8sBasePath}${url}`, response => this.props.setUrlResult(url, response), responseHandler, fetchMethod);
+  }
+
+  render() {
+    const pages = [
+      {
+        href: '',
+        name: 'Overview',
+        component: () => <ClusterOverviewConnected clearTimeouts={this.clearTimeouts} fetchPrometheusQueries={this.fetchPrometheusQueries} fetchAlerts={this.fetchAlerts} fetchUrl={this.fetchUrl} />,
+      },
+      {
+        href: 'storage',
+        name: 'Storage',
+        component: () => <StorageOverviewConnected clearTimeouts={this.clearTimeouts} fetchPrometheusQueries={this.fetchPrometheusQueries} fetchAlerts={this.fetchAlerts} fetchUrl={this.fetchUrl} />,
+      },
+    ];
+    return (
+      <React.Fragment>
+        <PageHeading title="Dashboards" detail={true} />
+        <HorizontalNav match={this.props.match} pages={pages} noStatusBox />
+      </React.Fragment>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  setPrometheusResult: (key, result) => dispatch({type: types.prometheusQuery, key, result}),
+  setAlertsResult: result => dispatch({type: types.alerts, result}),
+  setUrlResult: (key, result) => dispatch({type: types.url, key, result}),
+});
+
+export const DashboardsConnected = connect(null, mapDispatchToProps)(Dashboards);

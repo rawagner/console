@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import {
   StorageOverview as KubevirtStorageOverview,
@@ -7,6 +8,7 @@ import {
   STORAGE_PROMETHEUS_QUERIES,
 } from 'kubevirt-web-ui-components';
 
+import { dashboardReducerName } from '../../../kubevirt/components/dashboards/dashboard-reducers';
 import {
   CephClusterModel,
   NodeModel,
@@ -20,7 +22,6 @@ import { LoadingInline } from '../../../kubevirt/components/utils/okdutils';
 import { EventStream } from '../../../components/events';
 import { EventsInnerOverview } from '../../../kubevirt/components/cluster/events-inner-overview';
 import { LazyRenderer } from '../../../kubevirt/components/utils/lazyRenderer';
-import { fetchAlerts, fetchPrometheusQuery } from '../../../kubevirt/components/dashboards/dashboards';
 
 const CEPH_PG_CLEAN_AND_ACTIVE_QUERY = 'ceph_pg_clean and ceph_pg_active';
 const CEPH_PG_TOTAL_QUERY = 'ceph_pg_total';
@@ -36,8 +37,8 @@ const {
   CEPH_STATUS_QUERY,
   CEPH_OSD_UP_QUERY,
   CEPH_OSD_DOWN_QUERY,
-  STORAGE_CEPH_CAPACITY_TOTAL_QUERY,
-  STORAGE_CEPH_CAPACITY_USED_QUERY,
+  CEPH_CAPACITY_TOTAL_QUERY,
+  CEPH_CAPACITY_UTILIZATION_QUERY,
 } = STORAGE_PROMETHEUS_QUERIES;
 
 const resourceMap = {
@@ -60,53 +61,51 @@ const podFilter = ({ kind, namespace }) => PodModel.kind === kind && namespace =
 
 const EventStreamComponent = () => <EventStream scrollableElementId="events-body" InnerComponent={EventsInnerOverview} overview={true} namespace={undefined} filter={[pvcFilter, podFilter]} />;
 
+const prometheusQueries = [
+  CEPH_STATUS_QUERY,
+  CEPH_OSD_DOWN_QUERY,
+  CEPH_OSD_UP_QUERY,
+  UTILIZATION_IOPS_QUERY,
+  UTILIZATION_LATENCY_QUERY,
+  UTILIZATION_THROUGHPUT_QUERY,
+  UTILIZATION_RECOVERY_RATE_QUERY,
+  CEPH_CAPACITY_TOTAL_QUERY,
+  CEPH_CAPACITY_UTILIZATION_QUERY,
+  CEPH_PG_CLEAN_AND_ACTIVE_QUERY,
+  CEPH_PG_TOTAL_QUERY,
+  TOP_CONSUMERS_QUERY,
+];
+
 export class StorageOverview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.onFetch = this._onFetch.bind(this);
-  }
-
-  _onFetch(key, response) {
-    if (this._isMounted) {
-      this.setState({
-        [key]: response,
-      });
-      return true;
-    }
-    return false;
-  }
-
   componentDidMount() {
-    this._isMounted = true;
-
-    fetchPrometheusQuery(CEPH_STATUS_QUERY, response => this.onFetch('ocsHealthResponse', response));
-    fetchPrometheusQuery(CEPH_OSD_DOWN_QUERY, response => this.onFetch('cephOsdDown', response));
-    fetchPrometheusQuery(CEPH_OSD_UP_QUERY, response => this.onFetch('cephOsdUp', response));
-    fetchPrometheusQuery(UTILIZATION_IOPS_QUERY, response => this.onFetch('iopsUtilization', response));
-    fetchPrometheusQuery(UTILIZATION_LATENCY_QUERY, response => this.onFetch('latencyUtilization', response));
-    fetchPrometheusQuery(UTILIZATION_THROUGHPUT_QUERY, response => this.onFetch('throughputUtilization', response));
-    fetchPrometheusQuery(UTILIZATION_RECOVERY_RATE_QUERY, response => this.onFetch('recoveryRateUtilization', response));
-    fetchPrometheusQuery(STORAGE_CEPH_CAPACITY_TOTAL_QUERY, response => this.onFetch('capacityTotal', response));
-    fetchPrometheusQuery(STORAGE_CEPH_CAPACITY_USED_QUERY, response => this.onFetch('capacityUsed', response));
-    fetchPrometheusQuery(CEPH_PG_CLEAN_AND_ACTIVE_QUERY, response => this.onFetch('cleanAndActivePgRaw', response));
-    fetchPrometheusQuery(CEPH_PG_TOTAL_QUERY, response => this.onFetch('totalPgRaw', response));
-
-    fetchAlerts(result => this.onFetch('alertsResponse', result));
-    fetchPrometheusQuery(TOP_CONSUMERS_QUERY, response => this.onFetch('topConsumers', response));
+    this.props.fetchPrometheusQueries(prometheusQueries);
+    this.props.fetchAlerts();
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
+    this.props.clearTimeouts();
   }
 
   render() {
     const inventoryResourceMapToProps = resources => {
+      const { prometheusResults, alertsResults } = this.props;
       return {
         value: {
           LoadingComponent: LoadingInline,
           ...resources,
-          ...this.state,
+          ocsHealthResponse: prometheusResults[CEPH_STATUS_QUERY],
+          cephOsdDown: prometheusResults[CEPH_OSD_DOWN_QUERY],
+          cephOsdUp: prometheusResults[CEPH_OSD_UP_QUERY],
+          iopsUtilization: prometheusResults[UTILIZATION_IOPS_QUERY],
+          latencyUtilization: prometheusResults[UTILIZATION_LATENCY_QUERY],
+          throughputUtilization: prometheusResults[UTILIZATION_THROUGHPUT_QUERY],
+          recoveryRateUtilization: prometheusResults[UTILIZATION_RECOVERY_RATE_QUERY],
+          storageTotal: prometheusResults[CEPH_CAPACITY_TOTAL_QUERY],
+          storageUsed: prometheusResults[CEPH_CAPACITY_UTILIZATION_QUERY],
+          cleanAndActivePgRaw: prometheusResults[CEPH_PG_CLEAN_AND_ACTIVE_QUERY],
+          totalPgRaw: prometheusResults[CEPH_PG_TOTAL_QUERY],
+          topConsumers: prometheusResults[TOP_CONSUMERS_QUERY],
+          alertsResponse: alertsResults,
           EventStreamComponent,
         },
       };
@@ -126,3 +125,10 @@ export class StorageOverview extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  prometheusResults: state[dashboardReducerName].PROMETHEUS_RESULTS,
+  alertsResults: state[dashboardReducerName].ALERTS_RESULTS,
+});
+
+export const StorageOverviewConnected = connect(mapStateToProps)(StorageOverview);

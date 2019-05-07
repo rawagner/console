@@ -6,6 +6,7 @@ import { featureReducer, featureReducerName } from './features';
 import { monitoringReducer, monitoringReducerName } from './monitoring';
 import k8sReducers from './module/k8s/k8s-reducers';
 import UIReducers from './ui/ui-reducers';
+import { dashboardReducerName, dashboardReducer } from './kubevirt/components/dashboards/dashboard-reducers';
 
 const reducers = combineReducers({
   k8s: k8sReducers, // data
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   form: formReducer,
   [featureReducerName]: featureReducer,
   [monitoringReducerName]: monitoringReducer,
+  [dashboardReducerName]: dashboardReducer,
 });
 
 const store = createStore(reducers, {}, applyMiddleware(thunk));
