@@ -11,6 +11,8 @@ import {
   ResourceListPage,
   ResourceDetailPage,
   Perspective,
+  OverviewHealthPrometheusSubsystem,
+  OverviewHealthUrlSubsystem,
 } from '@console/plugin-sdk';
 
 // TODO(vojtech): internal code needed by plugins should be moved to console-shared package
@@ -18,6 +20,7 @@ import { PodModel } from '@console/internal/models';
 import { FLAGS } from '@console/internal/const';
 
 import * as models from './models';
+import { getFooHealthState } from './foo-health';
 
 type ConsumedExtensions =
   | ModelDefinition
@@ -27,7 +30,9 @@ type ConsumedExtensions =
   | ResourceClusterNavItem
   | ResourceListPage
   | ResourceDetailPage
-  | Perspective;
+  | Perspective
+  | OverviewHealthPrometheusSubsystem
+  | OverviewHealthUrlSubsystem;
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -108,6 +113,22 @@ const plugin: Plugin<ConsumedExtensions> = [
         </svg>
       ),
       landingPageURL: '/search',
+    },
+  },
+  {
+    type: 'Dashboards/Overview/HealthUrlSubsystem',
+    properties: {
+      title: 'Foo system',
+      url: 'fooUrl',
+      healthHandler: getFooHealthState,
+    },
+  },
+  {
+    type: 'Dashboards/Overview/HealthPrometheusSubsystem',
+    properties: {
+      title: 'Via prometheus',
+      query: 'fooQuery',
+      healthHandler: getFooHealthState,
     },
   },
 ];

@@ -8,6 +8,7 @@ import {
   isNavItem,
   isResourcePage,
   isPerspective,
+  isOverviewHealthSubsystem,
 } from './typings';
 
 /**
@@ -39,4 +40,9 @@ export class ExtensionRegistry {
   public getPerspectives() {
     return this.extensions.filter(isPerspective);
   }
+
+  public getOverviewHealthSubsystems() {
+    return this.extensions.filter(isOverviewHealthSubsystem);
+  }
+
 }

@@ -92,6 +92,7 @@
     "react-jsonschema-form": "^1.0.4",
     "react-lightweight-tooltip": "1.x",
     "react-linkify": "^0.2.2",
+    "react-measure": "^2.3.0",
     "react-modal": "3.x",
     "react-redux": "5.x",
     "react-router-dom": "4.x",
