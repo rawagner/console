@@ -64,3 +64,4 @@ export type PluginList = Plugin<Extension<any>>[];
 
 export * from './nav';
 export * from './pages';
+export * from './dashboards';

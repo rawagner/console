@@ -1,0 +1,27 @@
+.co-dashboard-card {
+  margin: 0;
+}
+
+.co-dashboard-card-title {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.co-dashboard-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.co-dashboard-card-body {
+  margin-top: 1.5em;
+}
+
+.co-dashboard-header-icon--info {
+  margin-right: -10px;
+}
+
+.co-dashboard__icon-sm {
+  font-size: 1.125rem;
+}

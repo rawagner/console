@@ -4,6 +4,7 @@ import { featureReducer, featureReducerName, FeatureState } from './reducers/fea
 import { monitoringReducer, monitoringReducerName, MonitoringState } from './reducers/monitoring';
 import k8sReducers, { K8sState } from './reducers/k8s';
 import UIReducers, { UIState } from './reducers/ui';
+import { dashboardsReducer, DashboardsState } from './reducers/dashboards';
 
 const composeEnhancers =
   // eslint-disable-next-line no-undef
@@ -33,6 +34,7 @@ export type RootState = {
   UI: UIState;
   [featureReducerName]: FeatureState;
   [monitoringReducerName]: MonitoringState;
+  dashboards: DashboardsState;
 };
 
 const reducers = combineReducers<RootState>({
@@ -40,6 +42,7 @@ const reducers = combineReducers<RootState>({
   UI: UIReducers,
   [featureReducerName]: featureReducer,
   [monitoringReducerName]: monitoringReducer,
+  dashboards: dashboardsReducer,
 });
 
 const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(thunk)));

@@ -4,16 +4,21 @@ import {
   ResourceNSNavItem,
   ResourceListPage,
   ResourceDetailPage,
+  OverviewHealthPrometheusSubsystem,
+  OverviewHealthUrlSubsystem,
 } from '@console/plugin-sdk';
 
 // TODO(vojtech): internal code needed by plugins should be moved to console-shared package
 import { PodModel } from '@console/internal/models';
+import { getFooHealthState } from './foo-health';
 
 type ConsumedExtensions =
   | HrefNavItem
   | ResourceNSNavItem
   | ResourceListPage
-  | ResourceDetailPage;
+  | ResourceDetailPage
+  | OverviewHealthPrometheusSubsystem
+  | OverviewHealthUrlSubsystem;
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -48,6 +53,22 @@ const plugin: Plugin<ConsumedExtensions> = [
     properties: {
       model: PodModel,
       loader: () => import('@console/internal/components/pod' /* webpackChunkName: "pod" */).then(m => m.PodsDetailsPage),
+    },
+  },
+  {
+    type: 'Dashboards/Overview/HealthUrlSubsystem',
+    properties: {
+      title: 'Foo system',
+      url: 'fooUrl',
+      healthHandler: getFooHealthState,
+    },
+  },
+  {
+    type: 'Dashboards/Overview/HealthPrometheusSubsystem',
+    properties: {
+      title: 'Via prometheus',
+      query: 'fooQuery',
+      healthHandler: getFooHealthState,
     },
   },
 ];
