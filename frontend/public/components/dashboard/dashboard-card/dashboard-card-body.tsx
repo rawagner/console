@@ -15,8 +15,8 @@ export class DashboardCardBody extends React.PureComponent<DashboardCardBodyProp
   }
 }
 
-export type DashboardCardBodyProps = {
+type DashboardCardBodyProps = {
   classname?: string;
   children: React.ReactNode;
-  isLoading?: boolean,
+  isLoading?: boolean;
 };

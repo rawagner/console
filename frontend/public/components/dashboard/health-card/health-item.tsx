@@ -9,23 +9,23 @@ export const LOADING_STATE = 'LOADING_STATE';
 
 const HealthItemIcon: React.FC<HealthItemIconProps> = ({ state }) => {
   let icon;
-  let className;
+  let iconClassModifier;
   switch (state) {
     case OK_STATE:
       icon = 'check-circle';
-      className = 'ok';
+      iconClassModifier = 'ok';
       break;
     case ERROR_STATE:
       icon = 'exclamation-circle';
-      className = 'error';
+      iconClassModifier = 'error';
       break;
     case WARNING_STATE:
     default:
       icon = 'exclamation-triangle';
-      className = 'warning';
+      iconClassModifier = 'warning';
   }
   return (
-    <div className={`co-health-card__icon co-health-card__icon--${className}`}>
+    <div className={`co-health-card__icon co-health-card__icon--${iconClassModifier}`}>
       <Icon type="fa" name={icon} />
     </div>
   );

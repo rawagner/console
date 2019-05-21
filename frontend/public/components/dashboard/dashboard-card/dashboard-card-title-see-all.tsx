@@ -22,7 +22,7 @@ export class DashboardCardTitleSeeAll extends React.PureComponent<DashboardCardT
   }
 }
 
-export type DashboardCardTitleSeeAllProps = {
-  children?: React.ReactNode,
-  title: string,
+type DashboardCardTitleSeeAllProps = {
+  children?: React.ReactNode;
+  title: string;
 }

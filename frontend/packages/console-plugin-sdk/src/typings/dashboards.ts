@@ -2,40 +2,37 @@ import { Extension } from '.';
 import { GetHealthStateFunction } from '@console/internal/components/dashboards-page/overview-dashboard/health-card';
 
 namespace ExtensionProperties {
-  export interface OverviewHealthUrlSubsystem {
-    title: string,
-    url: string,
-    responseHandler?: any,
-    fetchMethod?: any,
-    healthHandler: GetHealthStateFunction,
+  export interface OverviewHealthURLSubsystem {
+    title: string;
+    url: string;
+    responseHandler?: any;
+    fetchMethod?: any;
+    healthHandler: GetHealthStateFunction;
   }
   
   export interface OverviewHealthPrometheusSubsystem {
-    title: string,
-    query: string,
-    healthHandler: GetHealthStateFunction,
+    title: string;
+    query: string;
+    healthHandler: GetHealthStateFunction;
   }
 }
 
-export interface OverviewHealthUrlSubsystem extends Extension<ExtensionProperties.OverviewHealthUrlSubsystem> {
-  type: 'Dashboards/Overview/HealthUrlSubsystem';
+export interface OverviewHealthURLSubsystem extends Extension<ExtensionProperties.OverviewHealthURLSubsystem> {
+  type: 'Dashboards/Overview/HealthURLSubsystem';
 }
 
-export function isOverviewHealthUrlSubsystem(e: Extension<any>): e is OverviewHealthUrlSubsystem {
-  return e.type === 'Dashboards/Overview/HealthUrlSubsystem';
-}
+export const isOverviewHealthURLSubsystem = (e: Extension<any>): e is OverviewHealthURLSubsystem =>
+  e.type === 'Dashboards/Overview/HealthURLSubsystem';
 
 export interface OverviewHealthPrometheusSubsystem extends Extension<ExtensionProperties.OverviewHealthPrometheusSubsystem> {
   type: 'Dashboards/Overview/HealthPrometheusSubsystem';
 }
 
-export function isOverviewHealthPrometheusSubsystem(e: Extension<any>): e is OverviewHealthPrometheusSubsystem {
-  return e.type === 'Dashboards/Overview/HealthPrometheusSubsystem';
-}
+export const isOverviewHealthPrometheusSubsystem = (e: Extension<any>): e is OverviewHealthPrometheusSubsystem =>
+  e.type === 'Dashboards/Overview/HealthPrometheusSubsystem';
 
-export type OverviewHealthSubsystem = OverviewHealthUrlSubsystem | OverviewHealthPrometheusSubsystem;
+export type OverviewHealthSubsystem = OverviewHealthURLSubsystem | OverviewHealthPrometheusSubsystem;
 
-export function isOverviewHealthSubsystem(e: Extension<any>): e is OverviewHealthPrometheusSubsystem {
-  return isOverviewHealthUrlSubsystem(e) || isOverviewHealthPrometheusSubsystem(e);
-}
+export const isOverviewHealthSubsystem = (e: Extension<any>): e is OverviewHealthPrometheusSubsystem =>
+  isOverviewHealthURLSubsystem(e) || isOverviewHealthPrometheusSubsystem(e);
 

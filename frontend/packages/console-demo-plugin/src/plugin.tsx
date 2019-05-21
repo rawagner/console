@@ -12,7 +12,7 @@ import {
   ResourceDetailPage,
   Perspective,
   OverviewHealthPrometheusSubsystem,
-  OverviewHealthUrlSubsystem,
+  OverviewHealthURLSubsystem,
 } from '@console/plugin-sdk';
 
 // TODO(vojtech): internal code needed by plugins should be moved to console-shared package
@@ -32,7 +32,7 @@ type ConsumedExtensions =
   | ResourceDetailPage
   | Perspective
   | OverviewHealthPrometheusSubsystem
-  | OverviewHealthUrlSubsystem;
+  | OverviewHealthURLSubsystem;
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -116,7 +116,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     },
   },
   {
-    type: 'Dashboards/Overview/HealthUrlSubsystem',
+    type: 'Dashboards/Overview/HealthURLSubsystem',
     properties: {
       title: 'Foo system',
       url: 'fooUrl',

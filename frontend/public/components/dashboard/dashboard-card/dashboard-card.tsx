@@ -13,7 +13,7 @@ export class DashboardCard extends React.PureComponent<DashboardCardProps> {
   }
 }
 
-export type DashboardCardProps = {
-  className?: string,
+type DashboardCardProps = {
+  className?: string;
   children: React.ReactNode;
 };

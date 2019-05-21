@@ -5,7 +5,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ className, children }) => 
   <div className={classNames('co-dashboard-body', className)}>{children}</div>
 );
 
-export type DashboardProps = {
+type DashboardProps = {
   className?: string;
   children: React.ReactNode;
 };

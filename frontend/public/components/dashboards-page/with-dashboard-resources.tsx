@@ -5,22 +5,22 @@ import { Map as ImmutableMap } from 'immutable';
 
 import { RESULTS_TYPE } from '../../reducers/dashboards';
 import {
-  watchUrl,
-  stopWatchUrl,
+  watchURL,
+  stopWatchURL,
   watchPrometheusQuery,
   stopWatchPrometheusQuery,
   FetchMethod,
   ResponseHandler,
-  WatchUrlAction,
+  WatchURLAction,
   WatchPrometheusQueryAction,
-  StopWatchUrlAction,
+  StopWatchURLAction,
   StopWatchPrometheusAction,
 } from '../../actions/dashboards';
 import { RootState } from '../../redux';
 
 const mapDispatchToProps = dispatch => ({
-  watchUrl: (url, fetchMethod, responseHandler): WatchUrl => dispatch(watchUrl(url, fetchMethod, responseHandler)),
-  stopWatchUrl: (url): StopWatchUrl => dispatch(stopWatchUrl(url)),
+  watchURL: (url, fetchMethod, responseHandler): WatchURL => dispatch(watchURL(url, fetchMethod, responseHandler)),
+  stopWatchURL: (url): StopWatchURL => dispatch(stopWatchURL(url)),
   watchPrometheusQuery: (query): WatchPrometheus => dispatch(watchPrometheusQuery(query)),
   stopWatchPrometheusQuery: (query): StopWatchPrometheus => dispatch(stopWatchPrometheusQuery(query)),
 });
@@ -34,8 +34,8 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
   class _WithDashboardResources extends React.Component<WithDashboardResourcesProps> {
     private urls: Array<string> = [];
     private queries: Array<string> = [];
-    private _watchUrl = this.watchUrl.bind(this);
-    private _watchPrometheus = this.watchUrl.bind(this);
+    private _watchURL = this.watchURL.bind(this);
+    private _watchPrometheus = this.watchPrometheus.bind(this);
 
     shouldComponentUpdate(nextProps: WithDashboardResourcesProps) {
       const urlResultChanged = this.urls.some(urlKey =>
@@ -48,13 +48,13 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
     }
 
     componentWillUnmount() {
-      this.urls.forEach(this.props.stopWatchUrl);
+      this.urls.forEach(this.props.stopWatchURL);
       this.queries.forEach(this.props.stopWatchPrometheusQuery);
     }
 
-    watchUrl(url: string, fetchMethod: FetchMethod, responseHandler: ResponseHandler) {
+    watchURL(url: string, fetchMethod: FetchMethod, responseHandler: ResponseHandler) {
       this.urls.push(url);
-      this.props.watchUrl(url, fetchMethod, responseHandler);
+      this.props.watchURL(url, fetchMethod, responseHandler);
     }
 
     watchPrometheus(query: string) {
@@ -65,7 +65,7 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
     render() {
       return (
         <WrappedComponent
-          watchUrl={this._watchUrl}
+          watchURL={this._watchURL}
           watchPrometheus={this._watchPrometheus}
           urlResults={this.props[RESULTS_TYPE.URL]}
           prometheusResults={this.props[RESULTS_TYPE.URL]}
@@ -76,16 +76,16 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
 
 export const withDashboardResources = compose(connect(mapStateToProps, mapDispatchToProps), WithDashboardResources);
 
-export type WatchUrl = (url: string, fetchMethod?: FetchMethod, responseHandler?: ResponseHandler) => void;
-export type StopWatchUrl = (url: string) => void;
+export type WatchURL = (url: string, fetchMethod?: FetchMethod, responseHandler?: ResponseHandler) => void;
+export type StopWatchURL = (url: string) => void;
 export type WatchPrometheus = (query: string) => void;
 export type StopWatchPrometheus = (query: string) => void;
 
 type WithDashboardResourcesProps = {
-  watchUrl: WatchUrlAction,
-  watchPrometheusQuery: WatchPrometheusQueryAction,
-  stopWatchUrl: StopWatchUrlAction,
-  stopWatchPrometheusQuery: StopWatchPrometheusAction,
-  [RESULTS_TYPE.PROMETHEUS]: ImmutableMap<string, any>,
-  [RESULTS_TYPE.URL]: ImmutableMap<string, any>,
+  watchURL: WatchURLAction;
+  watchPrometheusQuery: WatchPrometheusQueryAction;
+  stopWatchURL: StopWatchURLAction;
+  stopWatchPrometheusQuery: StopWatchPrometheusAction;
+  [RESULTS_TYPE.PROMETHEUS]: ImmutableMap<string, any>;
+  [RESULTS_TYPE.URL]: ImmutableMap<string, any>;
 };

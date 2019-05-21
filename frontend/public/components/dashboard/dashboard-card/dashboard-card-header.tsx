@@ -13,7 +13,7 @@ export class DashboardCardHeader extends React.PureComponent<DashboardCardHeader
   }
 }
 
-export type DashboardCardHeaderProps = {
-  className?: string,
-  children: React.ReactNode,
+type DashboardCardHeaderProps = {
+  className?: string;
+  children: React.ReactNode;
 }

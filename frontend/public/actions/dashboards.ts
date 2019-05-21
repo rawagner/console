@@ -14,7 +14,7 @@ export enum ActionType {
   UpdateWatchInFlight = 'updateWatchInFlight',
 }
 
-const getPrometheusBaseURL = () => (window as any).SERVER_FLAGS.prometheusBaseURL;
+const prometheusBaseURL = window.SERVER_FLAGS.prometheusBaseURL;
 
 const REFRESH_TIMEOUT = 5000;
 
@@ -57,17 +57,16 @@ export const watchPrometheusQuery: WatchPrometheusQueryAction = query => (dispat
   const isActive = isWatchActive(getState().dashboards, RESULTS_TYPE.PROMETHEUS, query);
   dispatch(activateWatch(RESULTS_TYPE.PROMETHEUS, query));
   if (!isActive) {
-    const prometheusURL = getPrometheusBaseURL();
-    if (!prometheusURL) {
+    if (!prometheusBaseURL) {
       dispatch(updateResult(RESULTS_TYPE.PROMETHEUS, query, {}));
     } else {
-      const url = `${prometheusURL}/api/v1/query?query=${encodeURIComponent(query)}`;
+      const url = `${prometheusBaseURL}/api/v1/query?query=${encodeURIComponent(query)}`;
       fetchPeriodically(dispatch, RESULTS_TYPE.PROMETHEUS, query, url, getState, coFetchJSON);
     }
   }
 };
 
-export const watchUrl: WatchUrlAction = (url, fetchMethod = coFetchJSON, responseHandler) => (dispatch, getState) => {
+export const watchURL: WatchURLAction = (url, fetchMethod = coFetchJSON, responseHandler) => (dispatch, getState) => {
   const isActive = isWatchActive(getState().dashboards, RESULTS_TYPE.URL, url);
   dispatch(activateWatch(RESULTS_TYPE.URL, url));
   if (!isActive) {
@@ -77,14 +76,14 @@ export const watchUrl: WatchUrlAction = (url, fetchMethod = coFetchJSON, respons
 };
 
 export const stopWatchPrometheusQuery = (query: string) => stopWatch(RESULTS_TYPE.PROMETHEUS, query);
-export const stopWatchUrl = (url: string) => stopWatch(RESULTS_TYPE.URL, url);
+export const stopWatchURL = (url: string) => stopWatch(RESULTS_TYPE.URL, url);
 
 
 type ThunkAction = (dispatch: Dispatch, getState: () => RootState) => void;
 
-export type WatchUrlAction = (url: string, fetchMethod?: FetchMethod, responseHandler?: ResponseHandler) => ThunkAction;
+export type WatchURLAction = (url: string, fetchMethod?: FetchMethod, responseHandler?: ResponseHandler) => ThunkAction;
 export type WatchPrometheusQueryAction = (query: string) => ThunkAction;
-export type StopWatchUrlAction = (url: string) => void;
+export type StopWatchURLAction = (url: string) => void;
 export type StopWatchPrometheusAction = (query: string) => void;
 
 export type FetchMethod = (fetch: string) => Promise<any>;

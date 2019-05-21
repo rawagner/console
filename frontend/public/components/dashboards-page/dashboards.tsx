@@ -18,6 +18,6 @@ export const DashboardsPage: React.FC<DashboardsPageProps> = ({ match }) => (
   </React.Fragment>
 );
 
-export type DashboardsPageProps = {
-  match: any,
+type DashboardsPageProps = {
+  match: any;
 };

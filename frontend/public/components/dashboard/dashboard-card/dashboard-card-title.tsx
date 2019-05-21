@@ -12,7 +12,7 @@ export class DashboardCardTitle extends React.PureComponent<DashboardCardTitlePr
   }
 }
 
-export type DashboardCardTitleProps = {
-  className?: string,
-  children: React.ReactNode,
+type DashboardCardTitleProps = {
+  className?: string;
+  children: React.ReactNode;
 }

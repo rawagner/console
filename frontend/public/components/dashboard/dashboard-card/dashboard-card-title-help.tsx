@@ -22,6 +22,6 @@ export class DashboardCardTitleHelp extends React.PureComponent<DashboardCardTit
   }
 }
 
-export type DashboardCardTitleHelpProps = {
-  children: React.ReactNode,
+type DashboardCardTitleHelpProps = {
+  children: React.ReactNode;
 }

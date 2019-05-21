@@ -9,6 +9,6 @@ export class HealthBody extends React.PureComponent<HealthBodyProps> {
 }
 
 type HealthBodyProps = {
-  className?: string,
-  children: any,
+  className?: string;
+  children: any;
 };
