@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { Card } from '@patternfly/react-core';
+import { Card, CardProps } from '@patternfly/react-core';
 
 export class DashboardCard extends React.PureComponent<DashboardCardProps> {
   render() {
@@ -16,4 +16,4 @@ export class DashboardCard extends React.PureComponent<DashboardCardProps> {
 type DashboardCardProps = {
   className?: string;
   children: React.ReactNode;
-};
+} & CardProps;

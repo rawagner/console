@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { CardBody } from '@patternfly/react-core';
+import { CardBody, CardBodyProps } from '@patternfly/react-core';
 
 import { LoadingInline } from '../../utils';
 
@@ -19,4 +19,4 @@ type DashboardCardBodyProps = {
   classname?: string;
   children: React.ReactNode;
   isLoading?: boolean;
-};
+} & CardBodyProps;
