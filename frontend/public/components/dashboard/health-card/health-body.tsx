@@ -7,5 +7,5 @@ export const HealthBody: React.FC<HealthBodyProps> = React.memo(({ children, cla
 
 type HealthBodyProps = {
   className?: string;
-  children: any;
+  children: React.ReactNode;
 };

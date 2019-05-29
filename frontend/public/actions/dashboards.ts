@@ -32,7 +32,7 @@ const dashboardsActions = {
   updateWatchInFlight,
 };
 
-const fetchPeriodically: FetchPeriodically = async(dispatch, type, key, url, getState, fetch) => {
+const fetchPeriodically: FetchPeriodically = async(dispatch, type, key, url, getState, fetch, responseHandler) => {
   if (!isWatchActive(getState().dashboards, type, key)) {
     return;
   }
@@ -40,12 +40,15 @@ const fetchPeriodically: FetchPeriodically = async(dispatch, type, key, url, get
   try {
     dispatch(updateWatchInFlight(type, key, true));
     result = await fetch(url);
+    if (responseHandler) {
+      result = await responseHandler(result);
+    }
   } catch (error) {
     result = error;
   } finally {
     dispatch(updateWatchInFlight(type, key, false));
     dispatch(updateResult(type, key, result));
-    const timeout = setTimeout(() => fetchPeriodically(dispatch, type, key, url, getState, fetch), REFRESH_TIMEOUT);
+    const timeout = setTimeout(() => fetchPeriodically(dispatch, type, key, url, getState, fetch, responseHandler), REFRESH_TIMEOUT);
     dispatch(updateWatchTimeout(type, key, timeout));
   }
 };
@@ -63,12 +66,12 @@ export const watchPrometheusQuery: WatchPrometheusQueryAction = query => (dispat
   }
 };
 
-export const watchURL: WatchURLAction = (url, fetch = coFetchJSON) => (dispatch, getState) => {
+export const watchURL: WatchURLAction = (url, fetch = coFetchJSON, responseHandler) => (dispatch, getState) => {
   const isActive = isWatchActive(getState().dashboards, RESULTS_TYPE.URL, url);
   dispatch(activateWatch(RESULTS_TYPE.URL, url));
   if (!isActive) {
-    const k8sUrl = `${k8sBasePath}/${url}`;
-    fetchPeriodically(dispatch, RESULTS_TYPE.URL, url, k8sUrl, getState, fetch);
+    const k8sURL = `${k8sBasePath}/${url}`;
+    fetchPeriodically(dispatch, RESULTS_TYPE.URL, url, k8sURL, getState, fetch, responseHandler);
   }
 };
 
@@ -78,14 +81,15 @@ export const stopWatchURL = (url: string) => stopWatch(RESULTS_TYPE.URL, url);
 
 type ThunkAction = (dispatch: Dispatch, getState: () => RootState) => void;
 
-export type WatchURLAction = (url: string, fetch?: Fetch) => ThunkAction;
+export type WatchURLAction = (url: string, fetch?: Fetch, responseHandler?: ResponseHandler) => ThunkAction;
 export type WatchPrometheusQueryAction = (query: string) => ThunkAction;
 export type StopWatchURLAction = (url: string) => void;
 export type StopWatchPrometheusAction = (query: string) => void;
 
 export type Fetch = (url: string) => Promise<any>;
+export type ResponseHandler = (response: any) => Promise<any>;
 
 type FetchPeriodically =
-  (dispatch: Dispatch, type: RESULTS_TYPE, key: string, url: string, getState: () => RootState, fetch: Fetch) => void;
+  (dispatch: Dispatch, type: RESULTS_TYPE, key: string, url: string, getState: () => RootState, fetch: Fetch, responseHandler?: ResponseHandler) => void;
 
 export type DashboardsAction = Action<typeof dashboardsActions>;

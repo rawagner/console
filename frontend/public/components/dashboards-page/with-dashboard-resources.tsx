@@ -30,7 +30,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
-  class _WithDashboardResources extends React.Component<WithDashboardResourcesProps> {
+  class WithDashboardResources_ extends React.Component<WithDashboardResourcesProps> {
     private urls: Array<string> = [];
     private queries: Array<string> = [];
 
@@ -42,11 +42,6 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
         this.props[RESULTS_TYPE.PROMETHEUS].getIn([query, 'result']) !== nextProps[RESULTS_TYPE.PROMETHEUS].getIn([query, 'result'])
       );
       return urlResultChanged || queryResultChanged;
-    }
-
-    componentWillUnmount() {
-      this.urls.forEach(this.props.stopWatchURL);
-      this.queries.forEach(this.props.stopWatchPrometheusQuery);
     }
 
     watchURL = (url: string, fetch: Fetch) => {
@@ -63,7 +58,9 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
       return (
         <WrappedComponent
           watchURL={this.watchURL}
+          stopWatchURL={this.props.stopWatchURL}
           watchPrometheus={this.watchPrometheus}
+          stopWatchPrometheusQuery={this.props.stopWatchPrometheusQuery}
           urlResults={this.props[RESULTS_TYPE.URL]}
           prometheusResults={this.props[RESULTS_TYPE.URL]}
         />

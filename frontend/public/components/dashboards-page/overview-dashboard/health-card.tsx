@@ -15,7 +15,7 @@ import { OK_STATE, ERROR_STATE, WARNING_STATE, LOADING_STATE } from '../../dashb
 import { coFetch } from '../../../co-fetch';
 import { featureReducerName } from '../../../reducers/features';
 import { FLAGS } from '../../../const';
-import { withDashboardResources, WatchURL, WatchPrometheus } from '../with-dashboard-resources';
+import { withDashboardResources, WatchURL, WatchPrometheus, StopWatchURL, StopWatchPrometheus } from '../with-dashboard-resources';
 import { RootState } from '../../../redux';
 import { getBrandingDetails } from '../../masthead';
 
@@ -27,23 +27,23 @@ export const K8S_ERROR = 'Kubernetes is in an error state';
 
 const getClusterHealth = (subsystemStates: Array<HealthState>): ClusterHealth => {
   let healthState: ClusterHealth = { state: OK_STATE, message: 'Cluster is healthy' };
-  const stateBySeverity = {
+  const subsystemBySeverity = {
     error: subsystemStates.filter(subsystem => subsystem.state === ERROR_STATE),
     warning: subsystemStates.filter(subsystem => subsystem.state === WARNING_STATE),
     loading: subsystemStates.filter(subsystem => subsystem.state === LOADING_STATE),
   };
 
-  if (stateBySeverity.loading.length > 0) {
+  if (subsystemBySeverity.loading.length > 0) {
     healthState = { state: LOADING_STATE, message: null };
-  } else if (stateBySeverity.error.length > 0) {
+  } else if (subsystemBySeverity.error.length > 0) {
     healthState =
-      stateBySeverity.error.length === 1
-        ? stateBySeverity.error[0]
+      subsystemBySeverity.error.length === 1
+        ? subsystemBySeverity.error[0]
         : { state: ERROR_STATE, message: 'Multiple errors', details: 'Cluster health is degraded' };
-  } else if (stateBySeverity.warning.length > 0) {
+  } else if (subsystemBySeverity.warning.length > 0) {
     healthState =
-      stateBySeverity.warning.length === 1
-        ? stateBySeverity.warning[0]
+      subsystemBySeverity.warning.length === 1
+        ? subsystemBySeverity.warning[0]
         : { state: WARNING_STATE, message: 'Multiple warnings', details: 'Cluster health is degraded' };
   }
 
@@ -69,10 +69,19 @@ const fetchK8sHealth = async(url) => {
   return response.text();
 };
 
-const _HealthCard: React.FC<HealthProps> = ({ watchURL, watchPrometheus, urlResults, prometheusResults, isOpenShift }) => {
-  const subsystems = plugins.registry.getOverviewHealthSubsystems();
+const _HealthCard: React.FC<HealthProps> = ({
+  watchURL,
+  stopWatchURL,
+  watchPrometheus,
+  stopWatchPrometheusQuery,
+  urlResults,
+  prometheusResults,
+  isOpenShift,
+}) => {
   React.useEffect(() => {
+    const subsystems = plugins.registry.getOverviewHealthSubsystems();
     watchURL('healthz', fetchK8sHealth);
+
     subsystems.filter(plugins.isOverviewHealthURLSubsystem).forEach(subsystem => {
       const { url, fetch } = subsystem.properties;
       watchURL(url, fetch);
@@ -81,8 +90,19 @@ const _HealthCard: React.FC<HealthProps> = ({ watchURL, watchPrometheus, urlResu
       const { query } = subsystem.properties;
       watchPrometheus(query);
     });
-  }, []);
+    return () => {
+      stopWatchURL('healtz');
 
+      subsystems.filter(plugins.isOverviewHealthURLSubsystem).forEach(subsystem =>
+        stopWatchURL(subsystem.properties.url)
+      );
+      subsystems.filter(plugins.isOverviewHealthPrometheusSubsystem).forEach(subsystem =>
+        stopWatchPrometheusQuery(subsystem.properties.query)
+      );
+    };
+  }, [watchURL, stopWatchURL, watchPrometheus, stopWatchPrometheusQuery]);
+
+  const subsystems = plugins.registry.getOverviewHealthSubsystems();
   const k8sHealth = urlResults.getIn(['healthz', 'result']);
   const k8sHealthState = getK8sHealthState(isOpenShift, k8sHealth);
 
@@ -157,7 +177,9 @@ export type HealthState = {
 
 type HealthProps = {
   watchURL: WatchURL;
+  stopWatchURL: StopWatchURL;
   watchPrometheus: WatchPrometheus;
+  stopWatchPrometheusQuery: StopWatchPrometheus;
   prometheusResults: ImmutableMap<string, any>;
   urlResults: ImmutableMap<string, any>;
   isOpenShift: boolean;
