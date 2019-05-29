@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { Icon } from 'patternfly-react';
-import { LoadingInline } from '../../utils';
 
-export const OK_STATE = 'OK_STATE';
-export const ERROR_STATE = 'ERROR_STATE';
-export const WARNING_STATE = 'WARNING_STATE';
-export const LOADING_STATE = 'LOADING_STATE';
+import { OK_STATE, ERROR_STATE, WARNING_STATE, LOADING_STATE } from './states';
+import { LoadingInline } from '../../utils';
 
 const HealthItemIcon: React.FC<HealthItemIconProps> = ({ state }) => {
   let icon;
@@ -31,20 +28,15 @@ const HealthItemIcon: React.FC<HealthItemIconProps> = ({ state }) => {
   );
 };
 
-export class HealthItem extends React.PureComponent<HealthItemProps> {
-  render() {
-    const { state, message, details } = this.props;
-    return (
-      <div className="co-health-card__item">
-        {state === LOADING_STATE ? <LoadingInline /> : <HealthItemIcon state={state} />}
-        <div>
-          {message && <span className="co-health-card__text">{message}</span>}
-          {details && <div className="co-health-card__text co-health-card__subtitle">{details}</div>}
-        </div>
-      </div>
-    );
-  }
-}
+export const HealthItem: React.FC<HealthItemProps> = React.memo(({ state, message, details }) => (
+  <div className="co-health-card__item">
+    {state === LOADING_STATE ? <LoadingInline /> : <HealthItemIcon state={state} />}
+    <div>
+      {message && <span className="co-health-card__text">{message}</span>}
+      {details && <div className="co-health-card__text co-health-card__subtitle">{details}</div>}
+    </div>
+  </div>
+));
 
 type HealthItemProps = {
   message?: string;

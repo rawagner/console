@@ -1,7 +1,7 @@
 .co-health-card__item {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
 }
 
 .co-health-card__body {
@@ -33,8 +33,8 @@
 }
 
 .co-health-card__subtitle {
-  font-size: 0.7rem;
   color: grey;
+  font-size: 0.7rem;
 }
 
 .co-health-card__icon {

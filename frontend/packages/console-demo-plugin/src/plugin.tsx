@@ -32,7 +32,7 @@ type ConsumedExtensions =
   | ResourceDetailPage
   | Perspective
   | OverviewHealthPrometheusSubsystem
-  | OverviewHealthURLSubsystem;
+  | OverviewHealthURLSubsystem<any>;
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -116,7 +116,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     },
   },
   {
-    type: 'Dashboards/Overview/HealthURLSubsystem',
+    type: 'Dashboards/Overview/Health/URL',
     properties: {
       title: 'Foo system',
       url: 'fooUrl',
@@ -124,7 +124,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     },
   },
   {
-    type: 'Dashboards/Overview/HealthPrometheusSubsystem',
+    type: 'Dashboards/Overview/Health/Prometheus',
     properties: {
       title: 'Via prometheus',
       query: 'fooQuery',

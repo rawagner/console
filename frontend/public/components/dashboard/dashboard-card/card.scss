@@ -2,23 +2,23 @@
   margin: 0;
 }
 
-.co-dashboard-card-title {
+.co-dashboard-card__title {
   font-size: 1rem;
   margin: 0;
 }
 
-.co-dashboard-card-header {
-  display: flex;
-  justify-content: space-between;
+.co-dashboard-card__header {
   align-items: center;
   border-bottom: 1px solid #d1d1d1;
+  display: flex;
+  justify-content: space-between;
 }
 
-.co-dashboard-card-body {
+.co-dashboard-card__body {
   margin-top: 1.5em;
 }
 
-.co-dashboard-header-icon--info {
+.co-dashboard-header__icon--info {
   margin-right: -10px;
 }
 

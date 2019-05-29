@@ -9,8 +9,7 @@ import {
   stopWatchURL,
   watchPrometheusQuery,
   stopWatchPrometheusQuery,
-  FetchMethod,
-  ResponseHandler,
+  Fetch,
   WatchURLAction,
   WatchPrometheusQueryAction,
   StopWatchURLAction,
@@ -19,7 +18,7 @@ import {
 import { RootState } from '../../redux';
 
 const mapDispatchToProps = dispatch => ({
-  watchURL: (url, fetchMethod, responseHandler): WatchURL => dispatch(watchURL(url, fetchMethod, responseHandler)),
+  watchURL: (url, fetch): WatchURL => dispatch(watchURL(url, fetch)),
   stopWatchURL: (url): StopWatchURL => dispatch(stopWatchURL(url)),
   watchPrometheusQuery: (query): WatchPrometheus => dispatch(watchPrometheusQuery(query)),
   stopWatchPrometheusQuery: (query): StopWatchPrometheus => dispatch(stopWatchPrometheusQuery(query)),
@@ -31,11 +30,9 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
-  class _WithDashboardResources extends React.Component<WithDashboardResourcesProps> {
+  class WithDashboardResources extends React.Component<WithDashboardResourcesProps> {
     private urls: Array<string> = [];
     private queries: Array<string> = [];
-    private _watchURL = this.watchURL.bind(this);
-    private _watchPrometheus = this.watchPrometheus.bind(this);
 
     shouldComponentUpdate(nextProps: WithDashboardResourcesProps) {
       const urlResultChanged = this.urls.some(urlKey =>
@@ -52,12 +49,12 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
       this.queries.forEach(this.props.stopWatchPrometheusQuery);
     }
 
-    watchURL(url: string, fetchMethod: FetchMethod, responseHandler: ResponseHandler) {
+    watchURL = (url: string, fetch: Fetch) => {
       this.urls.push(url);
-      this.props.watchURL(url, fetchMethod, responseHandler);
+      this.props.watchURL(url, fetch);
     }
 
-    watchPrometheus(query: string) {
+    watchPrometheus = (query: string) => {
       this.queries.push(query);
       this.props.watchPrometheusQuery(query);
     }
@@ -65,8 +62,8 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
     render() {
       return (
         <WrappedComponent
-          watchURL={this._watchURL}
-          watchPrometheus={this._watchPrometheus}
+          watchURL={this.watchURL}
+          watchPrometheus={this.watchPrometheus}
           urlResults={this.props[RESULTS_TYPE.URL]}
           prometheusResults={this.props[RESULTS_TYPE.URL]}
         />
@@ -76,7 +73,7 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
 
 export const withDashboardResources = compose(connect(mapStateToProps, mapDispatchToProps), WithDashboardResources);
 
-export type WatchURL = (url: string, fetchMethod?: FetchMethod, responseHandler?: ResponseHandler) => void;
+export type WatchURL = (url: string, fetch?: Fetch) => void;
 export type StopWatchURL = (url: string) => void;
 export type WatchPrometheus = (query: string) => void;
 export type StopWatchPrometheus = (query: string) => void;
