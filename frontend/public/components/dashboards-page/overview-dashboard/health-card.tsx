@@ -17,9 +17,10 @@ import { featureReducerName } from '../../../reducers/features';
 import { FLAGS } from '../../../const';
 import { withDashboardResources, WatchURL, WatchPrometheus } from '../with-dashboard-resources';
 import { RootState } from '../../../redux';
+import { getBrandingDetails } from '../../masthead';
 
-export const OCP_HEALTHY = 'OpenShift is healthy';
-export const OCP_ERROR = 'OpenShift is in an error state';
+export const OCP_HEALTHY = 'is healthy';
+export const OCP_ERROR = 'is in an error state';
 
 export const K8S_HEALTHY = 'Kubernetes is healthy';
 export const K8S_ERROR = 'Kubernetes is in an error state';
@@ -53,16 +54,17 @@ const getK8sHealthState = (isOpenShift: boolean, k8sHealth: any): HealthState =>
   if (!k8sHealth) {
     return { state: LOADING_STATE };
   }
+  const { productName } = getBrandingDetails();
   return k8sHealth === 'ok'
-    ? { message: isOpenShift ? OCP_HEALTHY : K8S_HEALTHY, state: OK_STATE }
-    : { message: isOpenShift ? OCP_ERROR: K8S_ERROR, state: ERROR_STATE };
+    ? { message: isOpenShift ? `${productName} ${OCP_HEALTHY}` : K8S_HEALTHY, state: OK_STATE }
+    : { message: isOpenShift ? `${productName} ${OCP_ERROR}`: K8S_ERROR, state: ERROR_STATE };
 };
 
 const mapStateToProps = (state: RootState) => ({
   isOpenShift: state[featureReducerName].get(FLAGS.OPENSHIFT),
 });
 
-const fetchK8sHealth = async (url) => {
+const fetchK8sHealth = async(url) => {
   const response = await coFetch(url);
   return response.text();
 }
@@ -102,7 +104,7 @@ const _HealthCard: React.FC<HealthProps> = ({ watchURL, watchPrometheus, urlResu
         <DashboardCardSeeAll title="See All">
           <div className="co-health-card__subsystem-body">
             <HealthItem
-              message={isOpenShift ? 'OpenShift' : 'Kubernetes'}
+              message={isOpenShift ?  getBrandingDetails().productName : 'Kubernetes'}
               details={k8sHealthState.message}
               state={k8sHealthState.state}
             />
