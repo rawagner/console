@@ -11,7 +11,7 @@ namespace ExtensionProperties {
     url: string;
     fetch?: (url: string) => Promise<R>;
   }
-  
+
   export interface OverviewHealthPrometheusSubsystem extends OverviewHealthSubsystem<any>{
     query: string;
   }

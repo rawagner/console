@@ -30,7 +30,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const WithDashboardResources = (WrappedComponent: React.ComponentType<any>) =>
-  class WithDashboardResources extends React.Component<WithDashboardResourcesProps> {
+  class _WithDashboardResources extends React.Component<WithDashboardResourcesProps> {
     private urls: Array<string> = [];
     private queries: Array<string> = [];
 

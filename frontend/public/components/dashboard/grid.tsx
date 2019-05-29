@@ -6,7 +6,7 @@ import { Grid, GridItem } from '@patternfly/react-core';
 export const MEDIA_QUERY_LG = 990;
 
 export const DashboardGrid: React.FC<DashboardGridProps> = ({ mainCards, leftCards, rightCards }) => {
-  const [dimensions, setDimensions] = React.useState({})
+  const [dimensions, setDimensions] = React.useState({});
   let grid;
   if (_.get(dimensions, 'bounds.width', -1) <= MEDIA_QUERY_LG) {
     grid = (

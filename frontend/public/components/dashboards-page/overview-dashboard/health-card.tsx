@@ -67,80 +67,80 @@ const mapStateToProps = (state: RootState) => ({
 const fetchK8sHealth = async(url) => {
   const response = await coFetch(url);
   return response.text();
-}
+};
 
 const _HealthCard: React.FC<HealthProps> = ({ watchURL, watchPrometheus, urlResults, prometheusResults, isOpenShift }) => {
-    const subsystems = plugins.registry.getOverviewHealthSubsystems();
-    React.useEffect(() => {
-      watchURL('healthz', fetchK8sHealth);
-      subsystems.filter(plugins.isOverviewHealthURLSubsystem).forEach(subsystem => {
-        const { url, fetch } = subsystem.properties;
-        watchURL(url, fetch);
-      });
-      subsystems.filter(plugins.isOverviewHealthPrometheusSubsystem).forEach(subsystem => {
-        const { query } = subsystem.properties;
-        watchPrometheus(query);
-      });
-    }, []);
-
-    const k8sHealth = urlResults.getIn(['healthz', 'result']);
-    const k8sHealthState = getK8sHealthState(isOpenShift, k8sHealth);
-
-    const subsystemsHealths = subsystems.map(subsystem => {
-      let result;
-      if (plugins.isOverviewHealthPrometheusSubsystem(subsystem)) {
-        result = prometheusResults.getIn([subsystem.properties.query, 'result']);
-      } else {
-        result = urlResults.getIn([subsystem.properties.url, 'result']);
-      }
-      return subsystem.properties.healthHandler(result);
+  const subsystems = plugins.registry.getOverviewHealthSubsystems();
+  React.useEffect(() => {
+    watchURL('healthz', fetchK8sHealth);
+    subsystems.filter(plugins.isOverviewHealthURLSubsystem).forEach(subsystem => {
+      const { url, fetch } = subsystem.properties;
+      watchURL(url, fetch);
     });
+    subsystems.filter(plugins.isOverviewHealthPrometheusSubsystem).forEach(subsystem => {
+      const { query } = subsystem.properties;
+      watchPrometheus(query);
+    });
+  }, []);
 
-    const healthState = getClusterHealth([k8sHealthState, ...subsystemsHealths]);
+  const k8sHealth = urlResults.getIn(['healthz', 'result']);
+  const k8sHealthState = getK8sHealthState(isOpenShift, k8sHealth);
 
-    let seeAll;
-    if (subsystems.length > 0) {
-      seeAll = (
-        <DashboardCardSeeAll title="See All">
-          <div className="co-health-card__subsystem-body">
-            <HealthItem
-              message={isOpenShift ?  getBrandingDetails().productName : 'Kubernetes'}
-              details={k8sHealthState.message}
-              state={k8sHealthState.state}
-            />
-            {subsystemsHealths.map((subsystem, index) => (
-              <div key={index}>
-                <div className="co-health-card__separator" />
-                <HealthItem
-                  message={subsystems[index].properties.title}
-                  details={subsystem.message}
-                  state={subsystem.state}
-                />
-              </div>
-            ))}
-          </div>
-        </DashboardCardSeeAll>
-      );
+  const subsystemsHealths = subsystems.map(subsystem => {
+    let result;
+    if (plugins.isOverviewHealthPrometheusSubsystem(subsystem)) {
+      result = prometheusResults.getIn([subsystem.properties.query, 'result']);
+    } else {
+      result = urlResults.getIn([subsystem.properties.url, 'result']);
     }
+    return subsystem.properties.healthHandler(result);
+  });
 
-    return (
-      <DashboardCard>
-        <DashboardCardHeader>
-          <DashboardCardTitle>Cluster Health</DashboardCardTitle>
-          {seeAll}
-        </DashboardCardHeader>
-        <DashboardCardBody>
-          <HealthBody>
-            <HealthItem
-              state={healthState.state}
-              message={healthState.message}
-              details={healthState.details}
-            />
-          </HealthBody>
-        </DashboardCardBody>
-      </DashboardCard>
+  const healthState = getClusterHealth([k8sHealthState, ...subsystemsHealths]);
+
+  let seeAll;
+  if (subsystems.length > 0) {
+    seeAll = (
+      <DashboardCardSeeAll title="See All">
+        <div className="co-health-card__subsystem-body">
+          <HealthItem
+            message={isOpenShift ? getBrandingDetails().productName : 'Kubernetes'}
+            details={k8sHealthState.message}
+            state={k8sHealthState.state}
+          />
+          {subsystemsHealths.map((subsystem, index) => (
+            <div key={index}>
+              <div className="co-health-card__separator" />
+              <HealthItem
+                message={subsystems[index].properties.title}
+                details={subsystem.message}
+                state={subsystem.state}
+              />
+            </div>
+          ))}
+        </div>
+      </DashboardCardSeeAll>
     );
-  };
+  }
+
+  return (
+    <DashboardCard>
+      <DashboardCardHeader>
+        <DashboardCardTitle>Cluster Health</DashboardCardTitle>
+        {seeAll}
+      </DashboardCardHeader>
+      <DashboardCardBody>
+        <HealthBody>
+          <HealthItem
+            state={healthState.state}
+            message={healthState.message}
+            details={healthState.details}
+          />
+        </HealthBody>
+      </DashboardCardBody>
+    </DashboardCard>
+  );
+};
 
 export const HealthCard = withDashboardResources(connect(mapStateToProps)(_HealthCard));
 
