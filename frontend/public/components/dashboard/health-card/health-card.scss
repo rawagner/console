@@ -19,7 +19,7 @@
   }
 
   .co-health-card__separator {
-    border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid $pf-color-black-200;
   }
 }
 
@@ -33,7 +33,7 @@
 }
 
 .co-health-card__subtitle {
-  color: grey;
+  color: $pf-color-black-500;
   font-size: 0.7rem;
 }
 
@@ -42,13 +42,13 @@
 }
 
 .co-health-card__icon--error {
-  color: #c9190b;
+  color: $pf-color-red-100;
 }
 
 .co-health-card__icon--ok {
-  color: #92d400;
+  color: $pf-color-light-green-400;
 }
 
 .co-health-card__icon--warning {
-  color: #f0ab00;
+  color: $pf-color-gold-400;
 }

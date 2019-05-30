@@ -3,7 +3,7 @@ import * as _ from 'lodash-es';
 import Measure from 'react-measure';
 import { Grid, GridItem } from '@patternfly/react-core';
 
-export const MEDIA_QUERY_LG = 990;
+export const MEDIA_QUERY_LG = 992;
 
 export const DashboardGrid: React.FC<DashboardGridProps> = ({ mainCards, leftCards, rightCards }) => {
   const [dimensions, setDimensions] = React.useState({});

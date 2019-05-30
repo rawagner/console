@@ -19,11 +19,8 @@ import { withDashboardResources, WatchURL, WatchPrometheus, StopWatchURL, StopWa
 import { RootState } from '../../../redux';
 import { getBrandingDetails } from '../../masthead';
 
-export const OCP_HEALTHY = 'is healthy';
-export const OCP_ERROR = 'is in an error state';
-
-export const K8S_HEALTHY = 'Kubernetes is healthy';
-export const K8S_ERROR = 'Kubernetes is in an error state';
+export const HEALTHY = 'is healthy';
+export const ERROR = 'is in an error state';
 
 const getClusterHealth = (subsystemStates: Array<HealthState>): ClusterHealth => {
   let healthState: ClusterHealth = { state: OK_STATE, message: 'Cluster is healthy' };
@@ -50,14 +47,15 @@ const getClusterHealth = (subsystemStates: Array<HealthState>): ClusterHealth =>
   return healthState;
 };
 
+const getName = (isOpenShift: boolean): string => isOpenShift ? getBrandingDetails().productName : 'Kubernetes';
+
 const getK8sHealthState = (isOpenShift: boolean, k8sHealth: any): HealthState => {
   if (!k8sHealth) {
     return { state: LOADING_STATE };
   }
-  const { productName } = getBrandingDetails();
   return k8sHealth === 'ok'
-    ? { message: isOpenShift ? `${productName} ${OCP_HEALTHY}` : K8S_HEALTHY, state: OK_STATE }
-    : { message: isOpenShift ? `${productName} ${OCP_ERROR}`: K8S_ERROR, state: ERROR_STATE };
+    ? { message: `${getName(isOpenShift)} ${HEALTHY}`, state: OK_STATE }
+    : { message: `${getName(isOpenShift)} ${ERROR}`, state: ERROR_STATE };
 };
 
 const mapStateToProps = (state: RootState) => ({
@@ -124,7 +122,7 @@ const _HealthCard: React.FC<HealthProps> = ({
       <DashboardCardSeeAll title="See All">
         <div className="co-health-card__subsystem-body">
           <HealthItem
-            message={isOpenShift ? getBrandingDetails().productName : 'Kubernetes'}
+            message={getName(isOpenShift)}
             details={k8sHealthState.message}
             state={k8sHealthState.state}
           />
