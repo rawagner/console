@@ -119,7 +119,7 @@ const _HealthCard: React.FC<HealthProps> = ({
   let seeAll;
   if (subsystems.length > 0) {
     seeAll = (
-      <DashboardCardSeeAll title="See All">
+      <DashboardCardSeeAll title="Subsystem health">
         <div className="co-health-card__subsystem-body">
           <HealthItem
             message={getName(isOpenShift)}
