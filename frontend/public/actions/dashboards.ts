@@ -21,7 +21,7 @@ const REFRESH_TIMEOUT = 5000;
 export const stopWatch = (type: RESULTS_TYPE, key: string) => action(ActionType.StopWatch, { type, key });
 export const updateResult = (type: RESULTS_TYPE, key: string, result) => action(ActionType.UpdateResult, { type, key, result });
 export const activateWatch = (type: RESULTS_TYPE, key: string) => action(ActionType.ActivateWatch, { type, key });
-export const updateWatchTimeout = (type: RESULTS_TYPE, key: string, timeout) => action(ActionType.UpdateWatchTimeout, { type, key, timeout});
+export const updateWatchTimeout = (type: RESULTS_TYPE, key: string, timeout: NodeJS.Timer) => action(ActionType.UpdateWatchTimeout, { type, key, timeout});
 export const updateWatchInFlight = (type: RESULTS_TYPE, key: string, inFlight: boolean) => action(ActionType.UpdateWatchInFlight, { type, key, inFlight });
 
 const dashboardsActions = {

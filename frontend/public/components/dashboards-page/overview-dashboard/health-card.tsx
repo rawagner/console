@@ -18,6 +18,7 @@ import { FLAGS } from '../../../const';
 import { withDashboardResources, WatchURL, WatchPrometheus, StopWatchURL, StopWatchPrometheus } from '../with-dashboard-resources';
 import { RootState } from '../../../redux';
 import { getBrandingDetails } from '../../masthead';
+import { PodModel } from '../../../models';
 
 export const HEALTHY = 'is healthy';
 export const ERROR = 'is in an error state';
@@ -75,8 +76,10 @@ const _HealthCard: React.FC<HealthProps> = ({
   urlResults,
   prometheusResults,
   isOpenShift,
+  watchK8sResource,
 }) => {
   React.useEffect(() => {
+    watchK8sResource({kind: PodModel.kind});
     const subsystems = plugins.registry.getOverviewHealthSubsystems();
     watchURL('healthz', fetchK8sHealth);
 
@@ -181,4 +184,6 @@ type HealthProps = {
   prometheusResults: ImmutableMap<string, any>;
   urlResults: ImmutableMap<string, any>;
   isOpenShift: boolean;
+  watchK8sResource: any;
+  k8sResources: any,
 };
