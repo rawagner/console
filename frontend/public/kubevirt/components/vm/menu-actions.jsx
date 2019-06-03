@@ -47,6 +47,8 @@ const isImporting = (vm, actionArgs) => {
   return status && [VM_STATUS_IMPORTING, VM_STATUS_V2V_CONVERSION_IN_PROGRESS].includes(status.status);
 };
 
+const isRunningWithVMI = (vm, actionArgs) =>
+  isVmRunning(vm) && actionArgs && !isEmpty(actionArgs[VirtualMachineInstanceModel.kind]);
 
 const menuActionStart = (kind, vm, actionArgs) => {
   return {
@@ -74,7 +76,7 @@ const menuActionStop = (kind, vm) => {
 
 const menuActionRestart = (kind, vm, actionArgs) => {
   return {
-    hidden: isImporting(vm, actionArgs) || !(actionArgs && !isEmpty(actionArgs[VirtualMachineInstanceModel.kind]) && isVmRunning(vm)),
+    hidden: isImporting(vm, actionArgs) || !isRunningWithVMI(vm, actionArgs),
     label: 'Restart Virtual Machine',
     callback: () => restartVmModal({
       kind,
@@ -125,7 +127,7 @@ const menuActionMigrate = (kind, vm, actionArgs) => {
   const migration = actionArgs && findVMIMigration(actionArgs[VirtualMachineInstanceMigrationModel.kind], actionArgs[VirtualMachineInstanceModel.kind]);
   const { name, namespace } = vm.metadata;
   return {
-    hidden: !actionArgs || isImporting(vm, actionArgs) || isMigrating(migration) || !(isEmpty(actionArgs[VirtualMachineInstanceModel.kind]) && isVmRunning(vm)),
+    hidden: !actionArgs || isImporting(vm, actionArgs) || isMigrating(migration) || !isRunningWithVMI(vm, actionArgs),
     label: 'Migrate Virtual Machine',
     callback: () => {
       return modalResourceLauncher(BasicMigrationDialog, {
