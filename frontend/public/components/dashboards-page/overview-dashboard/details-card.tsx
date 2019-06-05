@@ -13,7 +13,10 @@ import { withDashboardResources, WatchPrometheus, StopWatchPrometheus } from '..
 import { InfrastructureModel } from '../../../models';
 
 const getClusterName = (infrastructure): string => {
-  const apiServerURL = _.get(infrastructure, 'status.apiServerURL');
+  if(!infrastructure) {
+    return null;
+  }
+  const apiServerURL = infrastructure.getIn(['status', 'apiServerURL']);
   let clusterName;
   if (apiServerURL) {
     clusterName = apiServerURL.replace('https://api.', '');
@@ -25,7 +28,7 @@ const getClusterName = (infrastructure): string => {
   return clusterName;
 };
 
-const getInfrastructurePlatform = (infrastructure): string => _.get(infrastructure, 'status.platform');
+const getInfrastructurePlatform = (infrastructure): string => infrastructure ? infrastructure.getIn(['status','platform']): null;
 
 const getOpenshiftVersion = (openshiftClusterVersionResponse): string => {
   const result = _.get(openshiftClusterVersionResponse, 'data.result', []);
@@ -40,28 +43,32 @@ const getOpenshiftVersion = (openshiftClusterVersionResponse): string => {
 
 const OPENSHIFT_VERSION_QUERY = 'openshift_build_info{job="apiserver"}';
 
+const infrastructureResource = {
+  kind: InfrastructureModel.kind,
+  namespaced: false,
+  name: 'cluster',
+  isList: false,
+  prop: 'infrastructure'
+};
+
 export const _DetailsCard: React.FC<DetailsCardProps> = ({
   watchPrometheus,
   stopWatchPrometheusQuery,
   watchK8sResource,
+  stopWatchK8sResource,
   prometheusResults,
   k8sResources,
 }) => {
   React.useEffect(() => {
     watchPrometheus(OPENSHIFT_VERSION_QUERY);
-    watchK8sResource({
-      kind: InfrastructureModel.kind,
-      namespaced: false,
-      name: 'cluster',
-      isList: false,
-      prop: 'infrastructure'
-    });
+    watchK8sResource(infrastructureResource);
     return () => {
       stopWatchPrometheusQuery(OPENSHIFT_VERSION_QUERY);
+      stopWatchK8sResource(infrastructureResource);
     }
-  }, [watchPrometheus, stopWatchPrometheusQuery, watchK8sResource]);
+  }, [watchPrometheus, stopWatchPrometheusQuery, watchK8sResource, stopWatchK8sResource]);
   const openshiftClusterVersionResponse = prometheusResults.getIn([OPENSHIFT_VERSION_QUERY], 'result');
-  const infrastructure = k8sResources.getIn('infrastructure');
+  const infrastructure = k8sResources.infrastructure;
   return (
     <DashboardCard className="co-details-card">
       <DashboardCardHeader>
@@ -99,6 +106,7 @@ type DetailsCardProps = {
   watchK8sResource: any;
   prometheusResults: ImmutableMap<string, any>;
   k8sResources: any;
+  stopWatchK8sResource: any;
 }
 
 export const DetailsCard = withDashboardResources(_DetailsCard);
