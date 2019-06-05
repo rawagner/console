@@ -17,7 +17,7 @@ const shallowMapEquals = (a, b) => {
   return a.every((v, k) => b.get(k) === v);
 };
 
-const processReduxId = ({k8s}, props) => {
+export const processReduxId = ({k8s}, props) => {
   const {reduxID, isList, filters} = props;
 
   if (!reduxID) {
@@ -183,9 +183,11 @@ export const Firehose = connect(
         'resources',
       ]));
 
+      const a = this.props.alwaysShow ? children : null;
+
       return this.props.loaded || this.firehoses.length > 0
         ? <ConnectToState reduxes={reduxes}>{children}</ConnectToState>
-        : null;
+        : a;
     }
   }
 );
@@ -210,4 +212,5 @@ Firehose.propTypes = {
     isList: PropTypes.bool,
     optional: PropTypes.bool,
   })).isRequired,
+  alwaysShow: PropTypes.bool,
 };
