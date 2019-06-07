@@ -9,14 +9,12 @@ import {
   DashboardCardTitle,
 } from '../../dashboard/dashboard-card';
 import { DetailsBody, DetailItem } from '../../dashboard/details-card';
-import { withDashboardResources, WatchPrometheus, StopWatchPrometheus } from '../with-dashboard-resources';
+import { withDashboardResources, WatchPrometheus, StopWatchPrometheus, WatchK8sResource, StopWatchK8sResource } from '../with-dashboard-resources';
 import { InfrastructureModel } from '../../../models';
+import { referenceForModel } from '../../../module/k8s';
 
 const getClusterName = (infrastructure): string => {
-  if (!infrastructure) {
-    return null;
-  }
-  const apiServerURL = infrastructure.getIn(['status', 'apiServerURL']);
+  const apiServerURL = _.get(infrastructure, 'status.apiServerURL');
   let clusterName;
   if (apiServerURL) {
     clusterName = apiServerURL.replace('https://api.', '');
@@ -28,7 +26,7 @@ const getClusterName = (infrastructure): string => {
   return clusterName;
 };
 
-const getInfrastructurePlatform = (infrastructure): string => infrastructure ? infrastructure.getIn(['status','platform']): null;
+const getInfrastructurePlatform = (infrastructure): string => _.get(infrastructure, 'status.platform');
 
 const getOpenshiftVersion = (openshiftClusterVersionResponse): string => {
   const result = _.get(openshiftClusterVersionResponse, 'data.result', []);
@@ -44,7 +42,7 @@ const getOpenshiftVersion = (openshiftClusterVersionResponse): string => {
 const OPENSHIFT_VERSION_QUERY = 'openshift_build_info{job="apiserver"}';
 
 const infrastructureResource = {
-  kind: InfrastructureModel.kind,
+  kind: referenceForModel(InfrastructureModel),
   namespaced: false,
   name: 'cluster',
   isList: false,
@@ -57,7 +55,7 @@ export const _DetailsCard: React.FC<DetailsCardProps> = ({
   watchK8sResource,
   stopWatchK8sResource,
   prometheusResults,
-  k8sResources,
+  k8sResults,
 }) => {
   React.useEffect(() => {
     watchPrometheus(OPENSHIFT_VERSION_QUERY);
@@ -68,7 +66,7 @@ export const _DetailsCard: React.FC<DetailsCardProps> = ({
     };
   }, [watchPrometheus, stopWatchPrometheusQuery, watchK8sResource, stopWatchK8sResource]);
   const openshiftClusterVersionResponse = prometheusResults.getIn([OPENSHIFT_VERSION_QUERY], 'result');
-  const infrastructure = k8sResources.infrastructure;
+  const infrastructure = k8sResults.infrastructure;
   return (
     <DashboardCard className="co-details-card">
       <DashboardCardHeader>
@@ -103,10 +101,10 @@ export const _DetailsCard: React.FC<DetailsCardProps> = ({
 type DetailsCardProps = {
   watchPrometheus: WatchPrometheus;
   stopWatchPrometheusQuery: StopWatchPrometheus;
-  watchK8sResource: any;
+  watchK8sResource: WatchK8sResource;
+  stopWatchK8sResource: StopWatchK8sResource;
   prometheusResults: ImmutableMap<string, any>;
-  k8sResources: any;
-  stopWatchK8sResource: any;
+  k8sResults: any;
 }
 
 export const DetailsCard = withDashboardResources(_DetailsCard);

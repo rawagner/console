@@ -93,9 +93,9 @@ const ConnectToState = connect(({k8s}, {reduxes}) => {
   inject(props.children, _.omit(props, ['children', 'className', 'reduxes']))
 );
 
-const stateToProps = ({k8s}, {resources}) => {
+const stateToProps = ({k8s}, {resources, idPrefix}) => {
   const k8sModels = resources.reduce((models, {kind}) => models.set(kind, k8s.getIn(['RESOURCES', 'models', kind])), ImmutableMap());
-  const loaded = (r) => k8s.getIn([makeReduxID(k8sModels.get(r.kind), makeQuery(r.namespace, r.selector, r.fieldSelector, r.name)), 'loaded']);
+  const loaded = (r) => k8s.getIn([makeReduxID(k8sModels.get(r.kind), makeQuery(r.namespace, r.selector, r.fieldSelector, r.name), idPrefix), 'loaded']);
 
   return {
     k8sModels,
@@ -146,7 +146,7 @@ export const Firehose = connect(
     }
 
     start() {
-      const { watchK8sList, watchK8sObject, resources, k8sModels, inFlight } = this.props;
+      const { watchK8sList, watchK8sObject, resources, k8sModels, inFlight, idPrefix = ''} = this.props;
 
       if (inFlight && _.some(resources, ({kind}) => !k8sModels.get(kind))) {
         this.firehoses = [];
@@ -154,7 +154,7 @@ export const Firehose = connect(
         this.firehoses = resources.map(resource => {
           const query = makeQuery(resource.namespace, resource.selector, resource.fieldSelector, resource.name);
           const k8sKind = k8sModels.get(resource.kind);
-          const id = makeReduxID(k8sKind, query);
+          const id = makeReduxID(k8sKind, query, idPrefix);
           return _.extend({}, resource, {query, id, k8sKind});
         }).filter(f => {
           if (_.isEmpty(f.k8sKind)) {
@@ -172,7 +172,7 @@ export const Firehose = connect(
     }
 
     clear() {
-      this.firehoses.forEach(({id}) => this.props.stopK8sWatch(id));
+      this.firehoses.forEach(({id}) => this.props.stopK8sWatch(id, !!this.props.idPrefix));
       this.firehoses = [];
     }
 
@@ -183,11 +183,9 @@ export const Firehose = connect(
         'resources',
       ]));
 
-      const a = this.props.alwaysShow ? children : null;
-
       return this.props.loaded || this.firehoses.length > 0
         ? <ConnectToState reduxes={reduxes}>{children}</ConnectToState>
-        : a;
+        : null;
     }
   }
 );
@@ -212,5 +210,5 @@ Firehose.propTypes = {
     isList: PropTypes.bool,
     optional: PropTypes.bool,
   })).isRequired,
-  alwaysShow: PropTypes.bool,
+  idPrefix: PropTypes.string,
 };

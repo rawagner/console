@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { OverviewDashboard } from './overview-dashboard/overview-dashboard';
-import { HorizontalNav, PageHeading } from '../utils';
+import { HorizontalNav, PageHeading, LoadingBox } from '../utils';
 import * as k8sActions from '../../actions/k8s';
 
 const tabs = [
@@ -14,22 +14,29 @@ const tabs = [
   },
 ];
 
-const _DashboardsPage: React.FC<DashboardsPageProps> = ({ match, clearK8s }) => {
+const _DashboardsPage: React.FC<DashboardsPageProps> = ({ match, clearK8s, kindsInFlight }) => {
   React.useEffect(() => clearK8s);
-  return (
-    <React.Fragment>
-      <PageHeading title="Dashboards" detail={true} />
-      <HorizontalNav match={match} pages={tabs} noStatusBox />
-    </React.Fragment>
-  );
+  return kindsInFlight
+    ? <LoadingBox />
+    : (
+      <>
+        <PageHeading title="Dashboards" detail={true} />
+        <HorizontalNav match={match} pages={tabs} noStatusBox />
+      </>
+    );
 };
 
 const mapDispatchToProps = dispatch => ({
-  clearK8s: () => dispatch(k8sActions.clearNamespaced('dashboard')),
+  clearK8s: () => dispatch(k8sActions.clearPrefixed('dashboard')),
 });
 
-export const DashboardsPage = connect(null, mapDispatchToProps)(_DashboardsPage);
+const mapStateToProps = ({k8s}) => ({
+  kindsInFlight: k8s.getIn(['RESOURCES', 'inFlight']),
+});
+
+export const DashboardsPage = connect(mapStateToProps, mapDispatchToProps)(_DashboardsPage);
 
 type DashboardsPageProps = RouteComponentProps & {
-  clearK8s: any;
+  clearK8s: () => void;
+  kindsInFlight: boolean;
 };

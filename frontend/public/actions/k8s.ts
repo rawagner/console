@@ -30,7 +30,6 @@ export enum ActionType {
 const WS = {} as {[id: string]: WebSocket & any};
 const POLLs = {};
 const REF_COUNTS = {};
-const NAMESPACED_REFS = {};
 
 const nop = () => {};
 const paginationLimit = 250;
@@ -63,24 +62,13 @@ export const filterList = (id: string, name: string, value: string) => action(Ac
 
 export const startWatchK8sObject = (id: string) => action(ActionType.StartWatchK8sObject, {id});
 
-export const watchK8sObject = (id: string, name: string, namespace: string, query: {[key: string]: string}, k8sType: K8sKind, refNamespace?: string) => (dispatch: Dispatch, getState) => {
+export const watchK8sObject = (id: string, name: string, namespace: string, query: {[key: string]: string}, k8sType: K8sKind) => (dispatch: Dispatch, getState) => {
   if (id in REF_COUNTS) {
     REF_COUNTS[id] += 1;
-
-    if (refNamespace) {
-      NAMESPACED_REFS[refNamespace][id] += 1;
-    }
-
     return nop;
   }
   dispatch(startWatchK8sObject(id));
   REF_COUNTS[id] = 1;
-  if (refNamespace) {
-    NAMESPACED_REFS[refNamespace] = {
-      ...NAMESPACED_REFS[refNamespace],
-      [id]: 1,
-    };
-  }
 
   if (query.name) {
     query.fieldSelector = `metadata.name=${query.name}`;
@@ -112,15 +100,8 @@ export const watchK8sObject = (id: string, name: string, namespace: string, quer
 
 export const stopWatchK8s = (id: string) => action(ActionType.StopWatchK8s, {id});
 
-export const stopK8sWatch = (id: string, clear: boolean = true, refNamespace?: string) => (dispatch: Dispatch) => {
-  if (refNamespace) {
-    if (_.get(NAMESPACED_REFS, [refNamespace, id]) > 0) {
-      NAMESPACED_REFS[refNamespace][id] -= 1;
-      REF_COUNTS[id] -= 1;
-    }
-  } else {
-    REF_COUNTS[id] -= 1;
-  }
+export const stopK8sWatch = (id: string, clearResults: boolean = true) => (dispatch: Dispatch) => {
+  REF_COUNTS[id] -= 1;
 
   if (REF_COUNTS[id] > 0) {
     return nop;
@@ -134,19 +115,20 @@ export const stopK8sWatch = (id: string, clear: boolean = true, refNamespace?: s
   const poller = POLLs[id];
   clearInterval(poller);
   delete POLLs[id];
-  if (clear) {
-    delete REF_COUNTS[id];
+  delete REF_COUNTS[id];
+  if (clearResults) {
     dispatch(stopWatchK8s(id));
   }
 };
 
-export const clearNamespaced = (refNamespace: string) => (dispatch: Dispatch) => {
-  Object.keys(NAMESPACED_REFS[refNamespace]).forEach(id => {
-    while (NAMESPACED_REFS[refNamespace][id] > 0) {
-      stopK8sWatch(id, true, refNamespace)(dispatch);
+export const clearPrefixed = (idPrefix: string) => (dispatch: Dispatch) => {
+  Object.keys(REF_COUNTS).forEach(id => {
+    if (id.startsWith(`${idPrefix}-`)) {
+      while (REF_COUNTS[id] > 0) {
+        stopK8sWatch(id)(dispatch);
+      }
     }
   });
-  delete NAMESPACED_REFS[refNamespace];
 };
 
 export const startWatchK8sList = (id: string, query: {[key: string]: string}) => action(ActionType.StartWatchK8sList, {id, query});

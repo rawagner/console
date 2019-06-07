@@ -959,5 +959,6 @@ export const InfrastructureModel: K8sKind = {
   namespaced: false,
   kind: 'Infrastructure',
   id: 'infrastructure',
+  crd: true,
 };
 
