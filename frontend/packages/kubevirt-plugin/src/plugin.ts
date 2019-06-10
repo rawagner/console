@@ -7,10 +7,13 @@ import {
   ModelFeatureFlag,
   YAMLTemplate,
   ModelDefinition,
+  DashboardsOverviewHealthURLSubsystem,
 } from '@console/plugin-sdk';
 
 import * as models from './models';
 import { yamlTemplates } from './yaml-templates';
+import { getBrandingDetails } from './branding';
+import { getKubeVirtHealth } from './components/dashboards-page/overview-dashboard/health-card';
 
 type ConsumedExtensions =
   | ResourceNSNavItem
@@ -18,7 +21,8 @@ type ConsumedExtensions =
   | ResourceDetailsPage
   | ModelFeatureFlag
   | YAMLTemplate
-  | ModelDefinition;
+  | ModelDefinition
+  | DashboardsOverviewHealthURLSubsystem<JSON>;
 
 const FLAG_KUBEVIRT = 'KUBEVIRT';
 
@@ -63,6 +67,16 @@ const plugin: Plugin<ConsumedExtensions> = [
     properties: {
       model: models.VirtualMachineModel,
       template: yamlTemplates.getIn([models.VirtualMachineModel, 'default']),
+    },
+  },
+  {
+    type: 'Dashboards/Overview/Health/URL',
+    properties: {
+      title: getBrandingDetails(),
+      url: `apis/subresources.${models.VirtualMachineModel.apiGroup}/${
+        models.VirtualMachineModel.apiVersion
+      }/healthz`,
+      healthHandler: getKubeVirtHealth,
     },
   },
   // {
