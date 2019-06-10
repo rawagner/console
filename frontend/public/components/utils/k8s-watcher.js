@@ -1,13 +1,12 @@
 import * as _ from 'lodash-es';
 
-export const makeReduxID = (k8sKind = {}, query, idPrefix) => {
+export const makeReduxID = (k8sKind = {}, query) => {
   let qs = '';
   if (!_.isEmpty(query)) {
     qs = `---${JSON.stringify(query)}`;
   }
 
-  const id = `${k8sKind.plural}${qs}`;
-  return idPrefix ? `${idPrefix}-${id}`: id;
+  return `${k8sKind.plural}${qs}`;
 };
 
 /** @type {(namespace: string, labelSelector?: any, fieldSelector?: any, name?: string) => {[key: string]: string}} */

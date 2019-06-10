@@ -15,7 +15,7 @@ const tabs = [
 ];
 
 const _DashboardsPage: React.FC<DashboardsPageProps> = ({ match, clearK8s, kindsInFlight }) => {
-  React.useEffect(() => clearK8s);
+  React.useEffect(clearK8s, [clearK8s]);
   return kindsInFlight
     ? <LoadingBox />
     : (
@@ -27,7 +27,7 @@ const _DashboardsPage: React.FC<DashboardsPageProps> = ({ match, clearK8s, kinds
 };
 
 const mapDispatchToProps = dispatch => ({
-  clearK8s: () => dispatch(k8sActions.clearPrefixed('dashboard')),
+  clearK8s: () => dispatch(k8sActions.clearGrouped('dashboard')),
 });
 
 const mapStateToProps = ({k8s}) => ({

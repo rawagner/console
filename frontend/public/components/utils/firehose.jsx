@@ -93,9 +93,9 @@ const ConnectToState = connect(({k8s}, {reduxes}) => {
   inject(props.children, _.omit(props, ['children', 'className', 'reduxes']))
 );
 
-const stateToProps = ({k8s}, {resources, idPrefix}) => {
+const stateToProps = ({k8s}, {resources}) => {
   const k8sModels = resources.reduce((models, {kind}) => models.set(kind, k8s.getIn(['RESOURCES', 'models', kind])), ImmutableMap());
-  const loaded = (r) => k8s.getIn([makeReduxID(k8sModels.get(r.kind), makeQuery(r.namespace, r.selector, r.fieldSelector, r.name), idPrefix), 'loaded']);
+  const loaded = (r) => k8s.getIn([makeReduxID(k8sModels.get(r.kind), makeQuery(r.namespace, r.selector, r.fieldSelector, r.name)), 'loaded']);
 
   return {
     k8sModels,
@@ -115,7 +115,7 @@ export const Firehose = connect(
       next.loaded === prev.loaded && next.inFlight === prev.inFlight && shallowMapEquals(next.k8sModels, prev.k8sModels)
     ),
   })(
-  /** @augments {React.Component<{k8sModels?: Map<string, K8sKind>, forceUpdate?: boolean}>} */
+  /** @augments {React.Component<{k8sModels?: Map<string, K8sKind>, forceUpdate?: boolean, group?: string, showChildren?: boolean}>} */
   class Firehose extends React.Component {
     // TODO: Convert this to `componentDidMount`
     // eslint-disable-next-line camelcase
@@ -146,7 +146,7 @@ export const Firehose = connect(
     }
 
     start() {
-      const { watchK8sList, watchK8sObject, resources, k8sModels, inFlight, idPrefix = ''} = this.props;
+      const { watchK8sList, watchK8sObject, resources, k8sModels, inFlight, group} = this.props;
 
       if (inFlight && _.some(resources, ({kind}) => !k8sModels.get(kind))) {
         this.firehoses = [];
@@ -154,7 +154,7 @@ export const Firehose = connect(
         this.firehoses = resources.map(resource => {
           const query = makeQuery(resource.namespace, resource.selector, resource.fieldSelector, resource.name);
           const k8sKind = k8sModels.get(resource.kind);
-          const id = makeReduxID(k8sKind, query, idPrefix);
+          const id = makeReduxID(k8sKind, query);
           return _.extend({}, resource, {query, id, k8sKind});
         }).filter(f => {
           if (_.isEmpty(f.k8sKind)) {
@@ -166,13 +166,13 @@ export const Firehose = connect(
       }
 
       this.firehoses.forEach(({ id, query, k8sKind, isList, name, namespace }) => isList
-        ? watchK8sList(id, query, k8sKind)
-        : watchK8sObject(id, name, namespace, query, k8sKind)
+        ? watchK8sList(id, query, k8sKind, null, group)
+        : watchK8sObject(id, name, namespace, query, k8sKind, group)
       );
     }
 
     clear() {
-      this.firehoses.forEach(({id}) => this.props.stopK8sWatch(id, !!this.props.idPrefix));
+      this.firehoses.forEach(({id}) => this.props.stopK8sWatch(id, !!this.props.group));
       this.firehoses = [];
     }
 
@@ -183,9 +183,11 @@ export const Firehose = connect(
         'resources',
       ]));
 
+      const c = this.props.showChildren ? children : null;
+
       return this.props.loaded || this.firehoses.length > 0
         ? <ConnectToState reduxes={reduxes}>{children}</ConnectToState>
-        : null;
+        : c;
     }
   }
 );
@@ -210,5 +212,6 @@ Firehose.propTypes = {
     isList: PropTypes.bool,
     optional: PropTypes.bool,
   })).isRequired,
-  idPrefix: PropTypes.string,
+  group: PropTypes.string,
+  showChildren: PropTypes.bool,
 };

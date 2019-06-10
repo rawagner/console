@@ -8,16 +8,16 @@
 }
 
 .co-details-card__item-title {
+  flex-basis: 100%;
   font-size: 0.875rem;
   text-transform: capitalize;
-  flex-basis: 100%;
 }
 
 .co-details-card__item-value {
+  flex-basis: 100%;
   font-size: 0.875rem;
+  margin-bottom: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex-basis: 100%;
-  margin-bottom: 8px;
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
-import { Map as ImmutableMap } from 'immutable';
+import { connect } from 'react-redux';
 
 import {
   DashboardCard,
@@ -9,9 +9,14 @@ import {
   DashboardCardTitle,
 } from '../../dashboard/dashboard-card';
 import { DetailsBody, DetailItem } from '../../dashboard/details-card';
-import { withDashboardResources, WatchPrometheus, StopWatchPrometheus, WatchK8sResource, StopWatchK8sResource } from '../with-dashboard-resources';
+import { withDashboardResources, DashboardItemProps, FirehoseResource } from '../with-dashboard-resources';
 import { InfrastructureModel } from '../../../models';
 import { referenceForModel } from '../../../module/k8s';
+import { FLAGS } from '../../../const';
+import { featureReducerName, flagPending } from '../../../reducers/features';
+import { RootState } from '../../../redux';
+
+const OPENSHIFT_VERSION_QUERY = 'openshift_build_info{job="apiserver"}';
 
 const getClusterName = (infrastructure): string => {
   const apiServerURL = _.get(infrastructure, 'status.apiServerURL');
@@ -39,9 +44,10 @@ const getOpenshiftVersion = (openshiftClusterVersionResponse): string => {
   return null;
 };
 
-const OPENSHIFT_VERSION_QUERY = 'openshift_build_info{job="apiserver"}';
+const getKubernetesVersion = (kubernetesVersionResponse): string =>
+  _.get(kubernetesVersionResponse, 'gitVersion');
 
-const infrastructureResource = {
+const infrastructureResource: FirehoseResource = {
   kind: referenceForModel(InfrastructureModel),
   namespaced: false,
   name: 'cluster',
@@ -49,62 +55,85 @@ const infrastructureResource = {
   prop: 'infrastructure',
 };
 
+const mapStateToProps = (state: RootState) => ({
+  openShiftFlag: state[featureReducerName].get(FLAGS.OPENSHIFT),
+});
+
 export const _DetailsCard: React.FC<DetailsCardProps> = ({
+  watchURL,
+  stopWatchURL,
   watchPrometheus,
   stopWatchPrometheusQuery,
   watchK8sResource,
   stopWatchK8sResource,
   prometheusResults,
   k8sResults,
+  urlResults,
+  openShiftFlag,
 }) => {
   React.useEffect(() => {
-    watchPrometheus(OPENSHIFT_VERSION_QUERY);
-    watchK8sResource(infrastructureResource);
-    return () => {
-      stopWatchPrometheusQuery(OPENSHIFT_VERSION_QUERY);
-      stopWatchK8sResource(infrastructureResource);
-    };
-  }, [watchPrometheus, stopWatchPrometheusQuery, watchK8sResource, stopWatchK8sResource]);
-  const openshiftClusterVersionResponse = prometheusResults.getIn([OPENSHIFT_VERSION_QUERY], 'result');
+    if (!flagPending(openShiftFlag)) {
+      if (openShiftFlag) {
+        watchPrometheus(OPENSHIFT_VERSION_QUERY);
+        watchK8sResource(infrastructureResource);
+        return () => {
+          stopWatchPrometheusQuery(OPENSHIFT_VERSION_QUERY);
+          stopWatchK8sResource(infrastructureResource);
+        };
+      }
+      watchURL('version');
+      return () => {
+        stopWatchURL('version');
+      };
+    }
+  }, [openShiftFlag, watchPrometheus, stopWatchPrometheusQuery, watchK8sResource, stopWatchK8sResource, watchURL, stopWatchURL]);
+  const openshiftClusterVersionResponse = prometheusResults.getIn([OPENSHIFT_VERSION_QUERY, 'result']);
   const infrastructure = k8sResults.infrastructure;
+  const kubernetesVersion = urlResults.getIn(['version', 'result']);
   return (
     <DashboardCard className="co-details-card">
       <DashboardCardHeader>
         <DashboardCardTitle>Details</DashboardCardTitle>
       </DashboardCardHeader>
-      <DashboardCardBody>
+      <DashboardCardBody isLoading={flagPending(openShiftFlag)}>
         <DetailsBody>
-          <DetailItem
-            key="name"
-            title="Name"
-            value={getClusterName(infrastructure)}
-            isLoading={!infrastructure}
-          />
-          <DetailItem
-            key="provider"
-            title="Provider"
-            value={getInfrastructurePlatform(infrastructure)}
-            isLoading={!infrastructure}
-          />
-          <DetailItem
-            key="openshift"
-            title="OpenShift version"
-            value={getOpenshiftVersion(openshiftClusterVersionResponse)}
-            isLoading={!openshiftClusterVersionResponse}
-          />
+          {openShiftFlag ? (
+            <>
+              <DetailItem
+                key="name"
+                title="Name"
+                value={getClusterName(infrastructure)}
+                isLoading={!infrastructure}
+              />
+              <DetailItem
+                key="provider"
+                title="Provider"
+                value={getInfrastructurePlatform(infrastructure)}
+                isLoading={!infrastructure}
+              />
+              <DetailItem
+                key="openshift"
+                title="OpenShift version"
+                value={getOpenshiftVersion(openshiftClusterVersionResponse)}
+                isLoading={!openshiftClusterVersionResponse}
+              />
+            </>
+          ) : (
+            <DetailItem
+              key="kubernetes"
+              title="Kubernetes version"
+              value={getKubernetesVersion(kubernetesVersion)}
+              isLoading={!kubernetesVersion}
+            />
+          )}
         </DetailsBody>
       </DashboardCardBody>
     </DashboardCard>
   );
 };
 
-type DetailsCardProps = {
-  watchPrometheus: WatchPrometheus;
-  stopWatchPrometheusQuery: StopWatchPrometheus;
-  watchK8sResource: WatchK8sResource;
-  stopWatchK8sResource: StopWatchK8sResource;
-  prometheusResults: ImmutableMap<string, any>;
-  k8sResults: any;
+type DetailsCardProps = DashboardItemProps & {
+  openShiftFlag: boolean;
 }
 
-export const DetailsCard = withDashboardResources(_DetailsCard);
+export const DetailsCard = withDashboardResources(connect(mapStateToProps)(_DetailsCard));

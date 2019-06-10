@@ -35,6 +35,24 @@ const nop = () => {};
 const paginationLimit = 250;
 const apiGroups = 'apiGroups';
 
+const updateRef = (id: string, amount: number, group: string): void => {
+  REF_COUNTS[id].active += amount;
+
+  if (group) {
+    REF_COUNTS[id][group] += amount;
+  }
+};
+
+const initRef = (id: string, group: string): void => {
+  REF_COUNTS[id] = {
+    active: 1,
+  };
+
+  if (group) {
+    REF_COUNTS[id][group] = 1;
+  }
+};
+
 type K8sEvent = {type: 'ADDED' | 'DELETED' | 'MODIFIED', object: K8sResourceKind};
 
 export const updateListFromWS = (id: string, k8sObjects: K8sEvent[]) => action(ActionType.UpdateListFromWS, {id, k8sObjects});
@@ -62,13 +80,14 @@ export const filterList = (id: string, name: string, value: string) => action(Ac
 
 export const startWatchK8sObject = (id: string) => action(ActionType.StartWatchK8sObject, {id});
 
-export const watchK8sObject = (id: string, name: string, namespace: string, query: {[key: string]: string}, k8sType: K8sKind) => (dispatch: Dispatch, getState) => {
+export const watchK8sObject = (id: string, name: string, namespace: string, query: {[key: string]: string}, k8sType: K8sKind, group?: string) => (dispatch: Dispatch, getState) => {
   if (id in REF_COUNTS) {
-    REF_COUNTS[id] += 1;
+    updateRef(id, 1, group);
     return nop;
   }
   dispatch(startWatchK8sObject(id));
-  REF_COUNTS[id] = 1;
+
+  initRef(id, group);
 
   if (query.name) {
     query.fieldSelector = `metadata.name=${query.name}`;
@@ -100,10 +119,10 @@ export const watchK8sObject = (id: string, name: string, namespace: string, quer
 
 export const stopWatchK8s = (id: string) => action(ActionType.StopWatchK8s, {id});
 
-export const stopK8sWatch = (id: string, clearResults: boolean = true) => (dispatch: Dispatch) => {
-  REF_COUNTS[id] -= 1;
+export const stopK8sWatch = (id: string, clearResults: boolean = true, group?: string) => (dispatch: Dispatch) => {
+  updateRef(id, -1, group);
 
-  if (REF_COUNTS[id] > 0) {
+  if (REF_COUNTS[id].active > 0) {
     return nop;
   }
 
@@ -121,27 +140,26 @@ export const stopK8sWatch = (id: string, clearResults: boolean = true) => (dispa
   }
 };
 
-export const clearPrefixed = (idPrefix: string) => (dispatch: Dispatch) => {
-  Object.keys(REF_COUNTS).forEach(id => {
-    if (id.startsWith(`${idPrefix}-`)) {
-      while (REF_COUNTS[id] > 0) {
-        stopK8sWatch(id)(dispatch);
-      }
+export const clearGrouped = (group: string) => (dispatch: Dispatch) => {
+  Object.keys(REF_COUNTS).filter(id => _.has(REF_COUNTS[id], group)).forEach(id => {
+    while (REF_COUNTS[id][group] > 0) {
+      stopK8sWatch(id, true, group)(dispatch);
     }
   });
 };
 
 export const startWatchK8sList = (id: string, query: {[key: string]: string}) => action(ActionType.StartWatchK8sList, {id, query});
 
-export const watchK8sList = (id: string, query: {[key: string]: string}, k8skind: K8sKind, extraAction?) => (dispatch, getState) => {
+export const watchK8sList = (id: string, query: {[key: string]: string}, k8skind: K8sKind, extraAction?, group?: string) => (dispatch, getState) => {
   // Only one watch per unique list ID
   if (id in REF_COUNTS) {
-    REF_COUNTS[id] += 1;
+    updateRef(id, 1, group);
     return nop;
   }
 
   dispatch(startWatchK8sList(id, query));
-  REF_COUNTS[id] = 1;
+
+  initRef(id, group);
 
   const incrementallyLoad = async(continueToken = ''): Promise<string> => {
     // the list may not still be around...

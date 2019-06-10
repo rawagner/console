@@ -18,6 +18,7 @@ import {
 } from '../../actions/dashboards';
 import { RootState } from '../../redux';
 import { Firehose } from '../utils';
+import { K8sResourceKindReference, Selector } from '../../module/k8s';
 
 const FirehoseMapper: React.FC<FirehoseMapperProps> = ({ children, resources = {} }) => {
   const k8sResults = {};
@@ -87,7 +88,7 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<DashboardI
 
     render() {
       return (
-        <Firehose resources={this.state.k8sResources} idPrefix="dashboard">
+        <Firehose resources={this.state.k8sResources} group="dashboard" showChildren>
           <FirehoseMapper>
             <WrappedComponent
               watchURL={this.watchURL}
@@ -95,7 +96,7 @@ const WithDashboardResources = (WrappedComponent: React.ComponentType<DashboardI
               watchPrometheus={this.watchPrometheus}
               stopWatchPrometheusQuery={this.props.stopWatchPrometheusQuery}
               urlResults={this.props[RESULTS_TYPE.URL]}
-              prometheusResults={this.props[RESULTS_TYPE.URL]}
+              prometheusResults={this.props[RESULTS_TYPE.PROMETHEUS]}
               watchK8sResource={this.watchK8sResource}
               stopWatchK8sResource={this.stopWatchK8sResource}
             />
@@ -130,8 +131,18 @@ type FirehoseMapperProps = {
   resources?: object;
 };
 
-export type WatchK8sResource = (resource) => void;
-export type StopWatchK8sResource = (resource) => void;
+export type FirehoseResource = {
+  kind: K8sResourceKindReference;
+  name?: string;
+  namespace?: string;
+  isList?: boolean;
+  selector?: Selector;
+  prop: string;
+  namespaced?: boolean,
+};
+
+export type WatchK8sResource = (resource: FirehoseResource) => void;
+export type StopWatchK8sResource = (resource: FirehoseResource) => void;
 
 export type DashboardItemProps = {
   watchURL: WatchURL;
