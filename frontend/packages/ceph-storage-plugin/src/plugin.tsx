@@ -19,8 +19,6 @@ type ConsumedExtensions =
   | ModelDefinition
   | DashboardsOverviewHealthPrometheusSubsystem;
 
-import { getCephHealth } from './components/dashboards/health/health-card';
-
 import { StorageDashboard } from './components/dashboards/storage-dashboard';
 
 const CEPH_FLAG = 'CEPH';
@@ -47,14 +45,6 @@ const plugin: Plugin<ConsumedExtensions> = [
         name: 'Ceph dashboard',
         href: '/storage-dashboard',
       },
-    },
-  },
-  {
-    type: 'Dashboards/Overview/Health/Prometheus',
-    properties: {
-      title: 'Ceph Health',
-      query: 'ceph_health_status',
-      healthHandler: getCephHealth,
     },
   },
   {

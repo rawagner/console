@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import * as plugins from '@console/internal/plugins';
 import {
   DashboardCard,
   DashboardCardBody,
@@ -30,20 +29,6 @@ const _HealthCard: React.FC<HealthProps> = ({
   prometheusResults,
   openShiftFlag,
 }) => {
-  React.useEffect(() => {
-    const subsystems = plugins.registry.getDashboardsOverviewHealthSubsystems();
-
-    subsystems.filter(plugins.isDashboardsOverviewHealthPrometheusSubsystem).forEach(subsystem => {
-      const { query } = subsystem.properties;
-      watchPrometheus(query);
-    });
-    return () => {
-      subsystems.filter(plugins.isDashboardsOverviewHealthPrometheusSubsystem).forEach(subsystem =>
-        stopWatchPrometheusQuery(subsystem.properties.query)
-      );
-    };
-  }, [watchPrometheus, stopWatchPrometheusQuery]);
-
   const cephHealth = prometheusResults.getIn(['ceph_health_status', 'result']);
   const cephHealthState = getCephHealthState(cephHealth);
 

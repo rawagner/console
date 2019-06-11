@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-import { Dashboard, DashboardGrid } from '@console/internal/components/dashboard/';
-import { HealthCard } from './health/health-card';
+import { Dashboard } from '@console/internal/components/dashboard/dashboard';
+import { DashboardGrid } from '@console/internal/components/dashboard/grid';
+
+const Empty = () => null;
 
 export const StorageDashboard: React.FC<{}> = () => {
   const mainCards = [
-    <HealthCard key="health" />,
+    <Empty />
   ];
 
   return (
