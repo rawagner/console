@@ -73,7 +73,7 @@ const Graph: React.FC<GraphProps> = ({colors, domain, data, onZoom}) => {
         scale={{x: 'time', y: 'linear'}}
       >
         <ChartAxis tickCount={5} tickFormat={twentyFourHourTime} />
-        <ChartAxis dependentAxis tickCount={5} tickFormat={humanizeNumber} />
+        <ChartAxis dependentAxis tickCount={5} tickFormat={value => humanizeNumber(value).string} />
         <ChartGroup colorScale={colors}>
           {_.map(data, ({values}, i) => <ChartArea key={i} data={values} />)}
         </ChartGroup>

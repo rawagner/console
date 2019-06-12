@@ -23,29 +23,13 @@ import { PrometheusEndpoint } from './helpers';
 import { PrometheusGraph } from './prometheus-graph';
 import { barTheme } from './themes';
 import { humanizeNumber, truncateMiddle } from '../utils';
-import {
-  DataPoint,
-  DomainPadding,
-  MutatorFunction,
-  PrometheusResponse,
-} from '.';
+import { DomainPadding } from '.';
+import { formatVectorStats } from './utils';
 
 const DEFAULT_SPACING = 10;
 const DEFAULT_BAR_WIDTH = 10;
 const DEFAULT_DOMAIN_PADDING: DomainPadding = { x: [20, 10] };
 const PADDING_RATIO = 1 / 3;
-
-const handleResponse = (response: PrometheusResponse, metric: string, formatY: MutatorFunction): DataPoint[] => {
-  const results = _.get(response, 'data.result', []);
-  return _.map(results, r => {
-    const y = _.get(r, 'value[1]');
-    return {
-      label: formatY(y),
-      x: _.get(r, ['metric', metric], ''),
-      y,
-    };
-  });
-};
 
 const getTotalXDomainPadding = (domainPadding: DomainPadding): number => {
   const value = _.get(domainPadding, 'x', domainPadding);
@@ -61,7 +45,7 @@ const getTotalXDomainPadding = (domainPadding: DomainPadding): number => {
 export const Bar: React.FC<BarProps> = ({
   barWidth = DEFAULT_BAR_WIDTH,
   domainPadding = DEFAULT_DOMAIN_PADDING,
-  formatY = humanizeNumber,
+  formatY = value => humanizeNumber(value).string,
   metric,
   namespace,
   query,
@@ -71,7 +55,7 @@ export const Bar: React.FC<BarProps> = ({
 }) => {
   const [containerRef, width] = useRefWidth();
   const [response] = usePrometheusPoll({ endpoint: PrometheusEndpoint.QUERY, namespace, query });
-  const data = handleResponse(response, metric, formatY);
+  const data = formatVectorStats(response, metric, formatY);
 
   // Max space that horizontal padding should take up. By default, 1/3 of the horizontal space is always available for the actual bar graph.
   const maxHorizontalPadding = PADDING_RATIO * width;
