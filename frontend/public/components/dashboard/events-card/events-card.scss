@@ -1,0 +1,9 @@
+.co-events-card__body {
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+  max-height: 400px;
+  margin-top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

@@ -32,6 +32,7 @@ import {
   resourcePathFromModel,
   Timestamp,
   TogglePlay,
+  useRefWidth,
 } from './utils';
 
 const maxMessages = 500;
@@ -51,53 +52,55 @@ const kindFilter = (kind, {involvedObject}) => {
   return kind === 'all' || involvedObject.kind === kind;
 };
 
-const Inner = connectToFlags(FLAGS.CAN_LIST_NODE)(class Inner extends React.PureComponent {
-  render() {
-    const {klass, status, tooltipMsg, obj, lastTimestamp, firstTimestamp, message, source, count, flags} = this.props;
+const Inner_ = ({ klass, status, tooltipMsg, obj, lastTimestamp, firstTimestamp, message, source, count, flags, showTimeline }) => {
+  const [containerRef, width] = useRefWidth();
+  const isSmall = width < 400;
 
-    return <div className={`${klass} slide-${status}`}>
-      <div className="co-sysevent__icon-box">
-        <i className="co-sysevent-icon" title={tooltipMsg} />
-        <div className="co-sysevent__icon-line"></div>
-      </div>
-      <div className="co-sysevent__box">
-        <div className="co-sysevent__header">
-          <div className="co-sysevent__subheader">
-            <ResourceLink
-              className="co-sysevent__resourcelink"
-              kind={referenceFor(obj)}
-              namespace={obj.namespace}
-              name={obj.name}
-              title={obj.uid}
-            />
-            {obj.namespace && <ResourceLink
-              className="co-sysevent__resourcelink hidden-xs"
-              kind="Namespace"
-              name={obj.namespace}
-            />}
-            <Timestamp className="co-sysevent__timestamp" timestamp={lastTimestamp} />
-          </div>
-          <div className="co-sysevent__details">
-            <small className="co-sysevent__source">
-              Generated from <span>{source.component}</span>
-              {source.component === 'kubelet' && <span> on {flags[FLAGS.CAN_LIST_NODE]
-                ? <Link to={resourcePathFromModel(NodeModel, source.host)}>{source.host}</Link>
-                : <React.Fragment>{source.host}</React.Fragment>}
-              </span>}
-            </small>
-            {count > 1 && <small className="co-sysevent__count text-secondary">
-              {count} times in the last <Timestamp timestamp={firstTimestamp} simple={true} omitSuffix={true} />
-            </small>}
-          </div>
+  const cls = showTimeline && !isSmall ? 'co-sysevent' : 'co-sysevent--narrow';
+  return <div ref={containerRef} className={`${cls} ${klass} slide-${status}`}>
+    {showTimeline && !isSmall && <div className="co-sysevent__icon-box">
+      <i className="co-sysevent-icon" title={tooltipMsg} />
+      <div className="co-sysevent__icon-line"></div>
+    </div>}
+    <div className="co-sysevent__box">
+      <div className="co-sysevent__header">
+        <div className="co-sysevent__subheader">
+          <ResourceLink
+            className="co-sysevent__resourcelink"
+            kind={referenceFor(obj)}
+            namespace={obj.namespace}
+            name={obj.name}
+            title={obj.uid}
+          />
+          {obj.namespace && <ResourceLink
+            className="co-sysevent__resourcelink hidden-xs"
+            kind="Namespace"
+            name={obj.namespace}
+          />}
+          <Timestamp className="co-sysevent__timestamp" timestamp={lastTimestamp} />
         </div>
-
-        <div className="co-sysevent__message">
-          {message}
+        <div className="co-sysevent__details">
+          <small className="co-sysevent__source">
+            Generated from <span>{source.component}</span>
+            {source.component === 'kubelet' && <span> on {flags[FLAGS.CAN_LIST_NODE]
+              ? <Link to={resourcePathFromModel(NodeModel, source.host)}>{source.host}</Link>
+              : <React.Fragment>{source.host}</React.Fragment>}
+            </span>}
+          </small>
+          {count > 1 && <small className="co-sysevent__count text-secondary">
+            {count} times in the last <Timestamp timestamp={firstTimestamp} simple={true} omitSuffix={true} />
+          </small>}
         </div>
       </div>
-    </div>;
-  }
-});
+
+      <div className="co-sysevent__message">
+        {message}
+      </div>
+    </div>
+  </div>;
+};
+
+const Inner = React.memo(connectToFlags(FLAGS.CAN_LIST_NODE)(Inner_));
 
 // Keep track of seen events so we only animate new ones.
 const seen = new Set();
@@ -121,8 +124,8 @@ class SysEvent extends React.Component {
   }
 
   render() {
-    const { index, style, reason, message, source, metadata, firstTimestamp, lastTimestamp, count, involvedObject: obj} = this.props;
-    const klass = classNames('co-sysevent', {'co-sysevent--error': categoryFilter('error', this.props)});
+    const { index, style, reason, message, source, metadata, firstTimestamp, lastTimestamp, count, involvedObject: obj, showTimeline} = this.props;
+    const klass = classNames({'co-sysevent--error': categoryFilter('error', this.props)});
     const tooltipMsg = `${reason} (${obj.kind})`;
 
     let shouldAnimate;
@@ -135,7 +138,7 @@ class SysEvent extends React.Component {
 
     return <div className="co-sysevent--transition" style={style}>
       <CSSTransition mountOnEnter={true} appear={shouldAnimate} in exit={false} timeout={timeout} classNames="slide">
-        {status => <Inner klass={klass} status={status} tooltipMsg={tooltipMsg} obj={obj} firstTimestamp={firstTimestamp} lastTimestamp={lastTimestamp} count={count} message={message} source={source} width={style.width} />}
+        {status => <Inner showTimeline={showTimeline} klass={klass} status={status} tooltipMsg={tooltipMsg} obj={obj} firstTimestamp={firstTimestamp} lastTimestamp={lastTimestamp} count={count} message={message} source={source} width={style.width} />}
       </CSSTransition>
     </div>;
   }
@@ -209,7 +212,7 @@ const measurementCache = new CellMeasurerCache({
   minHeight: 109, /* height of event with a one-line event message on desktop */
 });
 
-class EventStream extends React.Component {
+export class EventStream extends React.Component {
   constructor(props) {
     super(props);
     this.messages = {};
@@ -231,7 +234,7 @@ class EventStream extends React.Component {
         rowIndex={index}
         parent={parent}>
         {({ measure }) =>
-          <SysEvent {...event} onLoad={measure} onEntered={print} src={event} key={key} style={style} index={index} />
+          <SysEvent {...event} onLoad={measure} onEntered={print} src={event} key={key} style={style} index={index} showTimeline={props.showStatus} />
         }
       </CellMeasurer>;
     }.bind(this);
@@ -414,7 +417,7 @@ class EventStream extends React.Component {
   }
 
   render() {
-    const { mock, resourceEventStream } = this.props;
+    const { mock, resourceEventStream, showStatus } = this.props;
     const {active, error, loading, filteredEvents, sortedMessages} = this.state;
     const count = filteredEvents.length;
     const allCount = sortedMessages.length;
@@ -465,8 +468,8 @@ class EventStream extends React.Component {
     const messageCount = count < maxMessages ? `Showing ${pluralize(count, 'event')}` : `Showing ${count} of ${allCount}+ events`;
 
     return <div className="co-m-pane__body co-m-pane__body--alt">
-      <div className="co-sysevent-stream">
-        <div className="co-sysevent-stream__status">
+      <div className={classNames({'co-sysevent-stream': showStatus})}>
+        {showStatus && <><div className="co-sysevent-stream__status">
           <div className="co-sysevent-stream__timeline__btn-text">
             { statusBtnTxt }
           </div>
@@ -476,14 +479,16 @@ class EventStream extends React.Component {
         </div>
 
         <div className={klass}>
-          <TogglePlay active={active} onClick={this.toggleStream} className="co-sysevent-stream__timeline__btn" />
+          {showStatus && <TogglePlay active={active} onClick={this.toggleStream} className="co-sysevent-stream__timeline__btn" />}
           <div className="co-sysevent-stream__timeline__end-message">
           There are no events before <Timestamp timestamp={this.state.oldestTimestamp} />
           </div>
         </div>
+        </>
+        }
         { /* Default `height` to 0 to avoid console errors from https://github.com/bvaughn/react-virtualized/issues/1158 */}
         { count > 0 &&
-            <WindowScroller scrollElement={document.getElementById('content-scrollable')}>
+            <WindowScroller scrollElement={document.getElementById(this.props.scrollableElementId)}>
               {({height, isScrolling, registerChild, onChildScroll, scrollTop}) =>
                 <AutoSizer disableHeight onResize={this.onResize}>
                   {({width}) => <div ref={registerChild}>
@@ -516,6 +521,8 @@ EventStream.defaultProps = {
   category: 'all',
   kind: 'all',
   mock: false,
+  scrollableElementId: 'content-scrollable',
+  showStatus: true,
 };
 
 EventStream.propTypes = {
@@ -526,6 +533,8 @@ EventStream.propTypes = {
   namespace: namespaceProptype,
   showTitle: PropTypes.bool,
   textFilter: PropTypes.string,
+  scrollableElementId: PropTypes.string,
+  showStatus: PropTypes.bool,
 };
 
 
