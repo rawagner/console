@@ -20,38 +20,49 @@ import { apiVersionForReference, kindForReference, K8sResourceKind, OwnerReferen
 import { ClusterServiceVersionModel } from '../../models';
 import { deleteModal } from '../modals';
 import { RootState } from '../../redux';
+import * as plugins from '../../plugins';
 
 const csvName = () => location.pathname.split('/').find((part, i, allParts) => allParts[i - 1] === referenceForModel(ClusterServiceVersionModel) || allParts[i - 1] === ClusterServiceVersionModel.plural);
 
-const actions = [
-  (kind, obj) => ({
-    label: `Edit ${kind.label}`,
-    href: `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${csvName()}/${referenceFor(obj)}/${obj.metadata.name}/yaml`,
-    accessReview: {
-      group: kind.apiGroup,
-      resource: kind.plural,
-      name: obj.metadata.name,
-      namespace: obj.metadata.namespace,
-      verb: 'update',
-    },
-  }),
-  (kind, obj) => ({
-    label: `Delete ${kind.label}`,
-    callback: () => deleteModal({
-      kind,
-      resource: obj,
-      namespace: obj.metadata.namespace,
-      redirectTo: `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${csvName()}/${referenceFor(obj)}`,
+const getActions = (ob: K8sResourceKind) => {
+  const actions = plugins.registry.getClusterServiceVersionActions().filter(action =>
+    action.properties.kind === ob.kind
+  );
+  const pluginActions = actions.map(action => (kind, obj) => ({
+    label: action.properties.label,
+    callback: action.properties.callback(kind, obj),
+  }));
+  return [
+    (kind, obj) => ({
+      label: `Edit ${kind.label}`,
+      href: `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${csvName()}/${referenceFor(obj)}/${obj.metadata.name}/yaml`,
+      accessReview: {
+        group: kind.apiGroup,
+        resource: kind.plural,
+        name: obj.metadata.name,
+        namespace: obj.metadata.namespace,
+        verb: 'update',
+      },
     }),
-    accessReview: {
-      group: kind.apiGroup,
-      resource: kind.plural,
-      name: obj.metadata.name,
-      namespace: obj.metadata.namespace,
-      verb: 'delete',
-    },
-  }),
-] as KebabAction[];
+    ...pluginActions,
+    (kind, obj) => ({
+      label: `Delete ${kind.label}`,
+      callback: () => deleteModal({
+        kind,
+        resource: obj,
+        namespace: obj.metadata.namespace,
+        redirectTo: `/k8s/ns/${obj.metadata.namespace}/${ClusterServiceVersionModel.plural}/${csvName()}/${referenceFor(obj)}`,
+      }),
+      accessReview: {
+        group: kind.apiGroup,
+        resource: kind.plural,
+        name: obj.metadata.name,
+        namespace: obj.metadata.namespace,
+        verb: 'delete',
+      },
+    }),
+  ] as KebabAction[];
+};
 
 const tableColumnClasses = [
   classNames('col-lg-2', 'col-md-3', 'col-sm-4', 'col-xs-6'),
@@ -124,7 +135,7 @@ export const OperandTableRow: React.FC<OperandTableRowProps> = ({obj, index, key
         <Timestamp timestamp={obj.metadata.creationTimestamp} />
       </TableData>
       <TableData className={tableColumnClasses[6]}>
-        <ResourceKebab actions={actions} kind={referenceFor(obj)} resource={obj} />
+        <ResourceKebab actions={getActions(obj)} kind={referenceFor(obj)} resource={obj} />
       </TableData>
     </TableRow>
   );
@@ -312,7 +323,7 @@ export const OperandDetailsPage: React.SFC<OperandDetailsPageProps> = (props) =>
   resources={[
     {kind: referenceForModel(ClusterServiceVersionModel), name: props.match.params.appName, namespace: props.namespace, isList: false, prop: 'csv'},
   ]}
-  menuActions={actions}
+  menuActions={getActions()}
   breadcrumbsFor={() => [
     {name: 'Installed Operators', path: `/k8s/ns/${props.match.params.ns}/${ClusterServiceVersionModel.plural}`},
     {name: props.match.params.appName, path: props.match.url.slice(0, props.match.url.lastIndexOf('/'))},
