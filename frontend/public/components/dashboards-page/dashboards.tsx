@@ -9,6 +9,10 @@ import { HorizontalNav, PageHeading, LoadingBox, Page, AsyncComponent } from '..
 import { Dashboard } from '../dashboard/dashboard';
 import { DashboardGrid, GridPosition, GridDashboardCard } from '../dashboard/grid';
 import { DashboardsCard } from '@console/plugin-sdk';
+import { featureReducerName, connectToFlags, FlagsObject } from '../../reducers/features';
+import { RootState } from '../../redux';
+
+export const getFlagsForExtensions = (extensions: {properties: {required: string}}[]): string[] => extensions.map(e => e.properties.required);
 
 const getCardsOnPosition = (cards: DashboardsCard[], position: GridPosition): GridDashboardCard[] =>
   cards.filter(c => c.properties.position === position).map(c => ({
@@ -16,9 +20,9 @@ const getCardsOnPosition = (cards: DashboardsCard[], position: GridPosition): Gr
     span: c.properties.span,
   }));
 
-const getPluginTabPages = (): Page[] => {
+const getPluginTabPages = (flags: FlagsObject): Page[] => {
   const cards = plugins.registry.getDashboardsCards();
-  return plugins.registry.getDashboardsTabs().map(tab => {
+  return plugins.registry.getDashboardsTabs().filter(tab => flags[tab.properties.required]).map(tab => {
     const tabCards = cards.filter(c => c.properties.tab === tab.properties.id);
     return {
       href: tab.properties.id,
@@ -36,34 +40,38 @@ const getPluginTabPages = (): Page[] => {
   });
 };
 
-const tabs: Page[] = [
+const getTabs = (flags: FlagsObject): Page[] => [
   {
     href: '',
     name: 'Overview',
     component: OverviewDashboard,
   },
-  ...getPluginTabPages(),
+  ...getPluginTabPages(flags),
 ];
 
-const DashboardsPage_: React.FC<DashboardsPageProps> = ({ match, kindsInFlight, k8sModels }) => {
+const DashboardsPage_: React.FC<DashboardsPageProps> = ({ match, kindsInFlight, k8sModels, flags }) => {
   return kindsInFlight && k8sModels.size === 0
     ? <LoadingBox />
     : (
       <>
         <PageHeading title="Dashboards" detail={true} />
-        <HorizontalNav match={match} pages={tabs} noStatusBox />
+        <HorizontalNav match={match} pages={getTabs(flags)} noStatusBox />
       </>
     );
 };
 
-const mapStateToProps = ({k8s}) => ({
-  kindsInFlight: k8s.getIn(['RESOURCES', 'inFlight']),
-  k8sModels: k8s.getIn(['RESOURCES', 'models']),
+const mapStateToProps = (state: RootState) => ({
+  kindsInFlight: state.k8s.getIn(['RESOURCES', 'inFlight']),
+  k8sModels: state.k8s.getIn(['RESOURCES', 'models']),
+  flags: state[featureReducerName],
 });
 
-export const DashboardsPage = connect(mapStateToProps)(DashboardsPage_);
+export const DashboardsPage = connect(mapStateToProps)(
+  connectToFlags(...getFlagsForExtensions(plugins.registry.getDashboardsCards()))(DashboardsPage_)
+);
 
 type DashboardsPageProps = RouteComponentProps & {
   kindsInFlight: boolean;
   k8sModels: ImmutableMap<string, any>;
+  flags: FlagsObject;
 };
