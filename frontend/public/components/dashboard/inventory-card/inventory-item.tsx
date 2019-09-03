@@ -10,7 +10,7 @@ import {
 import * as plugins from '../../../plugins';
 import {
   LoadingInline,
-} from '../../utils';
+} from '../../utils/status-box';
 import { K8sResourceKind, K8sKind } from '../../../module/k8s';
 import { InventoryStatusGroup } from './status-group';
 import { connectToFlags, FlagsObject, WithFlagsProps } from '../../../reducers/features';
