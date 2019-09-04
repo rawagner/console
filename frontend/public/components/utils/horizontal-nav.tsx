@@ -48,6 +48,11 @@ export type Page = {
 
 type NavFactory = { [name: string]: (c?: React.ComponentType<any>) => Page };
 export const navFactory: NavFactory = {
+  dashboard: (component) => ({
+    href: 'dashboard',
+    name: 'Dashboard',
+    component,
+  }),
   details: (component) => ({
     href: '',
     name: 'Overview',

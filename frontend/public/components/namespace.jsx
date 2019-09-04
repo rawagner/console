@@ -57,6 +57,7 @@ import {
   ConsoleLinks,
   getNamespaceDashboardConsoleLinks,
 } from './overview/namespace-overview';
+import { ProjectDashboard } from './project-dashboard/project-dashboard';
 
 const getModel = (useProjects) => (useProjects ? ProjectModel : NamespaceModel);
 const getDisplayName = (obj) =>
@@ -611,6 +612,7 @@ export const ProjectsDetailsPage = (props) => (
     {...props}
     menuActions={projectMenuActions}
     pages={[
+      navFactory.dashboard(ProjectDashboard),
       navFactory.details(OverviewNamespaceDashboard),
       navFactory.editYaml(),
       navFactory.workloads(Overview),

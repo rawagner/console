@@ -45,6 +45,6 @@ export const AlertsBody: React.FC<AlertsBodyProps> = ({
 type AlertsBodyProps = {
   isLoading: boolean;
   error: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   emptyMessage: string;
 };
