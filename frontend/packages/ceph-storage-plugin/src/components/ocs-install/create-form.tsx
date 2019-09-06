@@ -8,8 +8,16 @@ import { NodeList } from './node-list';
 
 import './ocs-install.scss';
 
-export const CreateOCSServiceForm: React.FC<CreateOCSServiceFormProps> = (props) => {
+export const CreateOCSServiceForm: React.FC<CreateOCSServiceFormProps> = ({
+  namespace,
+  clusterServiceVersion,
+}) => {
   const title = 'Create New OCS Service';
+
+  const ListComponent = React.useCallback(
+    (nodeProps) => <NodeList {...nodeProps} ocsProps={{ namespace, clusterServiceVersion }} />,
+    [namespace, clusterServiceVersion],
+  );
 
   return (
     <div className="co-m-pane__body co-m-pane__form">
@@ -40,7 +48,7 @@ export const CreateOCSServiceForm: React.FC<CreateOCSServiceFormProps> = (props)
           <ListPage
             kind={NodeModel.kind}
             showTitle={false}
-            ListComponent={(nodeProps) => <NodeList {...nodeProps} ocsProps={props} />}
+            ListComponent={ListComponent}
           />
         </div>
       </form>
