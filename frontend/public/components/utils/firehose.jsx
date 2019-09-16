@@ -76,19 +76,19 @@ const mapStateToProps = ({k8s}) => ({
 });
 
 const propsAreEqual = (prevProps, nextProps) => {
-  if (nextProps.children === prevProps.children && nextProps.reduxes === prevProps.reduxes) {
-    return nextProps.reduxes.every(({ reduxID }) => prevProps.k8s.get(reduxID) === nextProps.k8s.get(reduxID));
+  if (Object.keys(nextProps).filter(key => key !== 'k8s').every(key => nextProps[key] === prevProps[key])) {
+    return nextProps.firehoses.every(({ reduxID }) => prevProps.k8s.get(reduxID) === nextProps.k8s.get(reduxID));
   }
   return false;
 };
 
 // A wrapper Component that takes data out of redux for a list or object at some reduxID ...
 // passing it to children
-const ConnectToState = connect(mapStateToProps)(React.memo(({ k8s, reduxes, children }) => {
+const ConnectToState = connect(mapStateToProps)(React.memo(({ k8s, firehoses, children, ...rest }) => {
   const resources = {};
 
-  reduxes.forEach(redux => {
-    resources[redux.prop] = processReduxId({k8s}, redux);
+  firehoses.forEach(firehose => {
+    resources[firehose.prop] = processReduxId({k8s}, firehose);
   });
 
   const required = _.filter(resources, r => !r.optional);
@@ -99,11 +99,11 @@ const ConnectToState = connect(mapStateToProps)(React.memo(({ k8s, reduxes, chil
     filters: Object.assign({}, ..._.map(resources, 'filters')),
     loaded,
     loadError,
-    reduxIDs: _.map(reduxes, 'reduxID'),
+    reduxIDs: _.map(firehoses, 'reduxID'),
     resources,
   });
 
-  return inject(children, k8sResults);
+  return inject(children, {...rest, ...k8sResults});
 }, propsAreEqual));
 
 const stateToProps = ({k8s}, {resources}) => {
@@ -167,8 +167,8 @@ export const Firehose = connect(
         this.firehoses = resources.map(resource => {
           const query = makeQuery(resource.namespace, resource.selector, resource.fieldSelector, resource.name);
           const k8sKind = k8sModels.get(resource.kind);
-          const id = makeReduxID(k8sKind, query);
-          return _.extend({}, resource, {query, id, k8sKind});
+          const reduxID = makeReduxID(k8sKind, query);
+          return _.extend({}, resource, {query, reduxID, k8sKind});
         }).filter(f => {
           if (_.isEmpty(f.k8sKind)) {
             // eslint-disable-next-line no-console
@@ -178,27 +178,20 @@ export const Firehose = connect(
         });
       }
 
-      this.firehoses.forEach(({ id, query, k8sKind, isList, name, namespace }) => isList
-        ? watchK8sList(id, query, k8sKind)
-        : watchK8sObject(id, name, namespace, query, k8sKind)
+      this.firehoses.forEach(({ reduxID, query, k8sKind, isList, name, namespace }) => isList
+        ? watchK8sList(reduxID, query, k8sKind)
+        : watchK8sObject(reduxID, name, namespace, query, k8sKind)
       );
     }
 
     clear() {
-      this.firehoses.forEach(({id}) => this.props.stopK8sWatch(id));
+      this.firehoses.forEach(({reduxID}) => this.props.stopK8sWatch(reduxID));
       this.firehoses = [];
     }
 
     render() {
-      const reduxes = this.firehoses.map(({id, prop, isList, filters, optional}) => ({reduxID: id, prop, isList, filters, optional}));
-      const children = inject(this.props.children, _.omit(this.props, [
-        'children',
-        'resources',
-      ]));
-
       return this.props.loaded || this.firehoses.length > 0
-        ? <ConnectToState reduxes={reduxes}>{children}</ConnectToState>
-        : null;
+        ? <ConnectToState firehoses={this.firehoses} {...this.props} /> : null;
     }
   }
 );
