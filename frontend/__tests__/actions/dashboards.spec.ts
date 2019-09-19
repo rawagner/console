@@ -82,9 +82,9 @@ describe('dashboards-actions', () => {
       payload: {
         key: 'fooQuery',
         type: RESULTS_TYPE.PROMETHEUS,
-        result: {},
+        error: new Error('Prometheus URL is not available'),
       },
-      type: ActionType.UpdateResult,
+      type: ActionType.SetError,
     });
   });
 
