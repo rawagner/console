@@ -1067,7 +1067,7 @@ const PollerPages = () => {
       poll(`${prometheusBaseURL}/api/v1/rules`, 'alerts', data => {
         // Flatten the rules data to make it easier to work with, discard non-alerting rules since those are the only
         // ones we will be using and add a unique ID to each rule.
-        const groups = _.get(data, 'groups');
+        const groups = _.get(data, 'groups') as PrometheusRulesResponse['data']['groups'];
         const rules = _.flatMap(groups, g => {
           const addID = r => {
             const key = [g.file, g.name, r.name, r.duration, r.query, ..._.map(r.labels, (k, v) => `${k}=${v}`)].join(',');
@@ -1222,3 +1222,17 @@ export type ListPageProps = {
 type AlertingPageProps = {
   match: any;
 };
+
+type Group = {
+  rules: Rule[];
+  file: string;
+  inverval: number;
+  name: string;
+}
+
+export type PrometheusRulesResponse = {
+  data: {
+    groups: Group[]
+  }
+  status: string;
+}

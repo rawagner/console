@@ -84,7 +84,7 @@ describe('dashboards-actions', () => {
         type: RESULTS_TYPE.PROMETHEUS,
         result: {},
       },
-      type: ActionType.UpdateResult,
+      type: ActionType.SetData,
     });
   });
 
