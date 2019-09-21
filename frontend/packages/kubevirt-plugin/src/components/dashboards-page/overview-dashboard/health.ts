@@ -1,13 +1,18 @@
 import * as _ from 'lodash';
 import { HealthState } from '@console/internal/components/dashboard/health-card/states';
-import { SubsystemHealth } from '@console/internal/components/dashboards-page/overview-dashboard/health-card';
-import { ERROR, HEALTHY } from './strings';
+import { HealthHandler } from '@console/plugin-sdk';
 
-export const getKubevirtHealthState = (response): SubsystemHealth => {
+export const getKubevirtHealthState: HealthHandler<KubevirtHealthResponse> = (response) => {
   if (!response) {
     return { state: HealthState.LOADING };
   }
   return _.get(response, 'apiserver.connectivity') === 'ok'
-    ? { message: HEALTHY, state: HealthState.OK }
-    : { message: ERROR, state: HealthState.ERROR };
+    ? { state: HealthState.OK }
+    : { state: HealthState.ERROR };
+};
+
+type KubevirtHealthResponse = {
+  apiserver: {
+    connectivity: string;
+  };
 };

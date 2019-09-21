@@ -23,7 +23,7 @@ import { RootState } from '../../redux';
 import { Firehose, FirehoseResource, FirehoseResult } from '../utils';
 import { K8sResourceKind } from '../../module/k8s';
 import { PrometheusResponse } from '../graphs';
-import { Alert } from '../monitoring';
+import { PrometheusRulesResponse } from '../monitoring';
 
 const mapDispatchToProps: DispatchToProps = dispatch => ({
   watchURL: (url, fetch) => dispatch(watchURL(url, fetch)),
@@ -37,7 +37,7 @@ const mapDispatchToProps: DispatchToProps = dispatch => ({
 const mapStateToProps = (state: RootState) => ({
   [RESULTS_TYPE.URL]: state.dashboards.get(RESULTS_TYPE.URL),
   [RESULTS_TYPE.PROMETHEUS]: state.dashboards.get(RESULTS_TYPE.PROMETHEUS) as RequestMap<PrometheusResponse>,
-  [RESULTS_TYPE.ALERTS]: state.dashboards.get(RESULTS_TYPE.ALERTS) as RequestMap<Alert[]>,
+  [RESULTS_TYPE.ALERTS]: state.dashboards.get(RESULTS_TYPE.ALERTS) as RequestMap<PrometheusRulesResponse>,
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -60,15 +60,15 @@ export const withDashboardResources = <P extends DashboardItemProps>(WrappedComp
       shouldComponentUpdate(nextProps: WithDashboardResourcesProps, nextState: WithDashboardResourcesState) {
         const urlResultChanged = this.urls.some(urlKey =>
           this.props[RESULTS_TYPE.URL].getIn([urlKey, 'data']) !== nextProps[RESULTS_TYPE.URL].getIn([urlKey, 'data']) ||
-          this.props[RESULTS_TYPE.URL].getIn([urlKey, 'error']) !== nextProps[RESULTS_TYPE.URL].getIn([urlKey, 'error'])
+          this.props[RESULTS_TYPE.URL].getIn([urlKey, 'loadError']) !== nextProps[RESULTS_TYPE.URL].getIn([urlKey, 'loadError'])
         );
         const queryResultChanged = this.queries.some(query =>
           this.props[RESULTS_TYPE.PROMETHEUS].getIn([query, 'data']) !== nextProps[RESULTS_TYPE.PROMETHEUS].getIn([query, 'data']) ||
-          this.props[RESULTS_TYPE.PROMETHEUS].getIn([query, 'error']) !== nextProps[RESULTS_TYPE.PROMETHEUS].getIn([query, 'error'])
+          this.props[RESULTS_TYPE.PROMETHEUS].getIn([query, 'loadError']) !== nextProps[RESULTS_TYPE.PROMETHEUS].getIn([query, 'loadError'])
         );
         const alertsResultChanged =
-        this.props[RESULTS_TYPE.ALERTS].getIn([ALERTS_KEY, 'data']) !== nextProps[RESULTS_TYPE.PROMETHEUS].getIn([ALERTS_KEY, 'data']) ||
-        this.props[RESULTS_TYPE.ALERTS].getIn([ALERTS_KEY, 'error']) !== nextProps[RESULTS_TYPE.PROMETHEUS].getIn([ALERTS_KEY, 'error']);
+          this.props[RESULTS_TYPE.ALERTS].getIn([ALERTS_KEY, 'data']) !== nextProps[RESULTS_TYPE.ALERTS].getIn([ALERTS_KEY, 'data']) ||
+          this.props[RESULTS_TYPE.ALERTS].getIn([ALERTS_KEY, 'loadError']) !== nextProps[RESULTS_TYPE.ALERTS].getIn([ALERTS_KEY, 'loadError']);
         const k8sResourcesChanged = this.state.k8sResources !== nextState.k8sResources;
 
         return (
@@ -193,7 +193,7 @@ export type DashboardItemProps = {
   stopWatchAlerts: StopWatchAlerts;
   urlResults: RequestMap<any>;
   prometheusResults: RequestMap<PrometheusResponse>;
-  alertsResults: RequestMap<Alert[]>;
+  alertsResults: RequestMap<PrometheusRulesResponse>;
   watchK8sResource: WatchK8sResource;
   stopWatchK8sResource: StopWatchK8sResource;
   resources?: {
