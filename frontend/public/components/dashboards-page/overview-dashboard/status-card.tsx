@@ -189,7 +189,7 @@ const ClusterAlerts = withDashboardResources(
       <AlertsBody
         isLoading={!alertsResponse}
         error={alertsResponseError}
-        emptyMessage="No cluster alerts or messages"
+        emptyMessage="No cluster alerts or messages1"
       >
         {(hasAvailableUpdates(cv) || alerts.length) && (
           <>
