@@ -1,4 +1,4 @@
-import { SubsystemHealth } from '@console/internal/components/dashboards-page/overview-dashboard/health-card';
+import { HealthState } from '@console/internal/components/dashboard/health-card/states';
 import { GridPosition } from '@console/internal/components/dashboard/grid';
 import { FirehoseResource, Humanize, FirehoseResult } from '@console/internal/components/utils';
 import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
@@ -13,10 +13,10 @@ import { PrometheusResponse } from '@console/internal/components/graphs';
 import { Extension } from './extension';
 import { LazyLoader } from './types';
 
-namespace ExtensionProperties {
+export namespace ExtensionProperties {
   interface DashboardExtension {
     /** Name of feature flag for this item. */
-    required: string | string[];
+    required?: string | string[];
   }
 
   interface DashboardsOverviewHealthSubsystem extends DashboardExtension {
@@ -39,24 +39,27 @@ namespace ExtensionProperties {
      */
     fetch?: (url: string) => Promise<R>;
 
+    /** Resource which will be fetched and passed to healthHandler  */
+    resource?: FirehoseResource;
+
     /** Resolve the subsystem's health */
-    healthHandler: (response: R, error: boolean) => SubsystemHealth;
+    healthHandler: HealthHandler<R>;
   }
 
   export interface DashboardsOverviewHealthPrometheusSubsystem
     extends DashboardsOverviewHealthSubsystem {
     /** The Prometheus query */
-    query: string;
+    queries: string[];
 
     /** Resource which will be fetched and passed to healthHandler  */
     resource?: FirehoseResource;
 
     /** Resolve the subsystem's health */
-    healthHandler: (
-      response: PrometheusResponse,
-      error: boolean,
-      resource?: FirehoseResult<K8sResourceKind | K8sResourceKind[]>,
-    ) => SubsystemHealth;
+    healthHandler: HealthHandler<PrometheusResponse[]>;
+
+    popupComponent?: LazyLoader<any>;
+
+    popupTitle?: string;
   }
 
   export interface DashboardsTab extends DashboardExtension {
@@ -233,3 +236,14 @@ export const isDashboardsOverviewTopConsumerItem = (
 ): e is DashboardsOverviewTopConsumerItem => e.type === 'Dashboards/Overview/TopConsumers/Item';
 
 export type DashboardCardSpan = 4 | 6 | 12;
+
+export type SubsystemHealth = {
+  message?: string;
+  state: HealthState;
+};
+
+export type HealthHandler<R> = (
+  response: R,
+  error: any,
+  resource?: FirehoseResult<K8sResourceKind | K8sResourceKind[]>,
+) => SubsystemHealth;

@@ -153,7 +153,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'Dashboards/Overview/Health/Prometheus',
     properties: {
       title: 'Bar system',
-      query: 'barQuery',
+      queries: ['barQuery'],
       healthHandler: getBarHealthState,
       resource: {
         kind: NodeModel.kind,
