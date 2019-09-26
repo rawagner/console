@@ -18,14 +18,14 @@ const CephHealthStatus = [
   },
 ];
 
-export const getCephHealthState: HealthHandler<PrometheusResponse> = (ocsResponse, error) => {
+export const getCephHealthState: HealthHandler<PrometheusResponse[]> = (responses = [], error) => {
   if (error) {
     return CephHealthStatus[3];
   }
-  if (!ocsResponse) {
+  if (!responses[0]) {
     return { state: HealthState.LOADING };
   }
 
-  const value = _.get(ocsResponse, 'data.result[0].value[1]');
+  const value = _.get(responses[0], 'data.result[0].value[1]');
   return CephHealthStatus[value] || CephHealthStatus[3];
 };

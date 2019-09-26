@@ -46,13 +46,13 @@ namespace ExtensionProperties {
   export interface DashboardsOverviewHealthPrometheusSubsystem
     extends DashboardsOverviewHealthSubsystem {
     /** The Prometheus query */
-    query: string;
+    queries: string[];
 
     /** Resource which will be fetched and passed to healthHandler  */
     resource?: FirehoseResource;
 
     /** Resolve the subsystem's health */
-    healthHandler: HealthHandler<PrometheusResponse>;
+    healthHandler: HealthHandler<PrometheusResponse[]>;
   }
 
   export interface DashboardsTab extends DashboardExtension {
@@ -234,6 +234,6 @@ export type SubsystemHealth = {
 
 export type HealthHandler<R> = (
   response: R,
-  error: boolean,
+  error: any,
   resource?: FirehoseResult<K8sResourceKind | K8sResourceKind[]>,
 ) => SubsystemHealth;

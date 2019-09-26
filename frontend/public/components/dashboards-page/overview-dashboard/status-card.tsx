@@ -15,13 +15,14 @@ import { ALERTS_KEY } from '../../../actions/dashboards';
 import { connectToFlags, FlagsObject } from '../../../reducers/features';
 import { getFlagsForExtensions, isDashboardExtensionInUse } from '../utils';
 import * as plugins from '../../../plugins';
-import { FirehoseResource } from '../../utils';
+import { FirehoseResource, humanizePercentage } from '../../utils';
 import { PrometheusResponse } from '../../graphs';
 import { PrometheusRulesResponse } from '../../monitoring';
 import { getClusterUpdateStatus, ClusterVersionKind, ClusterUpdateStatus, referenceForModel, hasAvailableUpdates } from '../../../module/k8s';
 import { ClusterVersionModel } from '../../../models';
 import { clusterUpdateModal } from '../../modals/cluster-update-modal';
-import { ArrowCircleUpIcon } from '@patternfly/react-icons';
+import { ArrowCircleUpIcon, UnknownIcon } from '@patternfly/react-icons';
+import { YellowExclamationTriangleIcon, RedExclamationCircleIcon, GreenCheckCircleIcon } from '@console/shared';
 
 const getSubsystems = (flags: FlagsObject) =>
   plugins.registry.getDashboardsOverviewHealthSubsystems().filter(e => isDashboardExtensionInUse(e, flags));
@@ -43,6 +44,90 @@ const getK8sHealthState: HealthHandler<string> = (k8sHealth, error, resource) =>
   }
   return { state: k8sHealth === 'ok' ? HealthState.OK : HealthState.ERROR };
 };
+
+const controlPlaneQueries = [
+  '(sum(up{job="apiserver"} == 1) / count(up{job="apiserver"})) * 100',
+  '(sum(up{job="kube-controller-manager"} == 1) / count(up{job="kube-controller-manager"})) * 100',
+  '(sum(up{job="scheduler"} == 1) / count(up{job="scheduler"})) * 100',
+  'sum(rate(apiserver_request_count{code=~"2.."}[5m])) / sum(rate(apiserver_request_count[5m])) * 100',
+];
+
+const getControlPlaneComponentHealth: HealthHandler<PrometheusResponse> = (response, error) => {
+  if (error) {
+    return { state: HealthState.UNKNOWN, message: 'Not available' };
+  }
+  if (!response) {
+    return { state: HealthState.LOADING };
+  }
+  const perc = humanizePercentage(_.get(response, 'data.result[0].value[1]'));
+  if (perc.value > 90 ) {
+    return { state: HealthState.OK, message: perc.string };
+  } else if (perc.value > 70) {
+    return { state: HealthState.WARNING, message: perc.string };
+  }
+  return { state: HealthState.ERROR, message: perc.string };
+};
+
+const getControlPlaneHealth: HealthHandler<PrometheusResponse[]> = (responses = [], error: Array<any>) => {
+  const componentsHealth = responses.map((r, index) => getControlPlaneComponentHealth(r, error[index]));
+  if (componentsHealth.some(c => c.state === HealthState.LOADING)) {
+    return { state: HealthState.LOADING };
+  }
+  const errComponents = componentsHealth.filter(c =>
+    c.state === HealthState.WARNING || c.state === HealthState.ERROR || c.state === HealthState.UNKNOWN
+  );
+  if (errComponents.length) {
+    return { state: HealthState.WARNING, message: `${errComponents.length} components degraded` };
+  }
+  return { state: HealthState.OK };
+};
+
+const ResponseRate: React.FC<ResponseRateProps> = ({ response, children, error }) => {
+  const health = getControlPlaneComponentHealth(response, error);
+  let icon: React.ReactNode;
+  if (health.state === HealthState.UNKNOWN) {
+    icon = <UnknownIcon className="text-secondary" />;
+  } else if (health.state === HealthState.LOADING) {
+    icon = <div className="skeleton-health" />;
+  } else if (health.state === HealthState.OK) {
+    icon = <GreenCheckCircleIcon />;
+  } else if (health.state === HealthState.WARNING) {
+    icon = <YellowExclamationTriangleIcon />;
+  } else if (health.state === HealthState.ERROR) {
+    icon = <RedExclamationCircleIcon />;
+  }
+  return (
+    <div className="co-dashboard-card__control-plane-popup">
+      <div>{children}</div>
+      <div className="co-dashboard-card__response-rate">
+        <div className="co-dashboard-card__response-rate-text text-secondary">{health.message}</div>
+        {icon}
+      </div>
+    </div>
+  );
+};
+
+const ControlPlanePopup = ({ results, errors }) => (
+  <>
+    <div className="co-dashboard-card__control-plane-description">Components of the Control Plane are responsible for maintaining and reconcilling the state of the cluster.</div>
+    <div className="co-dashboard-card__control-plane-popup">
+      <div className="co-dashboard-card__control-plane-components">Components</div>
+      <div className="text-secondary">Response rate</div>
+    </div>
+    <ResponseRate response={results[0]} error={errors[0]}>
+      API Servers
+    </ResponseRate>
+    <ResponseRate response={results[1]} error={errors[1]}>
+      Controller Managers
+    </ResponseRate>
+    <ResponseRate response={results[2]} error={errors[2]}>
+      Schedulers
+    </ResponseRate>
+    <ResponseRate response={results[3]} error={errors[3]}>
+      API Request Success Rate
+    </ResponseRate>
+  </>
+);
 
 const URLHealthItem = withDashboardResources(({
   watchURL,
@@ -87,30 +172,45 @@ const PrometheusHealthItem = withDashboardResources(({
   stopWatchPrometheusQuery,
   prometheusResults,
   title,
-  query,
+  queries = [],
   healthHandler,
   resource,
+  PopupComponent,
+  popupTitle,
 }: PrometheusHealthItemProps) => {
   React.useEffect(() => {
-    watchPrometheus(query);
+    queries.forEach(q => watchPrometheus(q));
     if (resource) {
       watchK8sResource(resource);
     }
     return () => {
-      stopWatchPrometheusQuery(query);
+      queries.forEach(q => stopWatchPrometheusQuery(q));
       if (resource) {
         stopWatchK8sResource(resource);
       }
     };
-  }, [watchK8sResource, stopWatchK8sResource, resource, watchPrometheus, stopWatchPrometheusQuery, query]);
+  }, [watchK8sResource, stopWatchK8sResource, resource, watchPrometheus, stopWatchPrometheusQuery, queries]);
 
-  const healthResult = prometheusResults.getIn([query, 'data']) as PrometheusResponse;
-  const healthResultError = prometheusResults.getIn([query, 'loadError']);
+  const queryResults = queries.map(q => prometheusResults.getIn([q, 'data']) as PrometheusResponse);
+  const queryErrors = queries.map(q => prometheusResults.getIn([q, 'loadError']));
 
   const k8sResult = resource ? resources[resource.prop] : null;
-  const healthState = healthHandler(healthResult, healthResultError, k8sResult);
+  const healthState = healthHandler(queryResults, queryErrors.some(e => !!e), k8sResult);
 
-  return <HealthItem title={title} state={healthState.state} details={healthState.message} />;
+  const PopupComponentCallback = PopupComponent ? React.useCallback(() =>
+    <PopupComponent results={queryResults} errors={queryErrors} />,
+  [queryResults, queryErrors]
+  ) : null;
+
+  return (
+    <HealthItem
+      title={title}
+      state={healthState.state}
+      details={healthState.message}
+      popupTitle={popupTitle}
+      PopupComponent={PopupComponentCallback}
+    />
+  );
 }
 );
 
@@ -186,17 +286,26 @@ export const StatusCard = connectToFlags(
               healthHandler={getK8sHealthState}
               resource={cvResource}
             />
+            <PrometheusHealthItem
+              title="Control Plane"
+              queries={controlPlaneQueries}
+              healthHandler={getControlPlaneHealth}
+              PopupComponent={ControlPlanePopup}
+              popupTitle="Control Plane status"
+            />
             {subsystems.map(subsystem => isDashboardsOverviewHealthURLSubsystem(subsystem)
               ? <URLHealthItem
+                key={subsystem.properties.title}
                 title={subsystem.properties.title}
                 url={subsystem.properties.url}
                 fetch={subsystem.properties.fetch}
                 healthHandler={subsystem.properties.healthHandler}
               />
               : <PrometheusHealthItem
+                key={subsystem.properties.title}
                 resource={subsystem.properties.resource}
                 title={subsystem.properties.title}
-                query={subsystem.properties.query}
+                queries={subsystem.properties.queries}
                 healthHandler={subsystem.properties.healthHandler}
               />
             )}
@@ -217,8 +326,16 @@ type URLHealthItemProps = DashboardItemProps & {
 };
 
 type PrometheusHealthItemProps = DashboardItemProps & {
-  query: string;
+  queries: string[];
   title: string;
-  healthHandler: HealthHandler<PrometheusResponse>;
+  healthHandler: HealthHandler<PrometheusResponse[]>;
   resource?: FirehoseResource;
+  PopupComponent?: React.ComponentType<any>;
+  popupTitle?: string;
+};
+
+type ResponseRateProps = {
+  response: PrometheusResponse;
+  children: React.ReactNode;
+  error: boolean;
 };

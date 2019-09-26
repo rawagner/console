@@ -11,6 +11,7 @@ import {
   SyncAltIcon,
 } from '@patternfly/react-icons';
 import { HealthState } from '../health-card/states';
+import { DashboardCardPopupLink } from '../dashboard-card';
 
 const healthStateMapping = {
   [HealthState.OK]: {
@@ -39,13 +40,19 @@ const HealthItemIcon: React.FC<HealthItemIconProps> = ({ state }) => (
 );
 
 export const HealthItem: React.FC<HealthItemProps> = React.memo(
-  ({ className, state, title, details }) => {
+  ({ className, state, title, details, popupTitle, PopupComponent }) => {
     const detailMessage = details || (healthStateMapping[state] || healthStateMapping[HealthState.UNKNOWN]).message;
     return (
-      <div className={classNames('co-health-card__item', className)}>
+      <div className={classNames('co-status-card__health-item', className)}>
         {state === HealthState.LOADING ? <div className="skeleton-health" /> : <HealthItemIcon state={state} />}
         <div>
-          <span className="co-dashboard-text--small co-health-card__text">{title}</span>
+          <span className="co-dashboard-text--small co-health-card__text">
+            {PopupComponent ? (
+              <DashboardCardPopupLink linkTitle={title} popupTitle={popupTitle} className="co-status-card__popup">
+                <PopupComponent />
+              </DashboardCardPopupLink>
+            ) : title}
+          </span>
           {state !== HealthState.LOADING && detailMessage && (
             <div className="co-dashboard-text--small co-health-card__text co-health-card__subtitle">
               {detailMessage}
@@ -62,6 +69,8 @@ type HealthItemProps = {
   title: string;
   details?: string;
   state?: HealthState;
+  PopupComponent?: React.ComponentType<any>;
+  popupTitle?: string;
 };
 
 type HealthItemIconProps = {

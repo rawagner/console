@@ -64,7 +64,7 @@ const HealthCard: React.FC<DashboardItemProps> = ({
   ]);
 
   const cephCluster = _.get(resources, 'ceph') as FirehoseResult;
-  const cephHealthState = getCephHealthState(queryResult, !!queryResultError, cephCluster);
+  const cephHealthState = getCephHealthState([queryResult], queryResultError, cephCluster);
 
   const alertsResponse = alertsResults.getIn([ALERTS_KEY, 'data']) as PrometheusRulesResponse;
   const alerts = filterCephAlerts(getAlerts(alertsResponse));

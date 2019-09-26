@@ -17,3 +17,26 @@
 .co-overview-consumers__view-more {
   text-align: left;
 }
+
+.co-dashboard-card__control-plane-popup {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+}
+
+.co-dashboard-card__response-rate {
+  display: flex;
+  align-items: center;
+}
+
+.co-dashboard-card__response-rate-text {
+  padding-right: 0.4rem;
+}
+
+.co-dashboard-card__control-plane-components {
+  font-weight: bold;
+}
+
+.co-dashboard-card__control-plane-description {
+  padding-bottom: 0.7rem;
+}

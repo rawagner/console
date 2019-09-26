@@ -176,7 +176,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'Dashboards/Overview/Health/Prometheus',
     properties: {
       title: 'Storage',
-      query: STORAGE_HEALTH_QUERIES[StorageDashboardQuery.CEPH_STATUS_QUERY],
+      queries: [STORAGE_HEALTH_QUERIES[StorageDashboardQuery.CEPH_STATUS_QUERY]],
       resource: STORAGE_HEALTH_RESOURCES[StorageDashboardResource.CEPH_CLUSTER_RESOURCE],
       healthHandler: getCephHealthState,
       required: CEPH_FLAG,

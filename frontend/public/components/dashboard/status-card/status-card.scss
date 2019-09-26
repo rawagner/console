@@ -1,6 +1,6 @@
 .co-status-card__alerts-body {
   border-top: 1px solid $pf-color-black-300;
-  height: 15rem;
+  height: 300px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -54,10 +54,24 @@
 
 .co-status-card__health-body {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.co-status-card__health-item {
+  align-items: center;
+  display: flex;
+  padding-right: 3rem;
+}
+
+.co-status-card__health-item:last-of-type {
+  padding-right: 0;
 }
 
 .co-status-card__link-button {
+  padding: 0;
+}
+
+.co-status-card__popup {
   padding: 0;
 }
 
