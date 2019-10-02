@@ -11,7 +11,6 @@ import { FirehoseResource } from '../../../public/components/utils';
 // TODO(alecmerdler): Use these once `Firehose` is converted to TypeScript
 type FirehoseProps = {
   expand?: boolean;
-  forceUpdate?: boolean;
   resources: FirehoseResource[];
 
   // Provided by `connect`

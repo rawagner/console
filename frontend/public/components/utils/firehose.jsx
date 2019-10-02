@@ -149,7 +149,7 @@ export const Firehose = connect(
       shallowMapEquals(next.k8sModels, prev.k8sModels),
   },
 )(
-  /** @augments {React.Component<{k8sModels?: Map<string, K8sKind>, forceUpdate?: boolean}>} */
+  /** @augments {React.Component<{k8sModels?: Map<string, K8sKind>}>} */
   class Firehose extends React.Component {
     state = {
       firehoses: [],
@@ -166,22 +166,15 @@ export const Firehose = connect(
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-      const { forceUpdate = false } = this.props;
-      if (
-        this.state === nextState &&
-        nextProps.inFlight !== this.props.inFlight &&
-        nextProps.loaded
-      ) {
-        return forceUpdate;
-      }
-      if (
-        Object.keys(nextProps).every((key) => nextProps[key] === this.props[key]) &&
-        nextState.firehoses.length === 0 &&
-        this.state.firehoses.length === 0
-      ) {
+      if (this.props.inFlight !== nextProps.inFlight && this.props.loaded) {
         return false;
       }
-      return true;
+      return !(
+        Object.keys(nextProps).length === Object.keys(this.props).length &&
+        Object.keys(nextProps).every((key) => nextProps[key] === this.props[key]) &&
+        (nextState === this.state ||
+          (nextState.firehoses.length === 0 && this.state.firehoses.length === 0))
+      );
     }
 
     componentDidUpdate(prevProps) {
@@ -262,7 +255,6 @@ Firehose.contextTypes = {
 Firehose.propTypes = {
   children: PropTypes.node,
   expand: PropTypes.bool,
-  forceUpdate: PropTypes.bool,
   resources: PropTypes.arrayOf(
     PropTypes.shape({
       kind: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
