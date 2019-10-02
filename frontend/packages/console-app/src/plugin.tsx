@@ -54,8 +54,8 @@ const plugin: Plugin<ConsumedExtensions> = [
       healthHandler: getControlPlaneHealth,
       popupComponent: () =>
         import(
-          './components/dashboards-page/control-plane-status' /* webpackChunkName: "app-control-plane-status" */
-        ).then((m) => m.ControlPlanePopup),
+          './components/dashboards-page/ControlPlaneStatus' /* webpackChunkName: "console-app" */
+        ).then((m) => m.default),
       popupTitle: 'Control Plane status',
     },
   },

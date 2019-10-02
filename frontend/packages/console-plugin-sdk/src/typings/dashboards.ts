@@ -13,7 +13,7 @@ import { PrometheusResponse } from '@console/internal/components/graphs';
 import { Extension } from './extension';
 import { LazyLoader } from './types';
 
-export namespace ExtensionProperties {
+namespace ExtensionProperties {
   interface DashboardExtension {
     /** Name of feature flag for this item. */
     required?: string | string[];
@@ -39,7 +39,7 @@ export namespace ExtensionProperties {
      */
     fetch?: (url: string) => Promise<R>;
 
-    /** Resource which will be fetched and passed to healthHandler  */
+    /** Additional resource which will be fetched and passed to healthHandler  */
     resource?: FirehoseResource;
 
     /** Resolve the subsystem's health */
@@ -48,10 +48,10 @@ export namespace ExtensionProperties {
 
   export interface DashboardsOverviewHealthPrometheusSubsystem
     extends DashboardsOverviewHealthSubsystem {
-    /** The Prometheus query */
+    /** The Prometheus queries */
     queries: string[];
 
-    /** Resource which will be fetched and passed to healthHandler  */
+    /** Additional resource which will be fetched and passed to healthHandler  */
     resource?: FirehoseResource;
 
     /** Resolve the subsystem's health */

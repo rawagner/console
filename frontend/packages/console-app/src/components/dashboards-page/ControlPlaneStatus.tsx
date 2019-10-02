@@ -31,7 +31,7 @@ const ResponseRate: React.FC<ResponseRateProps> = ({ response, children, error }
   );
 };
 
-export const ControlPlanePopup: React.FC<ControlPlanePopupProps> = ({ results, errors }) => (
+const ControlPlanePopup: React.FC<ControlPlanePopupProps> = ({ results, errors }) => (
   <>
     <div className="co-overview-status__control-plane-description">
       Components of the Control Plane are responsible for maintaining and reconcilling the state of
@@ -55,6 +55,8 @@ export const ControlPlanePopup: React.FC<ControlPlanePopupProps> = ({ results, e
     </ResponseRate>
   </>
 );
+
+export default ControlPlanePopup;
 
 type ControlPlanePopupProps = {
   results: PrometheusResponse[];
