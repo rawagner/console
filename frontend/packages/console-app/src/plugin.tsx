@@ -7,6 +7,8 @@ import {
   DashboardsOverviewHealthPrometheusSubsystem,
 } from '@console/plugin-sdk';
 import { FLAGS } from '@console/internal/const';
+import { referenceForModel } from '@console/internal/module/k8s';
+import { ClusterVersionModel } from '@console/internal/models';
 import {
   fetchK8sHealth,
   getK8sHealthState,
@@ -39,6 +41,13 @@ const plugin: Plugin<ConsumedExtensions> = [
       url: 'healthz',
       fetch: fetchK8sHealth,
       healthHandler: getK8sHealthState,
+      resource: {
+        kind: referenceForModel(ClusterVersionModel),
+        namespaced: false,
+        name: 'version',
+        isList: false,
+        prop: 'cv',
+      },
     },
   },
   {

@@ -172,7 +172,7 @@ export const Firehose = connect(
       return !(
         Object.keys(nextProps).length === Object.keys(this.props).length &&
         Object.keys(nextProps).every((key) => nextProps[key] === this.props[key]) &&
-        (nextState === this.state ||
+        (nextState.firehoses === this.state.firehoses ||
           (nextState.firehoses.length === 0 && this.state.firehoses.length === 0))
       );
     }

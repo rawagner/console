@@ -47,7 +47,7 @@ const URLHealthItem = withDashboardResources(
     subsystem,
   }: URLHealthItemProps) => {
     React.useEffect(() => {
-      watchURL(subsystem.url, fetch);
+      watchURL(subsystem.url, subsystem.fetch);
       if (subsystem.resource) {
         watchK8sResource(subsystem.resource);
       }
