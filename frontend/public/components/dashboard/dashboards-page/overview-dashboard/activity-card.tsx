@@ -18,7 +18,6 @@ import * as plugins from '../../../../plugins';
 import { uniqueResource } from './utils';
 import { PrometheusResponse } from '../../../graphs';
 import { connectToFlags, WithFlagsProps, FlagsObject } from '../../../../reducers/features';
-import { getFlagsForExtensions, isDashboardExtensionInUse } from '../../utils';
 
 const eventsResource: FirehoseResource = { isList: true, kind: EventModel.kind, prop: 'events' };
 
@@ -37,15 +36,15 @@ const RecentEvent = withDashboardResources(
 const getResourceActivities = (flags: FlagsObject) =>
   plugins.registry
     .getDashboardsOverviewResourceActivities()
-    .filter((e) => isDashboardExtensionInUse(e, flags));
+    .filter((e) => plugins.registry.isExtensionInUse(e, flags));
 
 const getPrometheusActivities = (flags: FlagsObject) =>
   plugins.registry
     .getDashboardsOverviewPrometheusActivities()
-    .filter((e) => isDashboardExtensionInUse(e, flags));
+    .filter((e) => plugins.registry.isExtensionInUse(e, flags));
 
 const OngoingActivity = connectToFlags(
-  ...getFlagsForExtensions([
+  ...plugins.registry.getFlagsForExtensions([
     ...plugins.registry.getDashboardsOverviewResourceActivities(),
     ...plugins.registry.getDashboardsOverviewPrometheusActivities(),
   ]),

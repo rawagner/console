@@ -13,10 +13,6 @@ import {
 } from '@console/internal/components/dashboard/with-dashboard-resources';
 import { connectToFlags, FlagsObject, WithFlagsProps } from '@console/internal/reducers/features';
 import {
-  getFlagsForExtensions,
-  isDashboardExtensionInUse,
-} from '@console/internal/components/dashboard/utils';
-import {
   DashboardsStorageTopConsumerExtension,
   DashboardsStorageTopConsumerUsed,
   DashboardsStorageTopConsumerRequested,
@@ -58,7 +54,7 @@ const updateTopConsumersQueries = (
 };
 
 const getItems = (extensions: DashboardsStorageTopConsumerExtension[], flags: FlagsObject) =>
-  extensions.filter((e) => isDashboardExtensionInUse(e, flags));
+  extensions.filter((e) => plugins.registry.isExtensionInUse(e, flags));
 
 const getTopConsumersQueries = (flags: FlagsObject) => {
   const topConsumers: TopConsumersQueries = { ...TOP_CONSUMER_QUERIES };
@@ -148,7 +144,9 @@ const TopConsumerCard: React.FC<DashboardItemProps & WithFlagsProps> = ({
 };
 
 export default connectToFlags(
-  ...getFlagsForExtensions(plugins.registry.get(isDashboardsStorageTopConsumerUsed)),
+  ...plugins.registry.getFlagsForExtensions(
+    plugins.registry.get(isDashboardsStorageTopConsumerUsed),
+  ),
 )(withDashboardResources(TopConsumerCard));
 
 type TopConsumersQueries = {

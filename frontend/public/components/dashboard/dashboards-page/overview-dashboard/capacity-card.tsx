@@ -19,7 +19,6 @@ import {
 import { getInstantVectorStats, getRangeVectorStats, GetStats } from '../../../graphs/utils';
 import { OverviewQuery, capacityQueries } from './queries';
 import { connectToFlags, FlagsObject, WithFlagsProps } from '../../../../reducers/features';
-import { getFlagsForExtensions, isDashboardExtensionInUse } from '../../utils';
 
 const getLastStats = (response, getStats: GetStats): React.ReactText => {
   const stats = getStats(response);
@@ -30,7 +29,7 @@ const getQueries = (flags: FlagsObject) => {
   const pluginQueries = {};
   plugins.registry
     .getDashboardsOverviewQueries()
-    .filter((e) => isDashboardExtensionInUse(e, flags))
+    .filter((e) => plugins.registry.isExtensionInUse(e, flags))
     .forEach((pluginQuery) => {
       const queryKey = pluginQuery.properties.queryKey;
       if (!pluginQueries[queryKey]) {
@@ -191,5 +190,5 @@ export const CapacityCard_: React.FC<DashboardItemProps & WithFlagsProps> = ({
 };
 
 export const CapacityCard = connectToFlags(
-  ...getFlagsForExtensions(plugins.registry.getDashboardsOverviewQueries()),
+  ...plugins.registry.getFlagsForExtensions(plugins.registry.getDashboardsOverviewQueries()),
 )(withDashboardResources(CapacityCard_));

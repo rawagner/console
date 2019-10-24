@@ -19,10 +19,6 @@ import {
 import { getInstantVectorStats, GetStats } from '@console/internal/components/graphs/utils';
 import { PrometheusResponse } from '@console/internal/components/graphs';
 import {
-  getFlagsForExtensions,
-  isDashboardExtensionInUse,
-} from '@console/internal/components/dashboard/utils';
-import {
   DashboardsStorageCapacityDropdownItem,
   isDashboardsStorageCapacityDropdownItem,
 } from '../../../../extensions/dashboards';
@@ -54,7 +50,7 @@ const QueriesMatchingCapacityView: QueryMapType = {
 };
 
 const getItems = (extensions: DashboardsStorageCapacityDropdownItem[], flags: FlagsObject) =>
-  extensions.filter((e) => isDashboardExtensionInUse(e, flags));
+  extensions.filter((e) => plugins.registry.isExtensionInUse(e, flags));
 
 const getCapacityQueries = (flags: FlagsObject) => {
   const capacityQueries = { ...QueriesMatchingCapacityView };
@@ -140,7 +136,9 @@ export const CapacityCard: React.FC<DashboardItemProps & WithFlagsProps> = ({
 };
 
 export default connectToFlags(
-  ...getFlagsForExtensions(plugins.registry.get(isDashboardsStorageCapacityDropdownItem)),
+  ...plugins.registry.getFlagsForExtensions(
+    plugins.registry.get(isDashboardsStorageCapacityDropdownItem),
+  ),
 )(withDashboardResources(CapacityCard));
 
 export type QueryMapType = {

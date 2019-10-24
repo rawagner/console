@@ -14,3 +14,4 @@ export * from './yaml-templates';
 export * from './global-configs';
 export * from './clusterserviceversions';
 export * from './dev-catalog';
+export * from './reducers';

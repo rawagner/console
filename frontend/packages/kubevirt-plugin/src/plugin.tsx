@@ -12,6 +12,7 @@ import {
   DashboardsOverviewHealthURLSubsystem,
   DashboardsOverviewInventoryItem,
   DashboardsInventoryItemGroup,
+  PluginReducer,
 } from '@console/plugin-sdk';
 import {
   DashboardsStorageTopConsumerUsed,
@@ -26,6 +27,7 @@ import {
   getVMStatusGroups,
   VMOffGroupIcon,
 } from './components/dashboards-page/overview-dashboard/inventory';
+import { kubevirtReducer } from './utils/redux/reducers';
 
 import './style.scss';
 
@@ -42,7 +44,8 @@ type ConsumedExtensions =
   | DashboardsInventoryItemGroup
   | DashboardsStorageTopConsumerUsed
   | DashboardsStorageTopConsumerRequested
-  | DashboardsStorageCapacityDropdownItem;
+  | DashboardsStorageCapacityDropdownItem
+  | PluginReducer;
 
 const FLAG_KUBEVIRT = 'KUBEVIRT';
 
@@ -249,6 +252,14 @@ const plugin: Plugin<ConsumedExtensions> = [
         'sum((kube_persistentvolumeclaim_resource_requests_storage_bytes * on (namespace,persistentvolumeclaim) group_right() kube_pod_spec_volumes_persistentvolumeclaims_info{pod=~"virt-launcher-.*"}) * on (namespace,persistentvolumeclaim) group_left(storageclass, provisioner) (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)|(ceph.rook.io/block)"}))',
         'sum((kube_persistentvolumeclaim_resource_requests_storage_bytes * on (namespace,persistentvolumeclaim) group_right() kube_pod_spec_volumes_persistentvolumeclaims_info{pod !~"virt-launcher-.*"}) * on (namespace,persistentvolumeclaim) group_left(storageclass, provisioner) (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)|(ceph.rook.io/block)"}))',
       ],
+      required: FLAG_KUBEVIRT,
+    },
+  },
+  {
+    type: 'PluginReducer',
+    properties: {
+      namespace: 'kubevirt',
+      reducer: kubevirtReducer,
       required: FLAG_KUBEVIRT,
     },
   },

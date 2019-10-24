@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { FlagsObject } from '@console/internal/reducers/features';
 import {
   Extension,
   ExtensionTypeGuard,
@@ -27,6 +28,7 @@ import {
   isDevCatalogModel,
   isDashboardsOverviewResourceActivity,
   isDashboardsOverviewPrometheusActivity,
+  isPluginReducer,
 } from './typings';
 
 /**
@@ -35,8 +37,30 @@ import {
 export class ExtensionRegistry {
   private readonly extensions: Extension[];
 
+  private readonly plugins: ActivePlugin[];
+
   public constructor(plugins: ActivePlugin[]) {
     this.extensions = _.flatMap(plugins.map((p) => p.extensions));
+    this.plugins = plugins;
+  }
+
+  public getFlagsForExtensions(extensions: ExtensionWithFlags[]): string[] {
+    return extensions
+      .filter((e) => e.properties.required)
+      .reduce(
+        (requiredFlags, e) => _.uniq([...requiredFlags, ..._.castArray(e.properties.required)]),
+        [] as string[],
+      );
+  }
+
+  public isExtensionInUse(e: ExtensionWithFlags, flags: FlagsObject) {
+    const requiredFlags = e.properties.required ? _.castArray(e.properties.required) : [];
+    return _.every(requiredFlags, (f) => flags[f]);
+  }
+
+  public getPluginNameForExtension(e: Extension) {
+    const plugin = this.plugins.find((p) => p.extensions.includes(e));
+    return plugin && plugin.name;
   }
 
   public get<E extends Extension>(typeGuard: ExtensionTypeGuard<E>): E[] {
@@ -138,4 +162,10 @@ export class ExtensionRegistry {
   public getDashboardsOverviewPrometheusActivities() {
     return this.extensions.filter(isDashboardsOverviewPrometheusActivity);
   }
+
+  public getPluginReducers() {
+    return this.extensions.filter(isPluginReducer);
+  }
 }
+
+type ExtensionWithFlags = Extension<{ required?: string | string[] }>;

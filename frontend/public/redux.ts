@@ -1,10 +1,17 @@
-import { applyMiddleware, combineReducers, createStore, compose } from 'redux';
+import { applyMiddleware, combineReducers, createStore, compose, Reducer } from 'redux';
+import * as _ from 'lodash-es';
 
-import { featureReducer, featureReducerName, FeatureState } from './reducers/features';
+import {
+  featureReducer,
+  featureReducerName,
+  FeatureState,
+  stateToFlagsObject,
+} from './reducers/features';
 import { monitoringReducer, monitoringReducerName, MonitoringState } from './reducers/monitoring';
 import k8sReducers, { K8sState } from './reducers/k8s';
 import UIReducers, { UIState } from './reducers/ui';
 import { dashboardsReducer, DashboardsState } from './reducers/dashboards';
+import { registry } from './plugins';
 
 const composeEnhancers =
   // eslint-disable-next-line no-undef
@@ -33,17 +40,55 @@ export type RootState = {
   [featureReducerName]: FeatureState;
   [monitoringReducerName]: MonitoringState;
   dashboards: DashboardsState;
+  plugins?: {
+    [namespace: string]: Reducer;
+  };
 };
 
-const reducers = combineReducers<RootState>({
+const reducers = {
   k8s: k8sReducers, // data
   UI: UIReducers,
   [featureReducerName]: featureReducer,
   [monitoringReducerName]: monitoringReducer,
   dashboards: dashboardsReducer,
-});
+};
 
-const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(
+  combineReducers<RootState>(reducers),
+  {},
+  composeEnhancers(applyMiddleware(thunk)),
+);
+
+(() => {
+  const pluginReducerFlags = registry.getFlagsForExtensions(registry.getPluginReducers());
+  let currentFlags = _.pick(stateToFlagsObject(store.getState()), pluginReducerFlags);
+  store.subscribe(() => {
+    const flags = _.pick(stateToFlagsObject(store.getState()), pluginReducerFlags);
+    if (JSON.stringify(currentFlags) !== JSON.stringify(flags)) {
+      currentFlags = flags;
+      const pluginReducers = registry
+        .getPluginReducers()
+        .filter((e) => registry.isExtensionInUse(e, currentFlags));
+      const pluginReducerState = pluginReducers.reduce(
+        (acc, e) => {
+          acc[e.properties.namespace] = e.properties.reducer;
+          return acc;
+        },
+        {} as RootState['plugins'],
+      );
+      if (_.isEmpty(pluginReducerState)) {
+        store.replaceReducer(combineReducers<RootState>(reducers));
+      } else {
+        store.replaceReducer(
+          combineReducers<RootState>({
+            plugins: combineReducers(pluginReducerState),
+            ...reducers,
+          }),
+        );
+      }
+    }
+  });
+})();
 
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV !== 'production') {
