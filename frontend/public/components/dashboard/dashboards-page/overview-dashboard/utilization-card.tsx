@@ -190,7 +190,6 @@ const UtilizationCard_: React.FC<DashboardItemProps & WithFlagsProps> = ({
         humanize={humanizeBinaryBytes}
       />
     ),
-
     [],
   );
 
