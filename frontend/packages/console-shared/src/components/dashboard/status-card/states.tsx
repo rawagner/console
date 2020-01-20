@@ -14,7 +14,7 @@ export enum HealthState {
   WARNING = 'WARNING',
   LOADING = 'LOADING',
   UNKNOWN = 'UNKNOWN',
-  UPDATING = 'UPDATING',
+  UPGRADING = 'UPGRADING',
   PROGRESS = 'PROGRESS',
 }
 
@@ -30,9 +30,9 @@ export const healthStateMapping: { [key in HealthStateMappingKeys]: HealthStateM
     icon: <YellowExclamationTriangleIcon />,
     message: 'Degraded',
   },
-  [HealthState.UPDATING]: {
+  [HealthState.UPGRADING]: {
     icon: <BlueSyncIcon />,
-    message: 'Updating',
+    message: 'Upgrading',
   },
   [HealthState.PROGRESS]: {
     icon: <InProgressIcon />,
@@ -65,10 +65,10 @@ export const operatorHealthPriority: {
     health: HealthState.PROGRESS,
     ...healthStateMapping[HealthState.PROGRESS],
   },
-  [HealthState.UPDATING]: {
+  [HealthState.UPGRADING]: {
     priority: 3,
-    health: HealthState.UPDATING,
-    ...healthStateMapping[HealthState.UPDATING],
+    health: HealthState.UPGRADING,
+    ...healthStateMapping[HealthState.UPGRADING],
   },
   [HealthState.WARNING]: {
     priority: 4,

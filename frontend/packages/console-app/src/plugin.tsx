@@ -37,8 +37,8 @@ import {
   SCHEDULERS_UP,
 } from './queries';
 import {
-  getClusterUpdateTimestamp,
-  isClusterUpdateActivity,
+  getClusterUpgradeTimestamp,
+  isClusterUpgradeActivity,
 } from './components/dashboards-page/activity';
 
 type ConsumedExtensions =
@@ -72,11 +72,11 @@ const plugin: Plugin<ConsumedExtensions> = [
         kind: referenceForModel(ClusterVersionModel),
         namespaced: false,
       },
-      isActivity: isClusterUpdateActivity,
-      getTimestamp: getClusterUpdateTimestamp,
+      isActivity: isClusterUpgradeActivity,
+      getTimestamp: getClusterUpgradeTimestamp,
       loader: () =>
         import(
-          './components/dashboards-page/ClusterUpdateActivity' /* webpackChunkName: "console-app" */
+          './components/dashboards-page/ClusterUpgradeActivity' /* webpackChunkName: "console-app" */
         ).then((m) => m.default),
       required: FLAGS.CLUSTER_VERSION,
     },
