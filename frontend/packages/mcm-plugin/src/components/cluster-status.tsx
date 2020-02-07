@@ -1,23 +1,24 @@
 import * as React from 'react';
+import { SuccessStatus } from '@console/shared';
 import { ClusterKind, ClusterCondition, ClusterConditionTypes } from '../types';
 import { getConditions } from '../selectors';
-import { DASH } from '@console/kubevirt-plugin/integration-tests/tests/utils/consts';
-import { StatusIconAndText } from '@console/shared';
-import { OkIcon } from '@patternfly/react-icons';
 
 // TODO: check operator sources for all options here!
-const getStatusCondition = (conditions: ClusterCondition[]) => !conditions || conditions.length === 0 ? undefined : conditions[0];
+const getStatusCondition = (conditions: ClusterCondition[]) =>
+  !conditions || conditions.length === 0 ? undefined : conditions[0];
 
-// TODO: check ClusterStatus CR
+// Is ClusterStatus CR needed here?
 export const ClusterStatus: React.FC<ClusterStatusProps> = ({ cluster }) => {
   const conditions = getConditions(cluster);
-  const statusCondition = getStatusCondition(conditions); 
+  const statusCondition = getStatusCondition(conditions);
   const statusConditionType = (statusCondition || {}).type || '';
   switch (statusConditionType) {
     case ClusterConditionTypes.OK:
-      return <StatusIconAndText title="OK" icon={<OkIcon />} />;
+      return <SuccessStatus title="Ready" />;
     default:
-      return <>{DASH}</>
+      // eslint-disable-next-line no-console
+      console.warn('Unhandled cluster status condition type: ', statusCondition);
+      return <>{statusConditionType}</>;
   }
 };
 

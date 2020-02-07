@@ -14,6 +14,10 @@ export type ClusterKind = {
   status: ClusterStatus;
 } & K8sResourceKind;
 
+export type ClusterStatusKind = {
+  // TODO
+} & K8sResourceKind;
+
 export type ClusterCondition = K8sResourceCondition<ClusterConditionTypes>;
 
 export enum ClusterConditionTypes {

@@ -12,7 +12,7 @@ export interface ProjectListPageProps {
 }
 const ProjectListPage: React.FC<ProjectListPageProps> = (props) => (
   <div className="odc-project-list-page">
-    <PageHeading title={props.title + 'XXX'} badge={props.badge}>
+    <PageHeading title={`${props.title}XXX`} badge={props.badge}>
       {props.children}
     </PageHeading>
     <hr className="odc-project-list-page__section-border" />

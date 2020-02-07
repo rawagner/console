@@ -9,13 +9,13 @@ import {
   dimensifyRow,
   DASH,
 } from '@console/shared';
-import { Table, MultiListPage, TableRow, TableData, ListPage } from '@console/internal/components/factory';
+import { Table, TableRow, TableData, ListPage } from '@console/internal/components/factory';
 import { FirehoseResult, Kebab, ResourceLink } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s';
 import { ClusterModel } from '../models';
 import { ClusterKind } from '../types';
 import { getLabelValue } from '../selectors';
 import { ClusterStatus } from './cluster-status';
-import { referenceForModel } from '@console/internal/module/k8s';
 
 const tableColumnClasses = [
   classNames('col-lg-3', 'col-md-3', 'col-sm-4', 'col-xs-4'),
@@ -59,12 +59,7 @@ const ClusterHeader = () =>
     tableColumnClasses,
   );
 
-const ClusterRow: React.FC<ClusterRowProps> = ({
-  obj: cluster,
-  index,
-  key,
-  style,
-}) => {
+const ClusterRow: React.FC<ClusterRowProps> = ({ obj: cluster, index, key, style }) => {
   const dimensify = dimensifyRow(tableColumnClasses);
   const name = getName(cluster);
   const namespace = getNamespace(cluster);
@@ -76,17 +71,18 @@ const ClusterRow: React.FC<ClusterRowProps> = ({
   return (
     <TableRow id={uid} index={index} trKey={key} style={style}>
       <TableData className={dimensify()}>
-        <ResourceLink kind={ClusterModel.kind} name={name} namespace={namespace} />
+        <ResourceLink
+          kind={referenceForModel(ClusterModel)}
+          name={name}
+          namespace={namespace}
+          title={name}
+        />
       </TableData>
       <TableData className={dimensify()}>
         <ClusterStatus cluster={cluster} />
       </TableData>
-      <TableData className={dimensify()}>
-        {purpose || DASH}
-      </TableData>
-      <TableData className={dimensify()}>
-        {cloudProvider || DASH}
-      </TableData>
+      <TableData className={dimensify()}>{purpose || DASH}</TableData>
+      <TableData className={dimensify()}>{cloudProvider || DASH}</TableData>
     </TableRow>
   );
 };
@@ -107,15 +103,16 @@ const ClusterList: React.FC<React.ComponentProps<typeof Table> & ClusterListProp
 ClusterList.displayName = 'ClusterList';
 
 // TODO: read clusterstatus objects
+// the "title" will be changed later to match context ...
 export const ClustersPage: React.FC<ClustersPageProps> = (props) => {
-  console.log('--- ClustersPage.props: ', props);
   return (
     <ListPage
-    {...props}
-    kind={referenceForModel(ClusterModel)}
-    namespace={undefined}
-    ListComponent={ClusterList}
-  />
+      {...props}
+      kind={referenceForModel(ClusterModel)}
+      namespace={undefined}
+      ListComponent={ClusterList}
+      title="New Projects M"
+    />
   );
 };
 
@@ -133,4 +130,4 @@ type ClusterListProps = {
   };
 };
 
-type ClustersPageProps = { };
+type ClustersPageProps = {};

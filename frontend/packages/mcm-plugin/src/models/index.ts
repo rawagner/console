@@ -17,3 +17,16 @@ export const ClusterModel: K8sKind = {
   plural: 'clusters',
   id: '',
 };
+
+export const ClusterStatusModel: K8sKind = {
+  kind: 'ClusterStatus',
+  label: 'ClusterStatus',
+  labelPlural: 'ClusterStatuses',
+  apiGroup: 'mcm.ibm.com',
+  apiVersion: 'v1alpha1',
+  abbr: 'CS',
+  namespaced: true,
+  crd: true,
+  plural: 'clusterstatuses',
+  id: '',
+};

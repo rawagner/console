@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 import {
   Plugin,
-  ResourceNSNavItem,
   ResourceListPage,
   ResourceDetailsPage,
   ModelFeatureFlag,
@@ -57,6 +56,16 @@ const plugin: Plugin<ConsumedExtensions> = [
       loader: () =>
         import('./components/clusters' /* webpackChunkName: "mcm" */).then((m) => m.ClustersPage),
       required: FLAG_MCM,
+    },
+  },
+  {
+    type: 'Page/Resource/Details',
+    properties: {
+      model: models.ClusterModel,
+      loader: () =>
+        import('./components/cluster-details-page' /* webpackChunkName: "mcm" */).then(
+          (m) => m.ClusterDetailsPage,
+        ),
     },
   },
 
