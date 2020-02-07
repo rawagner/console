@@ -50,20 +50,20 @@ const plugin: Plugin<ConsumedExtensions> = [
       model: models.ClusterModel,
       loader: () =>
         import('./components/clusters' /* webpackChunkName: "mcm" */).then(
-          (m) => m.CLustersPage,
+          (m) => m.ClustersPage,
         ),
     },
   },
-  {
-    type: 'Page/Resource/Details',
-    properties: {
-      model: models.ClusterModel,
-      loader: () =>
-        import('./components/cluster-page' /* webpackChunkName: "mcm" */).then(
-          (m) => m.ClusterDetailsPage,
-        ),
-    },
-  },
+  // {
+  //   type: 'Page/Resource/Details',
+  //   properties: {
+  //     model: models.ClusterModel,
+  //     loader: () =>
+  //       import('./components/cluster-page' /* webpackChunkName: "mcm" */).then(
+  //         (m) => m.ClusterDetailsPage,
+  //       ),
+  //   },
+  // },
 ];
 
 export default plugin;

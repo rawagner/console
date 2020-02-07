@@ -4,7 +4,7 @@
   "description": "Multi Cloud Management",
   "private": true,
   "scripts": {
-    "lint": "yarn --cwd ../.. eslint packages/kubevirt-plugin"
+    "lint": "yarn --cwd ../.. eslint packages/mcm-plugin"
   },
   "dependencies": {
     "@console/internal": "0.0.0-fixed",
