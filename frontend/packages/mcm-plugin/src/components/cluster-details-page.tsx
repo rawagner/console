@@ -3,7 +3,7 @@ import { DetailsPage } from '@console/internal/components/factory';
 import { K8sResourceKindReference, referenceForModel } from '@console/internal/module/k8s';
 import { ClusterStatusModel } from '../models';
 import { ClusterDetails } from './cluster-details';
-import { ClusterNodes } from './cluster-nodes';
+import { ClusterNodesPage } from './cluster-nodes-page';
 
 export const ClusterDetailsPage: React.FC<ClusterDetailsPageProps> = (props) => {
   const { name, namespace } = props;
@@ -59,7 +59,7 @@ export const ClusterDetailsPage: React.FC<ClusterDetailsPageProps> = (props) => 
     {
       href: 'nodes',
       name: 'Nodes',
-      component: ClusterNodes,
+      component: ClusterNodesPage,
     },
   ];
 

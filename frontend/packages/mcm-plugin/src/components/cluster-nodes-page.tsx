@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ScrollToTopOnMount, StatusBox } from '@console/internal/components/utils';
 import { ClusterKind, ClusterStatusKind } from '../types';
 
-export const ClusterNodes: React.FC<ClusterNodesProps> = (props) => {
+export const ClusterNodesPage: React.FC<ClusterNodesPageProps> = (props) => {
   const { obj: cluster, clusterStatus, ...restProps } = props;
 
   const nodesCount =
@@ -20,7 +20,7 @@ export const ClusterNodes: React.FC<ClusterNodesProps> = (props) => {
   );
 };
 
-type ClusterNodesProps = {
+type ClusterNodesPageProps = {
   obj: ClusterKind;
   clusterStatus?: ClusterStatusKind;
 };
