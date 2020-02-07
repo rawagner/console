@@ -1,31 +1,19 @@
 import { K8sKind } from '@console/internal/module/k8s';
 
-// incorrect: /api/kubernetes/ apis/cluster.k8s.io/v1alpha1/clusters
-// correct: /apis/clusterregistry.k8s.io/v1alpha1/namespaces/ibm-mcm-s1/clusters/ibm-mcm-s1
-/*
-export const ClusterModel: K8sKind = {
-  abbr: 'C',
-  apiGroup: 'cluster.k8s.io',
-  apiVersion: 'v1alpha1',
-  crd: true,
-  kind: 'Cluster',
-  label: 'Cluster',
-  labelPlural: 'Clusters',
-  namespaced: true,
-  plural: 'clusters',
-  id: 'cluster',
-};
-*/
+// /apis/clusterregistry.k8s.io/v1alpha1/namespaces/ibm-mcm-s1/clusters/ibm-mcm-s1
 
+// Recent version of IBM Multi Cloud is not based on CRD but custom API extension.
+// This might change in future releases.
+// https://github.com/kubernetes/cluster-registry/blob/master/cluster-registry-crd.yaml
 export const ClusterModel: K8sKind = {
   kind: 'Cluster',
   label: 'Cluster',
   labelPlural: 'Clusters',
-  apiGroup: 'clusterregistry.k8s.io/v1alpha1',
-  apiVersion: 'v1',
+  apiGroup: 'clusterregistry.k8s.io',
+  apiVersion: 'v1alpha1',
   abbr: 'C',
   namespaced: true,
   crd: true,
   plural: 'clusters',
-  id: 'cluster',
+  id: '',
 };

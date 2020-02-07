@@ -6,15 +6,18 @@ import {
   ResourceDetailsPage,
   ModelFeatureFlag,
   ModelDefinition,
+  RoutePage,
+  HrefNavItem,
 } from '@console/plugin-sdk';
 import * as models from './models';
 
 type ConsumedExtensions =
-  | ResourceNSNavItem
   | ResourceListPage
   | ResourceDetailsPage
   | ModelFeatureFlag
   | ModelDefinition
+  | RoutePage
+  | HrefNavItem;
 
 export const FLAG_MCM = 'MCM';
 
@@ -29,38 +32,41 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Model',
     properties: {
       model: models.ClusterModel,
-      flag: FLAG_MCM,
+      flag: FLAG_MCM, // TODO: verify that this is not matching incorrectly the second "Cluster.clusters.k8s.io" CRD
     },
   },
   {
-    type: 'NavItem/ResourceNS',
+    type: 'NavItem/Href',
     properties: {
-      section: 'Workloads', // TODO: change
+      section: 'Home',
       componentProps: {
         name: 'Clusters',
-        resource: models.ClusterModel.plural,
-        required: FLAG_MCM,
+        href: '/k8s/clusters',
       },
-      mergeAfter: 'Pods',
+      mergeBefore: 'Dashboards', 
     },
+    flags: {
+      required: [FLAG_MCM],
+    }
   },
   {
-    type: 'Page/Resource/List',
+    type: 'Page/Route',
     properties: {
-      model: models.ClusterModel,
+      exact: true,
+      path: `/k8s/clusters`,
       loader: () =>
-        import('./components/clusters' /* webpackChunkName: "mcm" */).then(
-          (m) => m.ClustersPage,
-        ),
+        import('./components/clusters' /* webpackChunkName: "mcm" */).then((m) => m.ClustersPage),
+      required: FLAG_MCM,
     },
   },
+
   // {
-  //   type: 'Page/Resource/Details',
+  //   type: 'Page/Resource/List',
   //   properties: {
   //     model: models.ClusterModel,
   //     loader: () =>
-  //       import('./components/cluster-page' /* webpackChunkName: "mcm" */).then(
-  //         (m) => m.ClusterDetailsPage,
+  //       import('./components/clusters' /* webpackChunkName: "mcm" */).then(
+  //         (m) => m.ClustersPage,
   //       ),
   //   },
   // },

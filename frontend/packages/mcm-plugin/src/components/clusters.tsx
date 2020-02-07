@@ -9,7 +9,7 @@ import {
   dimensifyRow,
   DASH,
 } from '@console/shared';
-import { Table, MultiListPage, TableRow, TableData } from '@console/internal/components/factory';
+import { Table, MultiListPage, TableRow, TableData, ListPage } from '@console/internal/components/factory';
 import { FirehoseResult, Kebab, ResourceLink } from '@console/internal/components/utils';
 import { ClusterModel } from '../models';
 import { ClusterKind } from '../types';
@@ -106,32 +106,16 @@ const ClusterList: React.FC<React.ComponentProps<typeof Table> & ClusterListProp
 };
 ClusterList.displayName = 'ClusterList';
 
-// TODO: see Dashboard page to disable project selection
+// TODO: read clusterstatus objects
 export const ClustersPage: React.FC<ClustersPageProps> = (props) => {
-  const { namespace } = props;
-  console.log('---- ClustersPage, props: ', props);
-  const resources = [
-    {
-      kind: referenceForModel(ClusterModel),
-      model: ClusterModel,
-      namespace,
-      namespaced: true,
-      isList: true,
-      prop: 'clusters',
-    }
-  ];
-
-  const flatten = ({ clusters }) => clusters && clusters.loaded && !clusters.loadError ? clusters.data : [];
-
+  console.log('--- ClustersPage.props: ', props);
   return (
-    <MultiListPage
-      {...props}
-      title={ClusterModel.labelPlural}
-      ListComponent={ClusterList}
-      resources={resources}
-      flatten={flatten}
-      label={ClusterModel.labelPlural}
-    />
+    <ListPage
+    {...props}
+    kind={referenceForModel(ClusterModel)}
+    namespace={undefined}
+    ListComponent={ClusterList}
+  />
   );
 };
 
@@ -149,6 +133,4 @@ type ClusterListProps = {
   };
 };
 
-type ClustersPageProps = { 
-  namespace: string;
-};
+type ClustersPageProps = { };
