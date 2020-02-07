@@ -42,11 +42,11 @@ const plugin: Plugin<ConsumedExtensions> = [
         name: 'Clusters',
         href: '/k8s/clusters',
       },
-      mergeBefore: 'Dashboards', 
+      mergeBefore: 'Dashboards',
     },
     flags: {
       required: [FLAG_MCM],
-    }
+    },
   },
   {
     type: 'Page/Route',
