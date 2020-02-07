@@ -5,32 +5,12 @@ import {
   SectionHeading,
   ResourceSummary,
   ExternalLink,
-  resourcePath,
 } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared';
-import { Link } from 'react-router-dom';
 import { ClusterKind, ClusterStatusKind } from '../types';
 import { getLabelValue, getBasicID, prefixedID } from '../selectors';
-import { ClusterModel } from '../models';
 import { ClusterStatus } from './cluster-status';
-
-const NotAvailable = () => <span className="text-secondary">Not available</span>;
-
-const DetailsItem: React.FC<DetailsItemProps> = ({
-  title,
-  idValue,
-  isNotAvail = false,
-  valueClassName,
-  children,
-}) => (
-  <>
-    <dt>{title}</dt>
-    <dd id={idValue} className={valueClassName}>
-      {isNotAvail ? <NotAvailable /> : children}
-    </dd>
-  </>
-);
+import { DetailsItem } from './details-item';
+import { ClusterNodes } from './cluster-nodes';
 
 const ClusterConsole: React.FC<ClusterConsoleProps> = ({ cluster, clusterStatus }) => {
   // TODO: endpoints for non-openshift clusters
@@ -70,31 +50,13 @@ const ClusterDetailsList: React.FC<ClusterDetailsListProps> = (props) => {
   const kubernetesVersion = clusterStatus && clusterStatus.spec && clusterStatus.spec.version;
   const cloudProvider = getLabelValue(cluster, 'cloud');
 
-  const nodesCount =
-    clusterStatus &&
-    clusterStatus.spec &&
-    clusterStatus.spec.capacity &&
-    clusterStatus.spec.capacity.nodes;
-  const nodesLink = `${resourcePath(
-    referenceForModel(ClusterModel),
-    getName(cluster),
-    getNamespace(cluster),
-  )}/nodes`;
-
   return (
     <dl className="co-m-pane__details">
       <DetailsItem title="Master Status" idValue={prefixedID(id, 'master-status')}>
         <ClusterStatus cluster={cluster} />
       </DetailsItem>
 
-      <DetailsItem
-        title="Nodes"
-        idValue={prefixedID(getBasicID(cluster), 'nodes-count')}
-        isNotAvail={!nodesCount}
-      >
-        <Link to={nodesLink}>{nodesCount}</Link>
-      </DetailsItem>
-
+      <ClusterNodes {...props} />
       <ClusterConsole {...props} />
 
       <DetailsItem
@@ -152,12 +114,4 @@ type ClusterConsoleProps = ClusterDetailsSummaryProps;
 type ClusterDetailsProps = {
   obj: ClusterKind;
   clusterStatus?: ClusterStatusKind;
-};
-
-type DetailsItemProps = {
-  title: string;
-  idValue?: string;
-  isNotAvail?: boolean;
-  valueClassName?: string;
-  children: React.ReactNode;
 };
