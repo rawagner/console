@@ -111,7 +111,7 @@ export const ClustersPage: React.FC<ClustersPageProps> = (props) => {
       kind={referenceForModel(ClusterModel)}
       namespace={undefined}
       ListComponent={ClusterList}
-      title="New Projects M"
+      title="Clusters"
     />
   );
 };
