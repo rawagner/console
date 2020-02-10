@@ -119,6 +119,18 @@ const plugin: Plugin<ConsumedExtensions> = [
       required: [FLAG_ACM],
     },
   },
+  {
+    type: 'Page/Route',
+    properties: {
+      exact: true,
+      path: `/k8s/rawagner`,
+      loader: () =>
+        import('./components/dashboard/Test' /* webpackChunkName: "acm" */).then(
+          (m) => m.TestQuery,
+        ),
+      required: FLAG_ACM,
+    },
+  },
 ];
 
 export default plugin;

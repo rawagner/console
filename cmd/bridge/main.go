@@ -81,6 +81,8 @@ func main() {
 	fK8sModeOffClusterPrometheus := fs.String("k8s-mode-off-cluster-prometheus", "", "DEV ONLY. URL of the cluster's Prometheus server.")
 	fK8sModeOffClusterThanos := fs.String("k8s-mode-off-cluster-thanos", "", "DEV ONLY. URL of the cluster's Prometheus server.")
 	fK8sModeOffClusterAlertmanager := fs.String("k8s-mode-off-cluster-alertmanager", "", "DEV ONLY. URL of the cluster's AlertManager server.")
+	fK8sModeOffClusterMCM := fs.String("k8s-mode-off-cluster-mcm", "", "DEV ONLY. URL of the cluster's MCM server.")
+	fK8sModeOffClusterMCMToken := fs.String("k8s-mode-off-cluster-mcm-token", "", "DEV ONLY. MCM token.")
 	fK8sModeOffClusterMetering := fs.String("k8s-mode-off-cluster-metering", "", "DEV ONLY. URL of the cluster's metering server.")
 
 	fK8sAuth := fs.String("k8s-auth", "service-account", "service-account | bearer-token | oidc | openshift")
@@ -354,6 +356,21 @@ func main() {
 				HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
 				Endpoint:        offClusterAlertManagerURL,
 			}
+		}
+		if *fK8sModeOffClusterMCM != "" {
+			log.Info("MCM URL ", *fK8sModeOffClusterMCM)
+			offClusterMCMURL := bridge.ValidateFlagIsURL("k8s-mode-off-cluster-mcm", *fK8sModeOffClusterMCM)
+			offClusterMCMURL.Path = "/hcmuiapi/graphql"
+			srv.MCMProxyConfig = &proxy.Config{
+				TLSClientConfig: serviceProxyTLSConfig,
+				HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
+				Endpoint:        offClusterMCMURL,
+			}
+		}
+
+		if *fK8sModeOffClusterMCMToken != "" {
+			log.Info("MCM token ", *fK8sModeOffClusterMCMToken)
+			srv.MCMProxyToken = *fK8sModeOffClusterMCMToken
 		}
 
 		if *fK8sModeOffClusterMetering != "" {

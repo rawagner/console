@@ -2,8 +2,12 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { render } from 'react-dom';
 import { Helmet } from 'react-helmet';
-import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router-dom';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { setContext } from 'apollo-link-context';
 // AbortController is not supported in some older browser versions
 import 'abort-controller/polyfill';
 
@@ -40,6 +44,7 @@ const cvResource = [
 
 // Edge lacks URLSearchParams
 import 'url-search-params-polyfill';
+import { Provider } from 'react-redux';
 
 const NotificationDrawer = (props) => (
   <AsyncComponent
@@ -211,11 +216,23 @@ if ('serviceWorker' in navigator) {
   }
 }
 
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: `${window.SERVER_FLAGS.mcmBaseURL}`,
+});
+
+const client = new ApolloClient({
+  cache,
+  link,
+});
+
 render(
-  <Provider store={store}>
-    <Router history={history} basename={window.SERVER_FLAGS.basePath}>
-      <Route path="/" component={App} />
-    </Router>
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <Router history={history} basename={window.SERVER_FLAGS.basePath}>
+        <Route path="/" component={App} />
+      </Router>
+    </Provider>
+  </ApolloProvider>,
   document.getElementById('app'),
 );
