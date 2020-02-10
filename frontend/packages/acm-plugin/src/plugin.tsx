@@ -18,7 +18,7 @@ type ConsumedExtensions =
   | RoutePage
   | HrefNavItem;
 
-export const FLAG_MCM = 'MCM';
+export const FLAG_ACM = 'ACM';
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -31,7 +31,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Model',
     properties: {
       model: models.ClusterModel,
-      flag: FLAG_MCM, // TODO: verify that this is not matching incorrectly the second "Cluster.clusters.k8s.io" CRD
+      flag: FLAG_ACM, // TODO: verify that this is not matching incorrectly the second "Cluster.clusters.k8s.io" CRD
     },
   },
   {
@@ -42,10 +42,10 @@ const plugin: Plugin<ConsumedExtensions> = [
         name: 'Clusters',
         href: '/k8s/clusters',
       },
-      mergeBefore: 'Dashboards',
+      mergeBefore: 'Overview',
     },
     flags: {
-      required: [FLAG_MCM],
+      required: [FLAG_ACM],
     },
   },
   {
@@ -54,8 +54,8 @@ const plugin: Plugin<ConsumedExtensions> = [
       exact: true,
       path: `/k8s/clusters`,
       loader: () =>
-        import('./components/clusters' /* webpackChunkName: "mcm" */).then((m) => m.ClustersPage),
-      required: FLAG_MCM,
+        import('./components/clusters' /* webpackChunkName: "acm" */).then((m) => m.ClustersPage),
+      required: FLAG_ACM,
     },
   },
   {
@@ -63,7 +63,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     properties: {
       model: models.ClusterModel,
       loader: () =>
-        import('./components/cluster-details-page' /* webpackChunkName: "mcm" */).then(
+        import('./components/cluster-details-page' /* webpackChunkName: "acm" */).then(
           (m) => m.ClusterDetailsPage,
         ),
     },
@@ -74,7 +74,7 @@ const plugin: Plugin<ConsumedExtensions> = [
   //   properties: {
   //     model: models.ClusterModel,
   //     loader: () =>
-  //       import('./components/clusters' /* webpackChunkName: "mcm" */).then(
+  //       import('./components/clusters' /* webpackChunkName: "acm" */).then(
   //         (m) => m.ClustersPage,
   //       ),
   //   },
