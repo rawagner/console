@@ -31,7 +31,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Model',
     properties: {
       model: models.ClusterModel,
-      flag: FLAG_ACM, // TODO: verify that this is not matching incorrectly the second "Cluster.clusters.k8s.io" CRD
+      flag: FLAG_ACM,
     },
   },
   {

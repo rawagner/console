@@ -2,11 +2,11 @@ import { K8sResourceKind, K8sResourceCondition } from '@console/internal/module/
 
 export type ClusterSpec = {
   authInfo: any;
-  kubernetesApiEndpoints: any; // TODO: it's useful
+  kubernetesApiEndpoints: any; // TODO: be more specific
 };
 
 export type ClusterStatus = {
-  conditions?: any[]; // TODO: useful
+  conditions?: any[]; // TODO: be more specific
 };
 
 export type ClusterKind = {

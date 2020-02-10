@@ -19,37 +19,6 @@ export const ClusterDetailsPage: React.FC<ClusterDetailsPageProps> = (props) => 
     },
   ];
 
-  /*
-  const dashboardPage = {
-    href: '', // default landing page
-    name: 'Dashboard',
-    component: VMDashboard,
-  };
-
-  const overviewPage = {
-    href: VM_DETAIL_OVERVIEW_HREF,
-    name: 'Overview',
-    component: VMDetailsFirehose,
-  };
-
-  const consolePage = {
-    href: VM_DETAIL_CONSOLES_HREF,
-    name: 'Consoles',
-    component: VMConsoleFirehose,
-  };
-
-  const nicsPage = {
-    href: VM_DETAIL_NETWORKS_HREF,
-    name: 'Network Interfaces',
-    component: VMNics,
-  };
-
-  const disksPage = {
-    href: VM_DETAIL_DISKS_HREF,
-    name: 'Disks',
-    component: VMDisksFirehose,
-  };
-  */
   const pages = [
     {
       href: '',

@@ -102,7 +102,6 @@ const ClusterRow: React.FC<ClusterRowProps> = (props) => {
 const flatten = ({ clusters }) => getLoadedData(clusters, []);
 
 const ClusterList: React.FC<React.ComponentProps<typeof Table> & ClusterListProps> = (props) => {
-  console.log('--- ClusterList, props: ', props);
   const { resources, ...restProps } = props;
 
   return (

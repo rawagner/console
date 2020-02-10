@@ -13,7 +13,7 @@ import { DetailsItem } from './details-item';
 import { ClusterNodes } from './cluster-nodes';
 
 const ClusterConsole: React.FC<ClusterConsoleProps> = ({ cluster, clusterStatus }) => {
-  // TODO: endpoints for non-openshift clusters
+  // TODO: add endpoints for non-openshift clusters
   const consoleURL = clusterStatus && clusterStatus.spec && clusterStatus.spec.consoleURL;
   return (
     <DetailsItem

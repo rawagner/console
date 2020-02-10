@@ -15,7 +15,7 @@ export const ClusterNodesPage: React.FC<ClusterNodesPageProps> = (props) => {
     <StatusBox data={cluster} loaded={!!cluster} {...restProps}>
       <ScrollToTopOnMount />
       Count: {nodesCount}
-      TODO: Show (In-)active nodes and some usage statistics
+      This is a work-in-progress page: Show (In-)active nodes and some usage statistics
     </StatusBox>
   );
 };
