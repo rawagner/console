@@ -51,9 +51,7 @@ export const connectToPlural: ConnectToPlural = connect(
     },
   ) => {
     const plural = props.plural || _.get(props, 'match.params.plural');
-
     const groupVersionKind = getGroupVersionKind(plural);
-
     let kindObj: K8sKind = null;
     if (groupVersionKind) {
       const [group, version, kind] = groupVersionKind;

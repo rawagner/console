@@ -22,13 +22,14 @@ export const compareOwnerReference = (
   // Careful: there is bug in MCM, ClusterStatus ownerReference has apiVersion of the CLusterStatus and not the Cluster
   return (
     // obj.apiVersion === otherObj.apiVersion &&
-    obj.kind === otherObj.kind &&
-    isNameEqual &&
-    isUIDEqual
+    obj.kind === otherObj.kind && isNameEqual && isUIDEqual
   );
 };
 
-export const getClusterStatus = (clusterStatuses: ClusterStatusKind[] = [], cluster: ClusterKind) => {
+export const getClusterStatus = (
+  clusterStatuses: ClusterStatusKind[] = [],
+  cluster: ClusterKind,
+) => {
   const clusterOwnerReference = {
     apiVersion: getAPIVersion(cluster),
     kind: getKind(cluster),
@@ -36,8 +37,10 @@ export const getClusterStatus = (clusterStatuses: ClusterStatusKind[] = [], clus
     uid: getUID(cluster),
   };
 
-  return clusterStatuses.find( cs => {
-    return (cs.metadata.ownerReferences || []).some( or => compareOwnerReference(or, clusterOwnerReference));
+  return clusterStatuses.find((cs) => {
+    return (cs.metadata.ownerReferences || []).some((or) =>
+      compareOwnerReference(or, clusterOwnerReference),
+    );
   });
 };
 

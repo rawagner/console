@@ -80,7 +80,6 @@ const ClusterDetailsList: React.FC<ClusterDetailsListProps> = (props) => {
 
 export const ClusterDetails: React.FC<ClusterDetailsProps> = (props) => {
   const { obj: cluster, clusterStatus, ...restProps } = props;
-
   const mainResources = {
     cluster,
     clusterStatus,

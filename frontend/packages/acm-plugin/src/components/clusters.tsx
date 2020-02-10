@@ -67,7 +67,13 @@ const ClusterHeader = () =>
   );
 
 const ClusterRow: React.FC<ClusterRowProps> = (props) => {
-  const { obj: cluster, index, key, style, customData: { clusterStatuses} } = props;
+  const {
+    obj: cluster,
+    index,
+    key,
+    style,
+    customData: { clusterStatuses },
+  } = props;
 
   const dimensify = dimensifyRow(tableColumnClasses);
   const name = getName(cluster);
@@ -93,7 +99,11 @@ const ClusterRow: React.FC<ClusterRowProps> = (props) => {
       <TableData className={dimensify()}>{purpose || DASH}</TableData>
       <TableData className={dimensify()}>{cloudProvider || DASH}</TableData>
       <TableData className={dimensify()}>
-        <ClusterNodes cluster={cluster} clusterStatus={getClusterStatus(clusterStatuses, cluster)} isCompact />
+        <ClusterNodes
+          cluster={cluster}
+          clusterStatus={getClusterStatus(clusterStatuses, cluster)}
+          isCompact
+        />
       </TableData>
     </TableRow>
   );
@@ -120,7 +130,7 @@ const ClusterList: React.FC<React.ComponentProps<typeof Table> & ClusterListProp
   );
 };
 ClusterList.displayName = 'ClusterList';
- 
+
 // TODO: read clusterstatus objects
 // the "title" will be changed later to match context ...
 export const ClustersPage: React.FC<ClustersPageProps> = (props) => {
@@ -142,9 +152,9 @@ export const ClustersPage: React.FC<ClustersPageProps> = (props) => {
   return (
     <MultiListPage
       {...props}
-      namespace={undefined /* TODO: remove? */ }
+      namespace={undefined}
       ListComponent={ClusterList}
-      title="Clusters"
+      title="Advanced Clusters Management"
       resources={resources}
       flatten={flatten}
     />

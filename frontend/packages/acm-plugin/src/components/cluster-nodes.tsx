@@ -8,7 +8,11 @@ import { DetailsItem } from './details-item';
 import { prefixedID, getBasicID } from '../selectors';
 import { ClusterKind, ClusterStatusKind } from '../types';
 
-export const ClusterNodes: React.FC<ClusterNodesProps> = ({ cluster, clusterStatus, isCompact = false }) => {
+export const ClusterNodes: React.FC<ClusterNodesProps> = ({
+  cluster,
+  clusterStatus,
+  isCompact = false,
+}) => {
   const nodesCount =
     clusterStatus &&
     clusterStatus.spec &&
@@ -24,17 +28,17 @@ export const ClusterNodes: React.FC<ClusterNodesProps> = ({ cluster, clusterStat
     <Link to={nodesLink}>{nodesCount}</Link>
   ) : (
     <DetailsItem
-    title="Nodes"
-    idValue={prefixedID(getBasicID(cluster), 'nodes-count')}
-    isNotAvail={!nodesCount}
-  >
-    <Link to={nodesLink}>{nodesCount}</Link>
-  </DetailsItem>
+      title="Nodes"
+      idValue={prefixedID(getBasicID(cluster), 'nodes-count')}
+      isNotAvail={!nodesCount}
+    >
+      <Link to={nodesLink}>{nodesCount}</Link>
+    </DetailsItem>
   );
 };
 
 type ClusterNodesProps = {
   cluster: ClusterKind;
   clusterStatus?: ClusterStatusKind;
-  isCompact? : boolean;
+  isCompact?: boolean;
 };
