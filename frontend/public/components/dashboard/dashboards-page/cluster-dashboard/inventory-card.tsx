@@ -65,7 +65,7 @@ const getFirehoseResource = (model: K8sKind) => ({
   prop: 'resource',
 });
 
-const ClusterInventoryItem = withDashboardResources<ClusterInventoryItemProps>(
+export const ClusterInventoryItem = withDashboardResources<ClusterInventoryItemProps>(
   React.memo(
     ({
       watchK8sResource,
