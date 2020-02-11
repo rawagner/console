@@ -23,6 +23,7 @@ type ConsumedExtensions =
   | Perspective;
 
 export const FLAG_ACM = 'ACM';
+const PERSPECTIVE_ID = 'acm';
 
 const plugin: Plugin<ConsumedExtensions> = [
   {
@@ -41,7 +42,7 @@ const plugin: Plugin<ConsumedExtensions> = [
   {
     type: 'Perspective',
     properties: {
-      id: 'acm',
+      id: PERSPECTIVE_ID,
       name: 'Clusters', // TODO: "Advanced Cluster Management" is too long to show
       icon: <DomainIcon />,
       getLandingPageURL: () => '/clusters',
@@ -55,6 +56,7 @@ const plugin: Plugin<ConsumedExtensions> = [
   {
     type: 'Page/Route',
     properties: {
+      perspective: PERSPECTIVE_ID,
       exact: true,
       path: `/clusters`,
       loader: () =>
@@ -70,6 +72,20 @@ const plugin: Plugin<ConsumedExtensions> = [
         import('./components/cluster-details-page' /* webpackChunkName: "acm" */).then(
           (m) => m.ClusterDetailsPage,
         ),
+    },
+    flags: {
+      required: [FLAG_ACM],
+    },
+  },
+  {
+    type: 'NavItem/Href',
+    properties: {
+      perspective: PERSPECTIVE_ID,
+      componentProps: {
+        name: 'Clusters',
+        href: '/clusters',
+      },
+      mergeBefore: undefined,
     },
     flags: {
       required: [FLAG_ACM],
