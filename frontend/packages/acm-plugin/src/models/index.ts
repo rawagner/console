@@ -30,3 +30,29 @@ export const ClusterStatusModel: K8sKind = {
   plural: 'clusterstatuses',
   id: '',
 };
+
+export const ApplicationModel: K8sKind = {
+  kind: 'Application',
+  label: 'Application',
+  labelPlural: 'Applications',
+  apiGroup: 'app.k8s.io',
+  apiVersion: 'v1beta1',
+  abbr: 'A',
+  namespaced: true,
+  crd: true,
+  plural: 'applications',
+  id: '',
+};
+
+export const PolicyModel: K8sKind = {
+  kind: 'Policy',
+  label: 'Policy',
+  labelPlural: 'Policies',
+  apiGroup: 'policy.mcm.ibm.com',
+  apiVersion: 'v1alpha1',
+  abbr: 'PO',
+  namespaced: true,
+  crd: true,
+  plural: 'policies',
+  id: '',
+};

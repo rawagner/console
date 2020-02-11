@@ -10,8 +10,10 @@ import {
   RoutePage,
   HrefNavItem,
   Perspective,
+  ResourceNSNavItem,
 } from '@console/plugin-sdk';
 import * as models from './models';
+import { referenceForModel } from '@console/internal/module/k8s';
 
 type ConsumedExtensions =
   | ResourceListPage
@@ -20,7 +22,8 @@ type ConsumedExtensions =
   | ModelDefinition
   | RoutePage
   | HrefNavItem
-  | Perspective;
+  | Perspective
+  | ResourceNSNavItem;
 
 export const FLAG_ACM = 'ACM';
 const PERSPECTIVE_ID = 'acm';
@@ -45,9 +48,46 @@ const plugin: Plugin<ConsumedExtensions> = [
       id: PERSPECTIVE_ID,
       name: 'Clusters', // TODO: "Advanced Cluster Management" is too long to show
       icon: <DomainIcon />,
-      getLandingPageURL: () => '/clusters',
-      getK8sLandingPageURL: () => '/clusters',
-      getImportRedirectURL: (project) => '/clusters',
+      getLandingPageURL: () => '/overview',
+      getK8sLandingPageURL: () => '/overview',
+      getImportRedirectURL: () => '/overview',
+    },
+    flags: {
+      required: [FLAG_ACM],
+    },
+  },
+  {
+    type: 'Page/Resource/List',
+    properties: {
+      model: models.ClusterModel,
+      loader: () =>
+        import('./components/clusters' /* webpackChunkName: "acm" */).then((m) => m.ClustersPage),
+    },
+    flags: {
+      required: [FLAG_ACM],
+    },
+  },
+  {
+    type: 'NavItem/Href',
+    properties: {
+      perspective: 'acm',
+      componentProps: {
+        name: 'Overview',
+        href: '/overview',
+      },
+    },
+    flags: {
+      required: [FLAG_ACM],
+    },
+  },
+  {
+    type: 'NavItem/ResourceNS',
+    properties: {
+      perspective: PERSPECTIVE_ID,
+      componentProps: {
+        name: 'Clusters',
+        resource: referenceForModel(models.ClusterModel),
+      },
     },
     flags: {
       required: [FLAG_ACM],
@@ -58,10 +98,12 @@ const plugin: Plugin<ConsumedExtensions> = [
     properties: {
       perspective: PERSPECTIVE_ID,
       exact: true,
-      path: `/clusters`,
+      path: `/overview`,
       loader: () =>
-        import('./components/clusters' /* webpackChunkName: "acm" */).then((m) => m.ClustersPage),
-      required: FLAG_ACM,
+        import('./components/dashboard/Dashboard' /* webpackChunkName: "acm" */).then(
+          (m) => m.default,
+        ),
+      required: [FLAG_ACM],
     },
   },
   {
@@ -72,20 +114,6 @@ const plugin: Plugin<ConsumedExtensions> = [
         import('./components/cluster-details-page' /* webpackChunkName: "acm" */).then(
           (m) => m.ClusterDetailsPage,
         ),
-    },
-    flags: {
-      required: [FLAG_ACM],
-    },
-  },
-  {
-    type: 'NavItem/Href',
-    properties: {
-      perspective: PERSPECTIVE_ID,
-      componentProps: {
-        name: 'Clusters',
-        href: '/clusters',
-      },
-      mergeBefore: undefined,
     },
     flags: {
       required: [FLAG_ACM],
