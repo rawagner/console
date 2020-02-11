@@ -46,8 +46,8 @@ const plugin: Plugin<ConsumedExtensions> = [
       name: 'Clusters', // TODO: "Advanced Cluster Management" is too long to show
       icon: <DomainIcon />,
       getLandingPageURL: () => '/clusters',
-      getK8sLandingPageURL: () => '/add',
-      getImportRedirectURL: (project) => `/clusters/ns/${project}`,
+      getK8sLandingPageURL: () => '/clusters',
+      getImportRedirectURL: (project) => '/clusters',
     },
     flags: {
       required: [FLAG_ACM],
