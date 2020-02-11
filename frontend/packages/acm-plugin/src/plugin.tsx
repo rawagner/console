@@ -71,6 +71,9 @@ const plugin: Plugin<ConsumedExtensions> = [
           (m) => m.ClusterDetailsPage,
         ),
     },
+    flags: {
+      required: [FLAG_ACM],
+    },
   },
 ];
 
