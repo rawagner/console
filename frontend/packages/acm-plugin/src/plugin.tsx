@@ -46,7 +46,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'Perspective',
     properties: {
       id: PERSPECTIVE_ID,
-      name: 'Clusters', // TODO: "Advanced Cluster Management" is too long to show
+      name: 'Multi-Cluster',
       icon: <DomainIcon />,
       getLandingPageURL: () => '/overview',
       getK8sLandingPageURL: () => '/overview',
