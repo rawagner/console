@@ -35,6 +35,7 @@ const (
 	alertManagerProxyEndpoint      = "/api/alertmanager"
 	meteringProxyEndpoint          = "/api/metering"
 	mcmProxyEndpoint               = "/api/mcm"
+	mcmSearchProxyEndpoint         = "/api/mcm-search"
 	customLogoEndpoint             = "/custom-logo"
 	helmChartRepoProxyEndpoint     = "/api/helm/charts/"
 )
@@ -60,6 +61,7 @@ type jsGlobals struct {
 	PrometheusTenancyBaseURL string `json:"prometheusTenancyBaseURL"`
 	AlertManagerBaseURL      string `json:"alertManagerBaseURL"`
 	MCMBaseURL               string `json:"mcmBaseURL"`
+	MCMSearchBaseURL         string `json:"mcmSearchBaseURL"`
 	MeteringBaseURL          string `json:"meteringBaseURL"`
 	Branding                 string `json:"branding"`
 	CustomProductName        string `json:"customProductName"`
@@ -94,6 +96,7 @@ type Server struct {
 	AlertManagerProxyConfig  *proxy.Config
 	MeteringProxyConfig      *proxy.Config
 	MCMProxyConfig           *proxy.Config
+	MCMSearchProxyConfig     *proxy.Config
 	MCMProxyToken            string
 	// A lister for resource listing of a particular kind
 	MonitoringDashboardConfigMapLister *ResourceLister
@@ -301,13 +304,21 @@ func (s *Server) HTTPHandler() http.Handler {
 		)
 	}
 
-	// mcmToken := "d8621ec142cd123bbc3028a6a239cdb487fcc42975a54218de6813acb2f8235828473f21f3cdfdab720e8bea93abf60c9709ea36e99890da7c5c67ee7a5fceb73c4c6cdc3ba4b139d97f0bce09b2fa3f564dbb129b78fa03ac6d9749e1c45f706fc7c6a6c988e275c5b2b024d1801c727146637485e62a4631b9ae5cd7e9613710d5f7bf360d409dbf8c47f67ac94f06e13edfc2548f31e252fe8f8c9c4e01f91134fc209a85285860d32efa414d886ce9fc12e1589af40bbe4255ca202242ce22a4c088fe5d42807b21ff9ebfafd110d25884845a494567608746d1c43c6321aff5ab6591d2616a6622ee85b7b7a8d932f8e8aca308be6166470840a013232cbc2f431b8f89532cd8843fd77fb67df8a2cd9ed113e6c391007cfb5db0914525e73b9b705619913c482aac8a425fce15ac76c40cf86bc60779289792e79dee17d05c1e55144045990abe55ce8b7a6123a2c3ef1075c29e14b302ab9e4de25f779a7a2942abaefb91218e6eb1fbec9e9b747f4e94fcf298a3f2ffdb1ec4dc278ca6e0018e119a1ba1bc28c10d1ccaba43e1b641d5dcb21c9c43064e68b9538485375d6739b13506a3da4725a3f71a938f95b75f96fae867bdbc7b48f20f782e780bbf8270f7f3465f4cf008bbb19660ba510972be487c07551a95519914d699be1f844f13214e5b7fc9531b7ac83a406f5a0c02d"
 	mcmProxy := proxy.NewProxy(s.MCMProxyConfig)
 	handle(mcmProxyEndpoint, http.StripPrefix(
 		proxy.SingleJoiningSlash(s.BaseURL.Path, mcmProxyEndpoint),
 		authHandlerWithUser(func(user *auth.User, w http.ResponseWriter, r *http.Request) {
 			r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", s.MCMProxyToken))
 			mcmProxy.ServeHTTP(w, r)
+		})),
+	)
+
+	mcmSearchProxy := proxy.NewProxy(s.MCMSearchProxyConfig)
+	handle(mcmSearchProxyEndpoint, http.StripPrefix(
+		proxy.SingleJoiningSlash(s.BaseURL.Path, mcmSearchProxyEndpoint),
+		authHandlerWithUser(func(user *auth.User, w http.ResponseWriter, r *http.Request) {
+			r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", s.MCMProxyToken))
+			mcmSearchProxy.ServeHTTP(w, r)
 		})),
 	)
 
@@ -377,6 +388,7 @@ func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	jsg.MCMBaseURL = proxy.SingleJoiningSlash(s.BaseURL.Path, mcmProxyEndpoint)
+	jsg.MCMSearchBaseURL = proxy.SingleJoiningSlash(s.BaseURL.Path, mcmSearchProxyEndpoint)
 
 	if !s.authDisabled() {
 		s.Auther.SetCSRFCookie(s.BaseURL.Path, &w)

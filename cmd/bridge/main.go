@@ -83,6 +83,7 @@ func main() {
 	fK8sModeOffClusterAlertmanager := fs.String("k8s-mode-off-cluster-alertmanager", "", "DEV ONLY. URL of the cluster's AlertManager server.")
 	fK8sModeOffClusterMCM := fs.String("k8s-mode-off-cluster-mcm", "", "DEV ONLY. URL of the cluster's MCM server.")
 	fK8sModeOffClusterMCMToken := fs.String("k8s-mode-off-cluster-mcm-token", "", "DEV ONLY. MCM token.")
+	fK8sModeOffClusterMCMSearch := fs.String("k8s-mode-off-cluster-mcm-search", "", "DEV ONLY. URL of the cluster's MCM Search server.")
 	fK8sModeOffClusterMetering := fs.String("k8s-mode-off-cluster-metering", "", "DEV ONLY. URL of the cluster's metering server.")
 
 	fK8sAuth := fs.String("k8s-auth", "service-account", "service-account | bearer-token | oidc | openshift")
@@ -365,6 +366,17 @@ func main() {
 				TLSClientConfig: serviceProxyTLSConfig,
 				HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
 				Endpoint:        offClusterMCMURL,
+			}
+		}
+
+		if *fK8sModeOffClusterMCMSearch != "" {
+			log.Info("MCM URL Search", *fK8sModeOffClusterMCMSearch)
+			offClusterMCMSearchURL := bridge.ValidateFlagIsURL("k8s-mode-off-cluster-mcm-search", *fK8sModeOffClusterMCMSearch)
+			offClusterMCMSearchURL.Path = "/searchapi/graphql"
+			srv.MCMSearchProxyConfig = &proxy.Config{
+				TLSClientConfig: serviceProxyTLSConfig,
+				HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
+				Endpoint:        offClusterMCMSearchURL,
 			}
 		}
 
