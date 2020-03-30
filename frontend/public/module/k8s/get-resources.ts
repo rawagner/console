@@ -3,6 +3,8 @@ import * as _ from 'lodash-es';
 import { coFetchJSON } from '../../co-fetch';
 import { K8sKind, K8sVerb } from '../../module/k8s';
 import { API_DISCOVERY_RESOURCES_LOCAL_STORAGE_KEY } from '@console/shared/src/constants';
+import client from '../../components/graphql/client';
+import gql from 'graphql-tag';
 
 const ADMIN_RESOURCES = new Set([
   'roles',
@@ -81,8 +83,92 @@ export type DiscoveryResources = {
   safeResources: string[];
 };
 
-export const getResources = () =>
-  coFetchJSON('api/kubernetes/apis').then((res) => {
+export const getResourcesGQL = () => {
+  const query = gql(`
+    query {
+      urlFetch(url: "/apis")
+    }
+  `);
+  return client.query({ query }).then(response => {
+    const res = response.data.urlFetch;
+    const preferredVersions =res.groups.map((group) => group.preferredVersion);
+    const groupVersions = _.flatten(
+      res.groups.map((group) => group.versions.map((version) => `/apis/${version.groupVersion}`)),
+    )
+      .concat(['/api/v1']);
+    const body = groupVersions.map((g, index) => `group${index}: urlFetch(url: "${g}")`).join(' ');
+    const groupQuery = gql(`
+      query {
+        ${body}
+      }
+    `);
+    return client.query({ query: groupQuery }).then(res => {
+      const data: APIResourceList[] = Object.values(res.data);
+      const resourceSet = new Set<string>();
+      const namespacedSet = new Set<string>();
+      data.forEach(
+        (d) =>
+          d.resources &&
+          d.resources.forEach(({ namespaced, name }) => {
+            resourceSet.add(name);
+            namespaced && namespacedSet.add(name);
+          }),
+      );
+      const allResources = [...resourceSet].sort();
+
+      const safeResources = [];
+      const adminResources = [];
+
+      const defineModels = (list: APIResourceList): K8sKind[] => {
+        const groupVersionParts = list.groupVersion.split('/');
+        const apiGroup = groupVersionParts.length > 1 ? groupVersionParts[0] : null;
+        const apiVersion = groupVersionParts.length > 1 ? groupVersionParts[1] : list.groupVersion;
+        return list.resources
+          .filter(({ name }) => !name.includes('/'))
+          .map(({ name, singularName, namespaced, kind, verbs, shortNames }) => {
+            return {
+              kind,
+              namespaced,
+              verbs,
+              shortNames,
+              label: kind,
+              plural: name,
+              apiVersion,
+              abbr: kindToAbbr(kind),
+              ...(apiGroup ? { apiGroup } : {}),
+              labelPlural: `${kind}${kind.endsWith('s') ? 'es' : 's'}`,
+              path: name,
+              id: singularName,
+              crd: true,
+            };
+          });
+      };
+
+      const models = _.flatten(data.filter((d) => d.resources).map(defineModels));
+      allResources.forEach((r) =>
+        ADMIN_RESOURCES.has(r.split('/')[0]) ? adminResources.push(r) : safeResources.push(r),
+      );
+      const configResources = _.filter(
+        models,
+        (m) => m.apiGroup === 'config.openshift.io' && m.kind !== 'ClusterOperator',
+      );
+
+      return {
+        allResources,
+        safeResources,
+        adminResources,
+        configResources,
+        namespacedSet,
+        models,
+        preferredVersions,
+      } as DiscoveryResources;
+    });
+  });
+};
+
+export const getResources = () => getResourcesGQL();
+  /*
+  return coFetchJSON('api/kubernetes/apis').then((res) => {
     const preferredVersions = res.groups.map((group) => group.preferredVersion);
     const all: Promise<APIResourceList>[] = _.flatten(
       res.groups.map((group) => group.versions.map((version) => `/apis/${version.groupVersion}`)),
@@ -150,7 +236,8 @@ export const getResources = () =>
         preferredVersions,
       } as DiscoveryResources;
     });
-  });
+  })};
+  */
 
 export type APIResourceList = {
   kind: 'APIResourceList';

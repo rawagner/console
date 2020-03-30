@@ -30,6 +30,7 @@ const (
 	AuthLoginErrorEndpoint         = "/error"
 	authLogoutEndpoint             = "/auth/logout"
 	k8sProxyEndpoint               = "/api/kubernetes/"
+	graphQLProxyEndpoint           = "/api/graphql/"
 	prometheusProxyEndpoint        = "/api/prometheus"
 	prometheusTenancyProxyEndpoint = "/api/prometheus-tenancy"
 	alertManagerProxyEndpoint      = "/api/alertmanager"
@@ -71,6 +72,8 @@ type jsGlobals struct {
 	LoadTestFactor           int    `json:"loadTestFactor"`
 	GOARCH                   string `json:"GOARCH"`
 	GOOS                     string `json:"GOOS"`
+	GraphQLBaseURL      	 string `json:"graphqlBaseURL"`
+	GraphQLPublicURL         string `json:"graphQLPublicURL"`
 }
 
 type Server struct {
@@ -97,6 +100,7 @@ type Server struct {
 	ThanosTenancyProxyConfig *proxy.Config
 	AlertManagerProxyConfig  *proxy.Config
 	MeteringProxyConfig      *proxy.Config
+	GraphQLProxyConfig       *proxy.Config
 	// A lister for resource listing of a particular kind
 	MonitoringDashboardConfigMapLister *ResourceLister
 	HelmChartRepoProxyConfig           *proxy.Config
@@ -107,6 +111,7 @@ type Server struct {
 	GrafanaPublicURL      *url.URL
 	PrometheusPublicURL   *url.URL
 	ThanosPublicURL       *url.URL
+	GraphQLPublicURL      *url.URL
 }
 
 func (s *Server) authDisabled() bool {
@@ -216,6 +221,15 @@ func (s *Server) HTTPHandler() http.Handler {
 		authHandlerWithUser(func(user *auth.User, w http.ResponseWriter, r *http.Request) {
 			r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", user.Token))
 			k8sProxy.ServeHTTP(w, r)
+		})),
+	)
+
+	graphQLProxy := proxy.NewProxy(s.GraphQLProxyConfig)
+	handle(graphQLProxyEndpoint, http.StripPrefix(
+		proxy.SingleJoiningSlash(s.BaseURL.Path, graphQLProxyEndpoint),
+		authHandlerWithUser(func(user *auth.User, w http.ResponseWriter, r *http.Request) {
+			r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", user.Token))
+			graphQLProxy.ServeGQLHTTP(w, r)
 		})),
 	)
 
@@ -370,6 +384,7 @@ func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
 		GOARCH:                s.GOARCH,
 		GOOS:                  s.GOOS,
 		LoadTestFactor:        s.LoadTestFactor,
+		GraphQLPublicURL:      s.GraphQLPublicURL.String(),
 	}
 
 	if !s.authDisabled() {
@@ -398,6 +413,8 @@ func (s *Server) indexHandler(w http.ResponseWriter, r *http.Request) {
 	if s.CustomLogoFile != "" {
 		jsg.CustomLogoURL = proxy.SingleJoiningSlash(s.BaseURL.Path, customLogoEndpoint)
 	}
+
+	jsg.GraphQLPublicURL = proxy.SingleJoiningSlash(s.BaseURL.Path, graphQLProxyEndpoint)
 
 	tpl := template.New(indexPageTemplateName)
 	tpl.Delims("[[", "]]")

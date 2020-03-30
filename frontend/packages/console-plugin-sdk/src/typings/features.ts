@@ -15,8 +15,9 @@ namespace ExtensionProperties {
   }
 
   export interface ActionFeatureFlag extends FeatureFlag {
-    /** Function used to detect the feature and set flag name/value via Redux action dispatch. */
-    detect: ActionFeatureFlagDetector;
+    url: string,
+    action: (dispatch, res) => void;
+    error: (dispatch, err) => void;
   }
 }
 

@@ -10,6 +10,8 @@ import { MonitoringRoutes } from '../reducers/monitoring';
 import { setMonitoringURL } from './monitoring';
 import * as plugins from '../plugins';
 import { setClusterID, setCreateProjectMessage, setUser, setConsoleLinks } from './common';
+import gql from 'graphql-tag';
+import client from '../components/graphql/client';
 
 export enum ActionType {
   SetFlag = 'setFlag',
@@ -151,9 +153,9 @@ export type FeatureAction = Action<
   typeof featureActions | typeof receivedResources | typeof clearFlags
 >;
 
-const openshiftPath = `${k8sBasePath}/apis/apps.openshift.io/v1`;
+const openshiftPath = '/apis/apps.openshift.io/v1';
 const detectOpenShift = (dispatch) =>
-  coFetchJSON(openshiftPath).then(
+  coFetchJSON(`${k8sBasePath}${openshiftPath}`).then(
     (res) => dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.resources) > 0)),
     (err) =>
       _.get(err, 'response.status') === 404
@@ -161,9 +163,9 @@ const detectOpenShift = (dispatch) =>
         : handleError(err, FLAGS.OPENSHIFT, dispatch, detectOpenShift),
   );
 
-const clusterVersionPath = `${k8sBasePath}/apis/config.openshift.io/v1/clusterversions/version`;
+const clusterVersionPath = '/apis/config.openshift.io/v1/clusterversions/version';
 const detectClusterVersion = (dispatch) =>
-  coFetchJSON(clusterVersionPath).then(
+  coFetchJSON(`${k8sBasePath}${clusterVersionPath}`).then(
     (clusterVersion: ClusterVersionKind) => {
       const hasClusterVersion = !_.isEmpty(clusterVersion);
       dispatch(setFlag(FLAGS.CLUSTER_VERSION, hasClusterVersion));
@@ -178,9 +180,9 @@ const detectClusterVersion = (dispatch) =>
     },
   );
 
-const projectRequestPath = `${k8sBasePath}/apis/project.openshift.io/v1/projectrequests`;
+const projectRequestPath = '/apis/project.openshift.io/v1/projectrequests';
 const detectCanCreateProject = (dispatch) =>
-  coFetchJSON(projectRequestPath).then(
+  coFetchJSON(`${k8sBasePath}${projectRequestPath}`).then(
     (res) => dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.status === 'Success')),
     (err) => {
       const status = _.get(err, 'response.status');
@@ -193,9 +195,9 @@ const detectCanCreateProject = (dispatch) =>
     },
   );
 
-const loggingConfigMapPath = `${k8sBasePath}/api/v1/namespaces/openshift-logging/configmaps/sharing-config`;
+const loggingConfigMapPath = '/api/v1/namespaces/openshift-logging/configmaps/sharing-config';
 const detectLoggingURL = (dispatch) =>
-  coFetchJSON(loggingConfigMapPath).then(
+  coFetchJSON(`${k8sBasePath}${loggingConfigMapPath}`).then(
     (res) => {
       const { kibanaAppURL } = res.data;
       if (!_.isEmpty(kibanaAppURL)) {
@@ -209,8 +211,9 @@ const detectLoggingURL = (dispatch) =>
     },
   );
 
+const detectUserPath = '/apis/user.openshift.io/v1/users/~';
 const detectUser = (dispatch) =>
-  coFetchJSON('api/kubernetes/apis/user.openshift.io/v1/users/~').then(
+  coFetchJSON(`${k8sBasePath}${detectUserPath}`).then(
     (user) => {
       dispatch(setUser(user));
     },
@@ -221,8 +224,9 @@ const detectUser = (dispatch) =>
     },
   );
 
+const detectConsoleLinksPath = '/apis/console.openshift.io/v1/consolelinks';
 const detectConsoleLinks = (dispatch) =>
-  coFetchJSON('api/kubernetes/apis/console.openshift.io/v1/consolelinks').then(
+  coFetchJSON(`${k8sBasePath}${detectConsoleLinksPath}`).then(
     (consoleLinks) => {
       dispatch(setConsoleLinks(_.get(consoleLinks, 'items')));
     },
@@ -254,15 +258,125 @@ const ssarCheckActions = ssarChecks.map(({ flag, resourceAttributes, after }) =>
 
 export const detectFeatures = () => (dispatch: Dispatch) =>
   [
-    detectOpenShift,
-    detectCanCreateProject,
-    detectClusterVersion,
-    detectUser,
-    detectLoggingURL,
-    detectConsoleLinks,
-    ...ssarCheckActions,
-    ...plugins.registry
-      .getFeatureFlags()
-      .filter(plugins.isActionFeatureFlag)
-      .map((ff) => ff.properties.detect),
+    //detectOpenShift, //done
+    //detectCanCreateProject, //done
+    //detectClusterVersion, //done
+    //detectUser, //done
+    //detectLoggingURL, //done
+    //detectConsoleLinks, //done
+    //...ssarCheckActions,
+    //...plugins.registry
+   //   .getFeatureFlags()
+   //   .filter(plugins.isActionFeatureFlag)
+     // .map((ff) => ff.properties.detect),
   ].forEach((detect) => detect(dispatch));
+
+
+const gqlFeatures = [
+  {
+    path: openshiftPath,
+    action: (dispatch, res) => {
+      dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.resources) > 0))
+    },
+    error: (dispatch, err) => dispatch(setFlag(FLAGS.OPENSHIFT, false)),
+  },
+  {
+    path: clusterVersionPath,
+    action: (dispatch, res) => {
+      if (!_.isEmpty(res)) {
+        dispatch(setFlag(FLAGS.CLUSTER_VERSION, true));
+        dispatch(setClusterID(res.spec.clusterID));
+      }
+    },
+    error: (dispatch, err) => dispatch(setFlag(FLAGS.CLUSTER_VERSION, false)),
+  },
+  {
+    path: projectRequestPath,
+    action: (dispatch, res) => {
+      dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.status === 'Success'));
+    },
+    error: (dispatch, err) => {
+      dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, false));
+      dispatch(setCreateProjectMessage(_.get(err, 'json.details.causes[0].message')));
+    },
+  },
+  {
+    path: detectUserPath,
+    action: (dispatch, res) => {
+      dispatch(setUser(res));
+    }
+  },
+  {
+    path: loggingConfigMapPath,
+    action: (dispatch, res) => {
+      const { kibanaAppURL } = res.data;
+      if (!_.isEmpty(kibanaAppURL)) {
+        dispatch(setMonitoringURL(MonitoringRoutes.Kibana, kibanaAppURL));
+      }
+    }
+  },
+  {
+    path: detectConsoleLinksPath,
+    action: (dispatch, res) => {
+      dispatch(setConsoleLinks(_.get(res, 'items')));
+    }
+  }
+];
+
+const getSsarAttr = (ssar) => {
+  let attr = `resource: "${ssar.resourceAttributes.resource}", verb: "${ssar.resourceAttributes.verb}"`;
+  if (ssar.resourceAttributes.group) {
+    attr = `${attr}, group: "${ssar.resourceAttributes.group}"`
+  }
+  if (ssar.resourceAttributes.namespace) {
+    attr = `${attr}, namespace: "${ssar.resourceAttributes.namespace}"`
+  }
+  return attr;
+}
+
+export const detectFeaturesGQL = () => (dispatch: Dispatch) => {
+  const pluginFeatures = plugins.registry
+    .getFeatureFlags()
+    .filter(plugins.isActionFeatureFlag)
+    .map(({ properties: { url, action, error } }) => ({
+      path: url,
+      action,
+      error,
+    }));
+  const featuresBody = [...gqlFeatures, ...pluginFeatures].map((f, index) => `feature${index}: urlFetch(url: "${f.path}")`).join(' ');
+  const ssarBody = ssarChecks.map((c, index) => `ssar${index}: selfSubjectAccessReview(${getSsarAttr(c)}){status{allowed}}`).join(' ');
+  const query = gql(`
+    query {
+      ${featuresBody}
+      ${ssarBody}
+    }
+  `);
+  client.query({ query, errorPolicy: 'all' }).then(response => {
+    Object.keys(response.data).filter(k => k.startsWith('feature')).forEach((key, index) => {
+      const error = response.errors.find((e) => e.path[0] === key);
+      if (error) {
+        gqlFeatures[index].error && gqlFeatures[index].error(dispatch, error.extensions);
+      } else {
+        gqlFeatures[index].action(dispatch, response.data[key]);
+      }
+    Object.keys(response.data).filter(k => k.startsWith('ssar')).forEach((key, index) => {
+      const error = response.errors.find((e) => e.path[0] === key);
+      if (error) {
+        gqlFeatures[index].error && gqlFeatures[index].error(dispatch, error.extensions);
+      } else {
+        const res = response.data[key];
+        const allowed: boolean = res.status.allowed;
+        dispatch(setFlag(ssarChecks[index].flag, allowed));
+      }
+    })
+    //Object.values(response.data).forEach((res, index) => gqlFeatures[index].action(dispatch, res));
+  })});
+  /*
+  try {
+    const result = await client.query({ query });
+    Object.values(result.data).forEach((res, index) => gqlFeatures[index].action(dispatch, res));
+  } catch (err) {
+    console.log(err);
+  }
+  */
+}

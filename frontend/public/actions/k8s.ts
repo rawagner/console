@@ -12,6 +12,8 @@ import { makeReduxID } from '../components/utils/k8s-watcher';
 import { APIServiceModel } from '../models';
 import { coFetchJSON } from '../co-fetch';
 import { referenceForModel, K8sResourceKind, K8sKind } from '../module/k8s';
+import ApolloClient from 'apollo-client';
+import { NormalizedCacheObject } from 'apollo-cache-inmemory';
 
 export enum ActionType {
   ReceivedResources = 'resources',
@@ -36,7 +38,6 @@ const POLLs = {};
 const REF_COUNTS = {};
 
 const nop = () => {};
-const paginationLimit = 250;
 const apiGroups = 'apiGroups';
 
 type K8sEvent = { type: 'ADDED' | 'DELETED' | 'MODIFIED'; object: K8sResourceKind };
@@ -137,6 +138,68 @@ export const stopK8sWatch = (id: string) => (dispatch: Dispatch) => {
 export const startWatchK8sList = (id: string, query: { [key: string]: string }) =>
   action(ActionType.StartWatchK8sList, { id, query });
 
+const GQLSubs = {};
+
+export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, listQuery, queryVariables, listQueryVariables) => (
+  dispatch,
+) => {
+  const id = JSON.stringify(query);
+  if (GQLSubs[id]) {
+    return;
+  }
+  dispatch(startWatchK8sList(id, {}));
+  GQLSubs[id] = {
+    unsubscribe: () => {},
+  };
+  const fetchList = async () => {
+    const query = { query: listQuery, variables: listQueryVariables };
+    const start = performance.now();
+    const response = await client.query(query);
+    const stop = performance.now();
+    console.log(`GQL took: ${(stop - start).toFixed(4)}`);
+    dispatch(loaded(id, response.data.listResourcesProper.items));
+    return response.data.listResourcesProper.metadata.resourceVersion;
+  };
+  const watch = async () => {
+    let resourceVersion;
+    try {
+      resourceVersion = await fetchList();
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+    if (!GQLSubs[id]) {
+      return;
+    }
+    const subscription = client
+      .subscribe({
+        query,
+        variables: { resourceVersion, ...queryVariables },
+      })
+      .subscribe({
+        next: (result) => {
+          dispatch(updateListFromWS(id, [result.data.watchResources]));
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: (com) => {
+          console.log(com);
+        },
+      });
+    GQLSubs[id] = subscription;
+  };
+  watch();
+};
+
+export const stopWatchGQL = (query) => {
+  const id = JSON.stringify(query);
+  if (GQLSubs[id]) {
+    GQLSubs[id].unsubscribe();
+    GQLSubs[id] = null;
+  }
+};
+
 export const watchK8sList = (
   id: string,
   query: { [key: string]: string },
@@ -162,7 +225,6 @@ export const watchK8sList = (
     const response = await k8sList(
       k8skind,
       {
-        limit: paginationLimit,
         ...query,
         ...(continueToken ? { continue: continueToken } : {}),
       },
@@ -283,9 +345,9 @@ export const watchAPIServices = () => (dispatch, getState) => {
     return;
   }
   dispatch({ type: ActionType.GetResourcesInFlight });
-
   k8sList(APIServiceModel, {})
-    .then(() =>
+    .then((res) => {
+      console.log(res);
       dispatch(
         watchK8sList(
           makeReduxID(APIServiceModel, {}),
@@ -297,8 +359,8 @@ export const watchAPIServices = () => (dispatch, getState) => {
             // which could cause console to thrash.
             return events.some(({ type }) => type !== 'MODIFIED') ? getResources() : _.noop;
           },
-        ),
-      ),
+        )
+      )},
     )
     .catch(() => {
       const poller = () =>

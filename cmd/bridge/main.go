@@ -83,6 +83,7 @@ func main() {
 	fK8sModeOffClusterThanos := fs.String("k8s-mode-off-cluster-thanos", "", "DEV ONLY. URL of the cluster's Thanos server.")
 	fK8sModeOffClusterAlertmanager := fs.String("k8s-mode-off-cluster-alertmanager", "", "DEV ONLY. URL of the cluster's AlertManager server.")
 	fK8sModeOffClusterMetering := fs.String("k8s-mode-off-cluster-metering", "", "DEV ONLY. URL of the cluster's metering server.")
+	fK8sModeOffClusterGraphQL := fs.String("k8s-mode-off-cluster-graphql", "", "DEV ONLY. URL of the cluster's GraphQL server.")
 
 	fK8sAuth := fs.String("k8s-auth", "service-account", "service-account | bearer-token | oidc | openshift")
 	fK8sAuthBearerToken := fs.String("k8s-auth-bearer-token", "", "Authorization token to send with proxied Kubernetes API requests.")
@@ -109,6 +110,7 @@ func main() {
 	fDocumentationBaseURL := fs.String("documentation-base-url", "", "The base URL for documentation links.")
 
 	fAlermanagerPublicURL := fs.String("alermanager-public-url", "", "Public URL of the cluster's AlertManager server.")
+	fGraphQLPublicURL := fs.String("graphql-public-url", "", "Public URL of the cluster's GraphQL server.")
 	fGrafanaPublicURL := fs.String("grafana-public-url", "", "Public URL of the cluster's Grafana server.")
 	fPrometheusPublicURL := fs.String("prometheus-public-url", "", "Public URL of the cluster's Prometheus server.")
 	fThanosPublicURL := fs.String("thanos-public-url", "", "Public URL of the cluster's Thanos server.")
@@ -181,6 +183,10 @@ func main() {
 	if *fThanosPublicURL != "" {
 		thanosPublicURL = bridge.ValidateFlagIsURL("thanos-public-url", *fThanosPublicURL)
 	}
+	graphQLPublicURL := &url.URL{}
+	if *fGraphQLPublicURL != "" {
+		graphQLPublicURL = bridge.ValidateFlagIsURL("graphql-public-url", *fGraphQLPublicURL)
+	}
 
 	branding := *fBranding
 	if branding == "origin" {
@@ -216,6 +222,7 @@ func main() {
 		GrafanaPublicURL:      grafanaPublicURL,
 		PrometheusPublicURL:   prometheusPublicURL,
 		ThanosPublicURL:       thanosPublicURL,
+		GraphQLPublicURL:      graphQLPublicURL,
 		LoadTestFactor:        *fLoadTestFactor,
 	}
 
@@ -354,6 +361,14 @@ func main() {
 			TLSClientConfig: serviceProxyTLSConfig,
 			HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
 			Endpoint:        k8sEndpoint,
+		}
+
+		offClusterGraphQLURL := bridge.ValidateFlagIsURL("k8s-mode-off-cluster-graphql", *fK8sModeOffClusterGraphQL)
+		offClusterGraphQLURL.Path = "/graphql"
+		srv.GraphQLProxyConfig = &proxy.Config{
+			TLSClientConfig: serviceProxyTLSConfig,
+			HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
+			Endpoint:        offClusterGraphQLURL,
 		}
 
 		if *fK8sModeOffClusterPrometheus != "" {

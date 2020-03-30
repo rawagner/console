@@ -10,6 +10,14 @@ export const OCS_INDEPENDENT_FLAG = 'OCS_INDEPENDENT';
 const isIndependent = (data: K8sResourceKind): boolean =>
   data.spec?.externalStorage?.enable ?? false;
 
+export const detectIndependentModeAction = (dispatch, res) => {
+  dispatch(setFlag(OCS_INDEPENDENT_FLAG, isIndependent(res)));
+}
+
+export const detectIndependentModeError = (dispatch, err) => {
+  dispatch(setFlag(OCS_INDEPENDENT_FLAG, err))
+}
+
 export const detectIndependentMode: ActionFeatureFlagDetector = (dispatch) =>
   k8sGet(OCSServiceModel, OCS_INDEPENDENT_CR_NAME, CEPH_STORAGE_NAMESPACE).then(
     (obj: K8sResourceKind) => dispatch(setFlag(OCS_INDEPENDENT_FLAG, isIndependent(obj))),
@@ -26,6 +34,14 @@ export const isOCS45AndAboveVersion = (subscription: K8sResourceKind): boolean =
   const version = subscription?.status?.currentCSV;
   return version && version.includes('ocs-operator.v4') && version.split('.')[2] >= 5;
 };
+
+export const detectOCSVersion45AndAboveAction = (dispatch, res) => {
+  dispatch(setFlag(OCS_VERSION_4_5_FLAG, isOCS45AndAboveVersion(res)));
+}
+
+export const detectOCSVersion45AndAboveError = (dispatch, err) => {
+  dispatch(setFlag(OCS_VERSION_4_5_FLAG, false))
+}
 
 export const detectOCSVersion45AndAbove: ActionFeatureFlagDetector = (dispatch) =>
   k8sGet(SubscriptionModel, 'ocs-subscription', CEPH_STORAGE_NAMESPACE).then(

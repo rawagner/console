@@ -24,8 +24,10 @@ import {
 } from '@console/plugin-sdk';
 import {
   OCS_INDEPENDENT_FLAG,
-  detectIndependentMode,
-  detectOCSVersion45AndAbove,
+  detectIndependentModeAction,
+  detectOCSVersion45AndAboveAction,
+  detectIndependentModeError,
+  detectOCSVersion45AndAboveError,
   OCS_VERSION_4_5_FLAG,
 } from './features';
 import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
@@ -76,7 +78,9 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Action',
     properties: {
       flag: OCS_VERSION_4_5_FLAG,
-      detect: detectOCSVersion45AndAbove,
+      url: 'apis/ocs.openshift.io/v1/namespaces/openshift-storage/storageclusters/ocs-independent-storagecluster',
+      action: detectOCSVersion45AndAboveAction,
+      error: detectOCSVersion45AndAboveError,
     },
   },
   {
@@ -265,7 +269,9 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Action',
     properties: {
       flag: OCS_INDEPENDENT_FLAG,
-      detect: detectIndependentMode,
+      url: `apis/operators.coreos.com/v1alpha1/namespaces/openshift-storage/subscriptions/ocs-subscription`,
+      action: detectIndependentModeAction,
+      error: detectIndependentModeError,
     },
   },
   {

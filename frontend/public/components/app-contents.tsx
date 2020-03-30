@@ -20,6 +20,8 @@ import { RootState } from '../redux';
 
 //PF4 Imports
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
+import { DashboardsPage } from './dashboard/dashboards-page/dashboards';
+import { TestDashboard } from './dashboard/test-dashboard/test-dashboard';
 
 const RedirectComponent = (props) => {
   const to = `/k8s${props.location.pathname}`;
@@ -114,14 +116,8 @@ const AppContents_: React.FC<AppContentsProps> = ({ activePerspective, flags }) 
           {getPluginPageRoutes(activePerspective, flags)}
 
           <Route path={['/all-namespaces', '/ns/:ns']} component={RedirectComponent} />
-          <LazyRoute
-            path="/dashboards"
-            loader={() =>
-              import(
-                './dashboard/dashboards-page/dashboards' /* webpackChunkName: "dashboards" */
-              ).then((m) => m.DashboardsPage)
-            }
-          />
+          <Route path="/dashboards" component={DashboardsPage} />
+          <Route path="/test-gql" component={TestDashboard} />
 
           {/* Redirect legacy routes to avoid breaking links */}
           <Redirect from="/cluster-status" to="/dashboards" />

@@ -8,7 +8,7 @@ import { Route, Router } from 'react-router-dom';
 import 'abort-controller/polyfill';
 
 import store from '../redux';
-import { detectFeatures } from '../actions/features';
+import { detectFeatures, detectFeaturesGQL } from '../actions/features';
 import AppContents from './app-contents';
 import { getBrandingDetails, Masthead } from './masthead';
 import { ConsoleNotifier } from './console-notifier';
@@ -179,6 +179,7 @@ getCachedResources()
   .catch(startDiscovery);
 
 store.dispatch(detectFeatures());
+store.dispatch(detectFeaturesGQL());
 
 // Global timer to ensure all <Timestamp> components update in sync
 setInterval(() => store.dispatch(UIActions.updateTimestamps(Date.now())), 10000);

@@ -97,6 +97,11 @@ const AdminNav = () => (
         name="Overview"
         required={[FLAGS.CAN_GET_NS, FLAGS.OPENSHIFT]}
       />
+      <HrefLink
+        href="/test-gql"
+        activePath="/test-gql/"
+        name="TEST"
+      />
       <ResourceClusterLink resource="projects" name="Projects" required={FLAGS.OPENSHIFT} />
       <HrefLink href="/search" name="Search" startsWith={searchStartsWith} />
       <HrefLink href="/api-explorer" name="Explore" startsWith={apiExplorerStartsWith} />

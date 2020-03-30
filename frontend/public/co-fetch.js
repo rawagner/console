@@ -124,7 +124,7 @@ export const coFetchUtils = {
   parseJson,
 };
 
-export const coFetchJSON = (url, method = 'GET', options = {}) => {
+export const coFetchJSON = async (url, method = 'GET', options = {}) => {
   const headers = { Accept: 'application/json' };
   const { kind, name } = store.getState().UI.get('impersonate', {});
   if ((kind === 'User' || kind === 'Group') && name) {
@@ -136,17 +136,19 @@ export const coFetchJSON = (url, method = 'GET', options = {}) => {
   }
   // Pass headers last to let callers to override Accept.
   const allOptions = _.defaultsDeep({ method }, options, { headers });
-  return coFetch(url, allOptions).then((response) => {
-    if (!response.ok) {
-      return response.text();
-    }
+  const t1 = performance.now();
+  const response = await coFetch(url, allOptions);
+  const t2 = performance.now();
+  console.log(`fetch for ${url}: ${(t2-t1).toFixed(4)}`);
+  if (!response.ok) {
+    return response.text();
+  }
 
-    // If the response has no body, return promise that resolves with an empty object
-    if (response.headers.get('Content-Length') === '0') {
-      return Promise.resolve({});
-    }
-    return response.json();
-  });
+  // If the response has no body, return promise that resolves with an empty object
+  if (response.headers.get('Content-Length') === '0') {
+    return Promise.resolve({});
+  }
+  return response.json();
 };
 
 const coFetchSendJSON = (url, method, json = null, options = {}) => {

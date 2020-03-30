@@ -190,7 +190,10 @@ export default (state: K8sState, action: K8sAction): K8sState => {
       state = state.mergeDeep({
         [action.payload.id]: { loaded: true, loadError: '' },
       });
+      const t1 = performance.now();
       newList = loadList(state.getIn([action.payload.id, 'data']), action.payload.k8sObjects);
+      const t2 = performance.now();
+      console.log(`IMMUTABLE: Perf for ${action.payload.id} - took ${(t2-t1).toFixed(4)}`);
       break;
 
     case ActionType.UpdateListFromWS:
