@@ -15,6 +15,7 @@ import {
   ReduxReducer,
   ProjectDashboardInventoryItem,
   DashboardsOverviewResourceActivity,
+  SecretHandleChangeExtenion,
 } from '@console/plugin-sdk';
 import { DashboardsStorageCapacityDropdownItem } from '@console/ceph-storage-plugin';
 import { TemplateModel, PodModel } from '@console/internal/models';
@@ -44,7 +45,8 @@ type ConsumedExtensions =
   | DashboardsStorageCapacityDropdownItem
   | ReduxReducer
   | ProjectDashboardInventoryItem
-  | DashboardsOverviewResourceActivity;
+  | DashboardsOverviewResourceActivity
+  | SecretHandleChangeExtenion;
 
 export const FLAG_KUBEVIRT = 'KUBEVIRT';
 
@@ -297,6 +299,15 @@ const plugin: Plugin<ConsumedExtensions> = [
         import(
           './components/dashboards-page/overview-dashboard/activity' /* webpackChunkName: "kubevirt-activity" */
         ).then((m) => m.V2VImportActivity),
+    },
+    flags: {
+      required: [FLAG_KUBEVIRT],
+    },
+  },
+  {
+    type: 'Secret/SecretHandleChangeExtenion',
+    properties: {
+      handleChange: (name, value) => console.log(`${name}, ${value}`),
     },
     flags: {
       required: [FLAG_KUBEVIRT],

@@ -7,263 +7,273 @@ import { DeploymentModel, DeploymentConfigModel, StatefulSetModel } from '../../
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
 import { Dropdown, history, ResourceIcon, ResourceName, resourcePathFromModel } from '../utils';
 import { RadioInput } from '../radio';
+import { withExtensions, SecretHandleChangeExtenion, isSecretExtension } from '@console/plugin-sdk';
 
 const workloadResourceModels = [DeploymentModel, DeploymentConfigModel, StatefulSetModel];
 const getContainers = (workload: K8sResourceKind) =>
   _.get(workload, 'spec.template.spec.containers') || [];
 
-export class AddSecretToWorkloadModal extends React.Component<
-  AddSecretToWorkloadModalProps,
-  AddSecretToWorkloadModalState
-> {
-  state = {
-    inProgress: false,
-    errorMessage: '',
-    workloadOptions: {},
-    workloadsByUID: {},
-    selectedWorkloadUID: '',
-    addAs: 'environment',
-    prefix: '',
-    mountPath: '',
-  };
-
-  componentDidMount() {
-    const { namespace } = this.props;
-    const opts = { ns: namespace };
-    Promise.all(
-      workloadResourceModels.map((model) => {
-        return k8sList(model, opts)
-          .catch((err) => {
-            const errorMessage = err.message;
-            this.setState({ errorMessage });
-            return [];
-          })
-          .then((res: K8sResourceKind[]): WorkloadItem[] => res.map((obj) => ({ model, obj })));
-      }),
-    ).then((responses) => {
-      // TODO: Group by kind.
-      const allItems: WorkloadItem[] = _.flatten(responses);
-      const workloadsByUID = _.keyBy(allItems, 'obj.metadata.uid');
-      const sortedItems = _.orderBy(allItems, ['obj.metadata.name', 'model.kind'], ['asc', 'asc']);
-      const workloadOptions = _.reduce(
-        sortedItems,
-        (options, item) => {
-          const { name, uid } = item.obj.metadata;
-          options[uid] = <ResourceName kind={item.model.kind} name={name} />;
-          return options;
-        },
-        {},
-      );
-      this.setState({ workloadOptions, workloadsByUID });
-    });
-  }
-
-  autocompleteFilter(text, item) {
-    return fuzzy(text, item.props.name);
-  }
-
-  onWorkloadChange = (selectedWorkloadUID: string) => {
-    this.setState({ selectedWorkloadUID });
-  };
-
-  handleChange: React.ReactEventHandler<HTMLInputElement> = (event) => {
-    const { name, value } = event.currentTarget;
-    this.setState({
-      [name]: value,
-    } as any);
-  };
-
-  onAddAsChange: React.ReactEventHandler<HTMLInputElement> = (event) => {
-    this.setState({
-      addAs: event.currentTarget.value,
-    });
-  };
-
-  getEnvPatches(obj) {
-    const { secretName } = this.props;
-    const { prefix } = this.state;
-    const envFrom = {
-      secretRef: {
-        name: secretName,
-      },
-      prefix,
+export const AddSecretToWorkloadModal = withExtensions<SecretExtensionProps>({
+  secretExtensions: isSecretExtension,
+})(
+  class AddSecretToWorkloadModal extends React.Component<
+    AddSecretToWorkloadModalProps & SecretExtensionProps,
+    AddSecretToWorkloadModalState
+  > {
+    state = {
+      inProgress: false,
+      errorMessage: '',
+      workloadOptions: {},
+      workloadsByUID: {},
+      selectedWorkloadUID: '',
+      addAs: 'environment',
+      prefix: '',
+      mountPath: '',
     };
 
-    // Add `envFrom` to all containers.
-    // TODO: Let use the user pick the container.
-    const containers = getContainers(obj);
-    const patches = containers.map((container, i) => {
-      // Create the array if it doesn't exist. Append to the array otherwise.
-      const containerPatch = _.isEmpty(container.envFrom)
-        ? { op: 'add', path: `/spec/template/spec/containers/${i}/envFrom`, value: [envFrom] }
-        : { op: 'add', path: `/spec/template/spec/containers/${i}/envFrom/-`, value: envFrom };
-      return containerPatch;
-    });
-
-    return patches;
-  }
-
-  getVolumePatches(obj) {
-    const { secretName } = this.props;
-    const { mountPath } = this.state;
-    const mount = {
-      name: secretName,
-      readOnly: true,
-      mountPath,
-    };
-
-    // Add a volume mount to all containers.
-    // TODO: Let use the user pick the container.
-    const containers = getContainers(obj);
-    const patches = containers.map((container, i) => {
-      // Create the array if it doesn't exist. Append to the array otherwise.
-      const containerPatch = _.isEmpty(container.volumeMounts)
-        ? { op: 'add', path: `/spec/template/spec/containers/${i}/volumeMounts`, value: [mount] }
-        : { op: 'add', path: `/spec/template/spec/containers/${i}/volumeMounts/-`, value: mount };
-      return containerPatch;
-    });
-
-    const volume = {
-      name: secretName,
-      secret: { secretName },
-    };
-    const existingVolumes = _.get(obj, 'spec.template.spec.volumes');
-
-    // Create the array if it doesn't exist. Append to the array otherwise.
-    const volumePatch = _.isEmpty(existingVolumes)
-      ? { op: 'add', path: '/spec/template/spec/volumes', value: [volume] }
-      : { op: 'add', path: '/spec/template/spec/volumes/-', value: volume };
-    return [...patches, volumePatch];
-  }
-
-  getPatches(obj) {
-    return this.state.addAs === 'environment'
-      ? this.getEnvPatches(obj)
-      : this.getVolumePatches(obj);
-  }
-
-  submit = (event: React.FormEvent<EventTarget>) => {
-    event.preventDefault();
-
-    const { workloadsByUID, selectedWorkloadUID } = this.state;
-    if (!selectedWorkloadUID) {
-      this.setState({ errorMessage: 'You must select a workload.' });
-      return;
+    componentDidMount() {
+      const { namespace } = this.props;
+      const opts = { ns: namespace };
+      Promise.all(
+        workloadResourceModels.map((model) => {
+          return k8sList(model, opts)
+            .catch((err) => {
+              const errorMessage = err.message;
+              this.setState({ errorMessage });
+              return [];
+            })
+            .then((res: K8sResourceKind[]): WorkloadItem[] => res.map((obj) => ({ model, obj })));
+        }),
+      ).then((responses) => {
+        // TODO: Group by kind.
+        const allItems: WorkloadItem[] = _.flatten(responses);
+        const workloadsByUID = _.keyBy(allItems, 'obj.metadata.uid');
+        const sortedItems = _.orderBy(
+          allItems,
+          ['obj.metadata.name', 'model.kind'],
+          ['asc', 'asc'],
+        );
+        const workloadOptions = _.reduce(
+          sortedItems,
+          (options, item) => {
+            const { name, uid } = item.obj.metadata;
+            options[uid] = <ResourceName kind={item.model.kind} name={name} />;
+            return options;
+          },
+          {},
+        );
+        this.setState({ workloadOptions, workloadsByUID });
+      });
     }
 
-    this.setState({ inProgress: true, errorMessage: '' });
+    autocompleteFilter(text, item) {
+      return fuzzy(text, item.props.name);
+    }
 
-    const workload = workloadsByUID[selectedWorkloadUID];
-    const { model, obj } = workload;
-    const patches = this.getPatches(obj);
-    k8sPatch(model, obj, patches)
-      .then(() => {
-        this.setState({ inProgress: false });
-        this.props.close();
-        const { name, namespace } = obj.metadata;
-        history.push(resourcePathFromModel(model, name, namespace));
-      })
-      .catch(({ message: errorMessage }) => this.setState({ inProgress: false, errorMessage }));
-  };
+    onWorkloadChange = (selectedWorkloadUID: string) => {
+      this.setState({ selectedWorkloadUID });
+    };
 
-  render() {
-    const { secretName } = this.props;
-    const { addAs, workloadOptions, selectedWorkloadUID } = this.state;
-    const addAsEnvironment = addAs === 'environment';
-    const addAsVolume = addAs === 'volume';
-    const selectWorkloadPlaceholder = 'Select a workload';
+    handleChange: React.ReactEventHandler<HTMLInputElement> = (event) => {
+      const { name, value } = event.currentTarget;
+      this.props.secretExtensions.forEach((s) => s.properties.handleChange(name, value));
+      this.setState({
+        [name]: value,
+      } as any);
+    };
 
-    return (
-      <form
-        onSubmit={this.submit}
-        name="co-add-secret-to-workload"
-        className="co-add-secret-to-workload modal-content"
-      >
-        <ModalTitle>Add Secret to Workload</ModalTitle>
-        <ModalBody>
-          <p>
-            Add all values from <ResourceIcon kind="Secret" />
-            {secretName} to a workload as environment variables or a volume.
-          </p>
-          <div className="form-group">
-            <label
-              className="control-label co-required"
-              htmlFor="co-add-secret-to-workload__workload"
-            >
-              Add this secret to workload
-            </label>
-            <Dropdown
-              items={workloadOptions}
-              selectedKey={selectedWorkloadUID}
-              title={selectWorkloadPlaceholder}
-              onChange={this.onWorkloadChange}
-              autocompleteFilter={this.autocompleteFilter}
-              autocompletePlaceholder={selectWorkloadPlaceholder}
-              id="co-add-secret-to-workload__workload"
-            />
-          </div>
-          <fieldset>
-            <legend className="co-legend co-required">Add secret as</legend>
-            <RadioInput
-              title="Environment Variables"
-              name="co-add-secret-to-workload__add-as"
-              id="co-add-secret-to-workload__envvars"
-              value="environment"
-              onChange={this.onAddAsChange}
-              checked={addAsEnvironment}
-            />
-            {addAsEnvironment && (
-              <div className="co-m-radio-desc">
-                <div className="form-group">
-                  <label htmlFor="co-add-secret-to-workload__prefix">Prefix</label>
-                  <input
-                    className="pf-c-form-control"
-                    name="prefix"
-                    id="co-add-secret-to-workload__prefix"
-                    placeholder="(optional)"
-                    type="text"
-                    onChange={this.handleChange}
-                  />
+    onAddAsChange: React.ReactEventHandler<HTMLInputElement> = (event) => {
+      this.setState({
+        addAs: event.currentTarget.value,
+      });
+    };
+
+    getEnvPatches(obj) {
+      const { secretName } = this.props;
+      const { prefix } = this.state;
+      const envFrom = {
+        secretRef: {
+          name: secretName,
+        },
+        prefix,
+      };
+
+      // Add `envFrom` to all containers.
+      // TODO: Let use the user pick the container.
+      const containers = getContainers(obj);
+      const patches = containers.map((container, i) => {
+        // Create the array if it doesn't exist. Append to the array otherwise.
+        const containerPatch = _.isEmpty(container.envFrom)
+          ? { op: 'add', path: `/spec/template/spec/containers/${i}/envFrom`, value: [envFrom] }
+          : { op: 'add', path: `/spec/template/spec/containers/${i}/envFrom/-`, value: envFrom };
+        return containerPatch;
+      });
+
+      return patches;
+    }
+
+    getVolumePatches(obj) {
+      const { secretName } = this.props;
+      const { mountPath } = this.state;
+      const mount = {
+        name: secretName,
+        readOnly: true,
+        mountPath,
+      };
+
+      // Add a volume mount to all containers.
+      // TODO: Let use the user pick the container.
+      const containers = getContainers(obj);
+      const patches = containers.map((container, i) => {
+        // Create the array if it doesn't exist. Append to the array otherwise.
+        const containerPatch = _.isEmpty(container.volumeMounts)
+          ? { op: 'add', path: `/spec/template/spec/containers/${i}/volumeMounts`, value: [mount] }
+          : { op: 'add', path: `/spec/template/spec/containers/${i}/volumeMounts/-`, value: mount };
+        return containerPatch;
+      });
+
+      const volume = {
+        name: secretName,
+        secret: { secretName },
+      };
+      const existingVolumes = _.get(obj, 'spec.template.spec.volumes');
+
+      // Create the array if it doesn't exist. Append to the array otherwise.
+      const volumePatch = _.isEmpty(existingVolumes)
+        ? { op: 'add', path: '/spec/template/spec/volumes', value: [volume] }
+        : { op: 'add', path: '/spec/template/spec/volumes/-', value: volume };
+      return [...patches, volumePatch];
+    }
+
+    getPatches(obj) {
+      return this.state.addAs === 'environment'
+        ? this.getEnvPatches(obj)
+        : this.getVolumePatches(obj);
+    }
+
+    submit = (event: React.FormEvent<EventTarget>) => {
+      event.preventDefault();
+
+      const { workloadsByUID, selectedWorkloadUID } = this.state;
+      if (!selectedWorkloadUID) {
+        this.setState({ errorMessage: 'You must select a workload.' });
+        return;
+      }
+
+      this.setState({ inProgress: true, errorMessage: '' });
+
+      const workload = workloadsByUID[selectedWorkloadUID];
+      const { model, obj } = workload;
+      const patches = this.getPatches(obj);
+      k8sPatch(model, obj, patches)
+        .then(() => {
+          this.setState({ inProgress: false });
+          this.props.close();
+          const { name, namespace } = obj.metadata;
+          history.push(resourcePathFromModel(model, name, namespace));
+        })
+        .catch(({ message: errorMessage }) => this.setState({ inProgress: false, errorMessage }));
+    };
+
+    render() {
+      const { secretName } = this.props;
+      const { addAs, workloadOptions, selectedWorkloadUID } = this.state;
+      const addAsEnvironment = addAs === 'environment';
+      const addAsVolume = addAs === 'volume';
+      const selectWorkloadPlaceholder = 'Select a workload';
+
+      return (
+        <form
+          onSubmit={this.submit}
+          name="co-add-secret-to-workload"
+          className="co-add-secret-to-workload modal-content"
+        >
+          <ModalTitle>Add Secret to Workload</ModalTitle>
+          <ModalBody>
+            <p>
+              Add all values from <ResourceIcon kind="Secret" />
+              {secretName} to a workload as environment variables or a volume.
+            </p>
+            <div className="form-group">
+              <label
+                className="control-label co-required"
+                htmlFor="co-add-secret-to-workload__workload"
+              >
+                Add this secret to workload
+              </label>
+              <Dropdown
+                items={workloadOptions}
+                selectedKey={selectedWorkloadUID}
+                title={selectWorkloadPlaceholder}
+                onChange={this.onWorkloadChange}
+                autocompleteFilter={this.autocompleteFilter}
+                autocompletePlaceholder={selectWorkloadPlaceholder}
+                id="co-add-secret-to-workload__workload"
+              />
+            </div>
+            <fieldset>
+              <legend className="co-legend co-required">Add secret as</legend>
+              <RadioInput
+                title="Environment Variables"
+                name="co-add-secret-to-workload__add-as"
+                id="co-add-secret-to-workload__envvars"
+                value="environment"
+                onChange={this.onAddAsChange}
+                checked={addAsEnvironment}
+              />
+              {addAsEnvironment && (
+                <div className="co-m-radio-desc">
+                  <div className="form-group">
+                    <label htmlFor="co-add-secret-to-workload__prefix">Prefix</label>
+                    <input
+                      className="pf-c-form-control"
+                      name="prefix"
+                      id="co-add-secret-to-workload__prefix"
+                      placeholder="(optional)"
+                      type="text"
+                      onChange={this.handleChange}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-            <RadioInput
-              title="Volume"
-              name="co-add-secret-to-workload__add-as"
-              id="co-add-secret-to-workload__volume"
-              value="volume"
-              onChange={this.onAddAsChange}
-              checked={addAsVolume}
-            />
-            {addAsVolume && (
-              <div className="co-m-radio-desc">
-                <div className="form-group">
-                  <label htmlFor="co-add-secret-to-workload__mountpath" className="co-required">
-                    Mount Path
-                  </label>
-                  <input
-                    className="pf-c-form-control"
-                    name="mountPath"
-                    id="co-add-secret-to-workload__mountpath"
-                    type="text"
-                    onChange={this.handleChange}
-                    required
-                  />
+              )}
+              <RadioInput
+                title="Volume"
+                name="co-add-secret-to-workload__add-as"
+                id="co-add-secret-to-workload__volume"
+                value="volume"
+                onChange={this.onAddAsChange}
+                checked={addAsVolume}
+              />
+              {addAsVolume && (
+                <div className="co-m-radio-desc">
+                  <div className="form-group">
+                    <label htmlFor="co-add-secret-to-workload__mountpath" className="co-required">
+                      Mount Path
+                    </label>
+                    <input
+                      className="pf-c-form-control"
+                      name="mountPath"
+                      id="co-add-secret-to-workload__mountpath"
+                      type="text"
+                      onChange={this.handleChange}
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-          </fieldset>
-        </ModalBody>
-        <ModalSubmitFooter
-          errorMessage={this.state.errorMessage}
-          inProgress={this.state.inProgress}
-          submitText="Save"
-          cancel={this.props.cancel}
-        />
-      </form>
-    );
-  }
-}
+              )}
+            </fieldset>
+          </ModalBody>
+          <ModalSubmitFooter
+            errorMessage={this.state.errorMessage}
+            inProgress={this.state.inProgress}
+            submitText="Save"
+            cancel={this.props.cancel}
+          />
+        </form>
+      );
+    }
+  },
+);
 
 export const configureAddSecretToWorkloadModal = createModalLauncher<AddSecretToWorkloadModalProps>(
   AddSecretToWorkloadModal,
@@ -280,6 +290,10 @@ export type AddSecretToWorkloadModalProps = {
   secretName: string;
   namespace: string;
   blocking?: boolean;
+};
+
+type SecretExtensionProps = {
+  secretExtensions: SecretHandleChangeExtenion[];
 };
 
 export type AddSecretToWorkloadModalState = {
