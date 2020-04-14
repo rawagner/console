@@ -8,7 +8,7 @@ import { Timestamp } from '@console/internal/components/utils/timestamp';
 import { AsyncComponent } from '@console/internal/components/utils/async';
 import { FirehoseResult } from '@console/internal/components/utils/types';
 import { EventStreamList } from '@console/internal/components/utils/event-stream';
-import { K8sResourceKind, EventKind } from '@console/internal/module/k8s';
+import { K8sResourceCommon, EventKind } from '@console/internal/module/k8s';
 import { PrometheusResponse } from '@console/internal/components/graphs';
 import { DashboardCardButtonLink } from '../dashboard-card/DashboardCardLink';
 import EventItem from './EventItem';
@@ -193,7 +193,7 @@ type ActivityBodyProps = {
 
 type OngoingActivityBodyProps = {
   resourceActivities?: {
-    resource: K8sResourceKind;
+    resource: K8sResourceCommon;
     timestamp: Date;
     loader: LazyLoader<K8sActivityProps>;
   }[];

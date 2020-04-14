@@ -15,6 +15,7 @@ import {
   ReduxReducer,
   ProjectDashboardInventoryItem,
   DashboardsOverviewResourceActivity,
+  DashboardsNodeResourceActivity,
 } from '@console/plugin-sdk';
 import { DashboardsStorageCapacityDropdownItem } from '@console/ceph-storage-plugin';
 import { TemplateModel, PodModel } from '@console/internal/models';
@@ -29,6 +30,7 @@ import {
 import kubevirtReducer from './redux';
 
 import './style.scss';
+import { PodKind } from '@console/internal/module/k8s';
 
 type ConsumedExtensions =
   | ResourceNSNavItem
@@ -44,7 +46,8 @@ type ConsumedExtensions =
   | DashboardsStorageCapacityDropdownItem
   | ReduxReducer
   | ProjectDashboardInventoryItem
-  | DashboardsOverviewResourceActivity;
+  | DashboardsOverviewResourceActivity
+  | DashboardsNodeResourceActivity<PodKind>;
 
 export const FLAG_KUBEVIRT = 'KUBEVIRT';
 
@@ -291,6 +294,25 @@ const plugin: Plugin<ConsumedExtensions> = [
         kind: PodModel.kind,
         prop: 'pods',
       },
+      isActivity: (resource) => getName(resource).startsWith('kubevirt-v2v-conversion'),
+      getTimestamp: (resource) => new Date(resource.metadata.creationTimestamp),
+      loader: () =>
+        import(
+          './components/dashboards-page/overview-dashboard/activity' /* webpackChunkName: "kubevirt-activity" */
+        ).then((m) => m.V2VImportActivity),
+    },
+    flags: {
+      required: [FLAG_KUBEVIRT],
+    },
+  },
+  {
+    type: 'Dashboards/Node/Activity/Resource',
+    properties: {
+      getResource: (nodeName) => ({
+        isList: true,
+        kind: PodModel.kind,
+        fieldSelector: `spec.nodeName=${nodeName}`,
+      }),
       isActivity: (resource) => getName(resource).startsWith('kubevirt-v2v-conversion'),
       getTimestamp: (resource) => new Date(resource.metadata.creationTimestamp),
       loader: () =>

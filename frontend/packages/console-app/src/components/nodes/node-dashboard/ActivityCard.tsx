@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
@@ -9,11 +10,19 @@ import ActivityBody, {
   OngoingActivityBody,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
 import { EventModel, NodeModel } from '@console/internal/models';
-import { EventKind, NodeKind } from '@console/internal/module/k8s';
+import { EventKind, NodeKind, K8sResourceCommon } from '@console/internal/module/k8s';
 import { resourcePathFromModel } from '@console/internal/components/utils';
-import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
+import {
+  useK8sWatchResource,
+  useK8sWatchResources,
+} from '@console/internal/components/utils/k8s-watch-hook';
 
 import { NodeDashboardContext } from './NodeDashboardContext';
+import {
+  useExtensions,
+  DashboardsNodeResourceActivity,
+  isDashboardsNodeResourceActivity,
+} from '@console/plugin-sdk';
 
 const eventsResource = {
   isList: true,
@@ -35,6 +44,35 @@ const RecentEvent: React.FC<RecentEventProps> = ({ node }) => {
   return <RecentEventsBody events={{ data, loaded, loadError }} filter={eventsFilter} />;
 };
 
+const OngoingActivity: React.FC = () => {
+  const { obj } = React.useContext(NodeDashboardContext);
+  const extensions = useExtensions<DashboardsNodeResourceActivity>(
+    isDashboardsNodeResourceActivity,
+  );
+  const resources = extensions.reduce((acc, curr, index) => {
+    acc[index] = curr.properties.getResource(obj.metadata.name);
+    return acc;
+  }, {});
+  const resourcesResult = useK8sWatchResources<{ [key: string]: K8sResourceCommon[] }>(resources);
+  const activities = _.flatten(
+    extensions.map((e, index) =>
+      resourcesResult[index].data
+        .filter((r) => (e.properties.isActivity ? e.properties.isActivity(r) : true))
+        .map((r) => ({
+          resource: r,
+          timestamp: e.properties.getTimestamp ? e.properties.getTimestamp(r) : null,
+          loader: e.properties.loader,
+        })),
+    ),
+  );
+  return (
+    <OngoingActivityBody
+      loaded={Object.values(resourcesResult).every((r) => r.loaded)}
+      resourceActivities={activities}
+    />
+  );
+};
+
 const ActivityCard: React.FC = () => {
   const { obj } = React.useContext(NodeDashboardContext);
   const eventsLink = `${resourcePathFromModel(NodeModel, obj.metadata.name)}/events`;
@@ -46,7 +84,7 @@ const ActivityCard: React.FC = () => {
       </DashboardCardHeader>
       <DashboardCardBody>
         <ActivityBody className="co-project-dashboard__activity-body">
-          <OngoingActivityBody loaded />
+          <OngoingActivity />
           <RecentEvent node={obj} />
         </ActivityBody>
       </DashboardCardBody>

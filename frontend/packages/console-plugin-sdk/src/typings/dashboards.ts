@@ -15,6 +15,7 @@ import {
   WatchK8sResources,
   ResourcesObject,
   WatchK8sResults,
+  WatchK8sResource,
 } from '@console/internal/components/utils/k8s-watch-hook';
 import { Extension, LazyLoader } from './base';
 
@@ -220,6 +221,23 @@ namespace ExtensionProperties {
     /** Function which will map various statuses to groups. */
     mapper: StatusGroupMapper;
   }
+
+  export interface DashboardsNodeResourceActivity<R extends K8sResourceCommon> {
+    /** Resource to watch */
+    getResource: (nodeName: string) => WatchK8sResource & { isList: true };
+
+    /**
+     * Function which will determine if given resource represents the action.
+     * If the function is not defined, every resource represents activity.
+     */
+    isActivity?: (resource: R) => boolean;
+
+    /** Timestamp for given action, which will be used for ordering */
+    getTimestamp?: (resource: R) => Date;
+
+    /** Loader for corresponding action component */
+    loader: LazyLoader<K8sActivityProps<R>>;
+  }
 }
 
 export interface DashboardsOverviewHealthURLSubsystem<R = any>
@@ -322,6 +340,15 @@ export const isDashboardsOverviewResourceActivity = (
   e: Extension,
 ): e is DashboardsOverviewResourceActivity => e.type === 'Dashboards/Overview/Activity/Resource';
 
+export interface DashboardsNodeResourceActivity<R extends K8sResourceCommon = K8sResourceCommon>
+  extends Extension<ExtensionProperties.DashboardsNodeResourceActivity<R>> {
+  type: 'Dashboards/Node/Activity/Resource';
+}
+
+export const isDashboardsNodeResourceActivity = (
+  e: Extension,
+): e is DashboardsNodeResourceActivity => e.type === 'Dashboards/Node/Activity/Resource';
+
 export interface DashboardsOverviewPrometheusActivity
   extends Extension<ExtensionProperties.DashboardsOverviewPrometheusActivity> {
   type: 'Dashboards/Overview/Activity/Prometheus';
@@ -352,8 +379,8 @@ export const isDashboardsOverviewInventoryItemReplacement = (
 
 export type DashboardCardSpan = 4 | 6 | 12;
 
-export type K8sActivityProps = {
-  resource: K8sResourceKind;
+export type K8sActivityProps<R extends K8sResourceCommon = K8sResourceCommon> = {
+  resource: R;
 };
 
 export type PrometheusActivityProps = {

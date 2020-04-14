@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { ActivityProgress } from '@console/shared/src/components/dashboard/activity-card/ActivityItem';
 import { ResourceLink } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel, PodKind } from '@console/internal/module/k8s';
 import { K8sActivityProps } from '@console/plugin-sdk';
 import { VirtualMachineModel } from '../../../models';
 
@@ -19,7 +19,7 @@ export const DiskImportActivity: React.FC<K8sActivityProps> = ({ resource }) => 
   </ActivityProgress>
 );
 
-export const V2VImportActivity: React.FC<K8sActivityProps> = ({ resource }) => {
+export const V2VImportActivity: React.FC<K8sActivityProps<PodKind>> = ({ resource }) => {
   const vmName = _.get(resource.metadata.ownerReferences, '[0].name');
   return (
     <ActivityProgress
