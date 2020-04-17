@@ -6,16 +6,16 @@ import { watchGQL, stopWatchGQL } from '../../../../actions/k8s';
 import { RootState } from '../../../../redux';
 import client from '../../../graphql/client';
 
-export const useWatchResource = (listQuery, query, queryVariables, listQueryVariables) => {
+export const useWatchResource = (query, queryVariables) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     console.log('start');
-    dispatch(watchGQL(client, query, listQuery, queryVariables, listQueryVariables));
+    dispatch(watchGQL(client, query, queryVariables));
     return () => {
       console.log('stop');
-      stopWatchGQL(query);
-    }
-  }, [listQuery, query, queryVariables, listQueryVariables, dispatch]);
+      dispatch(stopWatchGQL(query));
+    };
+  }, [query, queryVariables, dispatch]);
 
   const id = JSON.stringify(query);
 

@@ -4,21 +4,17 @@ import DashboardCard from '@console/shared/src/components/dashboard/dashboard-ca
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
-import {
-  ResourceInventoryItem,
-} from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
+import { ResourceInventoryItem } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
 import { PodKind } from '../../../module/k8s';
-import {
-  useK8sWatchResource,
-} from '../../utils/k8s-watch-hook';
+import { useK8sWatchResource } from '../../utils/k8s-watch-hook';
 import { useWatchResource } from '../dashboards-page/cluster-dashboard/watchResource';
 import { getPodStatusGroups } from '@console/shared/src/components/dashboard/inventory-card/utils';
 import { PodModel } from '../../../models';
 
 const args = {};
 
-const GQLInventoryItem = ({ listQuery, query, mapper, model }) => {
-  const [data, loaded, loadError] = useWatchResource(listQuery, query, args, args);
+const GQLInventoryItem = ({ query, mapper, model }) => {
+  const [data, loaded, loadError] = useWatchResource(query, args);
   console.log('UPDATE GQL');
   return (
     <ResourceInventoryItem
@@ -32,12 +28,10 @@ const GQLInventoryItem = ({ listQuery, query, mapper, model }) => {
 };
 
 const podsSQ = gql(`
-  subscription w($resourceVersion: String){
-    watchResources(apiVersion: "${PodModel.apiVersion}", plural: "${
-  PodModel.plural
-}", resourceVersion: $resourceVersion) {
+  subscription w{
+    watchResources(apiVersion: "${PodModel.apiVersion}", plural: "${PodModel.plural}") {
       type
-      object {
+      objects {
         metadata {
           name
           namespace
@@ -85,9 +79,7 @@ const podsSQ = gql(`
 
 const podsQProper = gql(`
   {
-    listResourcesProper(apiVersion: "${PodModel.apiVersion}", plural: "${
-  PodModel.plural
-}"){
+    listResourcesProper(apiVersion: "${PodModel.apiVersion}", plural: "${PodModel.plural}"){
       metadata {
         resourceVersion
       }
@@ -169,14 +161,9 @@ export const TestCard = () => (
       <DashboardCardTitle>Cluster Inventory</DashboardCardTitle>
     </DashboardCardHeader>
     <DashboardCardBody>
-      <GQLInventoryItem listQuery={podsQProper} mapper={getPodStatusGroups} model={PodModel} query={podsSQ} />
-      {/*
-    <FirehoseInventoryItem
-        mapper={getPodStatusGroups}
-        model={PodModel}
-      />
-      */}
-      
+      <GQLInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsSQ} />
+
+      <FirehoseInventoryItem mapper={getPodStatusGroups} model={PodModel} />
     </DashboardCardBody>
   </DashboardCard>
 );

@@ -12,8 +12,10 @@ import { makeReduxID } from '../components/utils/k8s-watcher';
 import { APIServiceModel } from '../models';
 import { coFetchJSON } from '../co-fetch';
 import { referenceForModel, K8sResourceKind, K8sKind } from '../module/k8s';
-import ApolloClient from 'apollo-client';
+import ApolloClient, { QueryOptions } from 'apollo-client';
 import { NormalizedCacheObject } from 'apollo-cache-inmemory';
+
+const paginationLimit = 250;
 
 export enum ActionType {
   ReceivedResources = 'resources',
@@ -140,7 +142,7 @@ export const startWatchK8sList = (id: string, query: { [key: string]: string }) 
 
 const GQLSubs = {};
 
-export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, listQuery, queryVariables, listQueryVariables) => (
+export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, queryVariables) => (
   dispatch,
 ) => {
   const id = JSON.stringify(query);
@@ -148,37 +150,28 @@ export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, lis
     return;
   }
   dispatch(startWatchK8sList(id, {}));
-  GQLSubs[id] = {
-    unsubscribe: () => {},
-  };
-  const fetchList = async () => {
-    const query = { query: listQuery, variables: listQueryVariables };
-    const start = performance.now();
-    const response = await client.query(query);
-    const stop = performance.now();
-    console.log(`GQL took: ${(stop - start).toFixed(4)}`);
-    dispatch(loaded(id, response.data.listResourcesProper.items));
-    return response.data.listResourcesProper.metadata.resourceVersion;
-  };
   const watch = async () => {
-    let resourceVersion;
-    try {
-      resourceVersion = await fetchList();
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-    if (!GQLSubs[id]) {
-      return;
-    }
     const subscription = client
       .subscribe({
         query,
-        variables: { resourceVersion, ...queryVariables },
+        variables: queryVariables,
       })
       .subscribe({
         next: (result) => {
-          dispatch(updateListFromWS(id, [result.data.watchResources]));
+          if (result.data.watchResources.type === 'INIT_LOAD') {
+            dispatch(loaded(id, result.data.watchResources.objects));
+          }
+          if (result.data.watchResources.type === 'INC_LOAD') {
+            dispatch(bulkAddToList(id, result.data.watchResources.objects));
+          }
+          dispatch(
+            updateListFromWS(id, [
+              {
+                type: result.data.watchResources.type,
+                object: result.data.watchResources.objects[0],
+              },
+            ]),
+          );
         },
         error: (err) => {
           console.log(err);
@@ -192,11 +185,12 @@ export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, lis
   watch();
 };
 
-export const stopWatchGQL = (query) => {
+export const stopWatchGQL = (query) => (dispatch) => {
   const id = JSON.stringify(query);
   if (GQLSubs[id]) {
     GQLSubs[id].unsubscribe();
     GQLSubs[id] = null;
+    dispatch(stopWatchK8s(id));
   }
 };
 
@@ -225,6 +219,7 @@ export const watchK8sList = (
     const response = await k8sList(
       k8skind,
       {
+        limit: paginationLimit,
         ...query,
         ...(continueToken ? { continue: continueToken } : {}),
       },
@@ -359,9 +354,9 @@ export const watchAPIServices = () => (dispatch, getState) => {
             // which could cause console to thrash.
             return events.some(({ type }) => type !== 'MODIFIED') ? getResources() : _.noop;
           },
-        )
-      )},
-    )
+        ),
+      );
+    })
     .catch(() => {
       const poller = () =>
         coFetchJSON('api/kubernetes/apis').then((d) => {
