@@ -5,7 +5,7 @@ import { InventoryCard } from './inventory-card';
 
 const mainCards = [{ Card: InventoryCard }];
 
-export const TestDashboard: React.FC = () => (
+export const GQLDashboard: React.FC = () => (
   <Dashboard>
     <DashboardGrid mainCards={mainCards} />
   </Dashboard>

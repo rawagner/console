@@ -22,6 +22,7 @@ import { RootState } from '../redux';
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import { DashboardsPage } from './dashboard/dashboards-page/dashboards';
 import { TestDashboard } from './dashboard/test-dashboard/test-dashboard';
+import { GQLDashboard } from './dashboard/gql-dashboard/gql-dashboard';
 
 const RedirectComponent = (props) => {
   const to = `/k8s${props.location.pathname}`;
@@ -118,6 +119,7 @@ const AppContents_: React.FC<AppContentsProps> = ({ activePerspective, flags }) 
           <Route path={['/all-namespaces', '/ns/:ns']} component={RedirectComponent} />
           <Route path="/dashboards" component={DashboardsPage} />
           <Route path="/test-gql" component={TestDashboard} />
+          <Route path="/gql-dashboard" component={GQLDashboard} />
 
           {/* Redirect legacy routes to avoid breaking links */}
           <Redirect from="/cluster-status" to="/dashboards" />

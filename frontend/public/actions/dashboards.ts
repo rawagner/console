@@ -8,6 +8,9 @@ import { RootState } from '../redux';
 import { getPrometheusURL, PrometheusEndpoint } from '../components/graphs/helpers';
 import { PrometheusResponse } from '../components/graphs';
 
+import client from '../components/graphql/client';
+import gql from 'graphql-tag';
+
 export enum ActionType {
   StopWatch = 'stopWatch',
   SetData = 'setData',
@@ -82,6 +85,39 @@ const fetchPeriodically: FetchPeriodically = async (
   }
 };
 
+const fetchPeriodicallyGQL: FetchPeriodically = async (
+  dispatch,
+  type,
+  key,
+  getURL,
+  getState,
+  fetch,
+) => {
+  if (!isWatchActive(getState().dashboards, type, key)) {
+    return;
+  }
+  try {
+    dispatch(updateWatchInFlight(type, key, true));
+    const query = gql(`
+    query {
+      prometheusFetch(url: "${getURL()}")
+    }
+  `);
+    const response = await client.query({ query });
+    //const data = await fetch(getURL());
+    dispatch(setData(type, key, response.data.prometheusFetch));
+  } catch (error) {
+    dispatch(setError(type, key, error));
+  } finally {
+    dispatch(updateWatchInFlight(type, key, false));
+    const timeout = setTimeout(
+      () => fetchPeriodicallyGQL(dispatch, type, key, getURL, getState, fetch),
+      REFRESH_TIMEOUT,
+    );
+    dispatch(updateWatchTimeout(type, key, timeout));
+  }
+};
+
 export const watchPrometheusQuery: WatchPrometheusQueryAction = (query, namespace, timespan) => (
   dispatch,
   getState,
@@ -99,13 +135,16 @@ export const watchPrometheusQuery: WatchPrometheusQueryAction = (query, namespac
       );
     } else {
       const url = () =>
-        getPrometheusURL({
-          endpoint: timespan ? PrometheusEndpoint.QUERY_RANGE : PrometheusEndpoint.QUERY,
-          namespace,
-          query,
-          timespan,
-        });
-      fetchPeriodically(dispatch, RESULTS_TYPE.PROMETHEUS, queryKey, url, getState, coFetchJSON);
+        getPrometheusURL(
+          {
+            endpoint: timespan ? PrometheusEndpoint.QUERY_RANGE : PrometheusEndpoint.QUERY,
+            namespace,
+            query,
+            timespan,
+          },
+          '',
+        );
+      fetchPeriodicallyGQL(dispatch, RESULTS_TYPE.PROMETHEUS, queryKey, url, getState, coFetchJSON);
     }
   }
 };

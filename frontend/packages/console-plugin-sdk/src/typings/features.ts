@@ -15,9 +15,7 @@ namespace ExtensionProperties {
   }
 
   export interface ActionFeatureFlag extends FeatureFlag {
-    url: string,
-    action: (dispatch, res) => void;
-    error: (dispatch, err) => void;
+    detect: ActionFeatureFlagDetector;
   }
 }
 

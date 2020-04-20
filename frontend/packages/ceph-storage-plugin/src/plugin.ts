@@ -24,11 +24,9 @@ import {
 } from '@console/plugin-sdk';
 import {
   OCS_INDEPENDENT_FLAG,
-  detectIndependentModeAction,
-  detectOCSVersion45AndAboveAction,
-  detectIndependentModeError,
-  detectOCSVersion45AndAboveError,
   OCS_VERSION_4_5_FLAG,
+  detectOCSVersion45AndAbove,
+  detectIndependentMode,
 } from './features';
 import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { GridPosition } from '@console/shared/src/components/dashboard/DashboardGrid';
@@ -78,9 +76,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Action',
     properties: {
       flag: OCS_VERSION_4_5_FLAG,
-      url: 'apis/ocs.openshift.io/v1/namespaces/openshift-storage/storageclusters/ocs-independent-storagecluster',
-      action: detectOCSVersion45AndAboveAction,
-      error: detectOCSVersion45AndAboveError,
+      detect: detectOCSVersion45AndAbove,
     },
   },
   {
@@ -269,9 +265,7 @@ const plugin: Plugin<ConsumedExtensions> = [
     type: 'FeatureFlag/Action',
     properties: {
       flag: OCS_INDEPENDENT_FLAG,
-      url: `apis/operators.coreos.com/v1alpha1/namespaces/openshift-storage/subscriptions/ocs-subscription`,
-      action: detectIndependentModeAction,
-      error: detectIndependentModeError,
+      detect: detectIndependentMode,
     },
   },
   {

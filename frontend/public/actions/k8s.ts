@@ -12,8 +12,8 @@ import { makeReduxID } from '../components/utils/k8s-watcher';
 import { APIServiceModel } from '../models';
 import { coFetchJSON } from '../co-fetch';
 import { referenceForModel, K8sResourceKind, K8sKind } from '../module/k8s';
-import ApolloClient, { QueryOptions } from 'apollo-client';
-import { NormalizedCacheObject } from 'apollo-cache-inmemory';
+import client, { httpClient } from '../components/graphql/client';
+import gql from 'graphql-tag';
 
 const paginationLimit = 250;
 
@@ -142,15 +142,26 @@ export const startWatchK8sList = (id: string, query: { [key: string]: string }) 
 
 const GQLSubs = {};
 
-export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, queryVariables) => (
-  dispatch,
-) => {
+let gqlPerf = true;
+let gqlLoaded = false;
+
+export const watchGQL = (query, queryVariables, extraAction, perf) => (dispatch) => {
   const id = JSON.stringify(query);
   if (GQLSubs[id]) {
     return;
   }
+  GQLSubs[id] = {
+    unsubscribe: () => {},
+  };
   dispatch(startWatchK8sList(id, {}));
   const watch = async () => {
+    if (!GQLSubs[id]) {
+      return;
+    }
+    if (gqlPerf && perf) {
+      performance.mark('gql-start');
+      gqlPerf = false;
+    }
     const subscription = client
       .subscribe({
         query,
@@ -158,26 +169,35 @@ export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, que
       })
       .subscribe({
         next: (result) => {
-          if (result.data.watchResources.type === 'INIT_LOAD') {
-            dispatch(loaded(id, result.data.watchResources.objects));
+          if (result.data.watchPods.type === 'INIT_LOAD') {
+            dispatch(loaded(id, result.data.watchPods.objects));
+          } else if (
+            result.data.watchPods.type === 'INC_LOAD' ||
+            result.data.watchPods.type === 'FINAL_LOAD'
+          ) {
+            if (result.data.watchPods.type === 'FINAL_LOAD' && !gqlLoaded && perf) {
+              performance.mark('gql-stop');
+              performance.measure('gqlPerf', 'gql-start', 'gql-stop');
+              gqlLoaded = true;
+            }
+            dispatch(bulkAddToList(id, result.data.watchPods.objects));
+          } else {
+            dispatch(
+              updateListFromWS(id, [
+                {
+                  type: result.data.watchPods.type,
+                  object: result.data.watchPods.objects[0],
+                },
+              ]),
+            );
+            extraAction && dispatch(extraAction(id, result.data.watchPods));
           }
-          if (result.data.watchResources.type === 'INC_LOAD') {
-            dispatch(bulkAddToList(id, result.data.watchResources.objects));
-          }
-          dispatch(
-            updateListFromWS(id, [
-              {
-                type: result.data.watchResources.type,
-                object: result.data.watchResources.objects[0],
-              },
-            ]),
-          );
         },
         error: (err) => {
           console.log(err);
         },
-        complete: (com) => {
-          console.log(com);
+        complete: () => {
+          console.log('complete');
         },
       });
     GQLSubs[id] = subscription;
@@ -188,10 +208,42 @@ export const watchGQL = (client: ApolloClient<NormalizedCacheObject>, query, que
 export const stopWatchGQL = (query) => (dispatch) => {
   const id = JSON.stringify(query);
   if (GQLSubs[id]) {
+    gqlPerf = true;
+    gqlLoaded = false;
     GQLSubs[id].unsubscribe();
     GQLSubs[id] = null;
     dispatch(stopWatchK8s(id));
   }
+};
+
+export const fetchGQL = (query) => (dispatch) => {
+  const id = JSON.stringify(query);
+  if (GQLSubs[id]) {
+    return;
+  }
+  GQLSubs[id] = {
+    unsubscribe: () => {},
+  };
+  dispatch(startWatchK8sList(id, {}));
+
+  performance.mark('gql-http-start');
+  const incrementallyLoad = async (continueToken = '') => {
+    const variables = { continueToken };
+    const response = await httpClient.query({ query, variables, fetchPolicy: 'network-only' });
+
+    if (!continueToken) {
+      dispatch(loaded(id, response.data.getPods.items));
+    } else {
+      dispatch(bulkAddToList(id, response.data.getPods.items));
+    }
+
+    if (response.data.getPods.metadata.continue) {
+      return incrementallyLoad(response.data.getPods.metadata.continue);
+    }
+    performance.mark('gql-http-stop');
+    performance.measure('gqlHttpPerf', 'gql-http-start', 'gql-http-stop');
+  };
+  incrementallyLoad();
 };
 
 export const watchK8sList = (
@@ -215,7 +267,6 @@ export const watchK8sList = (
       // let .then handle the cleanup
       return;
     }
-
     const response = await k8sList(
       k8skind,
       {
@@ -252,7 +303,14 @@ export const watchK8sList = (
     delete POLLs[id];
 
     try {
+      if (k8skind.kind === 'Pod') {
+        performance.mark('rest-start');
+      }
       const resourceVersion = await incrementallyLoad();
+      if (k8skind.kind === 'Pod') {
+        performance.mark('rest-stop');
+        performance.measure('restPerf', 'rest-start', 'rest-stop');
+      }
       // ensure this watch should still exist because pollAndWatch is recursiveish
       if (!REF_COUNTS[id]) {
         // eslint-disable-next-line no-console
@@ -335,27 +393,30 @@ export const watchK8sList = (
 
 export const setAPIGroups = (value: number) => action(ActionType.SetAPIGroups, { value });
 
+const apiServiceGQL = gql(`
+  subscription {
+    watchResources(kind: "${APIServiceModel.kind}", apiVersion: "${APIServiceModel.apiVersion}", apiGroup: "${APIServiceModel.apiGroup}", plural: "${APIServiceModel.plural}") {
+      type
+    }
+  }
+`);
+
+const watchAPIExtra = (id: string, events: K8sEvent[]) => {
+  // Only re-run API discovery on added or removed API services. A
+  // misbehaving API service can trigger frequent watch updates,
+  // which could cause console to thrash.
+  return events.some(({ type }) => type !== 'MODIFIED') ? getResources() : _.noop;
+};
+
 export const watchAPIServices = () => (dispatch, getState) => {
   if (getState().k8s.has('apiservices') || POLLs[apiGroups]) {
     return;
   }
   dispatch({ type: ActionType.GetResourcesInFlight });
+  //watchGQL(apiServiceGQL, null, watchAPIExtra);
   k8sList(APIServiceModel, {})
-    .then((res) => {
-      console.log(res);
-      dispatch(
-        watchK8sList(
-          makeReduxID(APIServiceModel, {}),
-          {},
-          APIServiceModel,
-          (id: string, events: K8sEvent[]) => {
-            // Only re-run API discovery on added or removed API services. A
-            // misbehaving API service can trigger frequent watch updates,
-            // which could cause console to thrash.
-            return events.some(({ type }) => type !== 'MODIFIED') ? getResources() : _.noop;
-          },
-        ),
-      );
+    .then(() => {
+      dispatch(watchK8sList(makeReduxID(APIServiceModel, {}), {}, APIServiceModel, watchAPIExtra));
     })
     .catch(() => {
       const poller = () =>

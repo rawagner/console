@@ -7,15 +7,17 @@ import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboa
 import { ResourceInventoryItem } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
 import { PodKind } from '../../../module/k8s';
 import { useK8sWatchResource } from '../../utils/k8s-watch-hook';
-import { useWatchResource } from '../dashboards-page/cluster-dashboard/watchResource';
+import {
+  useWatchResource,
+  useWatchResourceHttp,
+} from '../dashboards-page/cluster-dashboard/watchResource';
 import { getPodStatusGroups } from '@console/shared/src/components/dashboard/inventory-card/utils';
 import { PodModel } from '../../../models';
 
 const args = {};
 
-const GQLInventoryItem = ({ query, mapper, model }) => {
-  const [data, loaded, loadError] = useWatchResource(query, args);
-  console.log('UPDATE GQL');
+export const GQLInventoryItem = ({ query, mapper, model }) => {
+  const [data, loaded, loadError] = useWatchResource(query, args, true);
   return (
     <ResourceInventoryItem
       isLoading={!loaded}
@@ -27,61 +29,24 @@ const GQLInventoryItem = ({ query, mapper, model }) => {
   );
 };
 
-const podsSQ = gql(`
-  subscription w{
-    watchResources(apiVersion: "${PodModel.apiVersion}", plural: "${PodModel.plural}") {
-      type
-      objects {
-        metadata {
-          name
-          namespace
-          uid
-          resourceVersion
-          deletionTimestamp
-          creationTimestamp
-        }
-        status {
-          phase
-          reason
-          initContainerStatuses {
-            state {
-              terminated {
-                reason
-                exitCode
-                signal
-              }
-              waiting {
-                reason
-              }
-            }
-          }
-          containerStatuses {
-            ready
-            state {
-              waiting {
-                reason
-              }
-              running {
-                reason
-              }
-              terminated {
-                reason
-                exitCode
-                signal
-              }
-            }
-          }
-        }
-      }
-  }
-}
-`);
+export const GQLHTTPInventoryItem = ({ query, mapper, model }) => {
+  const [data, loaded, loadError] = useWatchResourceHttp(query);
+  return (
+    <ResourceInventoryItem
+      isLoading={!loaded}
+      error={!!loadError}
+      kind={model}
+      resources={data}
+      mapper={mapper}
+    />
+  );
+};
 
-const podsQProper = gql(`
-  {
-    listResourcesProper(apiVersion: "${PodModel.apiVersion}", plural: "${PodModel.plural}"){
+const podsHTTPQ = gql(`
+  query w($continueToken: String){
+    getPods(continueToken: $continueToken) {
       metadata {
-        resourceVersion
+        continue
       }
       items {
         metadata {
@@ -129,6 +94,56 @@ const podsQProper = gql(`
   }
 `);
 
+const podsSQ = gql(`
+  subscription w{
+    watchPods {
+      type
+      objects {
+        metadata {
+          name
+          namespace
+          uid
+          resourceVersion
+          deletionTimestamp
+          creationTimestamp
+        }
+        status {
+          phase
+          reason
+          initContainerStatuses {
+            state {
+              terminated {
+                reason
+                exitCode
+                signal
+              }
+              waiting {
+                reason
+              }
+            }
+          }
+          containerStatuses {
+            ready
+            state {
+              waiting {
+                reason
+              }
+              running {
+                reason
+              }
+              terminated {
+                reason
+                exitCode
+                signal
+              }
+            }
+          }
+        }
+      }
+  }
+}
+`);
+
 let firstRender = true;
 let loadedRender = true;
 
@@ -155,14 +170,14 @@ const FirehoseInventoryItem = ({ mapper, model }) => {
   );
 };
 
-export const TestCard = () => (
+export const InventoryCard = () => (
   <DashboardCard data-test-id="inventory-card">
     <DashboardCardHeader>
       <DashboardCardTitle>Cluster Inventory</DashboardCardTitle>
     </DashboardCardHeader>
     <DashboardCardBody>
       <GQLInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsSQ} />
-
+      <GQLHTTPInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsHTTPQ} />
       <FirehoseInventoryItem mapper={getPodStatusGroups} model={PodModel} />
     </DashboardCardBody>
   </DashboardCard>

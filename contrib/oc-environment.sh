@@ -34,8 +34,8 @@ export BRIDGE_K8S_MODE_OFF_CLUSTER_PROMETHEUS
 BRIDGE_K8S_MODE_OFF_CLUSTER_ALERTMANAGER=$(oc -n openshift-monitoring get configmap sharing-config -o jsonpath='{.data.alertmanagerURL}')
 export BRIDGE_K8S_MODE_OFF_CLUSTER_ALERTMANAGER
 
-BRIDGE_K8S_MODE_OFF_CLUSTER_GRAPHQL="https://localhost:4000/graphql"
-#BRIDGE_K8S_MODE_OFF_CLUSTER_GRAPHQL="https://console-gql-rawagner.apps.ostest.test.metalkube.org/graphql"
+#BRIDGE_K8S_MODE_OFF_CLUSTER_GRAPHQL="https://localhost:4000/graphql"
+BRIDGE_K8S_MODE_OFF_CLUSTER_GRAPHQL="https://console-gql-rawagner.apps.ci-ln-bfigndt-d5d6b.origin-ci-int-aws.dev.rhcloud.com/graphql"
 export BRIDGE_K8S_MODE_OFF_CLUSTER_GRAPHQL
 
 BRIDGE_K8S_AUTH="bearer-token"

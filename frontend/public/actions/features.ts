@@ -2,8 +2,8 @@ import { Dispatch } from 'react-redux';
 import * as _ from 'lodash-es';
 import { ActionType as Action, action } from 'typesafe-actions';
 import { FLAGS } from '@console/shared/src/constants/common';
-import { GroupModel, SelfSubjectAccessReviewModel, UserModel } from '../models';
-import { k8sBasePath, ClusterVersionKind, k8sCreate } from '../module/k8s';
+import { GroupModel, UserModel } from '../models';
+import { k8sBasePath, ClusterVersionKind } from '../module/k8s';
 import { receivedResources } from './k8s';
 import { coFetchJSON } from '../co-fetch';
 import { MonitoringRoutes } from '../reducers/monitoring';
@@ -11,7 +11,7 @@ import { setMonitoringURL } from './monitoring';
 import * as plugins from '../plugins';
 import { setClusterID, setCreateProjectMessage, setUser, setConsoleLinks } from './common';
 import gql from 'graphql-tag';
-import client from '../components/graphql/client';
+import client, { fetchURL } from '../components/graphql/client';
 
 export enum ActionType {
   SetFlag = 'setFlag',
@@ -155,23 +155,33 @@ export type FeatureAction = Action<
 
 const openshiftPath = '/apis/apps.openshift.io/v1';
 const detectOpenShift = (dispatch) =>
-  coFetchJSON(`${k8sBasePath}${openshiftPath}`).then(
-    (res) => dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.resources) > 0)),
-    (err) =>
+  fetchURL(openshiftPath).then(
+    (res) => {
+      featureFinished();
+      return dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.data.urlFetch.resources) > 0));
+    },
+    (gqlError) => {
+      featureFinished();
+      const err = gqlError.graphQLErrors[0].extensions;
       _.get(err, 'response.status') === 404
         ? dispatch(setFlag(FLAGS.OPENSHIFT, false))
-        : handleError(err, FLAGS.OPENSHIFT, dispatch, detectOpenShift),
+        : handleError(err, FLAGS.OPENSHIFT, dispatch, detectOpenShift);
+    },
   );
 
 const clusterVersionPath = '/apis/config.openshift.io/v1/clusterversions/version';
 const detectClusterVersion = (dispatch) =>
-  coFetchJSON(`${k8sBasePath}${clusterVersionPath}`).then(
-    (clusterVersion: ClusterVersionKind) => {
+  fetchURL(clusterVersionPath).then(
+    (res) => {
+      featureFinished();
+      const clusterVersion: ClusterVersionKind = res.data.urlFetch;
       const hasClusterVersion = !_.isEmpty(clusterVersion);
       dispatch(setFlag(FLAGS.CLUSTER_VERSION, hasClusterVersion));
       dispatch(setClusterID(clusterVersion.spec.clusterID));
     },
-    (err) => {
+    (gqlError) => {
+      featureFinished();
+      const err = gqlError.graphQLErrors[0].extensions;
       if (_.includes([403, 404], _.get(err, 'response.status'))) {
         dispatch(setFlag(FLAGS.CLUSTER_VERSION, false));
       } else {
@@ -182,9 +192,14 @@ const detectClusterVersion = (dispatch) =>
 
 const projectRequestPath = '/apis/project.openshift.io/v1/projectrequests';
 const detectCanCreateProject = (dispatch) =>
-  coFetchJSON(`${k8sBasePath}${projectRequestPath}`).then(
-    (res) => dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.status === 'Success')),
-    (err) => {
+  fetchURL(projectRequestPath).then(
+    (res) => {
+      featureFinished();
+      dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.data.urlFetch.status === 'Success'));
+    },
+    (gqlError) => {
+      featureFinished();
+      const err = gqlError.graphQLErrors[0].extensions;
       const status = _.get(err, 'response.status');
       if (status === 403) {
         dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, false));
@@ -197,14 +212,17 @@ const detectCanCreateProject = (dispatch) =>
 
 const loggingConfigMapPath = '/api/v1/namespaces/openshift-logging/configmaps/sharing-config';
 const detectLoggingURL = (dispatch) =>
-  coFetchJSON(`${k8sBasePath}${loggingConfigMapPath}`).then(
+  fetchURL(loggingConfigMapPath).then(
     (res) => {
-      const { kibanaAppURL } = res.data;
+      featureFinished();
+      const { kibanaAppURL } = res.data.urlFetch.data;
       if (!_.isEmpty(kibanaAppURL)) {
         dispatch(setMonitoringURL(MonitoringRoutes.Kibana, kibanaAppURL));
       }
     },
-    (err) => {
+    (gqlError) => {
+      featureFinished();
+      const err = gqlError.graphQLErrors[0].extensions;
       if (!_.includes([401, 403, 404, 500], _.get(err, 'response.status'))) {
         setTimeout(() => detectLoggingURL(dispatch), 15000);
       }
@@ -213,11 +231,15 @@ const detectLoggingURL = (dispatch) =>
 
 const detectUserPath = '/apis/user.openshift.io/v1/users/~';
 const detectUser = (dispatch) =>
-  coFetchJSON(`${k8sBasePath}${detectUserPath}`).then(
-    (user) => {
+  fetchURL(detectUserPath).then(
+    (res) => {
+      featureFinished();
+      const user = res.data.urlFetch;
       dispatch(setUser(user));
     },
-    (err) => {
+    (gqlError) => {
+      featureFinished();
+      const err = gqlError.graphQLErrors[0].extensions;
       if (!_.includes([401, 403, 404, 500], _.get(err, 'response.status'))) {
         setTimeout(() => detectUser(dispatch), 15000);
       }
@@ -226,157 +248,78 @@ const detectUser = (dispatch) =>
 
 const detectConsoleLinksPath = '/apis/console.openshift.io/v1/consolelinks';
 const detectConsoleLinks = (dispatch) =>
-  coFetchJSON(`${k8sBasePath}${detectConsoleLinksPath}`).then(
-    (consoleLinks) => {
+  fetchURL(detectConsoleLinksPath).then(
+    (res) => {
+      featureFinished();
+      const consoleLinks = res.data.urlFetch;
       dispatch(setConsoleLinks(_.get(consoleLinks, 'items')));
     },
-    (err) => {
+    (gqlError) => {
+      featureFinished();
+      const err = gqlError.graphQLErrors[0].extensions;
       if (!_.includes([401, 403, 404, 500], _.get(err, 'response.status'))) {
         setTimeout(() => detectConsoleLinks(dispatch), 15000);
       }
     },
   );
 
+const ssarQuery = gql(`
+  query q($resource: String, $verb: String, $group: String, $namespace: String){
+    selfSubjectAccessReview(resource: $resource, verb: $verb, group: $group, namespace: $namespace) {
+      status {
+        allowed
+      }
+    }
+  }
+`);
+const querySSARGQL = (resourceAttributes) =>
+  client.query({ query: ssarQuery, variables: resourceAttributes });
+
 const ssarCheckActions = ssarChecks.map(({ flag, resourceAttributes, after }) => {
-  const req = {
-    spec: { resourceAttributes },
-  };
   const fn = (dispatch) => {
-    return k8sCreate(SelfSubjectAccessReviewModel, req).then(
+    return querySSARGQL(resourceAttributes).then(
       (res) => {
-        const allowed: boolean = res.status.allowed;
+        featureFinished();
+        const allowed: boolean = res.data.selfSubjectAccessReview.status.allowed;
         dispatch(setFlag(flag, allowed));
         if (after) {
           after(dispatch, allowed);
         }
       },
-      (err) => handleError(err, flag, dispatch, fn),
+      (gqlError) => {
+        featureFinished();
+        handleError(gqlError.graphQLErrors[0].extensions, flag, dispatch, fn);
+      },
     );
   };
   return fn;
 });
 
-export const detectFeatures = () => (dispatch: Dispatch) =>
-  [
-    //detectOpenShift, //done
-    //detectCanCreateProject, //done
-    //detectClusterVersion, //done
-    //detectUser, //done
-    //detectLoggingURL, //done
-    //detectConsoleLinks, //done
-    //...ssarCheckActions,
-    //...plugins.registry
-   //   .getFeatureFlags()
-   //   .filter(plugins.isActionFeatureFlag)
-     // .map((ff) => ff.properties.detect),
+let finishedFeatures = 0;
+
+export const featureFinished = () => {
+  finishedFeatures++;
+  console.log(finishedFeatures);
+  if (finishedFeatures === 19) {
+    performance.mark('detectFeatures-finished');
+    performance.measure('detectFeatures', 'detectFeatures-start', 'detectFeatures-finished');
+    finishedFeatures = 0;
+  }
+};
+
+export const detectFeatures = () => (dispatch: Dispatch) => {
+  performance.mark('detectFeatures-start');
+  return [
+    detectOpenShift,
+    detectCanCreateProject,
+    detectClusterVersion,
+    detectUser,
+    detectLoggingURL,
+    detectConsoleLinks,
+    ...ssarCheckActions,
+    ...plugins.registry
+      .getFeatureFlags()
+      .filter(plugins.isActionFeatureFlag)
+      .map((ff) => ff.properties.detect),
   ].forEach((detect) => detect(dispatch));
-
-
-const gqlFeatures = [
-  {
-    path: openshiftPath,
-    action: (dispatch, res) => {
-      dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.resources) > 0))
-    },
-    error: (dispatch, err) => dispatch(setFlag(FLAGS.OPENSHIFT, false)),
-  },
-  {
-    path: clusterVersionPath,
-    action: (dispatch, res) => {
-      if (!_.isEmpty(res)) {
-        dispatch(setFlag(FLAGS.CLUSTER_VERSION, true));
-        dispatch(setClusterID(res.spec.clusterID));
-      }
-    },
-    error: (dispatch, err) => dispatch(setFlag(FLAGS.CLUSTER_VERSION, false)),
-  },
-  {
-    path: projectRequestPath,
-    action: (dispatch, res) => {
-      dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.status === 'Success'));
-    },
-    error: (dispatch, err) => {
-      dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, false));
-      dispatch(setCreateProjectMessage(_.get(err, 'json.details.causes[0].message')));
-    },
-  },
-  {
-    path: detectUserPath,
-    action: (dispatch, res) => {
-      dispatch(setUser(res));
-    }
-  },
-  {
-    path: loggingConfigMapPath,
-    action: (dispatch, res) => {
-      const { kibanaAppURL } = res.data;
-      if (!_.isEmpty(kibanaAppURL)) {
-        dispatch(setMonitoringURL(MonitoringRoutes.Kibana, kibanaAppURL));
-      }
-    }
-  },
-  {
-    path: detectConsoleLinksPath,
-    action: (dispatch, res) => {
-      dispatch(setConsoleLinks(_.get(res, 'items')));
-    }
-  }
-];
-
-const getSsarAttr = (ssar) => {
-  let attr = `resource: "${ssar.resourceAttributes.resource}", verb: "${ssar.resourceAttributes.verb}"`;
-  if (ssar.resourceAttributes.group) {
-    attr = `${attr}, group: "${ssar.resourceAttributes.group}"`
-  }
-  if (ssar.resourceAttributes.namespace) {
-    attr = `${attr}, namespace: "${ssar.resourceAttributes.namespace}"`
-  }
-  return attr;
-}
-
-export const detectFeaturesGQL = () => (dispatch: Dispatch) => {
-  const pluginFeatures = plugins.registry
-    .getFeatureFlags()
-    .filter(plugins.isActionFeatureFlag)
-    .map(({ properties: { url, action, error } }) => ({
-      path: url,
-      action,
-      error,
-    }));
-  const featuresBody = [...gqlFeatures, ...pluginFeatures].map((f, index) => `feature${index}: urlFetch(url: "${f.path}")`).join(' ');
-  const ssarBody = ssarChecks.map((c, index) => `ssar${index}: selfSubjectAccessReview(${getSsarAttr(c)}){status{allowed}}`).join(' ');
-  const query = gql(`
-    query {
-      ${featuresBody}
-      ${ssarBody}
-    }
-  `);
-  client.query({ query, errorPolicy: 'all' }).then(response => {
-    Object.keys(response.data).filter(k => k.startsWith('feature')).forEach((key, index) => {
-      const error = response.errors.find((e) => e.path[0] === key);
-      if (error) {
-        gqlFeatures[index].error && gqlFeatures[index].error(dispatch, error.extensions);
-      } else {
-        gqlFeatures[index].action(dispatch, response.data[key]);
-      }
-    Object.keys(response.data).filter(k => k.startsWith('ssar')).forEach((key, index) => {
-      const error = response.errors.find((e) => e.path[0] === key);
-      if (error) {
-        gqlFeatures[index].error && gqlFeatures[index].error(dispatch, error.extensions);
-      } else {
-        const res = response.data[key];
-        const allowed: boolean = res.status.allowed;
-        dispatch(setFlag(ssarChecks[index].flag, allowed));
-      }
-    })
-    //Object.values(response.data).forEach((res, index) => gqlFeatures[index].action(dispatch, res));
-  })});
-  /*
-  try {
-    const result = await client.query({ query });
-    Object.values(result.data).forEach((res, index) => gqlFeatures[index].action(dispatch, res));
-  } catch (err) {
-    console.log(err);
-  }
-  */
-}
+};
