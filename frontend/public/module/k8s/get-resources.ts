@@ -81,8 +81,9 @@ export type DiscoveryResources = {
   safeResources: string[];
 };
 
-export const getResources = () =>
-  coFetchJSON('api/kubernetes/apis').then((res) => {
+export const getResources = () => {
+  performance.mark('getResources-start');
+  return coFetchJSON('api/kubernetes/apis').then((res) => {
     const preferredVersions = res.groups.map((group) => group.preferredVersion);
     const all: Promise<APIResourceList>[] = _.flatten(
       res.groups.map((group) => group.versions.map((version) => `/apis/${version.groupVersion}`)),
@@ -91,6 +92,8 @@ export const getResources = () =>
       .map((p) => coFetchJSON(`api/kubernetes${p}`).catch((err) => err));
 
     return Promise.all(all).then((data) => {
+      performance.mark('getResources-stop');
+      performance.measure('getResources', 'getResources-start', 'getResources-stop');
       const resourceSet = new Set<string>();
       const namespacedSet = new Set<string>();
       data.forEach(
@@ -151,6 +154,7 @@ export const getResources = () =>
       } as DiscoveryResources;
     });
   });
+};
 
 export type APIResourceList = {
   kind: 'APIResourceList';

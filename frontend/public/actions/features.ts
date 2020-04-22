@@ -154,22 +154,29 @@ export type FeatureAction = Action<
 const openshiftPath = `${k8sBasePath}/apis/apps.openshift.io/v1`;
 const detectOpenShift = (dispatch) =>
   coFetchJSON(openshiftPath).then(
-    (res) => dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.resources) > 0)),
-    (err) =>
+    (res) => {
+      featureFinished();
+      dispatch(setFlag(FLAGS.OPENSHIFT, _.size(res.resources) > 0));
+    },
+    (err) => {
+      featureFinished();
       _.get(err, 'response.status') === 404
         ? dispatch(setFlag(FLAGS.OPENSHIFT, false))
-        : handleError(err, FLAGS.OPENSHIFT, dispatch, detectOpenShift),
+        : handleError(err, FLAGS.OPENSHIFT, dispatch, detectOpenShift);
+    },
   );
 
 const clusterVersionPath = `${k8sBasePath}/apis/config.openshift.io/v1/clusterversions/version`;
 const detectClusterVersion = (dispatch) =>
   coFetchJSON(clusterVersionPath).then(
     (clusterVersion: ClusterVersionKind) => {
+      featureFinished();
       const hasClusterVersion = !_.isEmpty(clusterVersion);
       dispatch(setFlag(FLAGS.CLUSTER_VERSION, hasClusterVersion));
       dispatch(setClusterID(clusterVersion.spec.clusterID));
     },
     (err) => {
+      featureFinished();
       if (_.includes([403, 404], _.get(err, 'response.status'))) {
         dispatch(setFlag(FLAGS.CLUSTER_VERSION, false));
       } else {
@@ -181,8 +188,12 @@ const detectClusterVersion = (dispatch) =>
 const projectRequestPath = `${k8sBasePath}/apis/project.openshift.io/v1/projectrequests`;
 const detectCanCreateProject = (dispatch) =>
   coFetchJSON(projectRequestPath).then(
-    (res) => dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.status === 'Success')),
+    (res) => {
+      featureFinished();
+      dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, res.status === 'Success'));
+    },
     (err) => {
+      featureFinished();
       const status = _.get(err, 'response.status');
       if (status === 403) {
         dispatch(setFlag(FLAGS.CAN_CREATE_PROJECT, false));
@@ -197,12 +208,14 @@ const loggingConfigMapPath = `${k8sBasePath}/api/v1/namespaces/openshift-logging
 const detectLoggingURL = (dispatch) =>
   coFetchJSON(loggingConfigMapPath).then(
     (res) => {
+      featureFinished();
       const { kibanaAppURL } = res.data;
       if (!_.isEmpty(kibanaAppURL)) {
         dispatch(setMonitoringURL(MonitoringRoutes.Kibana, kibanaAppURL));
       }
     },
     (err) => {
+      featureFinished();
       if (!_.includes([401, 403, 404, 500], _.get(err, 'response.status'))) {
         setTimeout(() => detectLoggingURL(dispatch), 15000);
       }
@@ -212,9 +225,11 @@ const detectLoggingURL = (dispatch) =>
 const detectUser = (dispatch) =>
   coFetchJSON('api/kubernetes/apis/user.openshift.io/v1/users/~').then(
     (user) => {
+      featureFinished();
       dispatch(setUser(user));
     },
     (err) => {
+      featureFinished();
       if (!_.includes([401, 403, 404, 500], _.get(err, 'response.status'))) {
         setTimeout(() => detectUser(dispatch), 15000);
       }
@@ -224,9 +239,11 @@ const detectUser = (dispatch) =>
 const detectConsoleLinks = (dispatch) =>
   coFetchJSON('api/kubernetes/apis/console.openshift.io/v1/consolelinks').then(
     (consoleLinks) => {
+      featureFinished();
       dispatch(setConsoleLinks(_.get(consoleLinks, 'items')));
     },
     (err) => {
+      featureFinished();
       if (!_.includes([401, 403, 404, 500], _.get(err, 'response.status'))) {
         setTimeout(() => detectConsoleLinks(dispatch), 15000);
       }
@@ -240,20 +257,37 @@ const ssarCheckActions = ssarChecks.map(({ flag, resourceAttributes, after }) =>
   const fn = (dispatch) => {
     return k8sCreate(SelfSubjectAccessReviewModel, req).then(
       (res) => {
+        featureFinished();
         const allowed: boolean = res.status.allowed;
         dispatch(setFlag(flag, allowed));
         if (after) {
           after(dispatch, allowed);
         }
       },
-      (err) => handleError(err, flag, dispatch, fn),
+      (err) => {
+        featureFinished();
+        handleError(err, flag, dispatch, fn);
+      },
     );
   };
   return fn;
 });
 
-export const detectFeatures = () => (dispatch: Dispatch) =>
-  [
+let finishedFeatures = 0;
+
+export const featureFinished = () => {
+  finishedFeatures++;
+  console.log(finishedFeatures);
+  if (finishedFeatures === 19) {
+    performance.mark('detectFeatures-finished');
+    performance.measure('detectFeatures', 'detectFeatures-start', 'detectFeatures-finished');
+    finishedFeatures = 0;
+  }
+};
+
+export const detectFeatures = () => (dispatch: Dispatch) => {
+  performance.mark('detectFeatures-start');
+  return [
     detectOpenShift,
     detectCanCreateProject,
     detectClusterVersion,
@@ -266,3 +300,4 @@ export const detectFeatures = () => (dispatch: Dispatch) =>
       .filter(plugins.isActionFeatureFlag)
       .map((ff) => ff.properties.detect),
   ].forEach((detect) => detect(dispatch));
+};

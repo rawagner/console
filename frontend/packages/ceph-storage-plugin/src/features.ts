@@ -1,5 +1,5 @@
 import { k8sGet, K8sResourceKind } from '@console/internal/module/k8s';
-import { setFlag, handleError } from '@console/internal/actions/features';
+import { setFlag, handleError, featureFinished } from '@console/internal/actions/features';
 import { ActionFeatureFlagDetector } from '@console/plugin-sdk';
 import { SubscriptionModel } from '@console/operator-lifecycle-manager';
 import { OCSServiceModel } from './models';
@@ -12,8 +12,12 @@ const isIndependent = (data: K8sResourceKind): boolean =>
 
 export const detectIndependentMode: ActionFeatureFlagDetector = (dispatch) =>
   k8sGet(OCSServiceModel, OCS_INDEPENDENT_CR_NAME, CEPH_STORAGE_NAMESPACE).then(
-    (obj: K8sResourceKind) => dispatch(setFlag(OCS_INDEPENDENT_FLAG, isIndependent(obj))),
+    (obj: K8sResourceKind) => {
+      featureFinished();
+      dispatch(setFlag(OCS_INDEPENDENT_FLAG, isIndependent(obj)));
+    },
     (err) => {
+      featureFinished();
       err?.response?.status === 404
         ? dispatch(setFlag(OCS_INDEPENDENT_FLAG, false))
         : handleError(err, OCS_INDEPENDENT_FLAG, dispatch, detectIndependentMode);
@@ -29,8 +33,12 @@ export const isOCS45AndAboveVersion = (subscription: K8sResourceKind): boolean =
 
 export const detectOCSVersion45AndAbove: ActionFeatureFlagDetector = (dispatch) =>
   k8sGet(SubscriptionModel, 'ocs-subscription', CEPH_STORAGE_NAMESPACE).then(
-    (obj: K8sResourceKind) => dispatch(setFlag(OCS_VERSION_4_5_FLAG, isOCS45AndAboveVersion(obj))),
+    (obj: K8sResourceKind) => {
+      featureFinished();
+      dispatch(setFlag(OCS_VERSION_4_5_FLAG, isOCS45AndAboveVersion(obj)));
+    },
     (err) => {
+      featureFinished();
       err?.response?.status === 404
         ? dispatch(setFlag(OCS_VERSION_4_5_FLAG, false))
         : handleError(err, OCS_VERSION_4_5_FLAG, dispatch, detectOCSVersion45AndAbove);
