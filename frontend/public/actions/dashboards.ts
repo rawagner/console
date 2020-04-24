@@ -103,7 +103,7 @@ const fetchPeriodicallyGQL: FetchPeriodically = async (
       prometheusFetch(url: "${getURL()}")
     }
   `);
-    const response = await client.query({ query });
+    const response = await client.query({ query, fetchPolicy: 'network-only' });
     //const data = await fetch(getURL());
     dispatch(setData(type, key, response.data.prometheusFetch));
   } catch (error) {

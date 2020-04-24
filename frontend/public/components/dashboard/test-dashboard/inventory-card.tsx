@@ -13,6 +13,7 @@ import {
 } from '../dashboards-page/cluster-dashboard/watchResource';
 import { getPodStatusGroups } from '@console/shared/src/components/dashboard/inventory-card/utils';
 import { PodModel } from '../../../models';
+import { Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
 
 const args = {};
 
@@ -95,7 +96,7 @@ const podsHTTPQ = gql(`
 `);
 
 const podsSQ = gql(`
-  subscription w{
+  subscription s{
     watchPods {
       type
       objects {
@@ -170,15 +171,63 @@ const FirehoseInventoryItem = ({ mapper, model }) => {
   );
 };
 
-export const InventoryCard = () => (
-  <DashboardCard data-test-id="inventory-card">
-    <DashboardCardHeader>
-      <DashboardCardTitle>Cluster Inventory</DashboardCardTitle>
-    </DashboardCardHeader>
-    <DashboardCardBody>
-      <GQLInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsSQ} />
-      <GQLHTTPInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsHTTPQ} />
-      <FirehoseInventoryItem mapper={getPodStatusGroups} model={PodModel} />
-    </DashboardCardBody>
-  </DashboardCard>
-);
+export const InventoryCard = () => {
+  const [isOpen, setOpen] = React.useState(false);
+  const [type, setType] = React.useState('WS');
+
+  const dropdownItems = [
+    <DropdownItem
+      key="WS"
+      onClick={() => {
+        setType('WS');
+        setOpen(false);
+      }}
+    >
+      WS
+    </DropdownItem>,
+    <DropdownItem
+      key="HTTP"
+      onClick={() => {
+        setType('HTTP');
+        setOpen(false);
+      }}
+    >
+      HTTP
+    </DropdownItem>,
+    <DropdownItem
+      key="REST"
+      onClick={() => {
+        setType('REST');
+        setOpen(false);
+      }}
+    >
+      REST
+    </DropdownItem>,
+  ];
+
+  return (
+    <DashboardCard data-test-id="inventory-card">
+      <DashboardCardHeader>
+        <DashboardCardTitle>Cluster Inventory</DashboardCardTitle>
+        <Dropdown
+          toggle={
+            <DropdownToggle id="toggle-id" onToggle={setOpen}>
+              {type}
+            </DropdownToggle>
+          }
+          isOpen={isOpen}
+          dropdownItems={dropdownItems}
+        />
+      </DashboardCardHeader>
+      <DashboardCardBody>
+        {type === 'WS' && (
+          <GQLInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsSQ} />
+        )}
+        {type === 'HTTP' && (
+          <GQLHTTPInventoryItem mapper={getPodStatusGroups} model={PodModel} query={podsHTTPQ} />
+        )}
+        {type === 'REST' && <FirehoseInventoryItem mapper={getPodStatusGroups} model={PodModel} />}
+      </DashboardCardBody>
+    </DashboardCard>
+  );
+};

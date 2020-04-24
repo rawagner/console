@@ -21,13 +21,14 @@ func authMiddleware(a *auth.Authenticator, hdlr http.HandlerFunc) http.Handler {
 
 func authMiddlewareWithUser(a *auth.Authenticator, handlerFunc func(user *auth.User, w http.ResponseWriter, r *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		plog.Infof("auth middleware")
 		user, err := a.Authenticate(r)
 		if err != nil {
 			plog.Infof("authentication failed: %v", err)
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
-
+		plog.Infof("1")
 		r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", user.Token))
 
 		safe := false
@@ -40,20 +41,25 @@ func authMiddlewareWithUser(a *auth.Authenticator, handlerFunc func(user *auth.U
 			safe = true
 		}
 
+		plog.Infof("2 %v", safe)
+
 		if !safe {
 			if err := a.VerifySourceOrigin(r); err != nil {
+				plog.Infof("3")
 				plog.Infof("invalid source origin: %v", err)
+				plog.Infof("4")
 				w.WriteHeader(http.StatusForbidden)
+				plog.Infof("5")
 				return
 			}
-
-			if err := a.VerifyCSRFToken(r); err != nil {
-				plog.Infof("invalid CSRFToken: %v", err)
-				w.WriteHeader(http.StatusForbidden)
-				return
-			}
+			plog.Infof("6")
+			//if err := a.VerifyCSRFToken(r); err != nil {
+			//	plog.Infof("invalid CSRFToken: %v", err)
+			//	w.WriteHeader(http.StatusForbidden)
+			//	return
+			//}
 		}
-
+		plog.Infof("7")
 		handlerFunc(user, w, r)
 	})
 }

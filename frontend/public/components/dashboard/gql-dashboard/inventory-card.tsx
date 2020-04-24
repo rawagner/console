@@ -14,7 +14,7 @@ import { PodModel } from '../../../models';
 const args = {};
 
 export const GQLInventoryItem = ({ query, mapper, model }) => {
-  const [data, loaded, loadError] = useWatchResource(query, args);
+  const [data, loaded, loadError] = useWatchResource(query, args, false);
   return (
     <ResourceInventoryItem
       isLoading={!loaded}

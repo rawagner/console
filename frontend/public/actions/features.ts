@@ -273,7 +273,7 @@ const ssarQuery = gql(`
   }
 `);
 const querySSARGQL = (resourceAttributes) =>
-  client.query({ query: ssarQuery, variables: resourceAttributes });
+  client.query({ query: ssarQuery, variables: resourceAttributes, fetchPolicy: 'network-only' });
 
 const ssarCheckActions = ssarChecks.map(({ flag, resourceAttributes, after }) => {
   const fn = (dispatch) => {

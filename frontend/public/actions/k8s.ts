@@ -13,7 +13,7 @@ import { APIServiceModel } from '../models';
 import { coFetchJSON } from '../co-fetch';
 import { referenceForModel, K8sResourceKind, K8sKind } from '../module/k8s';
 import client, { httpClient } from '../components/graphql/client';
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
 
 const paginationLimit = 250;
 
@@ -393,6 +393,7 @@ export const watchK8sList = (
 
 export const setAPIGroups = (value: number) => action(ActionType.SetAPIGroups, { value });
 
+/*
 const apiServiceGQL = gql(`
   subscription {
     watchResources(kind: "${APIServiceModel.kind}", apiVersion: "${APIServiceModel.apiVersion}", apiGroup: "${APIServiceModel.apiGroup}", plural: "${APIServiceModel.plural}") {
@@ -400,6 +401,7 @@ const apiServiceGQL = gql(`
     }
   }
 `);
+*/
 
 const watchAPIExtra = (id: string, events: K8sEvent[]) => {
   // Only re-run API discovery on added or removed API services. A

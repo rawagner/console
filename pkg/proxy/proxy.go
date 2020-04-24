@@ -272,10 +272,11 @@ func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (p *Proxy) ServeGQLHTTP(w http.ResponseWriter, r *http.Request) {
 	// Block scripts from running in proxied content for browsers that support Content-Security-Policy.
-	// w.Header().Set("Content-Security-Policy", "sandbox;")
+	//w.Header().Set("Content-Security-Policy", "sandbox;")
 	// Add `X-Content-Security-Policy` for IE11 and older browsers.
-	// w.Header().Set("X-Content-Security-Policy", "sandbox;")
+	//w.Header().Set("X-Content-Security-Policy", "sandbox;")
 
+	log.Printf("GQL request")
 	isWebsocket := false
 	upgrades := r.Header["Upgrade"]
 
@@ -285,6 +286,8 @@ func (p *Proxy) ServeGQLHTTP(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
+
+	log.Printf("WS %s", isWebsocket)
 
 	for _, h := range headerBlacklist {
 		r.Header.Del(h)
@@ -311,6 +314,7 @@ func (p *Proxy) ServeGQLHTTP(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("A %s", p.config.Endpoint.Path)
 	log.Printf("B %s", r.URL.Path)
+	log.Printf("is WS")
 	r.URL.Path = p.config.Endpoint.Path//SingleJoiningSlash(p.config.Endpoint.Path, r.URL.Path)
 
 	if r.URL.Scheme == "https" {
@@ -389,6 +393,7 @@ func (p *Proxy) ServeGQLHTTP(w http.ResponseWriter, r *http.Request) {
 	proxiedHeader.Add("Origin", "http://localhost")
 
 	dialer := &websocket.Dialer{
+		// EnableCompression: true, //compression between GQL and proxy
 		TLSClientConfig: p.config.TLSClientConfig,
 	}
 
@@ -414,6 +419,7 @@ func (p *Proxy) ServeGQLHTTP(w http.ResponseWriter, r *http.Request) {
 	defer backend.Close()
 
 	upgrader := &websocket.Upgrader{
+		// EnableCompression: true, //compression between proxy and console frontend
 		Subprotocols: []string{subProtocol},
 		CheckOrigin: func(r *http.Request) bool {
 			origin := r.Header["Origin"]

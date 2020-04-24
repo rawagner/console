@@ -52,6 +52,8 @@ const (
 
 	// Well-known location of metering service for OpenShift. This is only accessible in-cluster.
 	openshiftMeteringHost = "reporting-operator.openshift-metering.svc:8080"
+
+	openshiftGraphQLHost = "console-gql.rawagner.svc:4000"
 )
 
 func main() {
@@ -279,6 +281,8 @@ func main() {
 	}
 
 	var k8sEndpoint *url.URL
+
+
 	switch *fK8sMode {
 	case "in-cluster":
 		k8sEndpoint = &url.URL{Scheme: "https", Host: "kubernetes.default.svc"}
@@ -316,6 +320,7 @@ func main() {
 			if err != nil {
 				log.Fatalf("failed to read service-ca.crt file: %v", err)
 			}
+			
 			serviceProxyRootCAs := x509.NewCertPool()
 			if !serviceProxyRootCAs.AppendCertsFromPEM(serviceCertPEM) {
 				log.Fatalf("no CA found for Kubernetes services")
@@ -348,6 +353,12 @@ func main() {
 				TLSClientConfig: serviceProxyTLSConfig,
 				HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
 				Endpoint:        &url.URL{Scheme: "https", Host: openshiftMeteringHost, Path: "/api"},
+			}
+		
+			srv.GraphQLProxyConfig = &proxy.Config{
+				TLSClientConfig: serviceProxyTLSConfig,
+				HeaderBlacklist: []string{"Cookie", "X-CSRFToken"},
+				Endpoint:        &url.URL{Scheme: "https", Host: openshiftGraphQLHost, Path: "/graphql"},
 			}
 		}
 
