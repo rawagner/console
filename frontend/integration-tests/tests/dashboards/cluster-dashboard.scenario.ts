@@ -11,6 +11,15 @@ const inventoryItems = [
 
 const utilizationItems = ['CPU', 'Memory', 'Filesystem', 'Network Transfer', 'Pod count'];
 
+const checkDetailsItem = (item, value, expectedText: string, allowNotAvailable?: boolean) => {
+  expect(item.getText()).toEqual(expectedText);
+  const text = value.getText();
+  expect(text.length).not.toBe(0);
+  if (!allowNotAvailable) {
+    expect(text).not.toBe('Not available');
+  }
+};
+
 describe('Cluster Dashboard', () => {
   beforeAll(async () => {
     await sideNavView.clickNavLink(['Home', 'Overview']);
@@ -25,16 +34,11 @@ describe('Cluster Dashboard', () => {
 
       expect(items.count()).toBe(5);
       expect(values.count()).toBe(5);
-      expect(items.get(0).getText()).toEqual('Cluster API Address');
-      expect(items.get(1).getText()).toEqual('Cluster ID');
-      expect(items.get(2).getText()).toEqual('Provider');
-      expect(items.get(3).getText()).toEqual('OpenShift Version');
-      expect(items.get(4).getText()).toEqual('Update Channel');
-      for (let i = 0; i < 5; i++) {
-        const text = values.get(i).getText();
-        expect(text.length).not.toBe(0);
-        expect(text).not.toBe('Not available');
-      }
+      checkDetailsItem(items.get(0), values.get(0), 'Cluster API Address');
+      checkDetailsItem(items.get(1), values.get(1), 'Cluster ID');
+      checkDetailsItem(items.get(2), values.get(2), 'Provider');
+      checkDetailsItem(items.get(3), values.get(3), 'OpenShift Version');
+      checkDetailsItem(items.get(4), values.get(4), 'Update Channel', true);
     });
     it('has View settings link', () => {
       const link = clusterDashboardView.detailsCard.$('[href="/settings/cluster/"]');
