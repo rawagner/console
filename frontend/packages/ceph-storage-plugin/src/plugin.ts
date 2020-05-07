@@ -108,7 +108,9 @@ const plugin: Plugin<ConsumedExtensions> = [
         import('./components/ocs-install/install-page' /* webpackChunkName: "install-page" */).then(
           (m) => m.default,
         ),
-      required: CEPH_FLAG,
+    },
+    flags: {
+      required: [CEPH_FLAG],
     },
   },
   // Ceph Storage Dashboard Left cards
@@ -242,6 +244,8 @@ const plugin: Plugin<ConsumedExtensions> = [
             throw e;
           });
       },
+    },
+    flags: {
       disallowed: [OCS_INDEPENDENT_FLAG],
     },
   },
@@ -257,6 +261,8 @@ const plugin: Plugin<ConsumedExtensions> = [
         import(
           './components/converged-credentials/credentials' /* webpackChunkName: "ceph-storage-export-credentials" */
         ).then((m) => m.default({})),
+    },
+    flags: {
       disallowed: [OCS_INDEPENDENT_FLAG],
     },
   },

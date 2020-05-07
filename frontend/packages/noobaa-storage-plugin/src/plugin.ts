@@ -49,7 +49,9 @@ const plugin: Plugin<ConsumedExtensions> = [
         import('./components/bucket-class/create-bc' /* webpackChunkName: "create-bc" */).then(
           (m) => m.default,
         ),
-      required: NOOBAA_FLAG,
+    },
+    flags: {
+      required: [NOOBAA_FLAG],
     },
   },
   {
@@ -62,7 +64,9 @@ const plugin: Plugin<ConsumedExtensions> = [
         import('./components/noobaa-operator/noobaa-page' /* webpackChunkName: "create-bc" */).then(
           (m) => m.default,
         ),
-      required: NOOBAA_FLAG,
+    },
+    flags: {
+      required: [NOOBAA_FLAG],
     },
   },
   {
@@ -79,7 +83,9 @@ const plugin: Plugin<ConsumedExtensions> = [
         import(
           './components/create-backingstore-page/create-bs-page' /* webpackChunkName: "create-bs" */
         ).then((m) => m.default),
-      required: NOOBAA_FLAG,
+    },
+    flags: {
+      required: [NOOBAA_FLAG],
     },
   },
   {
@@ -285,7 +291,9 @@ const plugin: Plugin<ConsumedExtensions> = [
         import(
           './components/object-bucket-claim-page/create-obc' /* webpackChunkName: "create-obc" */
         ).then((m) => m.CreateOBCPage),
-      required: NOOBAA_FLAG,
+    },
+    flags: {
+      required: [NOOBAA_FLAG],
     },
   },
 ];

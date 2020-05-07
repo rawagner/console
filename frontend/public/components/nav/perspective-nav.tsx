@@ -3,7 +3,14 @@ import { connect, Dispatch } from 'react-redux';
 import * as _ from 'lodash-es';
 import { NavItemSeparator, Button } from '@patternfly/react-core';
 import { MinusCircleIcon } from '@patternfly/react-icons';
-import { useExtensions, NavItem, isNavItem, isSeparatorNavItem } from '@console/plugin-sdk';
+import {
+  useExtensions,
+  NavItem,
+  isNavItem,
+  isSeparatorNavItem,
+  Perspective,
+  isPerspective,
+} from '@console/plugin-sdk';
 import { RootState } from '../../redux';
 import { setPinnedResources } from '../../actions/ui';
 import { getActivePerspective, getPinnedResources } from '../../reducers/ui';
@@ -20,7 +27,6 @@ import {
 } from './items';
 
 import './_perspective-nav.scss';
-import * as plugins from '../../plugins';
 
 type StateProps = {
   perspective: string;
@@ -42,7 +48,7 @@ const PerspectiveNav: React.FC<StateProps & DispatchProps> = ({
   onPinnedResourcesChange,
 }) => {
   const navItemExtensions = useExtensions<NavItem>(isNavItem);
-  const perspectives = React.useMemo(() => plugins.registry.getPerspectives(), []);
+  const perspectives = useExtensions<Perspective>(isPerspective);
 
   const matchingNavItems = React.useMemo(
     () => navItemExtensions.filter((item) => item.properties.perspective === perspective),

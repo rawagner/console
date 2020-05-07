@@ -8,8 +8,9 @@ import { receivedResources } from './k8s';
 import { coFetchJSON } from '../co-fetch';
 import { MonitoringRoutes } from '../reducers/monitoring';
 import { setMonitoringURL } from './monitoring';
-import * as plugins from '../plugins';
+import { pluginStore } from '../plugins';
 import { setClusterID, setCreateProjectMessage, setUser, setConsoleLinks } from './common';
+import { isCustomFeatureFlag } from '@console/plugin-sdk';
 
 export enum ActionType {
   SetFlag = 'setFlag',
@@ -252,7 +253,8 @@ const ssarCheckActions = ssarChecks.map(({ flag, resourceAttributes, after }) =>
   return fn;
 });
 
-export const detectFeatures = () => (dispatch: Dispatch) =>
+export const detectFeatures = () => (dispatch: Dispatch) => {
+  const extensionFeatureFlags = pluginStore.getAllExtensions().filter(isCustomFeatureFlag);
   [
     detectOpenShift,
     detectCanCreateProject,
@@ -261,5 +263,6 @@ export const detectFeatures = () => (dispatch: Dispatch) =>
     detectLoggingURL,
     detectConsoleLinks,
     ...ssarCheckActions,
-    ...plugins.registry.getCustomFeatureFlags().map((ff) => ff.properties.detect),
+    ...extensionFeatureFlags.map((ff) => ff.properties.detect),
   ].forEach((detect) => detect(dispatch));
+};

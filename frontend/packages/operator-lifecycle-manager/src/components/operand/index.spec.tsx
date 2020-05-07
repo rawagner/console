@@ -14,7 +14,6 @@ import {
 } from '../../../mocks';
 import { ClusterServiceVersionModel } from '../../models';
 import {
-  OperandList_,
   OperandList,
   OperandListProps,
   ProvidedAPIsPage,
@@ -37,6 +36,8 @@ import { SpecDescriptor } from '../descriptors/spec';
 import { referenceForProvidedAPI } from '..';
 import { OperandLink } from './operand-link';
 
+import * as extensionHooks from '@console/plugin-sdk';
+
 const COLUMNS = OperandTableHeader();
 const NAME_INDEX = _.findIndex(COLUMNS, { title: 'Name' });
 const KIND_INDEX = _.findIndex(COLUMNS, { title: 'Kind' });
@@ -55,8 +56,9 @@ describe(OperandTableRow.displayName, () => {
   let wrapper: ShallowWrapper<OperandTableRowProps>;
 
   beforeEach(() => {
+    jest.spyOn(extensionHooks, 'useExtensions').mockImplementation(() => []);
     wrapper = shallow(
-      <OperandTableRow obj={testResourceInstance} index={0} rowKey={'0'} style={{}} flags={{}} />,
+      <OperandTableRow obj={testResourceInstance} index={0} rowKey={'0'} style={{}} />,
     );
   });
 
@@ -114,14 +116,15 @@ describe(OperandTableRow.displayName, () => {
   });
 });
 
-describe(OperandList_.displayName, () => {
+describe(OperandList.displayName, () => {
   let wrapper: ShallowWrapper<OperandListProps>;
   let resources: k8sModels.K8sResourceKind[];
 
   beforeEach(() => {
     resources = [testResourceInstance];
+    jest.spyOn(extensionHooks, 'useExtensions').mockImplementation(() => []);
     // eslint-disable-next-line react/jsx-pascal-case
-    wrapper = shallow(<OperandList_ loaded data={resources} filters={{}} flags={{}} />);
+    wrapper = shallow(<OperandList loaded data={resources} filters={{}} />);
   });
 
   it('renders a `Table` of the custom resource instances of the given kind', () => {
@@ -264,7 +267,6 @@ describe(OperandDetailsPage.displayName, () => {
       <OperandDetailsPage.WrappedComponent
         modelRef={k8sModels.referenceFor(testResourceInstance)}
         match={match}
-        flags={{}}
       />,
     );
   });

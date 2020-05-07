@@ -17,7 +17,7 @@ import {
   createStatefulSetItems,
   formatNamespacedRouteForResource,
 } from '@console/shared';
-import { OverviewCRD } from '@console/plugin-sdk';
+import { OverviewCRD, isOverviewCRD, useExtensions } from '@console/plugin-sdk';
 import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager';
 import { coFetchJSON } from '../../co-fetch';
 import { PROMETHEUS_TENANCY_BASE_PATH } from '../graphs';
@@ -28,7 +28,6 @@ import { CloseButton, Dropdown, Firehose, StatusBox, FirehoseResult, MsgBox } fr
 import { ProjectOverview } from './project-overview';
 import { ResourceOverviewPage } from './resource-overview-page';
 import { OverviewSpecialGroup } from './constants';
-import * as plugins from '../../plugins';
 
 const asOverviewGroups = (keyedItems: { [name: string]: OverviewItem[] }): OverviewGroup[] => {
   const compareGroups = (a: OverviewGroup, b: OverviewGroup) => {
@@ -425,14 +424,11 @@ const OverviewMainContent = connect<
   mainContentDispatchToProps,
 )(OverviewMainContent_);
 
-const overviewStateToProps = ({ UI, FLAGS }): OverviewPropsFromState => {
+const overviewStateToProps = ({ UI }): OverviewPropsFromState => {
   const selectedUID = UI.getIn(['overview', 'selectedUID']);
   const resources = UI.getIn(['overview', 'resources']);
-  const resourceList = plugins.registry
-    .getOverviewCRDs()
-    .filter((resource) => FLAGS.get(resource.properties.required));
   const selectedItem = !!resources && resources.get(selectedUID);
-  return { selectedItem, resourceList };
+  return { selectedItem };
 };
 
 const overviewDispatchToProps = (dispatch): OverviewPropsFromDispatch => {
@@ -445,10 +441,10 @@ const Overview_: React.SFC<OverviewProps> = ({
   mock,
   match,
   selectedItem,
-  resourceList,
   title,
   dismissDetails,
 }) => {
+  const resourceList = useExtensions<OverviewCRD>(isOverviewCRD);
   const namespace = _.get(match, 'params.name');
   const sidebarOpen = !_.isEmpty(selectedItem);
   const className = classnames('overview', { 'overview--sidebar-shown': sidebarOpen });
@@ -600,7 +596,6 @@ type OverviewMainContentState = {
 
 type OverviewPropsFromState = {
   selectedItem: any;
-  resourceList: OverviewCRD[];
 };
 
 type OverviewPropsFromDispatch = {
