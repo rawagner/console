@@ -51,6 +51,11 @@ pluginStore
       CRDs[modelRef] = ff.properties.flag as FLAGS;
     }
   });
+<<<<<<< HEAD
+=======
+
+export type FeatureState = ImmutableMap<string, boolean>;
+>>>>>>> Reduce usage of plugins.registry
 
 export const featureReducer = (state: FeatureState, action: FeatureAction): FeatureState => {
   if (!state) {

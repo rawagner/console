@@ -5,7 +5,7 @@ import { LAST_PERSPECTIVE_LOCAL_STORAGE_KEY } from '@console/shared';
 import * as UIActions from '../../public/actions/ui';
 import { RootState } from '@console/internal/redux-types';
 import { pluginStore, Perspective } from '../../public/plugins';
-import '../../__mocks__/localStorage';
+import '../../__mocks__/localStoragee';
 
 describe('getDefaultPerspective', () => {
   it('should default to undefined', () => {
