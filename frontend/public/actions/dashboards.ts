@@ -3,10 +3,12 @@ import { Dispatch } from 'react-redux';
 
 import { coFetchJSON } from '../co-fetch';
 import { k8sBasePath } from '../module/k8s/k8s';
-import { isWatchActive, RESULTS_TYPE, RequestMap } from '../reducers/dashboards';
-import { RootState } from '../redux';
+import { DashboardsState, RootState, RequestMap, RESULTS_TYPE } from '../redux-types';
 import { getPrometheusURL, PrometheusEndpoint } from '../components/graphs/helpers';
-import { PrometheusResponse } from '../components/graphs';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
+
+export const isWatchActive = (state: DashboardsState, type: string, key: string): boolean =>
+  state.getIn([type, key, 'active']) > 0 || state.getIn([type, key, 'inFlight']);
 
 export enum ActionType {
   StopWatch = 'stopWatch',

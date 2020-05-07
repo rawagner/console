@@ -30,7 +30,7 @@ import {
   useAccessReview,
 } from '../utils';
 import { isSystemRole } from './index';
-import { connectToFlags, flagPending } from '../../reducers/features';
+import { connectToFlags, flagPending } from '../utils/connect-flags';
 
 const bindingKind = (binding) =>
   binding.metadata.namespace ? 'RoleBinding' : 'ClusterRoleBinding';

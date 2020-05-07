@@ -15,13 +15,12 @@ import {
   getClusterOperatorStatus,
   getTemplateInstanceStatus,
 } from '../../module/k8s';
-
 import {
-  alertingRuleIsActive,
-  alertDescription,
   alertState,
+  alertingRuleIsActive,
   silenceState,
-} from '../../reducers/monitoring';
+  alertDescription,
+} from '@console/shared/src/selectors/monitoring';
 
 export const fuzzyCaseInsensitive = (a: string, b: string): boolean =>
   fuzzy(_.toLower(a), _.toLower(b));

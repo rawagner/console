@@ -14,10 +14,10 @@ import ErrorAlert from '@console/shared/src/components/alerts/error';
 
 import { formatNumber } from './format';
 import { ColumnStyle, Panel } from './types';
-import { PrometheusResponse } from '../../graphs';
 import { getPrometheusURL, PrometheusEndpoint } from '../../graphs/helpers';
 import { EmptyBox, usePoll, useSafeFetch } from '../../utils';
 import { TablePagination } from '../metrics';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 
 type AugmentedColumnStyle = ColumnStyle & {
   className?: string;

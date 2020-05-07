@@ -5,7 +5,7 @@ import { toLower } from 'lodash';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector } from 'react-redux';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 import { getTopologyFilters } from './filter-utils';
 
 const fuzzyCaseInsensitive = (a: string, b: string): boolean => fuzzy(toLower(a), toLower(b));

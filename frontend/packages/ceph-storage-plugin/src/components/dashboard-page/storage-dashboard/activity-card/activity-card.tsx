@@ -15,7 +15,7 @@ import ActivityBody, {
   RecentEventsBody,
   OngoingActivityBody,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
-import { PrometheusResponse } from '@console/internal/components/graphs';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 import { getNamespace } from '@console/shared';
 import {
   DashboardItemProps,

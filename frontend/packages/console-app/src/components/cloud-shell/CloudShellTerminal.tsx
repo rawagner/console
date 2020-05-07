@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
 import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';

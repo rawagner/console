@@ -5,7 +5,7 @@ import { TextInputTypes } from '@patternfly/react-core';
 import { ProjectModel } from '@console/internal/models';
 import { InputField, ResourceDropdownField, useFormikValidationFix, FLAGS } from '@console/shared';
 import { CREATE_NAMESPACE_KEY } from './cloud-shell-setup-utils';
-import { connectToFlags, WithFlagsProps } from '@console/internal/reducers/features';
+import { connectToFlags, WithFlagsProps } from '@console/internal/components/utils/connect-flags';
 
 type NamespaceSectionProps = WithFlagsProps;
 

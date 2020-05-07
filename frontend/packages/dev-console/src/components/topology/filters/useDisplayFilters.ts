@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector } from 'react-redux';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 import { DisplayFilters, getTopologyFilters } from './filter-utils';
 
 const useDisplayFilters = (): DisplayFilters => {

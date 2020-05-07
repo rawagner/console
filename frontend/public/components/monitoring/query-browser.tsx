@@ -31,8 +31,7 @@ import { APIError } from '@console/shared';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
 
 import * as UIActions from '../../actions/ui';
-import { RootState } from '../../redux';
-import { PrometheusLabels, PrometheusResponse, PrometheusResult, PrometheusValue } from '../graphs';
+import { RootState } from '../../redux-types';
 import { GraphEmpty } from '../graphs/graph-empty';
 import { getPrometheusURL, PrometheusEndpoint } from '../graphs/helpers';
 import { queryBrowserTheme } from '../graphs/themes';
@@ -50,6 +49,12 @@ import {
   twentyFourHourTime,
   twentyFourHourTimeWithSeconds,
 } from '../utils/datetime';
+import {
+  PrometheusValue,
+  PrometheusLabels,
+  PrometheusResponse,
+  PrometheusResult,
+} from '@console/shared/src/types/monitoring';
 
 // Prometheus internal labels start with "__"
 const isInternalLabel = (key: string): boolean => _.startsWith(key, '__');

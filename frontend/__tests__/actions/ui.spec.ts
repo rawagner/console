@@ -9,7 +9,7 @@ import '../../__mocks__/localStorage';
 import store from '../../public/redux';
 import * as UIActions from '../../public/actions/ui';
 import * as router from '../../public/components/utils/router';
-import { getActiveNamespace } from '@console/internal/reducers/ui';
+import { getActiveNamespace } from '@console/internal/reducers/ui-selectors';
 
 const setActiveNamespace = (ns) => store.dispatch(UIActions.setActiveNamespace(ns));
 const setActivePerspective = (perspective) =>

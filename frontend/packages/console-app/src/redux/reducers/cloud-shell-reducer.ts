@@ -1,5 +1,5 @@
 import { CloudShellActions, Actions } from '../actions/cloud-shell-actions';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 
 export const cloudShellReducerName = 'cloudShell';
 

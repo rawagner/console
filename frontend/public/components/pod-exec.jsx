@@ -6,7 +6,7 @@ import { Button } from '@patternfly/react-core';
 
 import store from '../redux';
 import { LoadingBox, LoadingInline, Dropdown, ResourceIcon } from './utils';
-import { connectToFlags } from '../reducers/features';
+import { connectToFlags } from './utils/connect-flags';
 import { FLAGS } from '@console/shared';
 import { Terminal } from './terminal';
 import { WSFactory } from '../module/ws-factory';

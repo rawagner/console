@@ -15,7 +15,7 @@ import {
   PartialObjectMetadata,
 } from '../../module/k8s';
 import { withStartGuide } from '../start-guide';
-import { connectToFlags, flagPending, FlagsObject } from '../../reducers/features';
+import { connectToFlags, flagPending, FlagsObject } from '../utils/connect-flags';
 import {
   Firehose,
   LoadError,

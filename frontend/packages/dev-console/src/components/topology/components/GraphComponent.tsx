@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { connect } from 'react-redux';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 import { GraphComponent as BaseGraphComponent, WithContextMenuProps } from '@console/topology';
 import { TopologyFilters, getTopologyFilters } from '../filters/filter-utils';
 

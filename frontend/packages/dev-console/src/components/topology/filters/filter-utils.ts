@@ -1,4 +1,4 @@
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 
 export enum ShowFiltersKeyValue {
   podCount = 'Pod Count',

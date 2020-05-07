@@ -28,7 +28,7 @@ import { FLAGS, YellowExclamationTriangleIcon } from '@console/shared';
 import { formatNamespacedRouteForResource } from '@console/shared/src/utils';
 import CloudShellMastheadButton from '@console/app/src/components/cloud-shell/CloudShellMastheadButton';
 import * as UIActions from '../actions/ui';
-import { connectToFlags, flagPending, featureReducerName } from '../reducers/features';
+import { connectToFlags, flagPending } from './utils/connect-flags';
 import { authSvc } from '../module/auth';
 import { getOCMLink } from '../module/k8s';
 import { history, Firehose } from './utils';
@@ -626,7 +626,7 @@ const mastheadToolbarStateToProps = (state) => ({
   user: state.UI.get('user'),
   consoleLinks: state.UI.get('consoleLinks'),
   notificationsRead: !!state.UI.getIn(['notifications', 'isRead']),
-  canAccessNS: !!state[featureReducerName].get(FLAGS.CAN_GET_NS),
+  canAccessNS: !!state.FLAGS.get(FLAGS.CAN_GET_NS),
 });
 
 const MastheadToolbarContents = connect(mastheadToolbarStateToProps, {

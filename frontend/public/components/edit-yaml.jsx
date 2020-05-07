@@ -9,7 +9,7 @@ import { DownloadIcon, InfoCircleIcon } from '@patternfly/react-icons';
 
 import { FLAGS, ALL_NAMESPACES_KEY, getBadgeFromType } from '@console/shared';
 
-import { connectToFlags } from '../reducers/features';
+import { connectToFlags } from './utils/connect-flags';
 import { errorModal } from './modals';
 import { Firehose, checkAccess, history, Loading, resourceObjPath } from './utils';
 import {

@@ -15,7 +15,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 import { getTopologyFilters } from './filters/filter-utils';
 
 import EmptyState from '../EmptyState';

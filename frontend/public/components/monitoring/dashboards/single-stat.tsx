@@ -6,9 +6,9 @@ import ErrorAlert from '@console/shared/src/components/alerts/error';
 
 import { formatNumber } from './format';
 import { Panel } from './types';
-import { PrometheusResponse } from '../../graphs';
 import { getPrometheusURL, PrometheusEndpoint } from '../../graphs/helpers';
 import { LoadingInline, usePoll, useSafeFetch } from '../../utils';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 
 const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <Bullseye className="monitoring-dashboards__single-stat query-browser__wrapper">

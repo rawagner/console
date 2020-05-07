@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector } from 'react-redux';
-import { RootState } from '@console/internal/redux';
+import { RootState } from '@console/internal/redux-types';
 import { testHook } from '../../../../test/test-utils';
 import { useSearchFilter } from '../useSearchFilter';
 

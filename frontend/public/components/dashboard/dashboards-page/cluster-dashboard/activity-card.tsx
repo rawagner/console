@@ -24,7 +24,7 @@ import {
   isDashboardsOverviewPrometheusActivity,
 } from '@console/plugin-sdk';
 import { uniqueResource } from './utils';
-import { PrometheusResponse } from '../../../graphs';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 
 const eventsResource: FirehoseResource = { isList: true, kind: EventModel.kind, prop: 'events' };
 const viewEvents = '/k8s/all-namespaces/events';

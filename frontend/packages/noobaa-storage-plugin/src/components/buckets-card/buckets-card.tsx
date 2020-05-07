@@ -12,7 +12,7 @@ import {
 import { StorageClassModel } from '@console/internal/models';
 import { FirehoseResource, resourcePathFromModel } from '@console/internal/components/utils';
 import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
-import { PrometheusResponse } from '@console/internal/components/graphs';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 import { getMetric, getGaugeValue, isBound } from '../../utils';
 import { NooBaaObjectBucketClaimModel } from '../../models';
 import { BucketsItem, BucketsItemProps } from './buckets-card-item';

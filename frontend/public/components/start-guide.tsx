@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
 
 import { FLAGS } from '@console/shared/src/constants';
-import { createProjectMessageStateToProps } from '../reducers/ui';
+import { createProjectMessageStateToProps } from '../reducers/ui-selectors';
 import { Disabled, HintBlock, ExternalLink, openshiftHelpBase, LinkifyExternal } from './utils';
-import { connectToFlags } from '../reducers/features';
+import { connectToFlags } from './utils/connect-flags';
 import { ProjectModel, RoleModel, StorageClassModel } from '../models';
 import { createProjectModal } from './modals/create-namespace-modal';
 

@@ -9,7 +9,7 @@ import { Dropdown } from './dropdown';
 import { Firehose } from './firehose';
 import { LoadingInline } from './status-box';
 import { ResourceName } from './resource-icon';
-import { connectToFlags, flagPending } from '../../reducers/features';
+import { connectToFlags, flagPending } from '../utils/connect-flags';
 
 class ListDropdown_ extends React.Component {
   constructor(props) {

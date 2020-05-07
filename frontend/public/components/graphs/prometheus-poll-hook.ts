@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 
 import { usePoll, useSafeFetch } from '../utils';
 import { getPrometheusURL, PrometheusEndpoint } from './helpers';
-import { PrometheusResponse } from '.';
+import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 
 const DEFAULT_DELAY = 15000; // 15 seconds
 const DEFAULT_SAMPLES = 60;
