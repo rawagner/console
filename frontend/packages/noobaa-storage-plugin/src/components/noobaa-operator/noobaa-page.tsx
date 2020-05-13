@@ -1,21 +1,18 @@
 import * as React from 'react';
 import { match } from 'react-router';
 import * as _ from 'lodash';
-import {
-  Firehose,
-  FirehoseResult,
-  HorizontalNav,
-  PageHeading,
-  FirehoseResource,
-  resourcePathFromModel,
-  BreadCrumbs,
-} from '@console/internal/components/utils';
-import { referenceForModel, k8sGet } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { EditYAML } from '@console/internal/components/edit-yaml';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { NooBaaSystemModel } from '../../models';
 import InfoPage from './infoPage';
 import MCGResourceList from './resourceTable';
+import { PageHeading, BreadCrumbs } from '@console/internal/components/utils/headings';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { HorizontalNav } from '@console/internal/components/utils/horizontal-nav';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { FirehoseResult, FirehoseResource } from '@console/internal/components/utils/types';
 
 const getFireHoseResources = (namespace: string): FirehoseResource[] => {
   const system = {

@@ -7,23 +7,20 @@ import { Link } from 'react-router-dom';
 import { Button, TextInput } from '@patternfly/react-core';
 
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
-import { useDocumentListener, KEYBOARD_SHORTCUTS } from '@console/shared';
+import { KEYBOARD_SHORTCUTS } from '@console/shared/src/constants/common';
+import { useDocumentListener } from '@console/shared/src/hooks/document-listener';
 import { filterList } from '../../actions/k8s';
 import { storagePrefix } from '../row-filter';
 import { ErrorPage404, ErrorBoundaryFallback } from '../error';
-import { referenceForModel } from '../../module/k8s';
-import {
-  Dropdown,
-  Firehose,
-  history,
-  inject,
-  kindObj,
-  makeQuery,
-  makeReduxID,
-  PageHeading,
-  RequireCreatePermission,
-} from '../utils';
+import { referenceForModel } from '../../module/k8s/k8s';
 import { FilterToolbar } from '../filter-toolbar';
+import { makeReduxID, makeQuery } from '../utils/k8s-watcher';
+import { kindObj, inject } from '../utils/inject';
+import { Dropdown } from '../utils/dropdown';
+import { PageHeading } from '../utils/headings';
+import { RequireCreatePermission } from '../utils/rbac';
+import { Firehose } from '../utils/firehose';
+import { history } from '../utils/router';
 
 /** @type {React.SFC<{disabled?: boolean, label?: string, onChange: (value: string) => void;, defaultValue?: string, value?: string, placeholder?: string, autoFocus?: boolean, onFocus?:any, name?:string, id?: string, onKeyDown?: any, parentClassName?: string }}>} */
 export const TextFilter = (props) => {

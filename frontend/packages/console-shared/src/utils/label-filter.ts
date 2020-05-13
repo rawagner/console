@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceCommon } from '@console/internal/module/k8s';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
 import { toRequirements } from '@console/internal/module/k8s/selector';
 import { requirementToString } from '@console/internal/module/k8s/selector-requirement';
 

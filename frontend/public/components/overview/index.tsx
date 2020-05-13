@@ -5,29 +5,33 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';
+import { DEFAULT_GROUP_NAME, METRICS_POLL_INTERVAL } from '@console/shared/src/constants/resource';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { formatNamespacedRouteForResource } from '@console/shared/src/utils/namespace';
 import {
-  DEFAULT_GROUP_NAME,
-  METRICS_POLL_INTERVAL,
-  OverviewItem,
   getResourceList,
   createDaemonSetItems,
   createDeploymentConfigItems,
   createDeploymentItems,
   createPodItems,
   createStatefulSetItems,
-  formatNamespacedRouteForResource,
-} from '@console/shared';
-import { OverviewCRD, isOverviewCRD, useExtensions } from '@console/plugin-sdk';
-import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager';
+} from '@console/shared/src/utils/resource-utils';
+import { OverviewCRD, isOverviewCRD } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
 import { coFetchJSON } from '../../co-fetch';
-import { PROMETHEUS_TENANCY_BASE_PATH } from '../graphs';
-import { TextFilter } from '../factory';
+import { PROMETHEUS_TENANCY_BASE_PATH } from '../graphs/constants';
+import { TextFilter } from '../factory/list-page';
 import * as UIActions from '../../actions/ui';
-import { DeploymentKind, K8sResourceKind, PodKind, RouteKind } from '../../module/k8s';
-import { CloseButton, Dropdown, Firehose, StatusBox, FirehoseResult, MsgBox } from '../utils';
+import { DeploymentKind, K8sResourceKind, PodKind, RouteKind } from '../../module/k8s/types';
 import { ProjectOverview } from './project-overview';
 import { ResourceOverviewPage } from './resource-overview-page';
 import { OverviewSpecialGroup } from './constants';
+import { Dropdown } from '../utils/dropdown';
+import { MsgBox, StatusBox } from '../utils/status-box';
+import { Firehose } from '../utils/firehose';
+import { FirehoseResult } from '../utils/types';
+import { CloseButton } from '../utils/close-button';
 
 const asOverviewGroups = (keyedItems: { [name: string]: OverviewItem[] }): OverviewGroup[] => {
   const compareGroups = (a: OverviewGroup, b: OverviewGroup) => {

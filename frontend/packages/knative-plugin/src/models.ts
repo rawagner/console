@@ -2,7 +2,7 @@ import {
   chart_color_cyan_400 as knativeServingColor,
   chart_color_red_300 as knativeEventingColor,
 } from '@patternfly/react-tokens';
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import {
   KNATIVE_EVENT_SOURCE_APIGROUP,
   KNATIVE_EVENT_SOURCE_APIGROUP_DEP,

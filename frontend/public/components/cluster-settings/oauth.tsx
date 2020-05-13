@@ -2,18 +2,17 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 
 import { OAuthModel } from '../../models';
-import { IdentityProvider, OAuthKind, referenceForModel } from '../../module/k8s';
-import { DetailsPage } from '../factory';
-import {
-  Dropdown,
-  EmptyBox,
-  Kebab,
-  ResourceSummary,
-  SectionHeading,
-  history,
-  navFactory,
-} from '../utils';
+import { referenceForModel } from '../../module/k8s/k8s';
+import { IdentityProvider, OAuthKind } from '../../module/k8s/types';
+import { DetailsPage } from '../factory/details';
+import { history } from '../utils/router';
 import { formatDuration } from '../utils/datetime';
+import { Kebab } from '../utils/kebab';
+import { EmptyBox } from '../utils/status-box';
+import { SectionHeading } from '../utils/headings';
+import { ResourceSummary } from '../utils/details-page';
+import { Dropdown } from '../utils/dropdown';
+import { navFactory } from '../utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(OAuthModel), ...common];

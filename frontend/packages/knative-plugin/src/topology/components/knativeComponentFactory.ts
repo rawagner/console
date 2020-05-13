@@ -8,19 +8,9 @@ import {
   withSelection,
   withDndDrop,
 } from '@console/topology';
-import {
-  AbstractSBRComponentFactory,
-  NodeComponentProps,
-  withContextMenu,
-  withNoDrop,
-  nodeDragSourceSpec,
-  withEditReviewAccess,
-  createMenuItems,
-  getTopologyResourceObject,
-} from '@console/dev-console/src/components/topology';
 import { ModifyApplication } from '@console/dev-console/src/actions/modify-application';
-import { Kebab, kebabOptionsToMenu } from '@console/internal/components/utils';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
+import { Kebab, kebabOptionsToMenu } from '@console/internal/components/utils/kebab';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { RevisionModel, ServiceModel } from '../../models';
 import { getRevisionActions } from '../../actions/getRevisionActions';
 import {
@@ -40,6 +30,16 @@ import {
   eventSourceTargetSpec,
   knativeServiceDropTargetSpec,
 } from './knativeComponentUtils';
+import {
+  createMenuItems,
+  AbstractSBRComponentFactory,
+  NodeComponentProps,
+  withEditReviewAccess,
+  withContextMenu,
+  withNoDrop,
+  nodeDragSourceSpec,
+} from '@console/dev-console/src/components/topology/components';
+import { getTopologyResourceObject } from '@console/dev-console/src/components/topology/topology-utils';
 
 export const knativeContextMenu = (element: Node) => {
   const item = getTopologyResourceObject(element.getData());

@@ -1,5 +1,6 @@
-import { K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import { KebabOption } from '@console/internal/components/utils';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { KebabOption } from '@console/internal/components/utils/kebab';
 import { ImportOptions } from '../components/import/import-types';
 import { QUERY_PROPERTIES, UNASSIGNED_KEY } from '../const';
 

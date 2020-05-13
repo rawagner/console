@@ -2,12 +2,12 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikValues, useField, useFormikContext } from 'formik';
 import { Select, SelectOption } from '@patternfly/react-core';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   useK8sWatchResource,
   WatchK8sResource,
 } from '@console/internal/components/utils/k8s-watch-hook';
-import { LoadingInline } from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 import { PipelineResourceModel } from '../../../../models';
 import { PipelineResourceKind } from '../../../../utils/pipeline-augment';
 import { CREATE_PIPELINE_RESOURCE } from './const';

@@ -4,25 +4,25 @@ import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import { BanIcon } from '@patternfly/react-icons';
 
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  AsyncComponent,
-  DetailsItem,
-  Kebab,
-  KebabAction,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-} from './utils';
-import { CustomResourceDefinitionKind, K8sKind, referenceForCRD } from '../module/k8s';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { CustomResourceDefinitionKind, K8sKind } from '../module/k8s/types';
+import { referenceForCRD } from '../module/k8s/k8s';
 import { CustomResourceDefinitionModel } from '../models';
 import { Conditions } from './conditions';
 import { getResourceListPages } from './resource-pages';
 import { DefaultPage } from './default-resource';
-import { GreenCheckCircleIcon } from '@console/shared';
-import { useExtensions, isResourceListPage, ResourceListPage } from '@console/plugin-sdk';
+import { GreenCheckCircleIcon } from '@console/shared/src/components/status/icons';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { isResourceListPage, ResourceListPage } from '@console/plugin-sdk/src/typings';
+import { Kebab, KebabAction, ResourceKebab } from './utils/kebab';
+import { DetailsItem } from './utils/details-item';
+import { ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
 
 const { common } = Kebab.factory;
 

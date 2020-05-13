@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { getInfrastructurePlatform } from '@console/shared';
+import { getInfrastructurePlatform } from '@console/shared/src/selectors/infrastructure';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
@@ -11,14 +11,16 @@ import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
-import { FirehoseResource, ExternalLink, FirehoseResult } from '@console/internal/components/utils';
 import { InfrastructureModel } from '@console/internal/models/index';
 import { SubscriptionModel } from '@console/operator-lifecycle-manager/src/models';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 import { getOCSVersion } from '@console/ceph-storage-plugin/src/selectors';
 import { useK8sGet } from '@console/internal/components/utils/k8s-get-hook';
 import { getMetric } from '../../utils';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { FirehoseResult, FirehoseResource } from '@console/internal/components/utils/types';
 
 const NOOBAA_SYSTEM_NAME_QUERY = 'NooBaa_system_info';
 const NOOBAA_DASHBOARD_LINK_QUERY = 'NooBaa_system_links';

@@ -1,11 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import {
-  withHandlePromise,
-  HandlePromiseProps,
-  FirehoseResult,
-} from '@console/internal/components/utils';
-import {
   Button,
   ButtonVariant,
   Split,
@@ -17,9 +12,14 @@ import {
   Title,
   EmptyStateBody,
 } from '@patternfly/react-core';
-import { ModalTitle, ModalBody, ModalComponentProps } from '@console/internal/components/factory';
+import {
+  ModalTitle,
+  ModalBody,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import { NodeModel } from '@console/internal/models';
-import { NodeKind, k8sPatch } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { VMLikeEntityKind } from '../../../../types/vmLike';
 import { getVMLikeModel } from '../../../../selectors/vm';
 import { getVMLikeAffinity } from '../../../../selectors/vm-like/selectors';
@@ -39,6 +39,11 @@ import {
 } from './helpers';
 import { getAffinityPatch } from '../../../../k8s/patches/vm/vm-scheduling-patches';
 import './affinity-modal.scss';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 export const AffinityModal = withHandlePromise<AffinityModalProps>(
   ({

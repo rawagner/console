@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { InputField } from '@console/shared';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 
 const CronJobSection: React.FC = () => (

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { Kebab, KebabOption } from '@console/internal/components/utils';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
+import { Kebab, KebabOption } from '@console/internal/components/utils/kebab';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { TopologyDataObject } from '../topology-types';
 import { getTopologyResourceObject } from '../topology-utils';
 

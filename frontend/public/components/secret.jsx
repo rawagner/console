@@ -2,21 +2,18 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { SecretData } from './configmap-and-secret-data';
-import {
-  Kebab,
-  SectionHeading,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  Timestamp,
-  detailsPage,
-  navFactory,
-  resourceObjPath,
-} from './utils';
 import { SecretType } from './secrets/create-secret';
 import { configureAddSecretToWorkloadModal } from './modals/add-secret-to-workload';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { resourceObjPath, ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { navFactory } from './utils/horizontal-nav';
+import { detailsPage, ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
 
 export const WebHookSecretKey = 'WebHookSecretKey';
 

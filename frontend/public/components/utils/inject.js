@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { modelFor, kindForReference } from '../../module/k8s';
+import { kindForReference } from '../../module/k8s/k8s';
+import { modelFor } from '../../module/k8s/k8s-models';
 
 export const inject = (children, props) => {
   const safeProps = _.omit(props, ['children']);

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Dropdown, humanizeBinaryBytes } from '@console/internal/components/utils';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 import {
   DashboardItemProps,
   withDashboardResources,

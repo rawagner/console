@@ -10,8 +10,8 @@ import {
   StackItem,
   TextInputTypes,
 } from '@patternfly/react-core';
-import { InputField } from '@console/shared';
-import { ButtonBar } from '@console/internal/components/utils';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 import { Pipeline } from '../../../utils/pipeline-augment';
 import { PipelineParameters, PipelineResources } from '../detail-page-tabs';
 import { UpdateOperationType } from './const';

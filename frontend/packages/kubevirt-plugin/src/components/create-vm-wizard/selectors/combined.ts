@@ -1,5 +1,5 @@
 import { Map as ImmutableMap } from 'immutable';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { ITemplate } from '../../../types/template';
 import { getTemplateOperatingSystems } from '../../../selectors/vm-template/advanced';
 import { concatImmutableLists, immutableListToShallowJS } from '../../../utils/immutable';

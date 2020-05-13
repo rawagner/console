@@ -1,22 +1,23 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { match } from 'react-router';
-import {
-  ButtonBar,
-  withHandlePromise,
-  HandlePromiseProps,
-} from '@console/internal/components/utils';
-import { k8sGet, k8sCreate, referenceForModel } from '@console/internal/module/k8s';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { k8sGet, k8sCreate } from '@console/internal/module/k8s/resource';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { Title, FormGroup, Form, ActionGroup, Button, TextInput } from '@patternfly/react-core';
 import { history } from '@console/internal/components/utils/router';
 import { SecretModel, ConfigMapModel } from '@console/internal/models';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 import { OCSServiceModel } from '../../models';
 import FileUpload from './fileUpload';
 import { DataState, ErrorType, Field } from './types';
 import { getValidJSON, checkError } from './utils';
 import './install.scss';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 
 const ERROR: DataState = {
   clusterName: '',

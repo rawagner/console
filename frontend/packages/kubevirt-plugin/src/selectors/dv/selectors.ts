@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getStorageSize } from '../selectors';
 
 export const getDataVolumeResources = (dataVolume: K8sResourceKind) =>

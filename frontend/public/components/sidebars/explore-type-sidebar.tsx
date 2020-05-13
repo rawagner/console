@@ -2,15 +2,11 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import { Breadcrumb, BreadcrumbItem, Button } from '@patternfly/react-core';
 
-import {
-  getDefinitionKey,
-  getStoredSwagger,
-  getSwaggerPath,
-  K8sKind,
-  SwaggerDefinition,
-  SwaggerDefinitions,
-} from '../../module/k8s';
-import { CamelCaseWrap, EmptyBox, LinkifyExternal } from '../utils';
+import { getDefinitionKey, getStoredSwagger, getSwaggerPath } from '../../module/k8s/swagger';
+import { K8sKind, SwaggerDefinition, SwaggerDefinitions } from '../../module/k8s/types';
+import { LinkifyExternal } from '../utils/link';
+import { EmptyBox } from '../utils/status-box';
+import { CamelCaseWrap } from '../utils/camel-case-wrap';
 
 const getRef = (definition: SwaggerDefinition): string => {
   const ref = definition.$ref || _.get(definition, 'items.$ref');

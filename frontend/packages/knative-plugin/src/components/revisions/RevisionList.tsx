@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, TableProps } from '@console/internal/components/factory';
+import { Table, TableProps } from '@console/internal/components/factory/table';
 import { RevisionModel } from '../../models';
 import RevisionHeader from './RevisionHeader';
 import RevisionRow from './RevisionRow';

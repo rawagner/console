@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Firehose } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { ServiceModel } from '@console/knative-plugin';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ServiceModel } from '@console/knative-plugin/src/models';
 import { VirtualMachineModel } from '@console/kubevirt-plugin/src/models';
-import { ResourceDropdown } from '@console/shared';
+import ResourceDropdown from '@console/shared/src/components/dropdown/ResourceDropdown';
 
 interface ApplicationDropdownProps {
   id?: string;

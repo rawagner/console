@@ -10,7 +10,7 @@ import {
 } from './k8s';
 import store from '../../redux';
 import { pluginStore } from '../../plugins';
-import { isModelDefinition } from '@console/plugin-sdk';
+import { isModelDefinition } from '@console/plugin-sdk/src/typings';
 import { K8sResourceKindReference, K8sKind, K8sResourceCommon, GroupVersionKind } from './types';
 
 const modelKey = (model: K8sKind): string => {

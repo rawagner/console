@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
-import { ResourceLink, ExternalLink } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ExternalLink } from '@console/internal/components/utils/link';
 import { RouteModel } from '../../models';
 
 export type RoutesOverviewListItemProps = {

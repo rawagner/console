@@ -13,7 +13,7 @@ import {
 } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 import { confirmModal } from '@console/internal/components/modals';
-import { joinGrammaticallyListOfItems } from '@console/shared/src';
+import { joinGrammaticallyListOfItems } from '@console/shared/src/utils/grammar';
 import { CloudInitField, VMWizardStorage, VMWizardStorageType, VMWizardTab } from '../../types';
 import { vmWizardActions } from '../../redux/actions';
 import { ActionType } from '../../redux/types';

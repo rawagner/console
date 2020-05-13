@@ -1,31 +1,31 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { NodeKind, referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
-import {
-  useAccessReview,
-  SectionHeading,
-  LabelList,
-  Kebab,
-  ResourceLink,
-  cloudProviderNames,
-  cloudProviderID,
-  Timestamp,
-} from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { NodeKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { NodeModel, MachineModel } from '@console/internal/models';
-import { Button, pluralize } from '@patternfly/react-core';
+import { pluralize, Button } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import {
   getNodeMachineNameAndNamespace,
   getNodeAddresses,
-  getName,
-  getNamespace,
-} from '@console/shared';
+} from '@console/shared/src/selectors/node';
 import NodeIPList from '@console/app/src/components/nodes/NodeIPList';
 import NodeGraphs from '@console/app/src/components/nodes/NodeGraphs';
 import { BareMetalHostModel } from '../../models';
 import { BareMetalHostKind } from '../../types';
 import BareMetalNodeStatus from './BareMetalNodeStatus';
 import { bareMetalNodeStatus } from '../../status/baremetal-node-status';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { LabelList } from '@console/internal/components/utils/label-list';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import {
+  cloudProviderNames,
+  cloudProviderID,
+} from '@console/internal/components/utils/cloud-provider';
+import { Kebab } from '@console/internal/components/utils/kebab';
 
 type BareMetalNodeDetailsOverviewProps = {
   node: NodeKind;

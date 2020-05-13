@@ -13,23 +13,19 @@ import {
   K8sResourceConditionStatus,
   MachineConfigPoolConditionType,
   MachineConfigPoolKind,
-  referenceForModel,
-} from '../module/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  Kebab,
-  KebabAction,
-  navFactory,
-  pluralize,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Selector,
-  togglePaused,
-  WorkloadPausedAlert,
-} from './utils';
+} from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
+import { Kebab, ResourceKebab, KebabAction } from './utils/kebab';
+import { togglePaused, WorkloadPausedAlert } from './utils/workload-pause';
+import { ResourceLink } from './utils/resource-link';
+import { pluralize, ResourceSummary } from './utils/details-page';
+import { Selector } from './utils/selector';
+import { SectionHeading } from './utils/headings';
+import { navFactory } from './utils/horizontal-nav';
 
 const pauseAction: KebabAction = (kind, obj) => ({
   label: obj.spec.paused ? 'Resume Updates' : 'Pause Updates',

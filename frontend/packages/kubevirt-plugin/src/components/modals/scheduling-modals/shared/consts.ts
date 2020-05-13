@@ -1,4 +1,4 @@
-import { pluralize } from '@console/internal/components/utils';
+import { pluralize } from '@console/internal/components/utils/details-page';
 import { AffinityRowData } from '../affinity-modal/types';
 
 // Node Checker

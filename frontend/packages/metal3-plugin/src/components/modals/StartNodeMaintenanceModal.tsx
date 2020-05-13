@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { FormControl } from 'patternfly-react';
 import { Alert } from '@patternfly/react-core';
-import { withHandlePromise, HandlePromiseProps } from '@console/internal/components/utils';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
 import {
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
   createModalLauncher,
   ModalComponentProps,
-} from '@console/internal/components/factory';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/modal';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { CephClusterModel } from '@console/ceph-storage-plugin/src/models';
 import { startNodeMaintenance } from '../../k8s/requests/node-maintenance';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';

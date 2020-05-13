@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
 import NodeDetailsOverview from './NodeDetailsOverview';
 import NodeDetailsConditions from './NodeDetailsConditions';
 import NodeDetailsImages from './NodeDetailsImages';

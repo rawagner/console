@@ -4,28 +4,26 @@ import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
 import { AddHealthChecks, EditHealthChecks } from '@console/app/src/actions/modify-health-checks';
-import { K8sResourceKind } from '../module/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  AsyncComponent,
-  DetailsItem,
-  Kebab,
-  KebabAction,
-  ContainerTable,
-  detailsPage,
-  LabelList,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Selector,
-  LoadingInline,
-} from './utils';
+import { K8sResourceKind } from '../module/k8s/types';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
 import { VolumesTable } from './volumes-table';
 import { DaemonSetModel } from '../models';
-import { PodRingController, PodRing } from '@console/shared';
+import PodRing from '@console/shared/src/components/pod/PodRing';
+import PodRingController from '@console/shared/src/components/pod/PodRingDataController';
+import { Kebab, KebabAction, ResourceKebab } from './utils/kebab';
+import { DetailsItem } from './utils/details-item';
+import { ResourceSummary, detailsPage } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { LoadingInline } from './utils/status-box';
+import { ContainerTable } from './utils/container-table';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { Selector } from './utils/selector';
 
 export const menuActions: KebabAction[] = [
   AddHealthChecks,

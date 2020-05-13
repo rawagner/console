@@ -1,4 +1,4 @@
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { KebabAction } from '@console/internal/components/utils/kebab';
 import { Extension } from './base';
 

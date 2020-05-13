@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { withHandlePromise } from '@console/internal/components/utils';
+import { withHandlePromise } from '@console/internal/components/utils/promise-component';
 import {
   createModalLauncher,
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
-} from '@console/internal/components/factory';
-import { k8sPatch } from '@console/internal/module/k8s';
-import { getName } from '@console/shared';
+} from '@console/internal/components/factory/modal';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { getName } from '@console/shared/src/selectors/common';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import { getVMLikeModel } from '../../../selectors/vm';
 import { getRemoveDiskPatches } from '../../../k8s/patches/vm/vm-disk-patches';

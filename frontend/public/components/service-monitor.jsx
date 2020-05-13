@@ -2,10 +2,13 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
-import { ListPage, Table, TableRow, TableData } from './factory';
-import { Kebab, ResourceKebab, ResourceLink, Selector } from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
 import { ServiceMonitorModel } from '../models';
-import { referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { Selector } from './utils/selector';
 
 const { Edit, Delete } = Kebab.factory;
 const menuActions = [Edit, Delete];

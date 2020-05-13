@@ -2,16 +2,17 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import { Base64 } from 'js-base64';
 import { ExpandIcon } from '@patternfly/react-icons';
-import { Button } from '@patternfly/react-core';
+import { Button, Dropdown } from '@patternfly/react-core';
 
 import store from '../redux';
-import { LoadingBox, LoadingInline, Dropdown, ResourceIcon } from './utils';
 import { connectToFlags } from './utils/connect-flags';
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { Terminal } from './terminal';
 import { WSFactory } from '../module/ws-factory';
-import { resourceURL } from '../module/k8s';
+import { resourceURL } from '../module/k8s/resource';
 import { PodModel } from '../models';
+import { ResourceIcon } from './utils/resource-icon';
+import { LoadingBox, LoadingInline } from './utils/status-box';
 
 const nameWithIcon = (name) => (
   <span>

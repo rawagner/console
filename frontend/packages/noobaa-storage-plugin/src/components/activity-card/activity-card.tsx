@@ -4,8 +4,8 @@ import DashboardCard from '@console/shared/src/components/dashboard/dashboard-ca
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
-import { EventKind } from '@console/internal/module/k8s';
-import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
+import { EventKind } from '@console/internal/module/k8s/types';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
 import { EventModel, StatefulSetModel, PodModel } from '@console/internal/models';
 import ActivityBody, {
   RecentEventsBody,

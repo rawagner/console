@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { SectionHeading, ResourceSummary } from '@console/internal/components/utils';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { TaskRunModel } from '../../models';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
 
 export interface TaskRunDetailsProps {
   obj: K8sResourceKind;

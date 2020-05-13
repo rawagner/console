@@ -4,26 +4,25 @@ import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
 import { connectToFlags } from './utils/connect-flags';
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { Conditions } from './conditions';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { coFetchJSON } from '../co-fetch';
 import { ChargebackReportModel, ReportQueryModel } from '../models';
 import { LoadError, LoadingInline, MsgBox } from './utils/status-box';
-import { GroupVersionKind, K8sResourceKind, modelFor, referenceForModel } from '../module/k8s';
-import {
-  Kebab,
-  DownloadButton,
-  LabelList,
-  NavBar,
-  navFactory,
-  PageHeading,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-} from './utils';
+import { GroupVersionKind, K8sResourceKind } from '../module/k8s/types';
+import { modelFor } from '../module/k8s/k8s-models';
+import { referenceForModel } from '../module/k8s/k8s';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { PageHeading, SectionHeading } from './utils/headings';
+import { NavBar, navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { ResourceSummary } from './utils/details-page';
+import { DownloadButton } from './utils/download-button';
+import { LabelList } from './utils/label-list';
 
 export const ReportReference: GroupVersionKind = referenceForModel(ChargebackReportModel);
 export const ScheduledReportReference: GroupVersionKind = 'metering.openshift.io~ScheduledReport';

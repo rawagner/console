@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { K8sResourceKind, k8sGet } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 
 export const useSafeK8s = () => {
   const controller = useRef<AbortController>();

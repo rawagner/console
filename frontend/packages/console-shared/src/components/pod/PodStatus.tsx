@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { ChartDonut } from '@patternfly/react-charts';
 import { Tooltip } from '@patternfly/react-core';
-import { ExtPodKind } from '../../types';
-import { calculateRadius, podStatus, getPodStatus } from '../../utils';
-import { podColor, AllPodStatus } from '../../constants';
 import './PodStatus.scss';
+import { ExtPodKind } from '../../types/pod';
+import { AllPodStatus, podColor } from '../../constants/pod';
+import { calculateRadius, getPodStatus, podStatus } from '../../utils/pod-utils';
 
 const ANIMATION_DURATION = 350;
 

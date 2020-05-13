@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ResourceLink } from '@console/internal/components/utils';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { Conditions } from '@console/internal/components/conditions';
 import { DescriptorProps, StatusCapability, Descriptor, SpecCapability } from '../types';
 import { testModel } from '../../../../mocks';

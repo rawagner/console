@@ -1,4 +1,4 @@
-import { K8sResourceKind, MachineKind, NodeKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, MachineKind, NodeKind } from '@console/internal/module/k8s/types';
 import { getHostOperationalStatus, getHostProvisioningState, getHostErrorType } from '../selectors';
 import {
   HOST_STATUS_TITLES,

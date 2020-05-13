@@ -3,16 +3,18 @@ import * as _ from 'lodash';
 import { Map as ImmutableMap } from 'immutable';
 import { Button, Switch, Tooltip, Checkbox } from '@patternfly/react-core';
 import { EyeIcon, EyeSlashIcon, PencilAltIcon } from '@patternfly/react-icons';
-import { LoadingInline, ResourceLink, Selector } from '@console/internal/components/utils';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
-import { k8sPatch, k8sUpdate } from '@console/internal/module/k8s';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { k8sPatch, k8sUpdate } from '@console/internal/module/k8s/resource';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
 import { SecretValue } from '@console/internal/components/configmap-and-secret-data';
 import { CapabilityProps, DescriptorProps, SpecCapability, Error } from '../types';
 import { ResourceRequirementsModalLink } from './resource-requirements';
 import { EndpointList } from './endpoint';
 import { configureSizeModal } from './configure-size';
 import { configureUpdateStrategyModal } from './configure-update-strategy';
+import { Selector } from '@console/internal/components/utils/selector';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 
 const Default: React.SFC<SpecCapabilityProps> = ({ value }) => {
   if (_.isEmpty(value) && !_.isNumber(value) && !_.isBoolean(value)) {

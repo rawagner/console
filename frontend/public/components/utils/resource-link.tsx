@@ -3,15 +3,11 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as classNames from 'classnames';
 
-import { FLAGS } from '@console/shared/src/constants';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { ResourceIcon } from './resource-icon';
-import {
-  modelFor,
-  referenceForModel,
-  K8sKind,
-  K8sResourceKindReference,
-  K8sResourceKind,
-} from '../../module/k8s';
+import { referenceForModel } from '../../module/k8s/k8s';
+import { modelFor } from '../../module/k8s/k8s-models';
+import { K8sKind, K8sResourceKindReference, K8sResourceKind } from '../../module/k8s/types';
 import { connectToModel } from '../../kinds';
 import { connectToFlags, FlagsObject } from './connect-flags';
 

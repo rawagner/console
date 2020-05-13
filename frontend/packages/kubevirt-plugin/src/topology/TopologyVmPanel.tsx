@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  ResourceIcon,
-  SimpleTabNav,
-  ActionsMenu,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
 import * as UIActions from '@console/internal/actions/ui';
 import { Node } from '@console/topology';
-import { modelFor } from '@console/internal/module/k8s';
+import { modelFor } from '@console/internal/module/k8s/k8s-models';
 import { vmActions } from './components/kubevirtComponentFactory';
 import { TopologyVmDetailsPanel } from './TopologyVmDetailsPanel';
 import { TopologyVmResourcesPanel } from './TopologyVmResourcesPanel';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { ActionsMenu } from '@console/internal/components/utils/dropdown';
+import { SimpleTabNav } from '@console/internal/components/utils/simple-tab-nav';
 
 type PropsFromState = {
   selectedDetailsTab?: any;

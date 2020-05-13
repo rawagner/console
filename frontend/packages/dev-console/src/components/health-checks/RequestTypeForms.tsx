@@ -2,13 +2,11 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikValues, useFormikContext } from 'formik';
 import { TextInputTypes, FormGroup } from '@patternfly/react-core';
-import {
-  InputField,
-  CheckboxField,
-  DropdownField,
-  getFieldId,
-  TextColumnField,
-} from '@console/shared';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import CheckboxField from '@console/shared/src/components/formik-fields/CheckboxField';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
+import TextColumnField from '@console/shared/src/components/formik-fields/TextColumnField';
 import { NameValueEditor } from '@console/internal/components/utils/name-value-editor';
 import { Resources } from '../import/import-types';
 

@@ -11,7 +11,8 @@ import { ResourceLink } from './resource-link';
 import { Selector } from './selector';
 import { Timestamp } from './timestamp';
 import { useAccessReview } from './rbac';
-import { K8sResourceKind, modelFor, referenceFor, Toleration } from '../../module/k8s';
+import { K8sResourceKind, Toleration } from '../../module/k8s/types';
+import { modelFor, referenceFor } from '../../module/k8s/k8s-models';
 
 export const pluralize = (
   i: number,

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Alert } from '@patternfly/react-core';
 import * as _ from 'lodash';
 import { fromNow } from '@console/internal/components/utils/datetime';
-import { EventKind } from '@console/internal/module/k8s';
+import { EventKind } from '@console/internal/module/k8s/types';
 import './MonitoringOverviewEventsWarning.scss';
 
 interface MonitoringOverviewEventsWarningProps {

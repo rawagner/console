@@ -3,8 +3,8 @@ import { mount, ReactWrapper } from 'enzyme';
 import Spy = jasmine.Spy;
 
 import { PullSecret } from '../../public/components/namespace';
-import * as k8s from '../../public/module/k8s';
-import { LoadingInline } from '../../public/components/utils';
+import * as k8s from '../../public/module/k8s/resource';
+import { LoadingInline } from '../../public/components/utils/status-box';
 import { testNamespace } from '../../__mocks__/k8sResourcesMocks';
 import { SecretModel } from '../../public/models';
 

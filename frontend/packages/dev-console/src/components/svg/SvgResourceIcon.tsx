@@ -2,7 +2,8 @@ import * as React from 'react';
 import cx from 'classnames';
 import { get } from 'lodash';
 import { useSize } from '@console/topology';
-import { modelFor, kindToAbbr } from '@console/internal/module/k8s';
+import { modelFor } from '@console/internal/module/k8s/k8s-models';
+import { kindToAbbr } from '@console/internal/module/k8s/get-resources';
 import './SvgResourceIcon.scss';
 
 interface ResourceIconProps {

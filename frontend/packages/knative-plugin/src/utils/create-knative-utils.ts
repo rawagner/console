@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind, ImagePullPolicy } from '@console/internal/module/k8s';
+import { K8sResourceKind, ImagePullPolicy } from '@console/internal/module/k8s/types';
 import { getAppLabels, mergeData } from '@console/dev-console/src/utils/resource-label-utils';
 import { getProbesData } from '@console/dev-console/src/components/health-checks/create-health-checks-probe-utils';
 import {

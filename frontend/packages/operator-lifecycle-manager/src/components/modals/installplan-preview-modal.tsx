@@ -7,9 +7,10 @@ import {
   ModalFooter,
 } from '@console/internal/components/factory/modal';
 import { ActionGroup, Button } from '@patternfly/react-core';
-import { ResourceLink, CopyToClipboard } from '@console/internal/components/utils';
 import { referenceForStepResource } from '../index';
 import { StepResource } from '../../types';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { CopyToClipboard } from '@console/internal/components/utils/copy-to-clipboard';
 
 const InstallPlanPreview: React.FC<InstallPlanPreviewModalProps> = ({ cancel, stepResource }) => (
   <div className="modal-content">

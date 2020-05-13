@@ -4,9 +4,10 @@ import { Helmet } from 'react-helmet';
 import { Alert } from '@patternfly/react-core';
 import { safeLoad } from 'js-yaml';
 
-import { K8sResourceKind } from '../../module/k8s';
-import { AsyncComponent, StatusBox } from '../utils';
+import { K8sResourceKind } from '../../module/k8s/types';
 import { patchAlertmanagerConfig, getAlertmanagerYAML } from './alert-manager-utils';
+import { AsyncComponent } from '../utils/async';
+import { StatusBox } from '../utils/status-box';
 
 const EditAlertmanagerYAML = (props) => (
   <AsyncComponent

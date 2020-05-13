@@ -14,8 +14,8 @@ import {
   observer,
   createSvgIdUrl,
 } from '@console/topology';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import SvgBoxedText from '../../../svg/SvgBoxedText';
 import { getTopologyResourceObject } from '../../topology-utils';
 import { useDisplayFilters, useSearchFilter } from '../../filters';

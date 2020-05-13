@@ -1,21 +1,18 @@
 import * as React from 'react';
 import { Grid, GridItem } from '@patternfly/react-core';
-import {
-  Firehose,
-  FirehoseResult,
-  LoadingBox,
-  useAccessReview,
-  asAccessReview,
-} from '@console/internal/components/utils';
-import { TopologyDataObject } from '@console/dev-console/src/components/topology';
 import { Node, NodeModel } from '@console/topology/src/types';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { TemplateModel } from '@console/internal/models';
 import { VirtualMachineModel } from '../models';
 import { TEMPLATE_TYPE_LABEL, TEMPLATE_TYPE_VM } from '../constants/vm';
 import { VMDetailsList, VMResourceSummary } from '../components/vms/vm-resource';
 import { VMNodeData } from './types';
 import { VMKind } from '../types/vm';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
+import { useAccessReview, asAccessReview } from '@console/internal/components/utils/rbac';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { TopologyDataObject } from '@console/dev-console/src/components/topology/topology-types';
 
 type TopologyVmDetailsPanelProps = {
   vm: Node<NodeModel, TopologyDataObject<VMNodeData>>;

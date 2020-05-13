@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Formik } from 'formik';
-import { LoadingBox, StatusBox } from '@console/internal/components/utils';
+import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';
 import ProjectAccess from '../ProjectAccess';
 
 type ProjectAccessProps = React.ComponentProps<typeof ProjectAccess>;

@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { baseCRDs } from '@console/internal/reducers/features';
 import { FLAGS } from '@console/shared/src/constants/common';
 import { testedExtensions, getDuplicates } from '../plugin-test-utils';
-import { isModelFeatureFlag } from '@console/plugin-sdk';
+import { isModelFeatureFlag } from '@console/plugin-sdk/src/typings';
 
 describe('ModelFeatureFlag', () => {
   it('duplicate flags are not allowed', () => {

@@ -1,12 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import {
-  Dropdown,
-  FirehoseResource,
-  FirehoseResult,
-  humanizeBinaryBytes,
-} from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   DashboardItemProps,
   withDashboardResources,
@@ -16,7 +10,7 @@ import DashboardCard from '@console/shared/src/components/dashboard/dashboard-ca
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import { getInstantVectorStats } from '@console/internal/components/graphs/utils';
-import { SubscriptionModel } from '@console/operator-lifecycle-manager/src';
+import { SubscriptionModel } from '@console/operator-lifecycle-manager/src/models';
 import { HeaderPrometheusViewLink } from '@console/ceph-storage-plugin/src/components/dashboard-page/storage-dashboard/breakdown-card/breakdown-header';
 import { BreakdownCardBody } from '@console/ceph-storage-plugin/src/components/dashboard-page/storage-dashboard/breakdown-card/breakdown-body';
 import { getStackChartStats } from '@console/ceph-storage-plugin/src/components/dashboard-page/storage-dashboard/breakdown-card/utils';
@@ -30,6 +24,9 @@ import { PROJECTS } from '../../constants/index';
 import { breakdownQueryMap, CAPACITY_BREAKDOWN_QUERIES } from '../../queries';
 import './capacity-breakdown-card.scss';
 import { NooBaaBucketClassModel } from '../../models';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
+import { FirehoseResult, FirehoseResource } from '@console/internal/components/utils/types';
 
 const SubscriptionResource: FirehoseResource = {
   kind: referenceForModel(SubscriptionModel),

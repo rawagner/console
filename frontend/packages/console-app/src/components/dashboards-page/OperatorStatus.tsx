@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { referenceForModel, ClusterOperator } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ClusterOperator } from '@console/internal/module/k8s/types';
 import { ClusterOperatorModel } from '@console/internal/models';
 import { ResourceLink } from '@console/internal/components/utils/resource-link';
-import { OperatorRowProps } from '@console/plugin-sdk';
+import { OperatorRowProps } from '@console/plugin-sdk/src/typings';
 import Status from '@console/shared/src/components/dashboard/status-card/StatusPopup';
 
 const ClusterOperatorStatusRow: React.FC<OperatorRowProps<ClusterOperator>> = ({

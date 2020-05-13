@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ShallowWrapper, shallow } from 'enzyme';
 import { TextInput, FormGroup, Grid } from '@patternfly/react-core';
 
-import { ModalTitle, ModalSubmitFooter } from '@console/internal/components/factory';
+import { ModalTitle, ModalSubmitFooter } from '@console/internal/components/factory/modal';
 
 import {
   RestorePVCModalProps,

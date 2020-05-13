@@ -3,14 +3,12 @@ import * as _ from 'lodash';
 import { Text, pluralize } from '@patternfly/react-core';
 import * as classNames from 'classnames';
 import { sortable, OnSelect } from '@patternfly/react-table';
-import { Table } from '@console/internal/components/factory';
-import {
-  ResourceLink,
-  humanizeBinaryBytes,
-  convertToBaseValue,
-} from '@console/internal/components/utils';
-import { NodeKind } from '@console/internal/module/k8s';
-import { getUID, getName, getNodeCPUCapacity, getNodeAllocatableMemory } from '@console/shared';
+import { Table } from '@console/internal/components/factory/table';
+import { humanizeBinaryBytes, convertToBaseValue } from '@console/internal/components/utils/units';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { getUID, getName } from '@console/shared/src/selectors/common';
+import { getNodeCPUCapacity, getNodeAllocatableMemory } from '@console/shared/src/selectors/node';
 import { NodeTableRow, RowUIDMap } from './types';
 import { getSelectedNodeUIDs } from './utils';
 import './node-selection-list.scss';

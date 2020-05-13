@@ -1,4 +1,4 @@
-import { k8sKill } from '@console/internal/module/k8s';
+import { k8sKill } from '@console/internal/module/k8s/resource';
 import { V2VVMwareModel } from '../../../models';
 import * as _ from 'lodash';
 

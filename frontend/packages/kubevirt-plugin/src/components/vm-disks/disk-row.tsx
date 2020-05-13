@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { TableData, TableRow, RowFunction } from '@console/internal/components/factory';
-import {
-  asAccessReview,
-  Kebab,
-  KebabOption,
-  LoadingInline,
-} from '@console/internal/components/utils';
-import { DASH, dimensifyRow, getDeletetionTimestamp } from '@console/shared';
+import { TableData, TableRow, RowFunction } from '@console/internal/components/factory/table';
+import { dimensifyRow } from '@console/shared/src/utils/table-utils';
+import { DASH } from '@console/shared/src/constants/ui';
+import { getDeletetionTimestamp } from '@console/shared/src/selectors/common';
 import { TemplateModel } from '@console/internal/models';
+import { KebabOption, Kebab } from '@console/internal/components/utils/kebab';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 import { deleteDeviceModal, DeviceType } from '../modals/delete-device-modal';
 import { VMLikeEntityKind } from '../../types/vmLike';
 import { asVM, isVMRunning } from '../../selectors/vm';

@@ -4,8 +4,8 @@ import DashboardCard from '@console/shared/src/components/dashboard/dashboard-ca
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
-import { EventKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
+import { EventKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
 import {
   EventModel,
   PersistentVolumeClaimModel,
@@ -16,13 +16,14 @@ import ActivityBody, {
   OngoingActivityBody,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
-import { getNamespace } from '@console/shared';
+import { getNamespace } from '@console/shared/src/selectors/common';
 import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
 import { referenceForModel } from '@console/internal/module/k8s/k8s';
-import { SubscriptionModel, SubscriptionKind } from '@console/operator-lifecycle-manager';
+import { SubscriptionKind } from '@console/operator-lifecycle-manager/src/types';
+import { SubscriptionModel } from '@console/operator-lifecycle-manager/src/models';
 import { CEPH_STORAGE_NAMESPACE, OCS_OPERATOR } from '../../../../constants/index';
 import { DATA_RESILIENCY_QUERY, StorageDashboardQuery } from '../../../../constants/queries';
 import { getResiliencyProgress } from '../../../../utils';

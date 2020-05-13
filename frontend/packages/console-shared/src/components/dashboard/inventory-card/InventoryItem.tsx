@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { InProgressIcon, QuestionCircleIcon } from '@patternfly/react-icons';
-import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
 import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 import {
   Accordion,
@@ -9,12 +9,12 @@ import {
   AccordionToggle,
   AccordionContent,
 } from '@patternfly/react-core';
-import { pluralize } from '@console/internal/components/utils';
+import { pluralize } from '@console/internal/components/utils/details-page';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import {
-  useExtensions,
   DashboardsInventoryItemGroup,
   isDashboardsInventoryItemGroup,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import { RedExclamationCircleIcon, YellowExclamationTriangleIcon } from '../../status/icons';
 import { InventoryStatusGroup } from './status-group';
 import './inventory-card.scss';

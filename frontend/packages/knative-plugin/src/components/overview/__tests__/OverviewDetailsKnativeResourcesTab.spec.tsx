@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { MockKnativeResources } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
-import OperatorBackedOwnerReferences from '@console/internal/components/utils';
 import OverviewDetailsKnativeResourcesTab from '../OverviewDetailsKnativeResourcesTab';
 import KnativeServiceResources from '../KnativeServiceResources';
 import KnativeRevisionResources from '../KnativeRevisionResources';
@@ -9,6 +8,7 @@ import RevisionsOverviewList from '../RevisionsOverviewList';
 import KSRoutesOverviewList from '../RoutesOverviewList';
 import ConfigurationsOverviewList from '../ConfigurationsOverviewList';
 import EventSinkServicesOverviewList from '../EventSinkServicesOverviewList';
+import OperatorBackedOwnerReferences from '@console/internal/components/utils/operator-backed-owner-references';
 
 type OverviewDetailsKnativeResourcesTabProps = React.ComponentProps<
   typeof OverviewDetailsKnativeResourcesTab

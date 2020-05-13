@@ -1,6 +1,5 @@
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
-
-import { KebabOption } from '@console/internal/components/utils';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { KebabOption } from '@console/internal/components/utils/kebab';
 
 export const SnapshotPVC = (kind: K8sKind, resource: K8sResourceKind): KebabOption => {
   return {

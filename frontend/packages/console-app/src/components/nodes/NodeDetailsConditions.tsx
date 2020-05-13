@@ -1,7 +1,9 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { NodeKind } from '@console/internal/module/k8s';
-import { SectionHeading, Timestamp, CamelCaseWrap } from '@console/internal/components/utils';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { CamelCaseWrap } from '@console/internal/components/utils/camel-case-wrap';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 type NodeDetailsConditionsProps = {
   node: NodeKind;

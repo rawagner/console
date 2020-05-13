@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Firehose, FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
-import { k8sPatch, K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { NetworkAttachmentDefinitionModel } from '@console/network-attachment-definition-plugin';
-import { getName, getNamespace } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { getLoadedData } from '../../../utils';
 import { NetworkType } from '../../../constants/vm';
 import { getInterfaces, getUsedNetworks, asVM, getVMLikeModel } from '../../../selectors/vm';

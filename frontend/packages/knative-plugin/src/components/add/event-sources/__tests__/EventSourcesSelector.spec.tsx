@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as lodash from 'lodash';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ItemSelectorField } from '@console/shared';
 import EventSourcesSelector from '../EventSourcesSelector';
 import * as sourceUtils from '../../../../utils/create-eventsources-utils';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
+import ItemSelectorField from '@console/shared/src/components/formik-fields/item-selector-field/ItemSelectorField';
 
 type EventSourcesSelectorProps = React.ComponentProps<typeof EventSourcesSelector>;
 

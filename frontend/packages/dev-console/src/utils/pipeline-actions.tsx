@@ -1,11 +1,8 @@
 import * as _ from 'lodash';
-import {
-  history,
-  resourcePathFromModel,
-  Kebab,
-  KebabAction,
-} from '@console/internal/components/utils';
-import { k8sCreate, K8sKind, k8sPatch, referenceForModel } from '@console/internal/module/k8s';
+import { history } from '@console/internal/components/utils/router';
+import { K8sKind } from '@console/internal/module/k8s/types';
+import { k8sCreate, k8sPatch } from '@console/internal/module/k8s/resource';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { errorModal } from '@console/internal/components/modals';
 import {
   addTriggerModal,
@@ -17,6 +14,8 @@ import { StartedByLabel } from '../components/pipelines/const';
 import { EventListenerModel, PipelineModel, PipelineRunModel } from '../models';
 import { Pipeline, PipelineRun } from './pipeline-augment';
 import { pipelineRunFilterReducer } from './pipeline-filter-reducer';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { KebabAction, Kebab } from '@console/internal/components/utils/kebab';
 
 export const handlePipelineRunSubmit = (pipelineRun: PipelineRun) => {
   history.push(

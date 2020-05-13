@@ -2,7 +2,10 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Form, TextInputTypes } from '@patternfly/react-core';
 import { FormikProps, FormikValues } from 'formik';
-import { MultiColumnField, InputField, DropdownField, FormFooter } from '@console/shared';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 
 enum accessRoles {
   '' = 'Select a role',

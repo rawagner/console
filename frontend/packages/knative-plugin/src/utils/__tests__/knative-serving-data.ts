@@ -1,4 +1,4 @@
-import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
 import {
   DeployImageFormData,
   Resources,

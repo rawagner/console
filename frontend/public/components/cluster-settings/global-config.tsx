@@ -5,12 +5,19 @@ import { Link } from 'react-router-dom';
 import { AlertVariant } from '@patternfly/react-core';
 
 import { RootState } from '../../redux-types';
-import { K8sKind, k8sList, referenceForModel, getResourceDescription } from '../../module/k8s';
-import { EmptyBox, ExpandableAlert, Kebab, LoadingBox, resourcePathFromModel } from '../utils';
+import { referenceForModel } from '../../module/k8s/k8s';
+import { K8sKind } from '../../module/k8s/types';
+import { k8sList } from '../../module/k8s/resource';
+import { getResourceDescription } from '../../module/k8s/swagger';
 import { addIDPItems } from './oauth';
-import { TextFilter } from '../factory';
+import { TextFilter } from '../factory/list-page';
 import { fuzzyCaseInsensitive } from '../factory/table-filters';
-import { withExtensions, isGlobalConfig, GlobalConfig } from '@console/plugin-sdk';
+import { isGlobalConfig, GlobalConfig } from '@console/plugin-sdk/src/typings';
+import { withExtensions } from '@console/plugin-sdk/src/withExtensions';
+import { Kebab } from '../utils/kebab';
+import { resourcePathFromModel } from '../utils/resource-link';
+import { ExpandableAlert } from '../utils/alerts';
+import { LoadingBox, EmptyBox } from '../utils/status-box';
 
 const stateToProps = (state: RootState) => ({
   configResources: state.k8s.getIn(['RESOURCES', 'configResources']),

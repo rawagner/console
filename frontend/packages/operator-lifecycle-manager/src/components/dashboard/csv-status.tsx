@@ -4,9 +4,9 @@ import {
   resourcePathFromModel,
   resourcePath,
 } from '@console/internal/components/utils/resource-link';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { pluralize } from '@patternfly/react-core';
-import { OperatorRowProps } from '@console/plugin-sdk';
+import { OperatorRowProps } from '@console/plugin-sdk/src/typings';
 import Status from '@console/shared/src/components/dashboard/status-card/StatusPopup';
 import { ClusterServiceVersionModel } from '../../models';
 import { ClusterServiceVersionKind } from '../../types';

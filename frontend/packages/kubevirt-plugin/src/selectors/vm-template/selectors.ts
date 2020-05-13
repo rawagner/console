@@ -1,7 +1,7 @@
 import { VMGenericLikeEntityKind } from '../../types/vmLike';
-import { getLabel, getName, getNamespace } from '@console/shared/src';
+import { getLabel, getName, getNamespace } from '@console/shared/src/selectors/common';
 import { LABEL_USED_TEMPLATE_NAME, LABEL_USED_TEMPLATE_NAMESPACE } from '../../constants/vm';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { TemplateValidations } from '../../utils/validations/template/template-validations';
 
 export const getVMTemplateNamespacedName = (

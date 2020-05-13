@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { navFactory } from '@console/internal/components/utils';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 import { PodsPage } from '@console/internal/components/pod';
 import { ResourceEventStream } from '@console/internal/components/events';
-import { DetailsPage } from '@console/internal/components/factory';
+import { DetailsPage } from '@console/internal/components/factory/details';
 import { nodeStatus } from '../../status/node';
 import NodeDetails from './NodeDetails';
 import NodeTerminal from './NodeTerminal';

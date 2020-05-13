@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Form } from '@patternfly/react-core';
 import { FormikProps, FormikValues, getIn } from 'formik';
-import { useAccessReview } from '@console/internal/components/utils';
-import { FormFooter } from '@console/shared';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 import PipelineParameters from './PipelineParameters';
 
 type PipelineParametersFormProps = FormikProps<FormikValues> & {

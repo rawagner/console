@@ -2,12 +2,13 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 
-import { SectionHeading, ExpandCollapse } from '../../utils';
 import {
   SaveAsDefaultCheckbox,
   SendResolvedAlertsCheckbox,
   FormProps,
 } from './alert-manager-receiver-forms';
+import { ExpandCollapse } from '../../utils/expand-collapse';
+import { SectionHeading } from '../../utils/headings';
 
 const SMTP_GLOBAL_FIELDS = [
   'smtp_from',

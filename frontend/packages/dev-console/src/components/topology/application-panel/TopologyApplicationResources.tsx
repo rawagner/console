@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import * as _ from 'lodash';
-import { modelFor } from '@console/internal/module/k8s';
+import { modelFor } from '@console/internal/module/k8s/k8s-models';
 import { TopologyDataObject } from '../topology-types';
 import { getTopologyResourceObject } from '../topology-utils';
 import ApplicationGroupResource from './ApplicationGroupResource';

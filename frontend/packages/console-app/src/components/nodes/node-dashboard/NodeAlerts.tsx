@@ -17,11 +17,8 @@ import {
   getNodeMachineNameAndNamespace,
 } from '@console/shared/src/selectors/node';
 import { usePrometheusQuery } from '@console/shared/src/components/dashboard/utilization-card/prometheus-hook';
-import {
-  humanizeCpuCores,
-  humanizeBinaryBytes,
-  Humanize,
-} from '@console/internal/components/utils';
+import { humanizeCpuCores, humanizeBinaryBytes } from '@console/internal/components/utils/units';
+import { Humanize } from '@console/internal/components/utils/types';
 import {
   CPUPopover,
   PopoverProps,
@@ -33,11 +30,8 @@ import {
   YellowExclamationTriangleIcon,
 } from '@console/shared/src/components/status/icons';
 import { DashboardCardPopupLink } from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardLink';
-import {
-  referenceForModel,
-  MachineKind,
-  MachineHealthCheckKind,
-} from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { MachineKind, MachineHealthCheckKind } from '@console/internal/module/k8s/types';
 import { MachineModel } from '@console/internal/models';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NumberSpinnerField } from '@console/shared';
+import NumberSpinnerField from '@console/shared/src/components/formik-fields/NumberSpinnerField';
 import FormSection from '../section/FormSection';
 
 const ScalingSection: React.FC = () => {

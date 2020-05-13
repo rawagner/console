@@ -6,9 +6,9 @@ import {
   TableRow,
   TableData,
   Table,
-  TextFilter,
   RowFunction,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/table';
+import { TextFilter } from '@console/internal/components/factory/list-page';
 import CustomResourceList from '../CustomResourceList';
 import {
   CustomResourceListProps,

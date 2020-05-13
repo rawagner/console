@@ -6,13 +6,18 @@ import { Alert } from '@patternfly/react-core';
 import { SyncAltIcon, UnknownIcon } from '@patternfly/react-icons';
 
 import { ClusterOperatorModel } from '../../models';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from '../factory';
+import { DetailsPage } from '../factory/details';
+import { ListPage } from '../factory/list-page';
+import { Table, TableRow, TableData, RowFunction } from '../factory/table';
 import { Conditions } from '../conditions';
+import { referenceForModel } from '../../module/k8s/k8s';
 import {
   getClusterOperatorStatus,
   getClusterOperatorVersion,
-  getClusterVersionCondition,
   getStatusAndMessage,
+} from '../../module/k8s/cluster-operator';
+import { getClusterVersionCondition } from '../../module/k8s/cluster-settings';
+import {
   ClusterOperator,
   ClusterVersionConditionType,
   ClusterVersionKind,
@@ -20,17 +25,17 @@ import {
   K8sResourceKindReference,
   OperandVersion,
   OperatorStatus,
-  referenceForModel,
-} from '../../module/k8s';
+} from '../../module/k8s/types';
 import {
-  navFactory,
-  EmptyBox,
-  Kebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-} from '../utils';
-import { GreenCheckCircleIcon, YellowExclamationTriangleIcon } from '@console/shared';
+  GreenCheckCircleIcon,
+  YellowExclamationTriangleIcon,
+} from '@console/shared/src/components/status/icons';
+import { Kebab } from '../utils/kebab';
+import { ResourceLink } from '../utils/resource-link';
+import { EmptyBox } from '../utils/status-box';
+import { ResourceSummary } from '../utils/details-page';
+import { SectionHeading } from '../utils/headings';
+import { navFactory } from '../utils/horizontal-nav';
 
 export const clusterOperatorReference: K8sResourceKindReference = referenceForModel(
   ClusterOperatorModel,

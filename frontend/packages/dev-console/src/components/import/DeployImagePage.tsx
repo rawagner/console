@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { PageHeading, Firehose } from '@console/internal/components/utils';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import { QUERY_PROPERTIES } from '../../const';
 import QueryFocusApplication from '../QueryFocusApplication';
 import NamespacedPage, { NamespacedPageVariants } from '../NamespacedPage';

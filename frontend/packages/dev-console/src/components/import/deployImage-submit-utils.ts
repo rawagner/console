@@ -7,10 +7,11 @@ import {
   RouteModel,
   RoleBindingModel,
 } from '@console/internal/models';
-import { k8sCreate, K8sResourceKind, K8sVerb, k8sUpdate } from '@console/internal/module/k8s';
-import { ServiceModel as KnServiceModel } from '@console/knative-plugin';
+import { K8sResourceKind, K8sVerb } from '@console/internal/module/k8s/types';
+import { k8sCreate, k8sUpdate } from '@console/internal/module/k8s/resource';
+import { ServiceModel as KnServiceModel } from '@console/knative-plugin/src/models';
 import { getKnativeServiceDepResource } from '@console/knative-plugin/src/utils/create-knative-utils';
-import { getRandomChars } from '@console/shared/src/utils';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 import {
   getAppLabels,
   getPodLabels,

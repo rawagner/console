@@ -1,12 +1,14 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { podPhase } from '@console/internal/module/k8s';
+import { podPhase } from '@console/internal/module/k8s/pods';
 import { BuildOverview } from '@console/internal/components/overview/build-overview';
 import { PodModel } from '@console/internal/models';
-import { AllPodStatus, OverviewItem, usePluginsOverviewTabSection } from '@console/shared';
 import { PodsOverview } from '@console/internal/components/overview/pods-overview';
 import RevisionsOverviewList from './RevisionsOverviewList';
 import KSRoutesOverviewList from './RoutesOverviewList';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { usePluginsOverviewTabSection } from '@console/shared/src/hooks/plugins-overview-tab-section';
+import { AllPodStatus } from '@console/shared/src/constants/pod';
 
 const REVISIONS_AUTOSCALED = 'All Revisions are autoscaled to 0';
 

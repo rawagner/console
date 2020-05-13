@@ -4,7 +4,7 @@ import DashboardCardHeader from '@console/shared/src/components/dashboard/dashbo
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import UtilizationBody from '@console/shared/src/components/dashboard/utilization-card/UtilizationBody';
 import { TopConsumerPopoverProp } from '@console/shared/src/components/dashboard/utilization-card/UtilizationItem';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 import ConsumerPopover from '@console/shared/src/components/dashboard/utilization-card/TopConsumerPopover';
 import { PopoverPosition } from '@patternfly/react-core';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
@@ -14,7 +14,7 @@ import {
   humanizeCpuCores,
   humanizeDecimalBytesPerSec,
   humanizeNumber,
-} from '../../utils';
+} from '../../utils/units';
 import { ProjectDashboardContext } from './project-dashboard-context';
 import { PodModel } from '../../../models';
 import {

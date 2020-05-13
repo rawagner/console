@@ -1,9 +1,11 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 
-import { k8sPatch, K8sResourceKind, K8sKind } from '../../module/k8s';
+import { K8sResourceKind, K8sKind } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { NumberSpinner, withHandlePromise } from '../utils';
+import { withHandlePromise } from '../utils/promise-component';
+import { NumberSpinner } from '../utils/number-spinner';
 
 export const ConfigureCountModal = withHandlePromise((props: ConfigureCountModalProps) => {
   const getPath = props.path.substring(1).replace('/', '.');

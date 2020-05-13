@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { useField, useFormikContext, FormikValues } from 'formik';
-import { NumberSpinner } from '@console/internal/components/utils';
+import { NumberSpinner } from '@console/internal/components/utils/number-spinner';
 import { FormGroup } from '@patternfly/react-core';
 import { FieldProps } from './field-types';
 import { getFieldId } from './field-utils';
-import { useFormikValidationFix } from '../../hooks';
+import { useFormikValidationFix } from '../../hooks/formik-validation-fix';
 
 const NumberSpinnerField: React.FC<FieldProps> = ({ label, helpText, required, ...props }) => {
   const [field, { touched, error }] = useField(props.name);

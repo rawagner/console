@@ -1,5 +1,5 @@
 import { Dispatch } from 'react-redux';
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { Extension, AlwaysOnExtension } from './base';
 import { Action } from 'typesafe-actions';
 

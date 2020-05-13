@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
-import { KebabOption, kebabOptionsToMenu } from '@console/internal/components/utils';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import {
   GraphElement,
   ComponentFactory as TopologyComponentFactory,
@@ -9,22 +8,23 @@ import {
   withSelection,
   Node,
 } from '@console/topology';
-import {
-  NodeComponentProps,
-  nodeDragSourceSpec,
-  nodeDropTargetSpec,
-  withEditReviewAccess,
-  withContextMenu,
-  AbstractSBRComponentFactory,
-  createMenuItems,
-  TopologyDataObject,
-  getTopologyResourceObject,
-} from '@console/dev-console/src/components/topology';
 import { ModifyApplication } from '@console/dev-console/src/actions/modify-application';
 import { vmMenuActions } from '../../components/vms/menu-actions';
 import { VmNode } from './nodes/VmNode';
 import { TYPE_VIRTUAL_MACHINE } from './const';
 import { VMNodeData } from '../types';
+import { kebabOptionsToMenu, KebabOption } from '@console/internal/components/utils/kebab';
+import { TopologyDataObject } from '@console/dev-console/src/components/topology/topology-types';
+import { getTopologyResourceObject } from '@console/dev-console/src/components/topology/topology-utils';
+import {
+  AbstractSBRComponentFactory,
+  createMenuItems,
+  withEditReviewAccess,
+  nodeDragSourceSpec,
+  withContextMenu,
+  NodeComponentProps,
+  nodeDropTargetSpec,
+} from '@console/dev-console/src/components/topology/components';
 
 export const vmActions = (vm: TopologyDataObject<VMNodeData>): KebabOption[] => {
   const contextMenuResource = getTopologyResourceObject(vm);

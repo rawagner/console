@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Status } from '@console/shared';
-import { TableRow, TableData, RowFunction } from '@console/internal/components/factory';
-import { Timestamp, Kebab } from '@console/internal/components/utils';
+import { Status } from '@console/shared/src/components/status/Status';
+import { TableRow, TableData, RowFunction } from '@console/internal/components/factory/table';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { Kebab } from '@console/internal/components/utils/kebab';
 import { confirmModal } from '@console/internal/components/modals';
 import { coFetchJSON } from '@console/internal/co-fetch';
 import { tableColumnClasses } from './HelmReleaseHistoryHeader';

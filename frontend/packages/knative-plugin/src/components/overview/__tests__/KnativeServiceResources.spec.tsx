@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { useExtensions } from '@console/plugin-sdk';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { PodsOverview } from '@console/internal/components/overview/pods-overview';
 import {
   sampleKnativePods,
@@ -9,7 +9,7 @@ import {
   knativeServiceObj,
 } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
 import { BuildOverview } from '@console/internal/components/overview/build-overview';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
 import KnativeServiceResources from '../KnativeServiceResources';
 import KSRoutesOverviewList from '../RoutesOverviewList';
 import RevisionsOverviewList from '../RevisionsOverviewList';

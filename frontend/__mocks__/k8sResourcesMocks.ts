@@ -1,4 +1,4 @@
-import { CustomResourceDefinitionKind, K8sResourceKind } from '../public/module/k8s';
+import { CustomResourceDefinitionKind, K8sResourceKind } from '../public/module/k8s/types';
 
 export const testNamespace: K8sResourceKind = {
   apiVersion: 'v1',

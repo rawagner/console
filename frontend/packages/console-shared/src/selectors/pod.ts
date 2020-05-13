@@ -1,4 +1,4 @@
-import { PodKind } from '@console/internal/module/k8s';
+import { PodKind } from '@console/internal/module/k8s/types';
 
 export const getNodeName = (pod: PodKind): PodKind['spec']['nodeName'] =>
   pod && pod.spec ? pod.spec.nodeName : undefined;

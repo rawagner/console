@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { OverviewItem } from '@console/shared';
-import { Firehose } from '@console/internal/components/utils';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import MonitoringOverview from './MonitoringOverview';
 import { PodModel } from '@console/internal/models';
 

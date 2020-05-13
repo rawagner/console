@@ -10,7 +10,7 @@ import { iGetProvisionSource } from '../../selectors/immutable/vm-settings';
 import { ProvisionSource } from '../../../../constants/vm/provision-source';
 import { getTemplateValidation } from '../../selectors/template';
 import { TemplateValidations } from '../../../../utils/validations/template/template-validations';
-import { getName } from '@console/shared/src';
+import { getName } from '@console/shared/src/selectors/common';
 import { DataVolumeWrapper } from '../../../../k8s/wrapper/vm/data-volume-wrapper';
 import { PersistentVolumeClaimWrapper } from '../../../../k8s/wrapper/vm/persistent-volume-claim-wrapper';
 import { DiskWrapper } from '../../../../k8s/wrapper/vm/disk-wrapper';

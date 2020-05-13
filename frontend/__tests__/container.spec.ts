@@ -1,4 +1,4 @@
-import { PodKind } from '../public/module/k8s';
+import { PodKind } from '../public/module/k8s/types';
 import { getContainerStatus } from '../public/module/k8s/container';
 
 describe('k8sDocker', () => {

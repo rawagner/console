@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { AccessReviewResourceAttributes, K8sKind } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { AccessReviewResourceAttributes, K8sKind } from '@console/internal/module/k8s/types';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import {
   BuildConfigModel,
   DeploymentConfigModel,

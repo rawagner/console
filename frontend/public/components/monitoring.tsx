@@ -38,10 +38,11 @@ import {
   PodModel,
   StatefulSetModel,
 } from '../models';
-import { K8sKind } from '../module/k8s';
+import { K8sKind } from '../module/k8s/types';
 import store from '../redux';
 import { RootState } from '../redux-types';
-import { RowFunction, Table, TableData, TableRow, TextFilter } from './factory';
+import { RowFunction, Table, TableData, TableRow } from './factory/table';
+import { TextFilter } from './factory/list-page';
 import { confirmModal } from './modals';
 import MonitoringDashboardsPage from './monitoring/dashboards';
 import { graphStateToProps, QueryBrowserPage, ToggleGraph } from './monitoring/metrics';
@@ -66,7 +67,7 @@ import {
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,
-} from '@console/shared';
+} from '@console/shared/src/components/status/icons';
 import {
   Alert,
   SilenceStates,

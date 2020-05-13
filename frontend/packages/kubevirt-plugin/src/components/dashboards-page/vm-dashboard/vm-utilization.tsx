@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
-  Dropdown,
   humanizeBinaryBytes,
   humanizeCpuCores as humanizeCpuCoresUtil,
-} from '@console/internal/components/utils';
-import { getName, getNamespace, getCreationTimestamp } from '@console/shared';
+} from '@console/internal/components/utils/units';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { getName, getNamespace, getCreationTimestamp } from '@console/shared/src/selectors/common';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import CloudShellDrawer from '../CloudShellDrawer';
-import { Drawer } from '@console/shared';
+import Drawer from '@console/shared/src/components/drawer/Drawer';
 
 describe('CloudShellDrawerComponent', () => {
   it('should render children as Drawer children when present', () => {

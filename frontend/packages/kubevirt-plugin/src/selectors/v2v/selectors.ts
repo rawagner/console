@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { VMWARE_KUBEVIRT_VMWARE_CONFIG_MAP_NAME } from '../../constants/v2v';
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 
 export const getV2VConnectionName = (value) => value && value.spec && value.spec.connection;
 

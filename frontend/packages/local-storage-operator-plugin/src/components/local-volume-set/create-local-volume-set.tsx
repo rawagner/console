@@ -12,20 +12,23 @@ import {
   Text,
   TextVariants,
 } from '@patternfly/react-core';
-import {
-  resourcePathFromModel,
-  BreadCrumbs,
-  Dropdown,
-  resourceObjPath,
-  withHandlePromise,
-  HandlePromiseProps,
-  ButtonBar,
-} from '@console/internal/components/utils';
 import { history } from '@console/internal/components/utils/router';
-import { ListPage } from '@console/internal/components/factory';
-import { k8sCreate, referenceFor } from '@console/internal/module/k8s';
+import { ListPage } from '@console/internal/components/factory/list-page';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { NodeModel } from '@console/internal/models';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
+import {
+  resourceObjPath,
+  resourcePathFromModel,
+} from '@console/internal/components/utils/resource-link';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
 import { LocalVolumeSetModel } from '../../models';
 import { NodesSelectionList } from './nodes-selection-list';
 import {

@@ -3,12 +3,13 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 
 import { RadioInput } from '../../radio';
-import { ExpandCollapse, ExternalLink } from '../../utils';
 import {
   SaveAsDefaultCheckbox,
   SendResolvedAlertsCheckbox,
   FormProps,
 } from './alert-manager-receiver-forms';
+import { ExpandCollapse } from '../../utils/expand-collapse';
+import { ExternalLink } from '../../utils/link';
 
 const GLOBAL_FIELDS = [
   'slack_api_url',

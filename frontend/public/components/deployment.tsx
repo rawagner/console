@@ -1,31 +1,29 @@
 import * as React from 'react';
 
-import { Status, PodRingController } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
+import PodRingController from '@console/shared/src/components/pod/PodRingDataController';
 import PodRingSet from '@console/shared/src/components/pod/PodRingSet';
 import { AddHealthChecks, EditHealthChecks } from '@console/app/src/actions/modify-health-checks';
 import { DeploymentModel } from '../models';
-import { DeploymentKind, K8sKind, K8sResourceKindReference } from '../module/k8s';
+import { DeploymentKind, K8sKind, K8sResourceKindReference } from '../module/k8s/types';
 import { configureUpdateStrategyModal, errorModal } from './modals';
 import { Conditions } from './conditions';
 import { ResourceEventStream } from './events';
 import { VolumesTable } from './volumes-table';
-import { DetailsPage, ListPage, Table, RowFunction } from './factory';
-import {
-  AsyncComponent,
-  DetailsItem,
-  Kebab,
-  KebabAction,
-  ContainerTable,
-  navFactory,
-  pluralize,
-  ResourceSummary,
-  SectionHeading,
-  togglePaused,
-  WorkloadPausedAlert,
-  LoadingInline,
-} from './utils';
+import { Table, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ReplicaSetsPage } from './replicaset';
 import { WorkloadTableRow, WorkloadTableHeader } from './workload-table';
+import { Kebab, KebabAction } from './utils/kebab';
+import { togglePaused, WorkloadPausedAlert } from './utils/workload-pause';
+import { DetailsItem } from './utils/details-item';
+import { pluralize, ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { LoadingInline } from './utils/status-box';
+import { ContainerTable } from './utils/container-table';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
 
 const deploymentsReference: K8sResourceKindReference = 'Deployment';
 const { ModifyCount, AddStorage, common } = Kebab.factory;

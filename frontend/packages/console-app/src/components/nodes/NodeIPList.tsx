@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { NodeAddress, DetailPropertyList, DetailPropertyListItem } from '@console/shared';
+import { NodeAddress } from '@console/shared/src/types/node';
+import DetailPropertyList from '@console/shared/src/components/lists/DetailPropertyList';
+import DetailPropertyListItem from '@console/shared/src/components/lists/DetailPropertyListItem';
 
 type NodeIPListProps = {
   ips: NodeAddress[];

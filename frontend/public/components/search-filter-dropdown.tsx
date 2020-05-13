@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
 import { CaretDownIcon, FilterIcon } from '@patternfly/react-icons';
-import { TextFilter } from './factory';
+import { TextFilter } from './factory/list-page';
 
 export enum searchFilterValues {
   Label = 'Label',

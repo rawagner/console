@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Alert, PrometheusResponse } from '@console/shared/src/types/monitoring';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 export const filterNooBaaAlerts = (alerts: Alert[]): Alert[] =>
   alerts.filter((alert) => _.get(alert, 'annotations.storage_type') === 'NooBaa');

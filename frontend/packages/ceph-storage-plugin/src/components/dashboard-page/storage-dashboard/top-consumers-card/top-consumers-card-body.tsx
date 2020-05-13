@@ -11,11 +11,12 @@ import {
   ChartVoronoiContainer,
 } from '@patternfly/react-charts';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
-import { DataPoint } from '@console/internal/components/graphs';
-import { humanizeBinaryBytes, LoadingInline } from '@console/internal/components/utils';
+import { DataPoint } from '@console/internal/components/graphs/types';
 import { twentyFourHourTime } from '@console/internal/components/utils/datetime';
 import { GraphEmpty } from '@console/internal/components/graphs/graph-empty';
 import { getGraphVectorStats, getMetricType, sortResources } from './utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 
 const chartPropsValue = {
   chartHeight: 175,

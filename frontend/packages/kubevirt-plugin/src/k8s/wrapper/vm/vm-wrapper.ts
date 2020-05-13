@@ -1,6 +1,6 @@
 /* eslint-disable lines-between-class-members */
 import * as _ from 'lodash';
-import { getLabels } from '@console/shared/src';
+import { getLabels } from '@console/shared/src/selectors/common';
 import { K8sResourceWrapper } from '../common/k8s-resource-wrapper';
 import { CPURaw, VMKind } from '../../../types/vm';
 import {

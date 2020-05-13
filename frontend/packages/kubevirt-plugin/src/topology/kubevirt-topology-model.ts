@@ -1,17 +1,19 @@
 import { NodeModel, EdgeModel } from '@console/topology';
+import { TYPE_VIRTUAL_MACHINE } from './components/const';
 import {
-  TopologyFilters as Filters,
   TopologyDataModel as DataModel,
+  Group,
   TopologyDataObject,
   Node,
-  Group,
   Edge,
-  dataObjectFromModel,
+} from '@console/dev-console/src/components/topology/topology-types';
+import { TopologyFilters as Filters } from '@console/dev-console/src/components/topology/filters';
+import { dataObjectFromModel } from '@console/dev-console/src/components/topology/data-transforms/transform-utils';
+import {
+  NODE_WIDTH,
   NODE_HEIGHT,
   NODE_PADDING,
-  NODE_WIDTH,
-} from '@console/dev-console/src/components/topology';
-import { TYPE_VIRTUAL_MACHINE } from './components/const';
+} from '@console/dev-console/src/components/topology/components';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getKubevirtGroupModel = (d: Group, model: DataModel, filters: Filters): NodeModel => {

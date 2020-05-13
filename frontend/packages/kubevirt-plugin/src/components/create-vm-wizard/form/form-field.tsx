@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { inject } from '@console/internal/components/utils';
-import { ValidationErrorType } from '@console/shared';
+import { inject } from '@console/internal/components/utils/inject';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { getPlaceholder, getFieldId, getFieldTitle } from '../utils/renderable-field-utils';
 import { iGetIn } from '../../../utils/immutable';
 import {

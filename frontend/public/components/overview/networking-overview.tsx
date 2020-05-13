@@ -2,9 +2,10 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import { LongArrowAltRightIcon } from '@patternfly/react-icons';
 
-import { K8sResourceKind, RouteKind } from '../../module/k8s';
+import { K8sResourceKind, RouteKind } from '../../module/k8s/types';
 import { RouteLocation } from '../routes';
-import { ResourceLink, SidebarSectionHeading } from '../utils';
+import { ResourceLink } from '../utils/resource-link';
+import { SidebarSectionHeading } from '../utils/headings';
 
 const ServicePortList: React.SFC<ServicePortListProps> = ({ service }) => {
   const ports = _.get(service, 'spec.ports', []);

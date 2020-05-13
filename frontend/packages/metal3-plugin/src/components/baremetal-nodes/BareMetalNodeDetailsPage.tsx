@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Helmet from 'react-helmet';
-import { navFactory, FirehoseResource } from '@console/internal/components/utils';
 import { PodsPage } from '@console/internal/components/pod';
 import { ResourceEventStream } from '@console/internal/components/events';
-import { DetailsPage } from '@console/internal/components/factory';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { MachineModel, NodeModel } from '@console/internal/models';
 import { connectToPlural } from '@console/internal/kinds';
 import { ResourceDetailsPageProps } from '@console/internal/components/resource-list';
@@ -14,6 +13,8 @@ import { menuActionsCreator } from './menu-actions';
 import BareMetalNodeDetails from './BareMetalNodeDetails';
 import { NODE_MAINTENANCE_FLAG } from '../../features';
 import BareMetalNodeDashboard from './dashboard/BareMetalNodeDashboard';
+import { FirehoseResource } from '@console/internal/components/utils/types';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 
 const { editYaml, events, pods } = navFactory;
 

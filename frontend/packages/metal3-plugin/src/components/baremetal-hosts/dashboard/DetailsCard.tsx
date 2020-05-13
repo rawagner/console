@@ -10,9 +10,9 @@ import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
-import { getName, getNamespace } from '@console/shared';
-import { MachineKind, NodeKind } from '@console/internal/module/k8s';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { MachineKind, NodeKind } from '@console/internal/module/k8s/types';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 import NodeLink from '../NodeLink';
 import BareMetalHostRole from '../BareMetalHostRole';
 import { BareMetalHostKind } from '../../../types';

@@ -6,7 +6,7 @@ import { Error, Errors } from '../../errors/errors';
 import { CommonDataProp, VMWizardProps } from '../types';
 import { iGetCommonData } from '../selectors/immutable/selectors';
 import { getLoadError, getModelString } from '../../../utils';
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { TemplateModel } from '@console/internal/models';
 import { DataVolumeModel, VirtualMachineModel } from '../../../models';
 import { getExtraWSQueries } from '../selectors/selectors';

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { FirehoseResult } from '@console/internal/components/utils';
-import { NodeKind } from '@console/internal/module/k8s';
-import { getLabels, getNodeTaints } from '@console/shared';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { getLabels } from '@console/shared/src/selectors/common';
+import { getNodeTaints } from '@console/shared/src/selectors/node';
 import { getLoadedData, isLoaded } from '../../../../utils';
 import { IDLabel } from '../../../LabelsList/types';
 

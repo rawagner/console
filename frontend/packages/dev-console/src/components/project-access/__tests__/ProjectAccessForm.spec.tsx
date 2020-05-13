@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { MultiColumnField, InputField, DropdownField, FormFooter } from '@console/shared';
 import ProjectAccessForm from '../ProjectAccessForm';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 
 type ProjectAccessFormProps = React.ComponentProps<typeof ProjectAccessForm>;
 let formProps: ProjectAccessFormProps;

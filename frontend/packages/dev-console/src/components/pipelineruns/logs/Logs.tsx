@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Base64 } from 'js-base64';
 import { Alert } from '@patternfly/react-core';
-import { resourceURL, modelFor, PodKind, ContainerSpec } from '@console/internal/module/k8s';
+import { PodKind, ContainerSpec } from '@console/internal/module/k8s/types';
+import { resourceURL } from '@console/internal/module/k8s/resource';
+import { modelFor } from '@console/internal/module/k8s/k8s-models';
 import { WSFactory } from '@console/internal/module/ws-factory';
-import { LOG_SOURCE_TERMINATED } from '@console/internal/components/utils';
+import { LOG_SOURCE_TERMINATED } from '@console/internal/components/utils/resource-log';
 import { coFetchText } from '@console/internal/co-fetch';
 import './Logs.scss';
 

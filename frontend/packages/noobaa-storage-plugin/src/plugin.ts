@@ -11,10 +11,10 @@ import {
   ResourceNSNavItem,
   RoutePage,
   YAMLTemplate,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import { GridPosition } from '@console/shared/src/components/dashboard/DashboardGrid';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import * as models from './models';
 
 type ConsumedExtensions =

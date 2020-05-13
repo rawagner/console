@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import * as _ from 'lodash';
-import { referenceForModel, PodKind } from '@console/internal/module/k8s';
-import { PodControllerOverviewItem } from '@console/shared';
+import { PodKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PodsOverview } from '@console/internal/components/overview/pods-overview';
 import {
   sampleEventSourceApiServer,
   sampleEventSourceCamel,
 } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
-import {
-  ResourceLink,
-  ExternalLink,
-  SidebarSectionHeading,
-} from '@console/internal/components/utils';
 import { ServiceModel } from '../../../models';
 import EventSinkServicesOverviewList from '../EventSinkServicesOverviewList';
+import { PodControllerOverviewItem } from '@console/shared/src/types/pod';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
 
 describe('EventSinkServicesOverviewList', () => {
   const current: PodControllerOverviewItem = {

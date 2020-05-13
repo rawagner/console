@@ -1,6 +1,6 @@
 import { StatusGroupMapper } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
 import { InventoryStatusGroup } from '@console/shared/src/components/dashboard/inventory-card/status-group';
-import { MachineKind, NodeKind } from '@console/internal/module/k8s';
+import { MachineKind, NodeKind } from '@console/internal/module/k8s/types';
 import { getName } from '@console/shared/src/selectors/common';
 import { getNodeMachineName } from '@console/shared/src/selectors/node';
 import { createBasicLookup } from '@console/shared/src/utils/utils';

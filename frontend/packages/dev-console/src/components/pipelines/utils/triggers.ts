@@ -2,7 +2,8 @@ import * as React from 'react';
 import { flatten, mapValues } from 'lodash';
 import { RouteModel } from '@console/internal/models';
 import { getRouteWebURL } from '@console/internal/components/routes';
-import { K8sResourceCommon, referenceForModel, RouteKind } from '@console/internal/module/k8s';
+import { K8sResourceCommon, RouteKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { useK8sGet } from '@console/internal/components/utils/k8s-get-hook';
 import {
   useK8sWatchResource,

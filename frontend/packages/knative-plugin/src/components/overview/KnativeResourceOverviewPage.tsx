@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Kebab, LoadingBox } from '@console/internal/components/utils';
 import { ResourceOverviewDetails } from '@console/internal/components/overview/resource-overview-details';
-import { groupVersionFor, K8sKind, referenceForModel } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
+import { groupVersionFor, referenceForModel } from '@console/internal/module/k8s/k8s';
 import { RootState } from '@console/internal/redux-types';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
 import { ModifyApplication } from '@console/dev-console/src/actions/modify-application';
 import { KNATIVE_SERVING_APIGROUP } from '../../const';
 import { RevisionModel, ServiceModel } from '../../models';
@@ -12,6 +12,8 @@ import { getRevisionActions } from '../../actions/getRevisionActions';
 import { isDynamicEventResourceKind } from '../../utils/fetch-dynamic-eventsources-utils';
 import OverviewDetailsKnativeResourcesTab from './OverviewDetailsKnativeResourcesTab';
 import KnativeOverview from './KnativeOverview';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
+import { Kebab } from '@console/internal/components/utils/kebab';
 
 interface StateProps {
   kindsInFlight?: boolean;

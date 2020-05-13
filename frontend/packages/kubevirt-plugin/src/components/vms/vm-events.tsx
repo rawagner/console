@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getNamespace } from '@console/shared';
+import { getNamespace } from '@console/shared/src/selectors/common';
 import { ResourcesEventStream } from '@console/internal/components/events';
 import { getVmEventsFilters } from '../../selectors/event';
 import { VMTabProps } from './types';

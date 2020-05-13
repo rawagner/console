@@ -3,12 +3,13 @@ import * as _ from 'lodash';
 import { RouteComponentProps } from 'react-router';
 import { Alert, AlertActionCloseButton, Title } from '@patternfly/react-core';
 import { history } from '@console/internal/components/utils/router';
-import { BreadCrumbs, resourcePathFromModel } from '@console/internal/components/utils';
-import { k8sGet } from '@console/internal/module/k8s';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { NooBaaBackingStoreModel } from '../../models';
 import CreateBackingStoreForm from './create-bs';
 import './create-bs.scss';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 const CreateBackingStoreFormPage: React.FC<CreateBackingStoreFormPageProps> = ({ match }) => {
   const [showHelp, setShowHelp] = React.useState(true);

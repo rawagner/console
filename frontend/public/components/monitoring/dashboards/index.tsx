@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { Map as ImmutableMap } from 'immutable';
 
-import { RedExclamationCircleIcon } from '@console/shared';
+import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
 import ErrorAlert from '@console/shared/src/components/alerts/error';
 import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
@@ -18,13 +18,16 @@ import * as UIActions from '../../../actions/ui';
 import { ErrorBoundaryFallback } from '../../error';
 import { RootState } from '../../../redux-types';
 import { getPrometheusURL, PrometheusEndpoint } from '../../graphs/helpers';
-import { ExternalLink, history, LoadingInline, useSafeFetch } from '../../utils';
 import { formatPrometheusDuration, parsePrometheusDuration } from '../../utils/datetime';
 import BarChart from './bar-chart';
 import Graph from './graph';
 import SingleStat from './single-stat';
 import Table from './table';
 import { Panel } from './types';
+import { useSafeFetch } from '../../utils/safe-fetch-hook';
+import { LoadingInline } from '../../utils/status-box';
+import { ExternalLink } from '../../utils/link';
+import { history } from '../../utils/router';
 
 const NUM_SAMPLES = 30;
 

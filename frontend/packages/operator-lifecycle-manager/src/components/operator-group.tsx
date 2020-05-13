@@ -2,12 +2,8 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { MsgBox } from '@console/internal/components/utils/status-box';
-import {
-  K8sResourceKind,
-  GroupVersionKind,
-  referenceForModel,
-  referenceForGroupVersionKind,
-} from '@console/internal/module/k8s';
+import { K8sResourceKind, GroupVersionKind } from '@console/internal/module/k8s/types';
+import { referenceForModel, referenceForGroupVersionKind } from '@console/internal/module/k8s/k8s';
 import { AsyncComponent } from '@console/internal/components/utils/async';
 import { getActiveNamespace } from '@console/internal/actions/ui';
 import { OperatorGroupModel } from '../models';

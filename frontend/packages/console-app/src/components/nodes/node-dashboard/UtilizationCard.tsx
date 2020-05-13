@@ -20,8 +20,8 @@ import {
   humanizeBinaryBytes,
   humanizeDecimalBytesPerSec,
   humanizeNumber,
-  Dropdown,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/units';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 import {
   PrometheusUtilizationItem,
   PrometheusMultilineUtilizationItem,

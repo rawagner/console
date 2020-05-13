@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { getAnnotationTags } from '@console/internal/components/image-stream';
 import { ImageStreamIcon } from '@console/internal/components/catalog/catalog-item-icon';
-import { ExternalLink } from '@console/internal/components/utils';
+import { ExternalLink } from '@console/internal/components/utils/link';
 import { getSampleRepo } from '../../../utils/imagestream-utils';
 
 export type ImageStreamInfoProps = {

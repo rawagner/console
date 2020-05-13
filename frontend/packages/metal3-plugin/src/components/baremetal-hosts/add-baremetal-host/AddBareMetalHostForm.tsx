@@ -1,9 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { history } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import { FormikProps } from 'formik';
 import { Form, TextInputTypes } from '@patternfly/react-core';
-import { InputField, TextAreaField, SwitchField, FormFooter } from '@console/shared/src';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import TextAreaField from '@console/shared/src/components/formik-fields/TextAreaField';
+import SwitchField from '@console/shared/src/components/formik-fields/SwitchField';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 import { AddBareMetalHostFormValues } from './types';
 
 type AddBareMetalHostFormProps = FormikProps<AddBareMetalHostFormValues> & {

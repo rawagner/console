@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { navFactory } from '@console/internal/components/utils';
-import { DetailsPage } from '@console/internal/components/factory';
-import { K8sResourceKindReference } from '@console/internal/module/k8s';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { K8sResourceKindReference } from '@console/internal/module/k8s/types';
 import { TemplateModel } from '@console/internal/models';
 import { VMDisksFirehose } from '../vm-disks';
 import { VMNics } from '../vm-nics';

@@ -1,4 +1,4 @@
-import { FirehoseResource } from '@console/internal/components/utils';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import { MockResources } from '@console/dev-console/src/components/topology/__tests__/topology-test-data';
 import { MockKnativeResources } from '../../topology/__tests__/topology-knative-test-data';
 import {

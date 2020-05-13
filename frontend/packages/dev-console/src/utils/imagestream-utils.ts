@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as semver from 'semver';
-import { ContainerPort, K8sResourceKind } from '@console/internal/module/k8s';
+import { ContainerPort, K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   isBuilder,
   getMostRecentBuilderTag,
@@ -11,7 +11,7 @@ import {
   getImageForIconClass,
 } from '@console/internal/components/catalog/catalog-item-icon';
 import { ProjectModel, ImageStreamModel } from '@console/internal/models';
-import { FirehoseResource } from '@console/internal/components/utils';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 
 export interface ImageTag {
   name: string;

@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { ContextMenuItem, ContextSubMenuItem, Node, Graph } from '@console/topology';
-import {
-  history,
-  KebabItem,
-  KebabOption,
-  KebabMenuOption,
-  kebabOptionsToMenu,
-  isKebabSubMenu,
-} from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import { workloadActions } from '../actions/workloadActions';
 import { groupActions } from '../actions/groupActions';
 import { nodeActions } from '../actions/nodeActions';
 import { graphActions } from '../actions/graphActions';
 import { TopologyApplicationObject } from '../topology-types';
 import { regroupActions } from '../actions/regroupActions';
+import {
+  KebabItem,
+  KebabOption,
+  KebabMenuOption,
+  isKebabSubMenu,
+  kebabOptionsToMenu,
+} from '@console/internal/components/utils/kebab';
 
 const onKebabOptionClick = (option: KebabOption) => {
   if (option.callback) {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as _ from 'lodash';
-import { Table, TableRow } from '@console/internal/components/factory';
+import { Table, TableRow } from '@console/internal/components/factory/table';
 import { testPackageManifest, testCatalogSource, testSubscription } from '../../mocks';
 import { PackageManifestKind } from '../types';
 import {

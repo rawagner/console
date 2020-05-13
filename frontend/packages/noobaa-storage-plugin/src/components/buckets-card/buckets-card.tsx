@@ -4,19 +4,21 @@ import DashboardCard from '@console/shared/src/components/dashboard/dashboard-ca
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
 import { StorageClassModel } from '@console/internal/models';
-import { FirehoseResource, resourcePathFromModel } from '@console/internal/components/utils';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 import { getMetric, getGaugeValue, isBound } from '../../utils';
 import { NooBaaObjectBucketClaimModel } from '../../models';
 import { BucketsItem, BucketsItemProps } from './buckets-card-item';
 import './buckets-card.scss';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 
 enum BucketsCardQueries {
   BUCKETS_LINK_QUERY = 'NooBaa_system_links',

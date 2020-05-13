@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { getBadgeFromType } from '@console/shared';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
 import { PipelineModel } from '../../models';
 import ProjectListPage from '../projects/ProjectListPage';
 import PipelinesResourceList from './PipelinesResourceList';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { ContainerSpec } from '../../module/k8s';
+import { ContainerSpec } from '../../module/k8s/types';
 
 const ContainerRow: React.SFC<ContainerRowProps> = ({ container }) => {
   const resourceLimits = _.get(container, 'resources.limits');

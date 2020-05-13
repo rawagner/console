@@ -1,4 +1,4 @@
-import { ValidationObject } from '@console/shared';
+import { ValidationObject } from '@console/shared/src/utils/validation/types';
 import { VMLikeEntityKind } from '../../types/vmLike';
 import { CombinedDisk } from '../../k8s/wrapper/vm/combined-disk';
 import { TemplateValidations } from '../../utils/validations/template/template-validations';

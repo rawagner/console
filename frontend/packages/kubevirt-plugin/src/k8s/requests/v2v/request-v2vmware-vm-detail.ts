@@ -1,4 +1,4 @@
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { EnhancedK8sMethods } from '../../enhancedK8sMethods/enhancedK8sMethods';
 import { V2VVMwareModel } from '../../../models';
 

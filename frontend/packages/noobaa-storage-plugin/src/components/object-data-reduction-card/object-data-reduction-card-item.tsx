@@ -1,10 +1,7 @@
 import * as React from 'react';
-import {
-  FieldLevelHelp,
-  humanizeBinaryBytes,
-  humanizePercentage,
-  LoadingInline,
-} from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
+import { FieldLevelHelp } from '@console/internal/components/utils/field-level-help';
+import { humanizeBinaryBytes, humanizePercentage } from '@console/internal/components/utils/units';
 
 const ItemBody: React.FC<ItemBodyProps> = React.memo(
   ({ title, stats, infoText, isLoading, error }) => {

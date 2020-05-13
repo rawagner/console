@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { ResourceSummary, LabelList } from '@console/internal/components/utils';
-import { TemplateKind } from '@console/internal/module/k8s';
-import { K8sEntityMap } from '@console/shared/src';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { getBasicID, prefixedID } from '../../utils';
 import { vmDescriptionModal } from '../modals/vm-description-modal';
 import { BootOrderModal } from '../modals/boot-order-modal';
@@ -40,6 +38,9 @@ import {
 } from '../modals/scheduling-modals/shared/consts';
 import './_vm-template-resource.scss';
 import { getFlavorText } from '../../selectors/vm/flavor-text';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { LabelList } from '@console/internal/components/utils/label-list';
+import { K8sEntityMap } from '@console/shared/src/utils/utils';
 
 export const VMTemplateResourceSummary: React.FC<VMTemplateResourceSummaryProps> = ({
   template,

@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { ResourceIcon, ActionsMenu } from '@console/internal/components/utils';
 import { GraphData, TopologyApplicationObject } from '../topology-types';
 import { groupActions } from '../actions/groupActions';
 import TopologyApplicationResources from './TopologyApplicationResources';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { ActionsMenu } from '@console/internal/components/utils/dropdown';
 
 export type TopologyApplicationPanelProps = {
   graphData: GraphData;

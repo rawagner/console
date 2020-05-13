@@ -5,20 +5,23 @@ import { Map as ImmutableMap } from 'immutable';
 import { Helmet } from 'react-helmet';
 
 import { ClusterDashboard } from './cluster-dashboard/cluster-dashboard';
-import { HorizontalNav, PageHeading, LoadingBox, Page, AsyncComponent } from '../../utils';
 import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
 import DashboardGrid, {
   GridPosition,
   GridDashboardCard,
 } from '@console/shared/src/components/dashboard/DashboardGrid';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import {
-  useExtensions,
   DashboardsCard,
   DashboardsTab,
   isDashboardsCard,
   isDashboardsTab,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import { RootState } from '../../../redux-types';
+import { AsyncComponent } from '../../utils/async';
+import { Page, HorizontalNav } from '../../utils/horizontal-nav';
+import { LoadingBox } from '../../utils/status-box';
+import { PageHeading } from '../../utils/headings';
 
 const getCardsOnPosition = (cards: DashboardsCard[], position: GridPosition): GridDashboardCard[] =>
   cards

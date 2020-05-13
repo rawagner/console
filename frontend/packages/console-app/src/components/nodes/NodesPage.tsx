@@ -3,28 +3,26 @@ import * as classNames from 'classnames';
 import { connect } from 'react-redux';
 import * as _ from 'lodash';
 import { sortable } from '@patternfly/react-table';
-import { getName, getUID, getNodeRole } from '@console/shared';
+import { getName, getUID } from '@console/shared/src/selectors/common';
+import { getNodeRole } from '@console/shared/src/selectors/node';
 import { NodeModel } from '@console/internal/models';
-import { NodeKind, referenceForModel } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   Table,
   TableRow,
   TableData,
-  ListPage,
   RowFunctionArgs,
-} from '@console/internal/components/factory';
-import {
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  Timestamp,
-  humanizeBinaryBytes,
-  formatCores,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/factory/table';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import { NodeMetrics, setNodeMetrics } from '@console/internal/actions/ui';
-import { PROMETHEUS_BASE_PATH } from '@console/internal/components/graphs';
+import { PROMETHEUS_BASE_PATH } from '@console/internal/components/graphs/constants';
 import { coFetchJSON } from '@console/internal/co-fetch';
 import { getPrometheusURL, PrometheusEndpoint } from '@console/internal/components/graphs/helpers';
+import { humanizeBinaryBytes, formatCores } from '@console/internal/components/utils/units';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
 import { nodeStatus } from '../../status/node';
 import NodeRoles from './NodeRoles';
 import { menuActions } from './menu-actions';

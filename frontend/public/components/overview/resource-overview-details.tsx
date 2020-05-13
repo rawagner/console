@@ -3,10 +3,14 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
 import * as UIActions from '../../actions/ui';
-import { K8sKind } from '../../module/k8s';
-import { AsyncComponent, KebabAction, ResourceOverviewHeading, SimpleTabNav } from '../utils';
-import { OverviewItem } from '@console/shared';
-import { useExtensions, OverviewResourceTab, isOverviewResourceTab } from '@console/plugin-sdk';
+import { K8sKind } from '../../module/k8s/types';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { OverviewResourceTab, isOverviewResourceTab } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { AsyncComponent } from '../utils/async';
+import { SimpleTabNav } from '../utils/simple-tab-nav';
+import { ResourceOverviewHeading } from '../utils/headings';
+import { KebabAction } from '../utils/kebab';
 
 const stateToProps = ({ UI }): PropsFromState => ({
   selectedDetailsTab: UI.getIn(['overview', 'selectedDetailsTab']),

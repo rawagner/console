@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { AsyncComponent } from './utils';
+import { AsyncComponent } from './utils/async';
 
 export const ImportYamlPage = () => {
   const title = 'Import YAML';

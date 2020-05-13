@@ -1,21 +1,27 @@
-import { FirehoseResult } from '@console/internal/components/utils';
-import { DeploymentKind, PodKind, K8sResourceConditionStatus } from '@console/internal/module/k8s';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import {
+  DeploymentKind,
+  PodKind,
+  K8sResourceConditionStatus,
+} from '@console/internal/module/k8s/types';
+import {
+  ServiceKind as knativeServiceKind,
+  RevisionKind,
+  ConditionTypes,
+  RouteKind,
+} from '@console/knative-plugin/src/types';
+import {
+  RevisionModel,
+  EventSourceApiServerModel,
   ConfigurationModel,
   RouteModel,
-  RevisionModel,
   ServiceModel,
   EventSourceCronJobModel,
   EventSourceContainerModel,
   EventSourceCamelModel,
-  EventSourceKafkaModel,
   EventSourceSinkBindingModel,
-  ConditionTypes,
-  RevisionKind,
-  RouteKind,
-  ServiceKind as knativeServiceKind,
-  EventSourceApiServerModel,
-} from '@console/knative-plugin';
+  EventSourceKafkaModel,
+} from '@console/knative-plugin/src/models';
 import { TopologyDataResources } from '../topology-types';
 
 export const sampleKnativeDeployments: FirehoseResult<DeploymentKind[]> = {

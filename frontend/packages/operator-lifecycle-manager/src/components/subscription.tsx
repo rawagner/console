@@ -6,39 +6,29 @@ import * as classNames from 'classnames';
 import { Alert, Button } from '@patternfly/react-core';
 import { InProgressIcon, PencilAltIcon } from '@patternfly/react-icons';
 import {
-  DetailsPage,
-  MultiListPage,
+  GreenCheckCircleIcon,
+  YellowExclamationTriangleIcon,
+} from '@console/shared/src/components/status/icons';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { WarningStatus } from '@console/shared/src/components/status/statuses';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
+import {
   Table,
   TableRow,
   TableData,
   RowFunction,
-} from '@console/internal/components/factory';
-import {
-  MsgBox,
-  ResourceLink,
-  ResourceKebab,
-  navFactory,
-  Kebab,
-  ResourceSummary,
-  LoadingInline,
-  SectionHeading,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/factory/table';
 import { removeQueryArgument } from '@console/internal/components/utils/router';
-import {
-  referenceForModel,
-  k8sGet,
-  k8sPatch,
-  k8sKill,
-  k8sUpdate,
-  K8sResourceKind,
-} from '@console/internal/module/k8s';
-import {
-  YellowExclamationTriangleIcon,
-  GreenCheckCircleIcon,
-  getNamespace,
-  getName,
-  WarningStatus,
-} from '@console/shared';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sGet, k8sPatch, k8sKill, k8sUpdate } from '@console/internal/module/k8s/resource';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
+import { MsgBox, LoadingInline } from '@console/internal/components/utils/status-box';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 import {
   SubscriptionModel,
   ClusterServiceVersionModel,

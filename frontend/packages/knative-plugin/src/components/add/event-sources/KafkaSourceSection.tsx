@@ -1,7 +1,7 @@
 import * as React from 'react';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
-import { InputField } from '@console/shared';
 import { TextInputTypes } from '@patternfly/react-core';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 import KafkaSourceNetSection from './KafkaSourceNetSection';
 import ServiceAccountDropdown from '../../dropdowns/ServiceAccountDropdown';
 

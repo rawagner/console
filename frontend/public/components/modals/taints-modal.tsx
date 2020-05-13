@@ -3,15 +3,18 @@ import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
-import { Dropdown, EmptyBox, PromiseComponent } from '../utils';
-import { K8sKind, k8sPatch, NodeKind, Taint } from '../../module/k8s';
+import { K8sKind, NodeKind, Taint } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import {
   createModalLauncher,
   ModalBody,
   ModalComponentProps,
   ModalSubmitFooter,
   ModalTitle,
-} from '../factory';
+} from '../factory/modal';
+import { EmptyBox } from '../utils/status-box';
+import { Dropdown } from '../utils/dropdown';
+import { PromiseComponent } from '../utils/promise-component';
 
 class TaintsModal extends PromiseComponent<TaintsModalProps, TaintsModalState> {
   readonly state: TaintsModalState;

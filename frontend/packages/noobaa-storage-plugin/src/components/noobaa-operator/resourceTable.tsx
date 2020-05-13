@@ -2,24 +2,22 @@ import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import * as React from 'react';
 import { match } from 'react-router';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import {
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  FirehoseResult,
-} from '@console/internal/components/utils';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
-import {
-  MultiListPage,
   Table,
   TableData,
   TableRow,
   TableProps,
   RowFunction,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/table';
 import { sortable } from '@patternfly/react-table';
 import { RowFilter } from '@console/internal/components/filter-toolbar';
 import { NooBaaBackingStoreModel, NooBaaBucketClassModel } from '../../models';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 const kindsFilterMap = Object.freeze({
   BackingStore: {

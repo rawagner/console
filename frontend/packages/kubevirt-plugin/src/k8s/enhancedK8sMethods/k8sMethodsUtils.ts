@@ -1,5 +1,5 @@
-import { getName } from '@console/shared';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { getName } from '@console/shared/src/selectors/common';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   CREATED,
   CREATED_WITH_CLEANUP,

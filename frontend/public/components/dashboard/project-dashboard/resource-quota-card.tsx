@@ -8,7 +8,7 @@ import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboa
 import ResourceQuotaBody from '@console/shared/src/components/dashboard/resource-quota-card/ResourceQuotaBody';
 import ResourceQuotaItem from '@console/shared/src/components/dashboard/resource-quota-card/ResourceQuotaItem';
 import { getQuotaResourceTypes, hasComputeResources } from '../../resource-quota';
-import { FirehoseResult } from '../../utils';
+import { FirehoseResult } from '../../utils/types';
 import { ResourceQuotaModel } from '../../../models';
 import { withDashboardResources, DashboardItemProps } from '../with-dashboard-resources';
 import { ProjectDashboardContext } from './project-dashboard-context';

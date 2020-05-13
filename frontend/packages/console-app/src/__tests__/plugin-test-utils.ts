@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { List as ImmutableList } from 'immutable';
-import { Extension, PluginStore } from '@console/plugin-sdk';
+import { Extension } from '@console/plugin-sdk/src/typings';
+import { PluginStore } from '@console/plugin-sdk/src/store';
 import { resolvePluginPackages, loadActivePlugins } from '@console/plugin-sdk/src/codegen';
 
 const testedPlugins = loadActivePlugins(resolvePluginPackages());

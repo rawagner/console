@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory';
-import {
-  navFactory,
-  SectionHeading,
-  ResourceSummary,
-  Kebab,
-} from '@console/internal/components/utils';
+import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory/details';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { Kebab } from '@console/internal/components/utils/kebab';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 import { CatalogSourceListPage, CatalogSourceListPageProps } from '../catalog-source';
 import { OperatorHubKind } from '.';
 

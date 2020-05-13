@@ -3,11 +3,15 @@ import { Link } from 'react-router-dom';
 import * as _ from 'lodash-es';
 import { BanIcon, PendingIcon, SyncAltIcon } from '@patternfly/react-icons';
 
-import { resourcePath, ExternalLink } from './utils';
 import { fromNow } from './utils/datetime';
-import { K8sResourceKind } from '../module/k8s';
+import { K8sResourceKind } from '../module/k8s/types';
 import { getBuildNumber } from '../module/k8s/builds';
-import { GreenCheckCircleIcon, RedExclamationCircleIcon } from '@console/shared';
+import {
+  GreenCheckCircleIcon,
+  RedExclamationCircleIcon,
+} from '@console/shared/src/components/status/icons';
+import { ExternalLink } from './utils/link';
+import { resourcePath } from './utils/resource-link';
 
 const getStages = (status): any[] => (status && status.stages) || [];
 const getJenkinsStatus = (resource: K8sResourceKind) => {

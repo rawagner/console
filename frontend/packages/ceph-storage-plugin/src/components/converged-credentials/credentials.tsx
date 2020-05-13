@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Base64 } from 'js-base64';
-import { k8sGet } from '@console/internal/module/k8s';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { SecretModel, ConfigMapModel } from '@console/internal/models';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import { CEPH_STORAGE_NAMESPACE } from '../../constants';
 
 const createJSONFile = (data: Credentials) =>

@@ -1,21 +1,16 @@
 import { saveAs } from 'file-saver';
-import {
-  PodKind,
-  ContainerSpec,
-  ContainerStatus,
-  resourceURL,
-  k8sGet,
-} from '@console/internal/module/k8s';
+import { PodKind, ContainerSpec, ContainerStatus } from '@console/internal/module/k8s/types';
+import { resourceURL, k8sGet } from '@console/internal/module/k8s/resource';
 import {
   LOG_SOURCE_TERMINATED,
   LOG_SOURCE_WAITING,
-  LineBuffer,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/resource-log';
 import { PodModel } from '@console/internal/models';
 import { coFetchText } from '@console/internal/co-fetch';
 import { errorModal } from '@console/internal/components/modals';
 import { containerToLogSourceStatus } from '../../../utils/pipeline-utils';
 import { TaskRuns } from '../../../utils/pipeline-augment';
+import { LineBuffer } from '@console/internal/components/utils/line-buffer';
 
 const getSortedContainerStatus = (
   containers: ContainerSpec[],

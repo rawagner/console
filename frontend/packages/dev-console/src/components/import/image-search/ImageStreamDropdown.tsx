@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { useFormikContext, FormikValues } from 'formik';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { ResourceDropdownField } from '@console/shared';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getImageStreamResource } from '../../../utils/imagestream-utils';
 import { ImageStreamActions } from '../import-types';
 import { ImageStreamContext } from './ImageStreamContext';

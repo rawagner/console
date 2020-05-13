@@ -1,17 +1,18 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { K8sKind, k8sPatch, K8sResourceKind, Patch } from '@console/internal/module/k8s';
+import { K8sKind, K8sResourceKind, Patch } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import {
   createModalLauncher,
   ModalBody,
   ModalSubmitFooter,
   ModalTitle,
 } from '@console/internal/components/factory/modal';
-import { withHandlePromise } from '@console/internal/components/utils';
 import {
   ConfigureUpdateStrategy,
   getNumberOrPercent,
 } from '@console/internal/components/modals/configure-update-strategy-modal';
+import { withHandlePromise } from '@console/internal/components/utils/promise-component';
 
 export const UpdateStrategyModal = withHandlePromise((props: UpdateStrategyModalProps) => {
   const {

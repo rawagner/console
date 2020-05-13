@@ -7,10 +7,12 @@ import DashboardCardLink from '@console/shared/src/components/dashboard/dashboar
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import DetailsBody from '@console/shared/src/components/dashboard/details-card/DetailsBody';
 import DetailItem from '@console/shared/src/components/dashboard/details-card/DetailItem';
-import { getName, getRequester } from '@console/shared';
-import { LabelList, resourcePathFromModel } from '../../utils';
+import { getName } from '@console/shared/src/selectors/common';
+import { getRequester } from '@console/shared/src/selectors/namespace';
 import { ProjectModel } from '../../../models';
 import { ProjectDashboardContext } from './project-dashboard-context';
+import { resourcePathFromModel } from '../../utils/resource-link';
+import { LabelList } from '../../utils/label-list';
 
 export const DetailsCard: React.FC = () => {
   const { obj } = React.useContext(ProjectDashboardContext);

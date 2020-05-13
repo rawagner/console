@@ -1,4 +1,4 @@
-import { ContainerSpec, PodKind, Volume } from '@console/internal/module/k8s';
+import { ContainerSpec, PodKind, Volume } from '@console/internal/module/k8s/types';
 import { PodModel } from '@console/internal/models';
 import { K8sResourceWrapper } from '../common/k8s-resource-wrapper';
 import { K8sInitAddon } from '../common/util/k8s-mixin';

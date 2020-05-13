@@ -2,15 +2,16 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { RouteComponentProps } from 'react-router';
 import { Link } from 'react-router-dom';
+import { StatusIcon } from '@console/shared/src/components/status/Status';
 import { Nav, NavItem, NavList } from '@patternfly/react-core';
-import { StatusIcon } from '@console/shared';
-import { Firehose, resourcePathFromModel } from '@console/internal/components/utils';
 import { pipelineRunFilterReducer } from '../../../utils/pipeline-filter-reducer';
 import { PipelineRun } from '../../../utils/pipeline-augment';
 import { PipelineRunModel } from '../../../models';
 import LogsWrapperComponent from '../logs/LogsWrapperComponent';
 import { getDownloadAllLogsCallback } from '../logs/logs-utils';
 import './PipelineRunLogs.scss';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { Firehose } from '@console/internal/components/utils/firehose';
 
 interface PipelineRunLogsProps {
   obj: PipelineRun;

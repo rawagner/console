@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { PodKind } from '@console/internal/module/k8s';
-import { PodStatus } from '@console/shared';
+import { PodKind } from '@console/internal/module/k8s/types';
 import PodSet from '../PodSet';
 import { DonutStatusData } from '../../../topology-types';
 import { samplePods } from '../../../__tests__/topology-test-data';
+import { PodStatus } from '@console/internal/components/pod';
 
 describe(PodSet.displayName, () => {
   let data: DonutStatusData;

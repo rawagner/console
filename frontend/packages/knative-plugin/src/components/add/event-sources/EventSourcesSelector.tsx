@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { useFormikContext, FormikValues } from 'formik';
-import { ItemSelectorField } from '@console/shared';
+import ItemSelectorField from '@console/shared/src/components/formik-fields/item-selector-field/ItemSelectorField';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import { NormalizedEventSources } from '../import-types';
 import { KNATIVE_EVENT_SOURCE_APIGROUP } from '../../../const';

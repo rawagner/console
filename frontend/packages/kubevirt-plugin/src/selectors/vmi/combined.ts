@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { K8sResourceKind, PodKind } from '@console/internal/module/k8s';
-import { getName } from '@console/shared';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
+import { getName } from '@console/shared/src/selectors/common';
 import { getServicePort } from '../service';
 import { VMIKind } from '../../types/vm';
 import { DEFAULT_RDP_PORT, TEMPLATE_VM_NAME_LABEL } from '../../constants/vm';

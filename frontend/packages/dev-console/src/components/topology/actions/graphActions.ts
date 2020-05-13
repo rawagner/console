@@ -1,7 +1,8 @@
 import * as _ from 'lodash';
 import { Node } from '@console/topology';
-import { ServiceModel, addEventSource } from '@console/knative-plugin';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { ServiceModel } from '@console/knative-plugin/src/models';
+import { addEventSource } from '@console/knative-plugin/src/actions';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { addResourceMenu, addResourceMenuWithoutCatalog } from '../../../actions/add-resources';
 import { GraphData } from '../topology-types';
 

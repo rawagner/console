@@ -1,4 +1,8 @@
-import { assureEndsWith, joinGrammaticallyListOfItems, makeSentence } from '@console/shared/src';
+import {
+  assureEndsWith,
+  joinGrammaticallyListOfItems,
+  makeSentence,
+} from '@console/shared/src/utils/grammar';
 import {
   ImportProvidersField,
   VMSettingsField,

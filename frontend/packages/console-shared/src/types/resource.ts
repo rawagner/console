@@ -1,7 +1,7 @@
-import { K8sResourceKind, PodKind, RouteKind } from '@console/internal/module/k8s';
-import { DEPLOYMENT_STRATEGY } from '../constants';
+import { K8sResourceKind, PodKind, RouteKind } from '@console/internal/module/k8s/types';
+import { DEPLOYMENT_STRATEGY } from '../constants/resource';
 import { OverviewItemAlerts, PodControllerOverviewItem } from './pod';
-import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
 
 export type APIError = {
   status?: string;

@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { useFormikContext, FormikValues } from 'formik';
-import { LoadingInline } from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 import { FormGroup, Alert } from '@patternfly/react-core';
 import { StarIcon } from '@patternfly/react-icons';
-import { getFieldId, ItemSelectorField } from '@console/shared';
+import ItemSelectorField from '@console/shared/src/components/formik-fields/item-selector-field/ItemSelectorField';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
 import { NormalizedBuilderImages } from '../../../utils/imagestream-utils';
 
 export interface BuilderImageSelectorProps {

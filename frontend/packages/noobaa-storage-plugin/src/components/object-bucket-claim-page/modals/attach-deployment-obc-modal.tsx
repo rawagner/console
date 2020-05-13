@@ -8,24 +8,20 @@ import {
   ModalTitle,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import {
-  Dropdown,
-  FirehoseResult,
-  Firehose,
-  HandlePromiseProps,
-  history,
-  resourceObjPath,
-  withHandlePromise,
-} from '@console/internal/components/utils';
 import { DeploymentModel } from '@console/internal/models';
+import { ContainerSpec, K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { getName } from '@console/shared/src/selectors/common';
+import { resourceObjPath } from '@console/internal/components/utils/resource-link';
+import { history } from '@console/internal/components/utils/router';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import {
-  ContainerSpec,
-  K8sKind,
-  k8sPatch,
-  K8sResourceKind,
-  referenceFor,
-} from '@console/internal/module/k8s/';
-import { getName } from '@console/shared';
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 
 const AttachDeploymentToOBCModal = withHandlePromise((props: AttachDeploymentToOBCModalProps) => {
   const [requestDeployment, setRequestedDeployment] = React.useState({});

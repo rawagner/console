@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ListPage } from '@console/internal/components/factory';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import { ProjectsTable } from '@console/internal/components/namespace';
-import { PageHeading } from '@console/internal/components/utils';
+import { PageHeading } from '@console/internal/components/utils/headings';
 import './ProjectListPage.scss';
 
 export interface ProjectListPageProps {

@@ -1,5 +1,5 @@
-import { referenceForModel } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared/src';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import * as _ from 'lodash';
 import { VirtualMachineModel } from '../models';
 

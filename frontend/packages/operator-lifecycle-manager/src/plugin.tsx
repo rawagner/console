@@ -10,9 +10,9 @@ import {
   RoutePage,
   DevCatalogModel,
   DashboardsOverviewHealthOperator,
-} from '@console/plugin-sdk';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { FLAGS } from '@console/shared/src/constants';
+} from '@console/plugin-sdk/src/typings';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { normalizeClusterServiceVersions } from './dev-catalog';
 import * as models from './models';
 import { Flags } from './const';

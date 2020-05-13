@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { useField, useFormikContext, FormikValues } from 'formik';
-import { LoadingInline } from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 import { FormGroup } from '@patternfly/react-core';
-import { getFieldId } from '@console/shared';
 import SelectorCard from './SelectorCard';
 import './ItemSelectorField.scss';
+import { getFieldId } from '../field-utils';
 
 interface Item {
   name: string;

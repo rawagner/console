@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { ResourceLink, ExternalLink } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ExternalLink } from '@console/internal/components/utils/link';
 import { MockKnativeResources } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
 import { RouteModel } from '../../../models';
 import RoutesOverviewListItem from '../RoutesOverviewListItem';

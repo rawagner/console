@@ -5,15 +5,12 @@ import { Map as ImmutableMap, OrderedMap, Set as ImmutableSet } from 'immutable'
 import * as classNames from 'classnames';
 import * as fuzzy from 'fuzzysearch';
 
-import { Dropdown, ResourceIcon } from './utils';
-import {
-  apiVersionForReference,
-  K8sKind,
-  K8sResourceKindReference,
-  modelFor,
-  referenceForModel,
-} from '../module/k8s';
+import { K8sKind, K8sResourceKindReference } from '../module/k8s/types';
+import { apiVersionForReference, referenceForModel } from '../module/k8s/k8s';
+import { modelFor } from '../module/k8s/k8s-models';
 import { Badge, Checkbox } from '@patternfly/react-core';
+import { ResourceIcon } from './utils/resource-icon';
+import { Dropdown } from './utils/dropdown';
 
 // Blacklist known duplicate resources.
 const blacklistGroups = ImmutableSet([

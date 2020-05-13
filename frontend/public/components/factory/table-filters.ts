@@ -1,20 +1,20 @@
 import * as _ from 'lodash-es';
 import * as fuzzy from 'fuzzysearch';
 import { nodeStatus } from '@console/app/src/status/node';
-import { getNodeRole, getLabelsAsString } from '@console/shared';
+import { getLabelsAsString } from '@console/shared/src/utils/label-filter';
+import { getNodeRole } from '@console/shared/src/selectors/node';
 import { routeStatus } from '../routes';
 import { secretTypeFilterReducer } from '../secret';
 import { bindingType, roleType } from '../RBAC';
+import { getClusterOperatorStatus } from '../../module/k8s/cluster-operator';
+import { getTemplateInstanceStatus } from '../../module/k8s/template';
 import {
-  K8sResourceKind,
-  MachineKind,
-  podPhaseFilterReducer,
   serviceCatalogStatus,
   serviceClassDisplayName,
   servicePlanDisplayName,
-  getClusterOperatorStatus,
-  getTemplateInstanceStatus,
-} from '../../module/k8s';
+} from '../../module/k8s/service-catalog';
+import { podPhaseFilterReducer } from '../../module/k8s/pods';
+import { K8sResourceKind, MachineKind } from '../../module/k8s/types';
 import {
   alertState,
   alertingRuleIsActive,

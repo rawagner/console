@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { FormikProps, FormikValues } from 'formik';
 import { TextInputTypes } from '@patternfly/react-core';
-import { MultiColumnField, InputField, DropdownField } from '@console/shared';
 import { RevisionItems } from '../../utils/traffic-splitting-utils';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 
 interface TrafficSplittingFieldProps {
   revisionItems: RevisionItems;

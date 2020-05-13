@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { getOwnerReferences } from '@console/shared/src';
+import { getOwnerReferences } from '@console/shared/src/selectors/common';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
-import { apiVersionForModel } from '@console/internal/module/k8s';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
 import { V1alpha1DataVolume } from '../../../types/vm/disk/V1alpha1DataVolume';
 import { AccessMode, DataVolumeSourceType, VolumeMode } from '../../../constants/vm/storage';
 import {

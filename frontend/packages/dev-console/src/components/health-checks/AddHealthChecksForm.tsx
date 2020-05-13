@@ -2,13 +2,17 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-import { FirehoseResult, LoadingBox, StatusBox, history } from '@console/internal/components/utils';
-import { K8sResourceKind, k8sUpdate, modelFor, referenceFor } from '@console/internal/module/k8s';
+import { history } from '@console/internal/components/utils/router';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { getResourcesType } from '../edit-application/edit-application-utils';
 import { healthChecksProbesValidationSchema } from './health-checks-probe-validation-utils';
 import { getHealthChecksData } from './create-health-checks-probe-utils';
 import AddHealthChecks from './AddHealthChecks';
 import { updateHealthChecksProbe } from './health-checks-utils';
+import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 type AddHealthChecksFormProps = {
   resource?: FirehoseResult<K8sResourceKind>;

@@ -1,4 +1,4 @@
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { isWinToolsImage, getVolumeContainerImage } from '../../../../selectors/vm';
 import {
   hasVmSettingsChanged,

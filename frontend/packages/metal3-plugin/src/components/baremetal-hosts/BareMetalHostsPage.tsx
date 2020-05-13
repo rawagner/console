@@ -1,15 +1,13 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { getName, createLookup, getNodeMachineName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
+import { getNodeMachineName } from '@console/shared/src/selectors/node';
+import { createLookup } from '@console/shared/src/utils/utils';
 import { MachineModel, MachineSetModel, NodeModel } from '@console/internal/models';
-import { MultiListPage } from '@console/internal/components/factory';
-import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
-import {
-  MachineKind,
-  MachineSetKind,
-  NodeKind,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
+import { MachineKind, MachineSetKind, NodeKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { useFlag } from '@console/shared/src/hooks/flag';
 import { BareMetalHostModel, NodeMaintenanceModel } from '../../models';
 import { getHostMachine, getNodeMaintenanceNodeName } from '../../selectors';

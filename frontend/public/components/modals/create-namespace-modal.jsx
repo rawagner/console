@@ -1,12 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { FLAGS } from '@console/shared';
-import { k8sCreate, referenceFor } from '../../module/k8s';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { k8sCreate } from '../../module/k8s/resource';
+import { referenceFor } from '../../module/k8s/k8s-models';
 import { NamespaceModel, ProjectRequestModel, NetworkPolicyModel } from '../../models';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { Dropdown, history, PromiseComponent, resourceObjPath, SelectorInput } from '../utils';
 import { setFlag } from '../../actions/features';
+import { SelectorInput } from '../utils/selector-input';
+import { history } from '../utils/router';
+import { resourceObjPath } from '../utils/resource-link';
+import { Dropdown } from '../utils/dropdown';
+import { PromiseComponent } from '../utils/promise-component';
 
 const allow = 'allow';
 const deny = 'deny';

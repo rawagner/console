@@ -2,11 +2,13 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 
 import { ClusterVersionModel } from '../../models';
-import { DetailsPage } from '../factory';
+import { DetailsPage } from '../factory/details';
 import { Conditions } from '../conditions';
-import { ClusterVersionKind, K8sResourceKindReference, referenceForModel } from '../../module/k8s';
-import { navFactory, ResourceSummary, SectionHeading } from '../utils';
-
+import { referenceForModel } from '../../module/k8s/k8s';
+import { ClusterVersionKind, K8sResourceKindReference } from '../../module/k8s/types';
+import { SectionHeading } from '../utils/headings';
+import { ResourceSummary } from '../utils/details-page';
+import { navFactory } from '../utils/horizontal-nav';
 const clusterVersionReference: K8sResourceKindReference = referenceForModel(ClusterVersionModel);
 
 const ClusterVersionDetails: React.SFC<ClusterVersionDetailsProps> = ({ obj }) => {

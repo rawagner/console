@@ -1,18 +1,13 @@
 import * as React from 'react';
 import { Form, FormSelect, FormSelectOption, TextInput } from '@patternfly/react-core';
 import {
-  FirehoseResult,
-  HandlePromiseProps,
-  withHandlePromise,
-} from '@console/internal/components/utils';
-import {
   createModalLauncher,
   ModalBody,
   ModalComponentProps,
   ModalTitle,
-} from '@console/internal/components/factory';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { ValidationErrorType } from '@console/shared';
+} from '@console/internal/components/factory/modal';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { NetworkAttachmentDefinitionModel } from '@console/network-attachment-definition-plugin';
 import { getLoadedData, getLoadError, isLoaded, prefixedID } from '../../../utils';
 import { validateNIC } from '../../../utils/validations/vm';
@@ -36,6 +31,11 @@ import { ModalFooter } from '../modal/modal-footer';
 import { useShowErrorToggler } from '../../../hooks/use-show-error-toggler';
 import { UINetworkEditConfig } from '../../../types/ui/nic';
 import { isFieldDisabled } from '../../../utils/ui/edit-config';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 export type NetworkProps = {
   id: string;

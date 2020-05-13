@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikProps, FormikValues } from 'formik';
 import { Form, FormGroup } from '@patternfly/react-core';
-import { FormFooter } from '@console/shared';
 import { SortByDirection } from '@patternfly/react-table';
-import { Table } from '@console/internal/components/factory';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
+import { Table } from '@console/internal/components/factory/table';
 import { HelmRelease } from '../helm-types';
 
 import RevisionListHeader from './rollback/RevisionListHeader';

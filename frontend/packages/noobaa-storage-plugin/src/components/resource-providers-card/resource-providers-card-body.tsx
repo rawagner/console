@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LoadingInline } from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 
 export const ResourceProvidersBody: React.FC<ResourceProvidersBodyProps> = ({
   isLoading,

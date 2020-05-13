@@ -5,9 +5,9 @@ import DashboardCard from '@console/shared/src/components/dashboard/dashboard-ca
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
-import { getName, getNamespace } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import InventoryItem from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
-import { resourcePath } from '@console/internal/components/utils';
+import { resourcePath } from '@console/internal/components/utils/resource-link';
 import { VMDashboardContext } from '../../vms/vm-dashboard-context';
 import { getVMLikeModel } from '../../../selectors/vm/vmlike';
 import { getNetworks, getDisks } from '../../../selectors/vm';

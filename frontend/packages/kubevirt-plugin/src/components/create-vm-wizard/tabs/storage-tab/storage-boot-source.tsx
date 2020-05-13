@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, FormSelect, FormSelectOption } from '@patternfly/react-core';
-import { ValidationErrorType } from '@console/shared';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { VMWizardStorage } from '../../types';
 import { FormRow } from '../../../form/form-row';
 import { FormSelectPlaceholderOption } from '../../../form/form-select-placeholder-option';

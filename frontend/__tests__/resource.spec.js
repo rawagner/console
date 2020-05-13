@@ -1,5 +1,5 @@
 import '../__mocks__/localStorage';
-import { k8sCreate } from '../public/module/k8s';
+import { k8sCreate } from '../public/module/k8s/resource';
 import { PodModel } from '../public/models';
 
 describe('k8s.k8sResource', () => {

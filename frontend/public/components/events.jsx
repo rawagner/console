@@ -9,32 +9,25 @@ import { CloseIcon } from '@patternfly/react-icons';
 
 import { namespaceProptype } from '../propTypes';
 import { ResourceListDropdown } from './resource-dropdown';
-import { TextFilter } from './factory';
-import {
-  apiGroupForReference,
-  isGroupVersionKind,
-  kindForReference,
-  referenceFor,
-  watchURL,
-} from '../module/k8s';
+import { TextFilter } from './factory/list-page';
+import { referenceFor } from '../module/k8s/k8s-models';
+import { apiGroupForReference, isGroupVersionKind, kindForReference } from '../module/k8s/k8s';
+import { watchURL } from '../module/k8s/resource';
+
 import { withStartGuide } from './start-guide';
 import { WSFactory } from '../module/ws-factory';
 import { EventModel, NodeModel } from '../models';
 import { connectToFlags } from './utils/connect-flags';
-import { FLAGS } from '@console/shared/src/constants';
-import {
-  Box,
-  Dropdown,
-  Loading,
-  PageHeading,
-  pluralize,
-  ResourceIcon,
-  ResourceLink,
-  resourcePathFromModel,
-  Timestamp,
-  TogglePlay,
-} from './utils';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { EventStreamList } from './utils/event-stream';
+import { ResourceLink, resourcePathFromModel } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { Dropdown } from './utils/dropdown';
+import { PageHeading } from './utils/headings';
+import { Box, Loading } from './utils/status-box';
+import { TogglePlay } from './utils/toggle-play';
+import { pluralize } from './utils/details-page';
+import { ResourceIcon } from './utils/resource-icon';
 
 const maxMessages = 500;
 const flushInterval = 500;

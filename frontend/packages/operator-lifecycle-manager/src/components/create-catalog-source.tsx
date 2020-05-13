@@ -2,15 +2,15 @@ import * as React from 'react';
 import Helmet from 'react-helmet';
 import { match } from 'react-router-dom';
 import { ActionGroup, Button, Form, FormGroup, TextInput } from '@patternfly/react-core';
+import { RadioGroup } from '@console/internal/components/radio';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import {
-  ButtonBar,
-  history,
-  NsDropdown,
   withHandlePromise,
   HandlePromiseProps,
-} from '@console/internal/components/utils';
-import { RadioGroup } from '@console/internal/components/radio';
-import { k8sCreate } from '@console/internal/module/k8s';
+} from '@console/internal/components/utils/promise-component';
+import { history } from '@console/internal/components/utils/router';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
+import { NsDropdown } from '@console/internal/components/utils/list-dropdown';
 import { CatalogSourceModel } from '../models';
 
 enum AvailabilityValue {

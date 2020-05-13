@@ -1,10 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-import { k8sKill } from '../../module/k8s';
+import { k8sKill } from '../../module/k8s/resource';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { history, PromiseComponent } from '../utils';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import { PromiseComponent } from '../utils/promise-component';
+import { history } from '../utils/router';
 
 class DeleteNamespaceModal extends PromiseComponent {
   constructor(props) {

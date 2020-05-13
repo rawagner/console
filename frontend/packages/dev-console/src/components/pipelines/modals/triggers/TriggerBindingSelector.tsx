@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { Firehose } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import { ClusterTriggerBindingModel, TriggerBindingModel } from '../../../../models';
 import { TriggerBindingKind } from '../../resource-types';
 import TriggerBindingSelectorDropdown from './TriggerBindingSelectorDropdown';

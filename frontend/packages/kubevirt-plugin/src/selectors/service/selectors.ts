@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { ServiceKind } from '@console/knative-plugin/src/types';
 import { VMIKind } from '../../types';
-import { getLabels } from '@console/shared';
+import { getLabels } from '@console/shared/src/selectors/common';
 
 export const getServicePort = (service: K8sResourceKind, targetPort: number) =>
   _.get(service, ['spec', 'ports'], []).find(

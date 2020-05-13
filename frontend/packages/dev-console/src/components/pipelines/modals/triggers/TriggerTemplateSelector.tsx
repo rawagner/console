@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useField } from 'formik';
-import { DropdownField } from '@console/shared/src';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 import { Pipeline } from '../../../../utils/pipeline-augment';
 import { RouteTemplate, usePipelineTriggerTemplateNames } from '../../utils/triggers';
 

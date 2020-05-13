@@ -7,14 +7,8 @@ import {
   TextVariants,
   Button,
 } from '@patternfly/react-core';
-import {
-  ResourceLink,
-  ExternalLink,
-  resourcePath,
-  pluralize,
-} from '@console/internal/components/utils';
-import { NodeKind } from '@console/internal/module/k8s';
-import { getName } from '@console/shared';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { getName } from '@console/shared/src/selectors/common';
 import {
   SCHEDULING_NODES_MATCH_TEXT,
   SCHEDULING_NO_NODES_MATCH_TEXT,
@@ -22,6 +16,9 @@ import {
   SCHEDULING_NO_NODES_MATCH_BUTTON_TEXT,
 } from '../consts';
 import './node-checker.scss';
+import { pluralize } from '@console/internal/components/utils/details-page';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { ResourceLink, resourcePath } from '@console/internal/components/utils/resource-link';
 
 export const NodeChecker: React.FC<NodeCheckerProps> = ({ qualifiedNodes }) => {
   const size = qualifiedNodes.length;

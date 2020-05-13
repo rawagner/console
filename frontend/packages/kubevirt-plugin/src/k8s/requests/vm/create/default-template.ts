@@ -1,5 +1,5 @@
 import { DefaultVMLikeEntityParams } from './types';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { VMTemplateWrapper } from '../../../wrapper/vm/vm-template-wrapper';
 import { VM_TEMPLATE_NAME_PARAMETER } from '../../../../constants/vm-templates';
 import {

@@ -4,7 +4,7 @@ import {
   ModalComponentProps,
   ModalBody,
   ModalTitle,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import CreateBackingStoreForm from './create-bs';
 import './create-bs.scss';
 

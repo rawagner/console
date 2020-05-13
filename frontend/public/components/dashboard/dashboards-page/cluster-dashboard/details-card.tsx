@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { ArrowCircleUpIcon, InProgressIcon } from '@patternfly/react-icons';
-import { FLAGS, getInfrastructureAPIURL, getInfrastructurePlatform } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
+import {
+  getInfrastructureAPIURL,
+  getInfrastructurePlatform,
+} from '@console/shared/src/selectors/infrastructure';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
@@ -11,21 +15,23 @@ import DetailItem from '@console/shared/src/components/dashboard/details-card/De
 import DashboardCardLink from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardLink';
 import { InfrastructureModel, ClusterVersionModel } from '../../../../models';
 import {
-  referenceForModel,
   getOpenShiftVersion,
   getK8sGitVersion,
-  ClusterVersionKind,
   getClusterID,
   getDesiredClusterVersion,
   getLastCompletedUpdate,
   getClusterUpdateStatus,
   getClusterVersionChannel,
-  ClusterUpdateStatus,
   getOCMLink,
+} from '../../../../module/k8s/cluster-settings';
+import {
+  ClusterVersionKind,
+  ClusterUpdateStatus,
   K8sResourceKind,
-} from '../../../../module/k8s';
+} from '../../../../module/k8s/types';
+import { referenceForModel } from '../../../../module/k8s/k8s';
 import { flagPending } from '../../../utils/connect-flags';
-import { ExternalLink } from '../../../utils';
+import { ExternalLink } from '../../../utils/link';
 import { clusterUpdateModal } from '../../../modals';
 import { Link } from 'react-router-dom';
 import { useK8sGet } from '../../../utils/k8s-get-hook';

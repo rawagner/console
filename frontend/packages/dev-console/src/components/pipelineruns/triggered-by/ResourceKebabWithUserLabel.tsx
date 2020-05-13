@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KebabAction, ResourceKebab } from '@console/internal/components/utils';
+import { KebabAction, ResourceKebab } from '@console/internal/components/utils/kebab';
 import { useMenuActionsWithUserLabel } from './hooks';
 
 const ResourceKebabWithUserLabel: React.FC<React.ComponentProps<typeof ResourceKebab>> = ({

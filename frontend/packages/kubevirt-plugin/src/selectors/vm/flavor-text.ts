@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { CPURaw } from '../../types/vm';
 import { vCPUCount } from './cpu';
-import { humanizeBinaryBytes } from '@console/internal/components/utils';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 import { convertToBytes } from '../../components/form/size-unit-utils';
 
 export const getFlavorText = ({

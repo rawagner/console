@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { K8sResourceKind, serviceClassDisplayName } from '../module/k8s';
+import { K8sResourceKind } from '../module/k8s/types';
+import { serviceClassDisplayName } from '../module/k8s/service-catalog';
 import { ClusterServiceClassIcon } from './catalog/catalog-item-icon';
-import { ExternalLink } from './utils';
+import { ExternalLink } from './utils/link';
 
 export const ClusterServiceClassInfo: React.FC<ClusterServiceClassInfoProps> = ({
   obj: serviceClass,

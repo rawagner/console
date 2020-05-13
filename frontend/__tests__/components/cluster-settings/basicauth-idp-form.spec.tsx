@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Button } from '@patternfly/react-core';
 
-import { ButtonBar } from '../../../public/components/utils';
+import { ButtonBar } from '../../../public/components/utils/button-bar';
 import { IDPNameInput } from '../../../public/components/cluster-settings/idp-name-input';
 import { IDPCAFileInput } from '../../../public/components/cluster-settings/idp-cafile-input';
 import {

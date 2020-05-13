@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import * as fuzzy from 'fuzzysearch';
 import { useFormikContext, FormikValues, getIn } from 'formik';
 import { ValidatedOptions } from '@patternfly/react-core';
-import { DropdownField } from '@console/shared';
-import { k8sGet, K8sResourceKind, ContainerPort } from '@console/internal/module/k8s';
+import { K8sResourceKind, ContainerPort } from '@console/internal/module/k8s/types';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { ImageStreamTagModel } from '@console/internal/models';
 import { UNASSIGNED_KEY } from '../../../const';
 import {
@@ -15,6 +15,7 @@ import {
   imageStreamLabels,
 } from '../../../utils/imagestream-utils';
 import { ImageStreamContext } from './ImageStreamContext';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 
 const ImageStreamTagDropdown: React.FC = () => {
   let imageStreamTagList = {};

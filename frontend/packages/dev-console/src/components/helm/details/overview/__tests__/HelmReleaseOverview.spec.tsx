@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { ResourceSummary, SectionHeading } from '@console/internal/components/utils';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { SectionHeading } from '@console/internal/components/utils/headings';
 import { mockHelmReleases } from '../../../__tests__/helm-release-mock-data';
 import HelmReleaseOverview from '../HelmReleaseOverview';
 import HelmChartSummary from '../HelmChartSummary';

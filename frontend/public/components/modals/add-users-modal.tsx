@@ -2,7 +2,8 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 
 import { GroupModel } from '../../models';
-import { GroupKind, k8sPatch } from '../../module/k8s';
+import { GroupKind } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import {
   ModalBody,
   ModalComponentProps,
@@ -10,7 +11,8 @@ import {
   ModalTitle,
   createModalLauncher,
 } from '../factory/modal';
-import { ListInput, HandlePromiseProps, withHandlePromise } from '../utils';
+import { withHandlePromise, HandlePromiseProps } from '../utils/promise-component';
+import { ListInput } from '../utils/list-input';
 
 export const AddUsersModal = withHandlePromise((props: AddUsersModalProps) => {
   const [values, setValues] = React.useState(['']);

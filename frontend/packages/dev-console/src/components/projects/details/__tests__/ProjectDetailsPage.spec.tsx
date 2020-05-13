@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { BreadCrumbs } from '@console/internal/components/utils';
 import { ProjectDetailsPage } from '../ProjectDetailsPage';
 import ProjectListPage from '../../ProjectListPage';
 import NamespacedPage from '../../../NamespacedPage';
-import { DetailsPage } from '@console/internal/components/factory';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
 
 const testProjectMatch = { url: '', params: { ns: 'test-project' }, isExact: true, path: '' };
 const allNamespaceMatch = { url: '', params: {}, isExact: true, path: '' };

@@ -1,26 +1,23 @@
 import * as React from 'react';
 
 import PodRingSet from '@console/shared/src/components/pod/PodRingSet';
-import { PodRingController } from '@console/shared';
+import PodRingController from '@console/shared/src/components/pod/PodRingDataController';
 import { AddHealthChecks, EditHealthChecks } from '@console/app/src/actions/modify-health-checks';
-import { K8sResourceKind } from '../module/k8s';
+import { K8sResourceKind } from '../module/k8s/types';
 import { ResourceEventStream } from './events';
-import { DetailsPage, ListPage, Table, RowFunction } from './factory';
-
+import { Table, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { WorkloadTableRow, WorkloadTableHeader } from './workload-table';
-
-import {
-  AsyncComponent,
-  Kebab,
-  KebabAction,
-  ContainerTable,
-  ResourceSummary,
-  SectionHeading,
-  navFactory,
-  LoadingInline,
-} from './utils';
 import { VolumesTable } from './volumes-table';
 import { StatefulSetModel } from '../models';
+import { Kebab, KebabAction } from './utils/kebab';
+import { SectionHeading } from './utils/headings';
+import { LoadingInline } from './utils/status-box';
+import { ResourceSummary } from './utils/details-page';
+import { ContainerTable } from './utils/container-table';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
 
 const { AddStorage, common, ModifyCount } = Kebab.factory;
 export const menuActions: KebabAction[] = [

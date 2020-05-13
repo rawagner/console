@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
 import {
-  FirehoseResource,
-  FirehoseResult,
   ResourceLink,
   resourcePathFromModel,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/resource-link';
 import { EventModel, MachineModel, NodeModel } from '@console/internal/models';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
@@ -17,12 +16,13 @@ import ActivityBody, {
   Activity,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
 import ActivityItem from '@console/shared/src/components/dashboard/activity-card/ActivityItem';
-import { EventKind, K8sResourceKind, MachineKind } from '@console/internal/module/k8s';
+import { EventKind, K8sResourceKind, MachineKind } from '@console/internal/module/k8s/types';
 import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
-import { getName, getNamespace, getMachineNodeName } from '@console/shared';
+import { getMachineNodeName } from '@console/shared/src/selectors/machine';
+import { getNamespace, getName } from '@console/shared/src/selectors/common';
 import { BareMetalHostModel } from '../../../models';
 import { BareMetalHostKind } from '../../../types';
 import { isHostInProgressState, getBareMetalHostStatus } from '../../../status/host-status';

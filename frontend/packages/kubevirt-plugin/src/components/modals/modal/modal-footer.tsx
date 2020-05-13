@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { Alert, Button, ButtonVariant, AlertProps, ActionGroup } from '@patternfly/react-core';
-import { LoadingInline } from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 
 import './modal-footer.scss';
 

@@ -1,5 +1,5 @@
 import { IRow } from '@patternfly/react-table';
-import { NodeKind, K8sResourceCommon } from '@console/internal/module/k8s';
+import { NodeKind, K8sResourceCommon } from '@console/internal/module/k8s/types';
 
 export type NodeTableRow = {
   cells: IRow['cells'];

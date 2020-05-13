@@ -2,22 +2,21 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { K8sResourceKind, K8sResourceKindReference } from '../module/k8s';
+import { K8sResourceKind, K8sResourceKindReference } from '../module/k8s/types';
 import { HorizontalPodAutoscalerModel } from '../models';
 import { Conditions } from './conditions';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  DetailsItem,
-  Kebab,
-  LabelList,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-  navFactory,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { DetailsItem } from './utils/details-item';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { navFactory } from './utils/horizontal-nav';
+import { LabelList } from './utils/label-list';
 
 const HorizontalPodAutoscalersReference: K8sResourceKindReference = 'HorizontalPodAutoscaler';
 

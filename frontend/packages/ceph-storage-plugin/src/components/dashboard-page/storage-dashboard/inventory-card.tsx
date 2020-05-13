@@ -8,13 +8,13 @@ import {
   DashboardItemProps,
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
-import { FirehoseResource } from '@console/internal/components/utils';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import {
   getNodeStatusGroups,
   getPVCStatusGroups,
   getPVStatusGroups,
 } from '@console/shared/src/components/dashboard/inventory-card/utils';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   NodeModel,
   PersistentVolumeClaimModel,

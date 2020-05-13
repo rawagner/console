@@ -22,7 +22,7 @@ import {
 
 import { history } from './router';
 import { isModalOpen } from '../modals';
-import { Dropdown } from '../utils';
+import { Dropdown } from './dropdown';
 
 export const FilterTypes = {
   category: 'category',

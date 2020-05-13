@@ -39,28 +39,24 @@ import { connect } from 'react-redux';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
 import {
   RedExclamationCircleIcon,
-  TechPreviewBadge,
   YellowExclamationTriangleIcon,
-} from '@console/shared';
+} from '@console/shared/src/components/status/icons';
+import TechPreviewBadge from '@console/shared/src/components/badges/TechPreviewBadge';
 import { PrometheusData, PrometheusLabels } from '@console/shared/src/types/monitoring';
 import * as UIActions from '../../actions/ui';
 import { RootState } from '../../redux-types';
 import { fuzzyCaseInsensitive } from '../factory/table-filters';
-import { PROMETHEUS_BASE_PATH } from '../graphs';
+import { PROMETHEUS_BASE_PATH } from '../graphs/constants';
 import { getPrometheusURL, PrometheusEndpoint } from '../graphs/helpers';
 import { getPrometheusExpressionBrowserURL } from '../graphs/prometheus-graph';
-import {
-  ActionsMenu,
-  Dropdown,
-  ExternalLink,
-  getURLSearchParams,
-  Kebab,
-  LoadingInline,
-  usePoll,
-  useSafeFetch,
-} from '../utils';
 import { setAllQueryArguments } from '../utils/router';
 import { colors, Error, QueryObj, QueryBrowser } from './query-browser';
+import { ActionsMenu, Dropdown } from '../utils/dropdown';
+import { ExternalLink, getURLSearchParams } from '../utils/link';
+import { useSafeFetch } from '../utils/safe-fetch-hook';
+import { LoadingInline } from '../utils/status-box';
+import { Kebab } from '../utils/kebab';
+import { usePoll } from '../utils/poll-hook';
 
 const aggregationOperators = [
   'avg()',

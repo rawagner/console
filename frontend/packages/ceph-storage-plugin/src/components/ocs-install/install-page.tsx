@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { match } from 'react-router';
-import { k8sGet } from '@console/internal/module/k8s';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
-import { BreadCrumbs } from '@console/internal/components/utils';
+import { k8sGet } from '@console/internal/module/k8s/resource';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { getAnnotations } from '@console/shared/src/selectors/common';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
 import { Radio, Title } from '@patternfly/react-core';
 import { OCSServiceModel } from '../../models';
 import InstallExternalCluster from '../independent-mode/install';

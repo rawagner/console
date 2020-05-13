@@ -16,9 +16,6 @@ import { clusterChannelModal, clusterUpdateModal, errorModal } from '../modals';
 import { GlobalConfigPage } from './global-config';
 import { ClusterAutoscalerModel, ClusterVersionModel } from '../../models';
 import {
-  ClusterUpdateStatus,
-  ClusterVersionConditionType,
-  ClusterVersionKind,
   clusterVersionReference,
   getAvailableClusterUpdates,
   getClusterID,
@@ -28,27 +25,29 @@ import {
   getErrataLink,
   getLastCompletedUpdate,
   getOCMLink,
-  k8sPatch,
+} from '../../module/k8s/cluster-settings';
+import { k8sPatch } from '../../module/k8s/resource';
+import { referenceForModel } from '../../module/k8s/k8s';
+import {
+  ClusterUpdateStatus,
+  ClusterVersionConditionType,
+  ClusterVersionKind,
   K8sResourceConditionStatus,
   K8sResourceKind,
-  referenceForModel,
-} from '../../module/k8s';
-import {
-  EmptyBox,
-  ExternalLink,
-  Firehose,
-  HorizontalNav,
-  ResourceLink,
-  resourcePathFromModel,
-  SectionHeading,
-  Timestamp,
-  truncateMiddle,
-} from '../utils';
+} from '../../module/k8s/types';
 import {
   GreenCheckCircleIcon,
   RedExclamationCircleIcon,
   YellowExclamationTriangleIcon,
-} from '@console/shared';
+} from '@console/shared/src/components/status/icons';
+import { truncateMiddle } from '../utils/truncate-middle';
+import { ExternalLink } from '../utils/link';
+import { resourcePathFromModel, ResourceLink } from '../utils/resource-link';
+import { EmptyBox } from '../utils/status-box';
+import { SectionHeading } from '../utils/headings';
+import { HorizontalNav } from '../utils/horizontal-nav';
+import { Timestamp } from '../utils/timestamp';
+import { Firehose } from '../utils/firehose';
 
 const cancelUpdate = (cv: ClusterVersionKind) => {
   k8sPatch(ClusterVersionModel, cv, [{ path: '/spec/desiredUpdate', op: 'remove' }]).catch(

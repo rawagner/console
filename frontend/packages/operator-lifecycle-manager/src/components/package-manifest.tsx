@@ -3,17 +3,18 @@ import * as _ from 'lodash';
 import { Link, match } from 'react-router-dom';
 import * as classNames from 'classnames';
 import { Button } from '@patternfly/react-core';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
-import { StatusBox, MsgBox } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import {
-  MultiListPage,
   Table,
   TableRow,
   TableData,
   RowFunctionArgs,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/table';
+import { StatusBox, MsgBox } from '@console/internal/components/utils/status-box';
 import { getActiveNamespace } from '@console/internal/actions/ui';
-import { ALL_NAMESPACES_KEY, OPERATOR_HUB_LABEL } from '@console/shared';
+import { ALL_NAMESPACES_KEY, OPERATOR_HUB_LABEL } from '@console/shared/src/constants/common';
 import {
   PackageManifestModel,
   SubscriptionModel,

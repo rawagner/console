@@ -3,14 +3,16 @@ import * as _ from 'lodash-es';
 import { ActionType as Action, action } from 'typesafe-actions';
 import { FLAGS } from '@console/shared/src/constants/common';
 import { GroupModel, SelfSubjectAccessReviewModel, UserModel } from '../models';
-import { k8sBasePath, ClusterVersionKind, k8sCreate } from '../module/k8s';
+import { ClusterVersionKind } from '../module/k8s/types';
+import { k8sBasePath } from '../module/k8s/k8s';
+import { k8sCreate } from '../module/k8s/resource';
 import { receivedResources } from './k8s';
 import { coFetchJSON } from '../co-fetch';
 import { MonitoringRoutes } from '../redux-types';
 import { setMonitoringURL } from './monitoring';
 import { pluginStore } from '../plugins';
 import { setClusterID, setCreateProjectMessage, setUser, setConsoleLinks } from './common';
-import { isCustomFeatureFlag } from '@console/plugin-sdk';
+import { isCustomFeatureFlag } from '@console/plugin-sdk/src/typings';
 
 export enum ActionType {
   SetFlag = 'setFlag',

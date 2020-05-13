@@ -2,12 +2,13 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, DropdownItem, DropdownToggle, Title } from '@patternfly/react-core';
 import { CaretDownIcon } from '@patternfly/react-icons';
-import { Perspective, useExtensions, isPerspective } from '@console/plugin-sdk';
+import { Perspective, isPerspective } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { RootState } from '../../redux-types';
 import { getFlagsObject, FlagsObject } from '../../components/utils/connect-flags';
 import { getActivePerspective } from '../../reducers/ui-selectors';
 import * as UIActions from '../../actions/ui';
-import { history } from '../utils';
+import { history } from '../utils/router';
 
 type StateProps = {
   activePerspective: string;

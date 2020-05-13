@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { ScrollToTopOnMount, SectionHeading, StatusBox } from '@console/internal/components/utils';
-import { getName, getNamespace } from '@console/shared/src';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getConfigAsJSON, getDescription, getType } from '../../selectors';
 import { networkTypes } from '../../constants';
 import { NetworkAttachmentDefinitionKind } from '../../types';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { ScrollToTopOnMount } from '@console/internal/components/utils/scroll-to-top-on-mount';
+import { SectionHeading } from '@console/internal/components/utils/headings';
 
 const NET_ATTACH_DEF_DETAILS_HEADING = 'Network Attachment Definition Details';
 

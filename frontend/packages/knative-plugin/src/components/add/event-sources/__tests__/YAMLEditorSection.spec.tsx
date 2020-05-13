@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { YAMLEditorField } from '@console/shared';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import YAMLEditorSection from '../YAMLEditorSection';
+import YAMLEditorField from '@console/shared/src/components/formik-fields/YAMLEditorField';
 
 jest.mock('formik', () => ({
   useFormikContext: jest.fn(() => ({

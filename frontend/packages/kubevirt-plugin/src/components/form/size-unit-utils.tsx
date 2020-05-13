@@ -1,6 +1,6 @@
-import { assureEndsWith } from '@console/shared/src';
+import { assureEndsWith } from '@console/shared/src/utils/grammar';
 import { getStringEnumValues } from '../../utils/types';
-import { convertToBaseValue } from '@console/internal/components/utils';
+import { convertToBaseValue } from '@console/internal/components/utils/units';
 
 export enum BinaryUnit {
   B = 'B',

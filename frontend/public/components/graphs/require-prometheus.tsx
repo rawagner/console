@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { FLAGS } from '@console/shared/src/constants';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { connectToFlags } from '../utils/connect-flags';
-import { PROMETHEUS_BASE_PATH, PROMETHEUS_TENANCY_BASE_PATH } from '.';
+import { PROMETHEUS_BASE_PATH, PROMETHEUS_TENANCY_BASE_PATH } from './constants';
 
 const canAccessPrometheus = (prometheusFlag) =>
   prometheusFlag && !!PROMETHEUS_BASE_PATH && !!PROMETHEUS_TENANCY_BASE_PATH;

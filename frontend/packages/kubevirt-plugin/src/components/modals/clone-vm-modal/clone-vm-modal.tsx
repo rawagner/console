@@ -11,22 +11,22 @@ import {
   Alert,
 } from '@patternfly/react-core';
 import {
-  Firehose,
-  FirehoseResource,
-  FirehoseResult,
   HandlePromiseProps,
   withHandlePromise,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/promise-component';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
 import {
   createModalLauncher,
   ModalTitle,
   ModalBody,
   ModalComponentProps,
   ModalFooter,
-} from '@console/internal/components/factory';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/modal';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { NamespaceModel, PersistentVolumeClaimModel, ProjectModel } from '@console/internal/models';
-import { getName, getNamespace, ValidationErrorType } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { VMKind } from '../../../types';
 import { getDescription } from '../../../selectors/selectors';
 import { getLoadedData, getLoadError, prefixedID } from '../../../utils';

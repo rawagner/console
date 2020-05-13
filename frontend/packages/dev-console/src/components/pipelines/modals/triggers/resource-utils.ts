@@ -1,5 +1,6 @@
-import { getRandomChars } from '@console/shared';
-import { apiVersionForModel, RouteKind } from '@console/internal/module/k8s';
+import { getRandomChars } from '@console/shared/src/utils/utils';
+import { RouteKind } from '@console/internal/module/k8s/types';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
 import { RouteModel } from '@console/internal/models';
 import { EventListenerModel, TriggerTemplateModel } from '../../../../models';
 import { PipelineRun } from '../../../../utils/pipeline-augment';

@@ -1,4 +1,4 @@
-import { K8sResourceKind, PodKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
 import { createBasicLookup } from '@console/shared/src/utils/utils';
 import { getName, getOwnerReferences } from '@console/shared/src/selectors/common'; // do not import just from shared - causes cycles
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';

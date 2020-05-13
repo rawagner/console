@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core';
-import { FirehoseResult } from '@console/internal/components/utils';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { getName, ValidationErrorType, ValidationObject } from '@console/shared';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { ValidationErrorType, ValidationObject } from '@console/shared/src/utils/validation/types';
+import { getName } from '@console/shared/src/selectors/common';
 import { getLoadedData, getLoadError, isLoaded } from '../../utils';
 import { ignoreCaseSort } from '../../utils/sort';
 import { FormRow } from './form-row';

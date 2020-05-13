@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
 import { SectionHeading } from './headings';
 
 export const BuildHooks: React.SFC<BuildHooksProps> = ({ resource }) => {

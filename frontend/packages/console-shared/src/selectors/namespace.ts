@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 export const getRequester = (obj: K8sResourceKind): string =>
   _.get(obj, ['metadata', 'annotations', 'openshift.io/requester']);

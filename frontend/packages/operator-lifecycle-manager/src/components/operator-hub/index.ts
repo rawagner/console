@@ -1,4 +1,4 @@
-import { K8sResourceKind, ObjectMetadata } from '@console/internal/module/k8s';
+import { K8sResourceKind, ObjectMetadata } from '@console/internal/module/k8s/types';
 import { PackageManifestKind, SubscriptionKind } from '../../types';
 
 export enum ProviderType {

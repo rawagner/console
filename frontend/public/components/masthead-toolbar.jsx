@@ -24,22 +24,25 @@ import {
 } from '@patternfly/react-core';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { FLAGS, YellowExclamationTriangleIcon } from '@console/shared';
-import { formatNamespacedRouteForResource } from '@console/shared/src/utils';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import { formatNamespacedRouteForResource } from '@console/shared/src/utils/namespace';
 import CloudShellMastheadButton from '@console/app/src/components/cloud-shell/CloudShellMastheadButton';
 import * as UIActions from '../actions/ui';
 import { connectToFlags, flagPending } from './utils/connect-flags';
 import { authSvc } from '../module/auth';
-import { getOCMLink } from '../module/k8s';
-import { history, Firehose } from './utils';
-import { openshiftHelpBase } from './utils/documentation';
-import { AboutModal } from './about-modal';
 import {
+  getOCMLink,
   clusterVersionReference,
   getAvailableClusterUpdates,
   getReportBugLink,
 } from '../module/k8s/cluster-settings';
+import { openshiftHelpBase } from './utils/documentation';
+import { AboutModal } from './about-modal';
+
 import * as redhatLogoImg from '../imgs/logos/redhat.svg';
+import { history } from './utils/router';
+import { Firehose } from './utils/firehose';
 
 const SystemStatusButton = ({ statuspageData, className }) =>
   !_.isEmpty(_.get(statuspageData, 'incidents')) ? (

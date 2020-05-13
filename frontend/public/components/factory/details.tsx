@@ -1,28 +1,20 @@
 import * as React from 'react';
 import { match } from 'react-router-dom';
 import * as _ from 'lodash-es';
-import { getBadgeFromType } from '@console/shared';
-import { useExtensions, ResourceTabPage, isResourceTabPage } from '@console/plugin-sdk';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
+import { ResourceTabPage, isResourceTabPage } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
-import {
-  Firehose,
-  HorizontalNav,
-  PageHeading,
-  FirehoseResource,
-  KebabOptionsCreator,
-  Page,
-  AsyncComponent,
-  PageComponentProps,
-} from '../utils';
-import {
-  K8sResourceKindReference,
-  K8sResourceKind,
-  K8sKind,
-  referenceForModel,
-  referenceFor,
-} from '../../module/k8s';
+import { referenceForModel } from '../../module/k8s/k8s';
+import { referenceFor } from '../../module/k8s/k8s-models';
+import { K8sResourceKindReference, K8sResourceKind, K8sKind } from '../../module/k8s/types';
 import { ErrorBoundaryFallback } from '../error';
 import { breadcrumbsForDetailsPage } from '../utils/breadcrumbs';
+import { AsyncComponent } from '../utils/async';
+import { PageComponentProps, HorizontalNav, Page } from '../utils/horizontal-nav';
+import { Firehose } from '../utils/firehose';
+import { PageHeading, KebabOptionsCreator } from '../utils/headings';
+import { FirehoseResource } from '../utils/types';
 
 export const DetailsPage = withFallback<DetailsPageProps>(({ pages = [], ...props }) => {
   const resourceKeys = _.map(props.resources, 'prop');

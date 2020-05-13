@@ -1,10 +1,10 @@
-import { k8sGet, k8sKill, k8sPatch, resourceURL } from '@console/internal/module/k8s';
+import { k8sGet, k8sKill, k8sPatch, resourceURL } from '@console/internal/module/k8s/resource';
 import {
   getName,
   getNamespace,
   getOwnerReferences,
   getDeletetionTimestamp,
-} from '@console/shared/src';
+} from '@console/shared/src/selectors/common';
 import { coFetch } from '@console/internal/co-fetch';
 import { getPxeBootPatch } from '../../patches/vm/vm-boot-patches';
 import { VirtualMachineImportModel, VirtualMachineModel } from '../../../models';

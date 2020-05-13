@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { isDashboardsOverviewUtilizationItem } from '@console/plugin-sdk';
+import { isDashboardsOverviewUtilizationItem } from '@console/plugin-sdk/src/typings';
 import { testedExtensions } from '../plugin-test-utils';
 
 describe('DashboardsOverviewUtilizationItem', () => {

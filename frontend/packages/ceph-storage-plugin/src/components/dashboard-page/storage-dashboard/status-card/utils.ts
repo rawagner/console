@@ -1,4 +1,4 @@
-import { PrometheusHealthHandler, ResourceHealthHandler } from '@console/plugin-sdk';
+import { PrometheusHealthHandler, ResourceHealthHandler } from '@console/plugin-sdk/src/typings';
 import { HealthState } from '@console/shared/src/components/dashboard/status-card/states';
 import { getResiliencyProgress } from '../../../../utils';
 import { WatchCephResource } from '../../../../types';

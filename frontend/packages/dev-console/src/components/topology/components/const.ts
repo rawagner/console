@@ -1,4 +1,4 @@
-import { STORAGE_PREFIX } from '@console/shared';
+import { STORAGE_PREFIX } from '@console/shared/src/constants/common';
 
 export const TYPE_WORKLOAD = 'workload';
 export const TYPE_CONNECTS_TO = 'connects-to';

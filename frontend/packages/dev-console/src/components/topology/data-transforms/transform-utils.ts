@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import { TransformResourceData, isKnativeServing } from '@console/shared';
-import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
 import { getImageForIconClass } from '@console/internal/components/catalog/catalog-item-icon';
 import {
   TYPE_EVENT_SOURCE,
@@ -24,6 +24,8 @@ import {
   TYPE_SERVICE_BINDING,
 } from '../components/const';
 import { getRoutesURL } from '../topology-utils';
+import { TransformResourceData } from '@console/shared/src/utils/transformResourceData';
+import { isKnativeServing } from '@console/shared/src/utils/pod-utils';
 
 export const dataObjectFromModel = (node: Node | Group): TopologyDataObject => {
   return {

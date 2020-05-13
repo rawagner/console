@@ -3,22 +3,21 @@ import { Link } from 'react-router-dom';
 import * as _ from 'lodash-es';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  history,
-  SectionHeading,
-  detailsPage,
-  navFactory,
-  ResourceSummary,
-  resourcePathFromModel,
-  ResourceLink,
-} from './utils';
-import { viewYamlComponent } from './utils/horizontal-nav';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { viewYamlComponent, navFactory } from './utils/horizontal-nav';
 import { ClusterServiceClassModel, ClusterServiceBrokerModel } from '../models';
-import { K8sResourceKind, referenceForModel, serviceClassDisplayName } from '../module/k8s';
+import { serviceClassDisplayName } from '../module/k8s/service-catalog';
+import { referenceForModel } from '../module/k8s/k8s';
+import { K8sResourceKind } from '../module/k8s/types';
 import { ClusterServiceClassIcon } from './catalog/catalog-item-icon';
 import { ClusterServicePlanPage } from './cluster-service-plan';
 import { ClusterServiceClassInfo } from './cluster-service-class-info';
+import { history } from './utils/router';
+import { resourcePathFromModel, ResourceLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, detailsPage } from './utils/details-page';
 
 const createInstance = (kindObj, serviceClass) => {
   if (!_.get(serviceClass, 'status.removedFromBrokerCatalog')) {

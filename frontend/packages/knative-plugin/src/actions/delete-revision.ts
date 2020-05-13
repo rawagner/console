@@ -1,5 +1,5 @@
-import { KebabOption } from '@console/internal/components/utils';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { KebabOption } from '@console/internal/components/utils/kebab';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { deleteRevisionModal } from '../components/modals';
 
 export const deleteRevision = (model: K8sKind, revision: K8sResourceKind): KebabOption => {

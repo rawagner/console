@@ -3,21 +3,20 @@ import * as _ from 'lodash';
 import { FormikProps, FormikValues } from 'formik';
 import { Form, Button } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import {
-  ContainerDropdown,
-  history,
-  PageHeading,
-  ResourceLink,
-  ResourceIcon,
-} from '@console/internal/components/utils';
-import { K8sResourceKind, referenceFor, modelFor } from '@console/internal/module/k8s';
-import { FormFooter } from '@console/shared';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
+import { history } from '@console/internal/components/utils/router';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
 import { getResourcesType } from '../edit-application/edit-application-utils';
 import HealthChecks from './HealthChecks';
 import Helmet from 'react-helmet';
 import { ContainerModel } from '@console/internal/models';
 import './AddHealthChecks.scss';
 import { getHealthChecksData } from './create-health-checks-probe-utils';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ContainerDropdown } from '@console/internal/components/utils/dropdown';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 
 type AddHealthChecksProps = {
   resource?: K8sResourceKind;

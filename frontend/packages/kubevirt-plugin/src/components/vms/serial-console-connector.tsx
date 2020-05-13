@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AccessConsoles, SerialConsole } from '@patternfly/react-console';
 import { WSFactory } from '@console/internal/module/ws-factory';
-import { getName } from '@console/shared/src/selectors';
+import { getName } from '@console/shared/src/selectors/common';
 import { VMIKind } from '../../types';
 
 const { CONNECTED, DISCONNECTED, LOADING } = AccessConsoles.constants;

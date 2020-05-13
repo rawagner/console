@@ -1,4 +1,4 @@
-import { RowFunction } from '@console/internal/components/factory';
+import { RowFunction } from '@console/internal/components/factory/table';
 import { SortByDirection } from '@patternfly/react-table';
 
 export interface CustomResourceListRowFilter {

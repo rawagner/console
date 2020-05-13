@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SortByDirection } from '@patternfly/react-table';
-import { Table } from '@console/internal/components/factory';
+import { Table } from '@console/internal/components/factory/table';
 import { PropPipelineData } from '../../../utils/pipeline-augment';
 import { PipelineModel } from '../../../models';
 import PipelineHeader from './PipelineHeader';

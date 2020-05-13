@@ -8,7 +8,7 @@ import {
   SendResolvedAlertsCheckbox,
   SaveAsDefaultCheckbox,
 } from './alert-manager-receiver-forms';
-import { ExpandCollapse } from '../../utils';
+import { ExpandCollapse } from '../../utils/expand-collapse';
 
 const GLOBAL_FIELDS = [
   'pagerduty_url',

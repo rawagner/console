@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikProps, FormikValues } from 'formik';
 import { Form } from '@patternfly/react-core';
-import { FormFooter } from '@console/shared';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 import NamespaceSection from './NamespaceSection';
 
 const CloudShellSetupForm: React.FC<Pick<

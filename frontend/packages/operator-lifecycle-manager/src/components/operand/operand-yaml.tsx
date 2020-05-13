@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { match as RouterMatch } from 'react-router-dom';
-import { K8sResourceKindReference } from '@console/internal/module/k8s';
+import { K8sResourceKindReference } from '@console/internal/module/k8s/types';
 import { CreateYAML } from '@console/internal/components/create-yaml';
 
 /**

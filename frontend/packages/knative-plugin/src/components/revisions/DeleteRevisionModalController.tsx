@@ -1,26 +1,18 @@
 import * as React from 'react';
 import { Formik, FormikHelpers, FormikValues } from 'formik';
 import { ActionGroup, Button } from '@patternfly/react-core';
-import { RedExclamationCircleIcon } from '@console/shared';
-import {
-  k8sKill,
-  K8sResourceKind,
-  k8sUpdate,
-  referenceForModel,
-} from '@console/internal/module/k8s';
-import {
-  Firehose,
-  FirehoseResult,
-  history,
-  resourceListPathFromModel,
-} from '@console/internal/components/utils';
+import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
+import { k8sKill, k8sUpdate } from '@console/internal/module/k8s/resource';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { history } from '@console/internal/components/utils/router';
 import {
   createModalLauncher,
   ModalBody,
   ModalComponentProps,
   ModalFooter,
   ModalTitle,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import { KNATIVE_SERVING_LABEL } from '../../const';
 import { RevisionModel, ServiceModel } from '../../models';
 import {
@@ -31,6 +23,9 @@ import {
 } from '../../utils/traffic-splitting-utils';
 import { TrafficSplittingType } from '../traffic-splitting/TrafficSplitting';
 import DeleteRevisionModal from './DeleteRevisionModal';
+import { resourceListPathFromModel } from '@console/internal/components/utils/resource-link';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 type ControllerProps = {
   loaded?: boolean;

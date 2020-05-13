@@ -1,9 +1,11 @@
 import * as _ from 'lodash-es';
 
 import { OAuthModel } from '../../models';
-import { IdentityProvider, k8sGet, k8sPatch, OAuthKind } from '../../module/k8s';
-import { history, resourcePathFromModel } from '../utils';
+import { IdentityProvider, OAuthKind } from '../../module/k8s/types';
+import { k8sGet, k8sPatch } from '../../module/k8s/resource';
+import { history } from '../utils/router';
 import { dryRunOpt } from '@console/dev-console/src/utils/shared-submit-utils';
+import { resourcePathFromModel } from '../utils/resource-link';
 
 // The name of the cluster-scoped OAuth configuration resource.
 const OAUTH_RESOURCE_NAME = 'cluster';

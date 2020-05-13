@@ -3,14 +3,20 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { ActionGroup, Button } from '@patternfly/react-core';
-import { filterScOnProvisioner, isCephProvisioner } from '@console/shared/src/utils';
-import { k8sCreate, K8sResourceKind, referenceFor } from '../../module/k8s';
-import { AsyncComponent, ButtonBar, RequestSizeInput, history, resourceObjPath } from '../utils';
+import { filterScOnProvisioner, isCephProvisioner } from '@console/shared/src/utils/storage-utils';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { k8sCreate } from '../../module/k8s/resource';
+import { referenceFor } from '../../module/k8s/k8s-models';
 import { StorageClassDropdown } from '../utils/storage-class-dropdown';
 import { RadioInput } from '../radio';
 import { Checkbox } from '../checkbox';
 import { PersistentVolumeClaimModel } from '../../models';
 import { StorageClass } from '../storage-class-form';
+import { AsyncComponent } from '../utils/async';
+import { RequestSizeInput } from '../utils/request-size-input';
+import { resourceObjPath } from '../utils/resource-link';
+import { ButtonBar } from '../utils/button-bar';
+import { history } from '../utils/router';
 
 const NameValueEditorComponent = (props) => (
   <AsyncComponent

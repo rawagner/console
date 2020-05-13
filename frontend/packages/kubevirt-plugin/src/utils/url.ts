@@ -1,4 +1,4 @@
-import { k8sBasePath } from '@console/internal/module/k8s';
+import { k8sBasePath } from '@console/internal/module/k8s/k8s';
 import { VMWizardMode, VMWizardName, VMWizardView } from '../constants/vm';
 
 const ELLIPSIS = '…';

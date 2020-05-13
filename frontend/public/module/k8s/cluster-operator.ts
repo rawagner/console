@@ -1,12 +1,5 @@
 import * as _ from 'lodash-es';
-import { ClusterOperator, OperandVersion } from '.';
-
-export enum OperatorStatus {
-  Available = 'Available',
-  Updating = 'Updating',
-  Degraded = 'Degraded',
-  Unknown = 'Unknown',
-}
+import { ClusterOperator, OperandVersion, OperatorStatus } from './types';
 
 export const getStatusAndMessage = (operator: ClusterOperator) => {
   const conditions = _.get(operator, 'status.conditions');

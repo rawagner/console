@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { ResourceSummary, NodeLink, ResourceLink } from '@console/internal/components/utils';
-import { K8sKind, PodKind, TemplateKind } from '@console/internal/module/k8s';
-import { getName, getNamespace, getNodeName } from '@console/shared';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { NodeLink, ResourceLink } from '@console/internal/components/utils/resource-link';
+import { K8sKind, PodKind, TemplateKind } from '@console/internal/module/k8s/types';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { PodModel } from '@console/internal/models';
 import { Selector } from '@console/internal/components/utils/selector';
+import { getNodeName } from '@console/shared/src/selectors/pod';
 import { VMKind, VMIKind } from '../../types';
 import { VMTemplateLink } from '../vm-templates/vm-template-link';
 import { getBasicID, prefixedID } from '../../utils';

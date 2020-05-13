@@ -1,14 +1,11 @@
 import * as _ from 'lodash';
 import { ValidatedOptions } from '@patternfly/react-core';
-import {
-  K8sResourceKind,
-  referenceFor,
-  referenceForModel,
-  ImagePullPolicy,
-} from '@console/internal/module/k8s';
+import { K8sResourceKind, ImagePullPolicy } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { BuildStrategyType } from '@console/internal/components/build';
 import { DeploymentConfigModel, DeploymentModel } from '@console/internal/models';
-import { ServiceModel } from '@console/knative-plugin';
+import { ServiceModel } from '@console/knative-plugin/src/models';
 import { UNASSIGNED_KEY } from '../../const';
 import { Resources, DeploymentData } from '../import/import-types';
 import { AppResources } from './edit-application-types';

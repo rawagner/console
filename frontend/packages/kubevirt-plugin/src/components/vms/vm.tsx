@@ -3,35 +3,31 @@ import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import { match } from 'react-router';
 import { sortable } from '@patternfly/react-table';
+import { createLookup } from '@console/shared/src/utils/utils';
 import {
-  createLookup,
-  dimensifyHeader,
-  dimensifyRow,
   getCreationTimestamp,
   getDeletetionTimestamp,
   getName,
   getNamespace,
   getOwnerReferences,
   getUID,
-} from '@console/shared';
+} from '@console/shared/src/selectors/common';
+import { dimensifyHeader, dimensifyRow } from '@console/shared/src/utils/table-utils';
 import { withStartGuide } from '@console/internal/components/start-guide';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { NamespaceModel, PodModel, NodeModel } from '@console/internal/models';
 import {
   Table,
-  MultiListPage,
   TableRow,
   TableData,
   RowFunction,
-} from '@console/internal/components/factory';
-import {
-  FirehoseResult,
-  Kebab,
-  KebabOption,
-  ResourceLink,
-  Timestamp,
-} from '@console/internal/components/utils';
-import { K8sKind, PodKind } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/table';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
+import { K8sKind, PodKind } from '@console/internal/module/k8s/types';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { KebabOption, Kebab } from '@console/internal/components/utils/kebab';
 import { VMStatus } from '../vm-status/vm-status';
 import {
   DataVolumeModel,

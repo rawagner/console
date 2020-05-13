@@ -7,35 +7,26 @@ import { ListPageProps } from '@console/internal/components/monitoring';
 import { sortable } from '@patternfly/react-table';
 import { Button } from '@patternfly/react-core';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import {
-  K8sResourceKind,
-  referenceForModel,
-  K8sKind,
-  k8sPatch,
-} from '@console/internal/module/k8s';
-import {
-  Firehose,
-  Kebab,
-  LoadingBox,
-  MsgBox,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  SectionHeading,
-  asAccessReview,
-  KebabOption,
-} from '@console/internal/components/utils';
-import {
-  DetailsPage,
   Table,
   TableRow,
   TableData,
-  TableProps,
-  MultiListPage,
   RowFunction,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/table';
 import { ConfigMapModel } from '@console/internal/models';
-import { PopoverStatus } from '@console/shared';
+import PopoverStatus from '@console/shared/src/components/status/PopoverStatus';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
+import { KebabOption, Kebab, ResourceKebab } from '@console/internal/components/utils/kebab';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { MsgBox, LoadingBox } from '@console/internal/components/utils/status-box';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import {
   SubscriptionModel,
   CatalogSourceModel,
@@ -54,6 +45,7 @@ import { PackageManifestList } from './package-manifest';
 import { deleteCatalogSourceModal } from './modals/delete-catalog-source-modal';
 import { disableDefaultSourceModal } from './modals/disable-default-source-modal';
 import { OperatorHubKind } from './operator-hub';
+import { TableProps } from 'react-virtualized';
 
 const DEFAULT_SOURCE_NAMESPACE = 'openshift-marketplace';
 const catalogSourceModelReference = referenceForModel(CatalogSourceModel);

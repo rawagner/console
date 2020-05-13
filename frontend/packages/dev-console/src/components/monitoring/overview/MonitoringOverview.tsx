@@ -15,10 +15,11 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { InfoCircleIcon } from '@patternfly/react-icons';
-import { K8sResourceKind, EventKind, PodKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, EventKind, PodKind } from '@console/internal/module/k8s/types';
 import { DeploymentConfigModel } from '@console/internal/models';
 import { sortEvents } from '@console/internal/components/events';
-import { FirehoseResult, LoadingBox } from '@console/internal/components/utils';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import MonitoringOverviewEventsWarning from './MonitoringOverviewEventsWarning';
 import MonitoringOverviewEvents from './MonitoringOverviewEvents';
 import WorkloadGraphs from './MonitoringMetrics';

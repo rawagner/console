@@ -1,5 +1,5 @@
-import { PatchBuilder } from '@console/shared/src/k8s';
-import { Patch, Toleration } from '@console/internal/module/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
+import { Patch, Toleration } from '@console/internal/module/k8s/types';
 import { NodeSelector } from '../../../types/vm';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import { getVMLikePatches } from '../vm-template';

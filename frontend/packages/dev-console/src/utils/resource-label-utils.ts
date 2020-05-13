@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { TRIGGERS_ANNOTATION } from '@console/shared';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { TRIGGERS_ANNOTATION } from '@console/shared/src/constants/resource';
 
 export const getAppLabels = (
   name: string,

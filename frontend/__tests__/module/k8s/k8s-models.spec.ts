@@ -1,12 +1,11 @@
 import {
-  referenceFor,
   referenceForCRD,
   referenceForOwnerRef,
   referenceForModel,
   kindForReference,
   versionForReference,
-  modelsToMap,
-} from '../../../public/module/k8s';
+} from '../../../public/module/k8s/k8s';
+import { referenceFor, modelsToMap } from '../../../public/module/k8s/k8s-models';
 import {
   testNamespace,
   testCRD,

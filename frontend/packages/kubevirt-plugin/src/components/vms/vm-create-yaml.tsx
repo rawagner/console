@@ -2,7 +2,7 @@ import * as React from 'react';
 import { safeLoad } from 'js-yaml';
 import { CreateYAMLProps } from '@console/internal/components/create-yaml';
 import { connectToPlural } from '@console/internal/kinds';
-import { k8sList } from '@console/internal/module/k8s';
+import { k8sList } from '@console/internal/module/k8s/resource';
 import { TemplateModel } from '@console/internal/models';
 import { ErrorPage404 } from '@console/internal/components/error';
 import {
@@ -12,7 +12,8 @@ import {
   TEMPLATE_WORKLOAD_LABEL,
 } from '../../constants/vm';
 import { OSSelection } from '../../constants/vm/default-os-selection';
-import { AsyncComponent, LoadingBox } from '@console/internal/components/utils';
+import { AsyncComponent } from '@console/internal/components/utils/async';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import { VMKind } from '../../types/vm';
 import { VirtualMachineModel } from '../../models';
 import { resolveDefaultVM } from '../../k8s/requests/vm/create/default-vm';

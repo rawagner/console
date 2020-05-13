@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import { ContainerRow, PodsDetailsPage } from '../../public/components/pod';
-import { DetailsPage } from '../../public/components/factory';
+import { DetailsPage } from '../../public/components/factory/details';
 
 describe(PodsDetailsPage.displayName, () => {
   let wrapper: ShallowWrapper;

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { LoadingInline } from '@console/internal/components/utils';
-import { k8sList } from '@console/internal/module/k8s';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
+import { k8sList } from '@console/internal/module/k8s/resource';
 import { useFormikContext, FormikValues } from 'formik';
 import { Alert, Badge, Expandable, Flex, FlexItem, FlexModifiers } from '@patternfly/react-core';
-import { CheckboxField } from '@console/shared';
+import CheckboxField from '@console/shared/src/components/formik-fields/CheckboxField';
 import { CLUSTER_PIPELINE_NS } from '../../../const';
 import { PipelineModel } from '../../../models';
 import PipelineVisualization from '../../pipelines/detail-page-tabs/pipeline-details/PipelineVisualization';

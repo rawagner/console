@@ -9,14 +9,14 @@ import {
   serviceAccountRef,
   serviceAccountKind,
 } from './constants';
-import { getRandomChars } from '@console/shared';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 import {
   EnvVarSource,
   ListKind,
   ConfigMapKind,
   SecretKind,
   ServiceAccountKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { V1Disk } from 'packages/kubevirt-plugin/src/types/vm/disk/V1Disk';
 
 export const getSerial = (ed: EnvDisk): string => ed[0];

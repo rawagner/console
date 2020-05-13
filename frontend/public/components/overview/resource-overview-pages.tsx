@@ -1,6 +1,7 @@
 import { Map as ImmutableMap } from 'immutable';
 
-import { GroupVersionKind, referenceForModel } from '../../module/k8s';
+import { GroupVersionKind } from '../../module/k8s/types';
+import { referenceForModel } from '../../module/k8s/k8s';
 import {
   DaemonSetModel,
   DeploymentModel,

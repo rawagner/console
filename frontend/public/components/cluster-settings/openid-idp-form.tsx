@@ -3,11 +3,15 @@ import { Helmet } from 'react-helmet';
 import { ActionGroup, Button } from '@patternfly/react-core';
 
 import { SecretModel, ConfigMapModel } from '../../models';
-import { IdentityProvider, k8sCreate, K8sResourceKind, OAuthKind } from '../../module/k8s';
-import { ButtonBar, ListInput, PromiseComponent, history } from '../utils';
+import { k8sCreate } from '../../module/k8s/resource';
+import { IdentityProvider, K8sResourceKind, OAuthKind } from '../../module/k8s/types';
+import { history } from '../utils/router';
 import { addIDP, getOAuthResource, redirectToOAuthPage, mockNames } from './';
 import { IDPNameInput } from './idp-name-input';
 import { IDPCAFileInput } from './idp-cafile-input';
+import { PromiseComponent } from '../utils/promise-component';
+import { ListInput } from '../utils/list-input';
+import { ButtonBar } from '../utils/button-bar';
 
 export class AddOpenIDPage extends PromiseComponent<{}, AddOpenIDIDPPageState> {
   readonly state: AddOpenIDIDPPageState = {

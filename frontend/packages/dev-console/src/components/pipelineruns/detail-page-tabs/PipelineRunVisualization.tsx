@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert } from '@patternfly/react-core';
-import { k8sGet } from '@console/internal/module/k8s';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { PipelineModel } from '../../../models';
 import PipelineVisualization from '../../pipelines/detail-page-tabs/pipeline-details/PipelineVisualization';
 import { Pipeline, PipelineRun } from '../../../utils/pipeline-augment';

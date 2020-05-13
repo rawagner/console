@@ -6,13 +6,13 @@ import {
   AreaChartStatus,
   chartStatusColors,
 } from '@console/internal/components/graphs/area';
-import { DataPoint } from '@console/internal/components/graphs';
+import { DataPoint } from '@console/internal/components/graphs/types';
 import { ByteDataTypes } from 'packages/console-shared/src/graph-helper/data-utils';
 import {
   YellowExclamationTriangleIcon,
   RedExclamationCircleIcon,
   ColoredIconProps,
-} from '../../status';
+} from '../../status/icons';
 
 export enum LIMIT_STATE {
   ERROR = 'ERROR',

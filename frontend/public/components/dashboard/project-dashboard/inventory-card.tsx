@@ -24,15 +24,17 @@ import {
   getPodStatusGroups,
   getPVCStatusGroups,
 } from '@console/shared/src/components/dashboard/inventory-card/utils';
-import { FirehoseResult, FirehoseResource, useAccessReview } from '../../utils';
-import { K8sKind, referenceForModel } from '../../../module/k8s';
-import { getName } from '@console/shared';
+import { K8sKind } from '../../../module/k8s/types';
+import { referenceForModel } from '../../../module/k8s/k8s';
+import { getName } from '@console/shared/src/selectors/common';
 import { ProjectDashboardContext } from './project-dashboard-context';
 import {
-  useExtensions,
   ProjectDashboardInventoryItem,
   isProjectDashboardInventoryItem,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { useAccessReview } from '../../utils/rbac';
+import { FirehoseResource, FirehoseResult } from '../../utils/types';
 
 const createFirehoseResource = (model: K8sKind, projectName: string): FirehoseResource => ({
   kind: model.crd ? referenceForModel(model) : model.kind,

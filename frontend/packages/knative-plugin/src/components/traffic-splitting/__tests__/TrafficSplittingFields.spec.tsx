@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { MultiColumnField } from '@console/shared';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
 import { formikFormProps } from '@console/shared/src/test-utils/formik-props-utils';
 import {
   mockTrafficData,

@@ -1,10 +1,12 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 
-import { k8sPatch, K8sResourceKind, K8sKind } from '../../module/k8s';
+import { k8sPatch } from '../../module/k8s/resource';
+import { K8sResourceKind, K8sKind } from '../../module/k8s/types';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { NameValueEditorPair, withHandlePromise } from '../utils';
 import { AsyncComponent } from '../utils/async';
+import { withHandlePromise } from '../utils/promise-component';
+import { NameValueEditorPair } from '../utils/types';
 
 /**
  * Set up an AsyncComponent to wrap the name-value-editor to allow on demand loading to reduce the

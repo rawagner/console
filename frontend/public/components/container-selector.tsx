@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ContainerSpec } from '../module/k8s';
+import { ContainerSpec } from '../module/k8s/types';
 import { Checkbox } from '@patternfly/react-core';
 
 export const ContainerSelector: React.FC<ContainerSelectorProps> = ({

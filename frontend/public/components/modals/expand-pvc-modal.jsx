@@ -1,8 +1,12 @@
 import * as React from 'react';
 
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { PromiseComponent, RequestSizeInput, resourceObjPath, history } from '../utils';
-import { k8sPatch, referenceFor } from '../../module/k8s/';
+import { k8sPatch } from '../../module/k8s/resource';
+import { referenceFor } from '../../module/k8s/k8s-models';
+import { history } from '../utils/router';
+import { resourceObjPath } from '../utils/resource-link';
+import { RequestSizeInput } from '../utils/request-size-input';
+import { PromiseComponent } from '../utils/promise-component';
 
 // Modal for expanding persistent volume claims
 class ExpandPVCModal extends PromiseComponent {

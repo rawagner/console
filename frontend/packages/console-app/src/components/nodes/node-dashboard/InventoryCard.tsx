@@ -8,10 +8,11 @@ import InventoryItem, {
   StatusGroupMapper,
 } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
 import { getPodStatusGroups } from '@console/shared/src/components/dashboard/inventory-card/utils';
-import { referenceForModel, K8sResourceCommon, K8sKind } from '@console/internal/module/k8s';
+import { K8sResourceCommon, K8sKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
 import { PodModel, NodeModel } from '@console/internal/models';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 import { NodeDashboardContext } from './NodeDashboardContext';
 

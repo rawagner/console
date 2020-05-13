@@ -2,18 +2,17 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { K8sResourceKindReference, K8sResourceKind } from '../module/k8s';
+import { K8sResourceKindReference, K8sResourceKind } from '../module/k8s/types';
 import { LimitRangeModel } from '../models';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  Kebab,
-  navFactory,
-  SectionHeading,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  Timestamp,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(LimitRangeModel), ...common];

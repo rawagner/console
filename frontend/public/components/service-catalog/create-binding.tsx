@@ -7,7 +7,9 @@ import { JSONSchema6 } from 'json-schema';
 
 import { LoadingBox } from '../utils/status-box';
 import { ServiceInstanceModel, ServiceBindingModel, ClusterServicePlanModel } from '../../models';
-import { k8sCreate, K8sResourceKind, referenceForModel } from '../../module/k8s';
+import { k8sCreate } from '../../module/k8s/resource';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { referenceForModel } from '../../module/k8s/k8s';
 import { ButtonBar } from '../utils/button-bar';
 import {
   createParametersSecret,
@@ -16,7 +18,10 @@ import {
   getUISchema,
   ServiceCatalogParametersForm,
 } from './schema-form';
-import { Firehose, history, PageHeading, resourcePathFromModel } from '../utils';
+import { Firehose } from '../utils/firehose';
+import { history } from '../utils/router';
+import { resourcePathFromModel } from '../utils/resource-link';
+import { PageHeading } from '../utils/headings';
 
 const PARAMETERS_SECRET_KEY = 'parameters';
 

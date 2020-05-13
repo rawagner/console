@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { MultiListPage } from '@console/internal/components/factory';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import { mockHelmReleases } from '../../../__tests__/helm-release-mock-data';
 import HelmReleaseResources from '../HelmReleaseResources';
 

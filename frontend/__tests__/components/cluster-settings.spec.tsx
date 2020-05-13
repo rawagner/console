@@ -14,8 +14,11 @@ import {
   ClusterOperatorTabPage,
 } from '../../public/components/cluster-settings/cluster-settings';
 import { GlobalConfigPage } from '../../public/components/cluster-settings/global-config';
-import { Firehose, HorizontalNav, ResourceLink, Timestamp } from '../../public/components/utils';
 import { AddCircleOIcon } from '@patternfly/react-icons';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { HorizontalNav } from '@console/internal/components/utils/horizontal-nav';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 describe('Cluster Settings page', () => {
   let wrapper: ShallowWrapper<any>;

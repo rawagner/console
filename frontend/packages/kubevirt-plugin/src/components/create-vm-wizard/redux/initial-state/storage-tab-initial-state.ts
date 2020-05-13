@@ -1,4 +1,4 @@
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 import { CommonData, VMWizardStorage, VMWizardStorageType } from '../../types';
 import { DiskWrapper } from '../../../../k8s/wrapper/vm/disk-wrapper';
 import {

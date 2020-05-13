@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PodKind } from '@console/internal/module/k8s';
+import { PodKind } from '@console/internal/module/k8s/types';
 import {
   HourglassHalfIcon,
   InProgressIcon,
@@ -8,7 +8,7 @@ import {
   SyncAltIcon,
   UnknownIcon,
 } from '@patternfly/react-icons';
-import { getNamespace, getName } from '@console/shared/src';
+import { getNamespace, getName } from '@console/shared/src/selectors/common';
 import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
 import GenericStatus from '@console/shared/src/components/status/GenericStatus';
 import {
@@ -19,8 +19,8 @@ import {
   ButtonVariant,
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import { ResourceLink, resourcePath } from '@console/internal/components/utils';
 import { PersistentVolumeClaimModel, PodModel } from '@console/internal/models';
+import { ResourceLink, resourcePath } from '@console/internal/components/utils/resource-link';
 import { unpauseVMI } from '../../k8s/requests/vmi/actions';
 import { VM_DETAIL_EVENTS_HREF } from '../../constants';
 import { VMKind, VMIKind } from '../../types';

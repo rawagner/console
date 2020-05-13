@@ -4,11 +4,19 @@ import { sortable } from '@patternfly/react-table';
 import { Button } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
 
-import { referenceForModel, K8sResourceKind } from '../module/k8s';
-import { ListPage, DetailsPage, Table, TableRow, TableData, RowFunction } from './factory';
-import { SectionHeading, LabelList, navFactory, ResourceLink, Selector, pluralize } from './utils';
+import { K8sResourceKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { configureReplicaCountModal } from './modals';
 import { AlertmanagerModel } from '../models';
+import { SectionHeading } from './utils/headings';
+import { LabelList } from './utils/label-list';
+import { Selector } from './utils/selector';
+import { pluralize } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
 
 const Details: React.SFC<DetailsProps> = (props) => {
   const alertManager = props.obj;

@@ -2,7 +2,7 @@ import * as fuzzy from 'fuzzysearch';
 import * as _ from 'lodash';
 import { safeDump } from 'js-yaml';
 import { coFetchJSON } from '@console/internal/co-fetch';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   HelmRelease,
   HelmChart,

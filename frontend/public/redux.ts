@@ -7,7 +7,8 @@ import k8sReducers from './reducers/k8s';
 import UIReducers from './reducers/ui';
 import { dashboardsReducer } from './reducers/dashboards';
 import { pluginStore } from './plugins';
-import { isReduxReducer, isExtensionInUse, getGatingFlagNames } from '@console/plugin-sdk';
+import { isReduxReducer } from '@console/plugin-sdk/src/typings';
+import { getGatingFlagNames, isExtensionInUse } from '@console/plugin-sdk/src/store';
 import { RootState } from './redux-types';
 
 const composeEnhancers =

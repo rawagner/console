@@ -5,8 +5,11 @@ import {
   ModalSubmitFooter,
   createModalLauncher,
 } from '@console/internal/components/factory/modal';
-import { withHandlePromise, HandlePromiseProps } from '@console/internal/components/utils';
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
 import { makeNodeUnschedulable } from '../../../k8s/requests/nodes';
 
 type ConfigureUnschedulableModalProps = HandlePromiseProps & {

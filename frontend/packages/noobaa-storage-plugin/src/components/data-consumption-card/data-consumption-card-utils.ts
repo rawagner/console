@@ -1,10 +1,6 @@
 import * as _ from 'lodash';
-import {
-  Humanize,
-  humanizeBinaryBytes,
-  humanizeNumber,
-  HumanizeResult,
-} from '@console/internal/components/utils';
+import { humanizeBinaryBytes, humanizeNumber } from '@console/internal/components/utils/units';
+import { Humanize, HumanizeResult } from '@console/internal/components/utils/types';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 import {
   ACCOUNTS,

@@ -1,5 +1,5 @@
 import * as UIActions from '@console/internal/actions/ui';
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
 
 export const nodeMemory = (node: NodeKind): number => {
   const used = UIActions.getNodeMetric(node, 'usedMemory');

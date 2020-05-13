@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
-import { K8sKind, K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import { KebabOption } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { KebabOption } from '@console/internal/components/utils/kebab';
 
 const healthChecksAdded = (resource: K8sResourceKind): boolean => {
   const containers = resource?.spec?.template?.spec?.containers;
@@ -15,7 +16,7 @@ const healthChecksUrl = (model: K8sKind, obj: K8sResourceKind): string => {
     kind,
     metadata: { name, namespace },
   } = obj;
-  const resourceKind = model.crd ? referenceFor(obj) : kind;
+  const resourceKind = model.crd ? referenceForModel(model) : kind;
   const containers = obj?.spec?.template?.spec?.containers;
   const containerName = containers?.[0]?.name;
   return `/k8s/ns/${namespace}/${resourceKind}/${name}/containers/${containerName}/health-checks`;

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { HintBlock, LoadingBox, FirehoseResult } from '@console/internal/components/utils';
 import ODCEmptyState from './EmptyState';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
+import { HintBlock } from '@console/internal/components/utils/hint-block';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 export interface ProjectsExistWrapperProps {
   title: string;

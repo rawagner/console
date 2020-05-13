@@ -5,20 +5,19 @@ import * as classNames from 'classnames';
 import * as fuzzy from 'fuzzysearch';
 import * as _ from 'lodash-es';
 import { ActionGroup, Button } from '@patternfly/react-core';
-import { getName } from '@console/shared';
-import {
-  AsyncComponent,
-  ButtonBar,
-  Dropdown,
-  ExternalLink,
-  Firehose,
-  FirehoseResult,
-  NameValueEditorPair,
-  history,
-} from './utils';
-import { k8sCreate, K8sResourceKind, referenceForModel } from './../module/k8s';
+import { getName } from '@console/shared/src/selectors/common';
+import { K8sResourceKind } from './../module/k8s/types';
+import { k8sCreate } from './../module/k8s/resource';
+import { referenceForModel } from './../module/k8s/k8s';
 import * as k8sActions from '../actions/k8s';
 import { CSIDriverModel, StorageClassModel } from './../models';
+import { AsyncComponent } from './utils/async';
+import { history } from './utils/router';
+import { NameValueEditorPair, FirehoseResult } from './utils/types';
+import { Dropdown } from './utils/dropdown';
+import { ExternalLink } from './utils/link';
+import { ButtonBar } from './utils/button-bar';
+import { Firehose } from './utils/firehose';
 
 const NameValueEditorComponent = (props) => (
   <AsyncComponent

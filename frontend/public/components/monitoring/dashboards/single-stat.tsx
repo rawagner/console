@@ -7,7 +7,9 @@ import ErrorAlert from '@console/shared/src/components/alerts/error';
 import { formatNumber } from './format';
 import { Panel } from './types';
 import { getPrometheusURL, PrometheusEndpoint } from '../../graphs/helpers';
-import { LoadingInline, usePoll, useSafeFetch } from '../../utils';
+import { useSafeFetch } from '../../utils/safe-fetch-hook';
+import { usePoll } from '../../utils/poll-hook';
+import { LoadingInline } from '../../utils/status-box';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 
 const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => (

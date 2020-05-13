@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { match as RMatch } from 'react-router';
-import { Firehose } from '@console/internal/components/utils';
-import { getResourceList } from '@console/shared';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { RootState } from '@console/internal/redux-types';
 import { safeLoadAll } from 'js-yaml';
 import { ServiceBindingRequestModel } from '../../models';
@@ -12,7 +12,9 @@ import { allowedResources, getHelmReleaseKey, getServiceBindingStatus } from './
 import { TopologyDataModel, TopologyDataResources, TrafficData } from './topology-types';
 import { HelmReleaseResourcesMap } from '../helm/helm-types';
 import { fetchHelmReleases } from '../helm/helm-utils';
-import { isOverviewCRD, useExtensions, OverviewCRD } from '@console/internal/plugins';
+import { getResourceList } from '@console/shared/src/utils/resource-utils';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { OverviewCRD, isOverviewCRD } from '@console/plugin-sdk/src/typings';
 
 export interface RenderProps {
   data?: TopologyDataModel;

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { PageHeading, Firehose, FirehoseResource } from '@console/internal/components/utils';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import { ImageStreamModel } from '@console/internal/models';
 import { QUERY_PROPERTIES } from '../../const';
 import NamespacedPage, { NamespacedPageVariants } from '../NamespacedPage';

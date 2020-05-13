@@ -3,9 +3,10 @@ import * as _ from 'lodash-es';
 import { Link } from 'react-router-dom';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
-import { getMachineAWSPlacement, getMachineRole } from '@console/shared';
+import { getMachineAWSPlacement, getMachineRole } from '@console/shared/src/selectors/machine';
 import { MachineModel, MachineDeploymentModel } from '../models';
-import { MachineDeploymentKind, referenceForModel } from '../module/k8s';
+import { MachineDeploymentKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
 import {
   editCountAction,
   getDesiredReplicas,
@@ -13,19 +14,16 @@ import {
   MachineCounts,
   MachineTabPage,
 } from './machine-set';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Selector,
-  navFactory,
-  pluralize,
-  resourcePath,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { formatDuration } from './utils/datetime';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink, resourcePath } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, pluralize } from './utils/details-page';
+import { Selector } from './utils/selector';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [

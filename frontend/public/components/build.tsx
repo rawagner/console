@@ -5,43 +5,35 @@ import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import { Alert } from '@patternfly/react-core';
 
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
-import {
-  K8sResourceKindReference,
-  referenceFor,
-  K8sResourceKind,
-  k8sPatch,
-  K8sKind,
-} from '../module/k8s';
+import { K8sResourceKindReference, K8sResourceKind, K8sKind } from '../module/k8s/types';
+import { referenceFor } from '../module/k8s/k8s-models';
+import { k8sPatch } from '../module/k8s/resource';
 import { cloneBuild, formatBuildDuration, getBuildNumber } from '../module/k8s/builds';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { errorModal, confirmModal } from './modals';
-import {
-  AsyncComponent,
-  BuildHooks,
-  BuildStrategy,
-  DetailsItem,
-  ExternalLink,
-  history,
-  humanizeBinaryBytes,
-  humanizeCpuCores,
-  Kebab,
-  KebabAction,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  resourceObjPath,
-  resourcePath,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-} from './utils';
 import { BuildPipeline, BuildPipelineLogLink } from './build-pipeline';
 import { BuildLogs } from './build-logs';
 import { ResourceEventStream } from './events';
-import { Area, requirePrometheus } from './graphs';
+import { Area } from './graphs';
+import { requirePrometheus } from './graphs/require-prometheus';
 import { BuildModel } from '../models';
+import { history } from './utils/router';
+import { resourceObjPath, resourcePath, ResourceLink } from './utils/resource-link';
+import { KebabAction, Kebab, ResourceKebab } from './utils/kebab';
+import { humanizeBinaryBytes, humanizeCpuCores } from './utils/units';
+import { ExternalLink } from './utils/link';
+import { SectionHeading } from './utils/headings';
+import { DetailsItem } from './utils/details-item';
+import { ResourceSummary } from './utils/details-page';
+import { Timestamp } from './utils/timestamp';
+import { BuildStrategy } from './utils/build-strategy';
+import { BuildHooks } from './utils/build-hooks';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
 
 const BuildsReference: K8sResourceKindReference = 'Build';
 

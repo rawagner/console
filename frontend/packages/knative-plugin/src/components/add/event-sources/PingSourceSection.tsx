@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { InputField } from '@console/shared';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 
 const PingSourceSection: React.FC = () => (
   <FormSection title="PingSource" extraMargin>

@@ -3,8 +3,8 @@ import { merge } from 'lodash';
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import { useSelector } from 'react-redux';
-import { KebabAction } from '@console/internal/components/utils';
-import { K8sResourceCommon } from '@console/internal/module/k8s';
+import { KebabAction } from '@console/internal/components/utils/kebab';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
 import { PipelineRun } from '../../../utils/pipeline-augment';
 import { StartedByLabel } from '../../pipelines/const';
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cloneDeep } from 'lodash';
 import { shallow } from 'enzyme';
-import { LOG_SOURCE_TERMINATED } from '@console/internal/components/utils';
+import { LOG_SOURCE_TERMINATED } from '@console/internal/components/utils/resource-log';
 import { podData, sampleContainer } from './logs-test-data';
 import Logs from '../Logs';
 

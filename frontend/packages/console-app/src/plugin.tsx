@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { CogsIcon } from '@patternfly/react-icons';
-import { FLAGS } from '@console/shared/src/constants';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { FLAG_DEVWORKSPACE } from './consts';
 import {
   Plugin,
@@ -14,7 +14,7 @@ import {
   DashboardsOverviewInventoryItem,
   DashboardsOverviewHealthOperator,
   ReduxReducer,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import {
   ClusterVersionModel,
   NodeModel,
@@ -23,7 +23,8 @@ import {
   PersistentVolumeClaimModel,
   ClusterOperatorModel,
 } from '@console/internal/models';
-import { referenceForModel, ClusterOperator } from '@console/internal/module/k8s';
+import { ClusterOperator } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   getNodeStatusGroups,
   getPodStatusGroups,

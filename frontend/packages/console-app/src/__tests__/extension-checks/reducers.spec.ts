@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { testedExtensions } from '../plugin-test-utils';
-import { isReduxReducer } from '@console/plugin-sdk';
+import { isReduxReducer } from '@console/plugin-sdk/src/typings';
 
 describe('ReduxReducer', () => {
   it('duplicate namespaces are not allowed', () => {

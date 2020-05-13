@@ -1,4 +1,4 @@
-import { apiVersionForModel } from '@console/internal/module/k8s';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
 import { NodeMaintenanceModel } from '../../../models';
 
 export const buildNodeMaintenance = ({

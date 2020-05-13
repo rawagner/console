@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { getAnnotations } from '@console/shared/src/selectors/common'; // do not import just from shared - causes cycles
-import { K8sResourceCondition } from '@console/internal/module/k8s';
+import { K8sResourceCondition } from '@console/internal/module/k8s/types';
 import { VMImportKind } from '../../types/vm-import/ovirt/vm-import';
 import { parseNumber } from '../../utils';
 import {

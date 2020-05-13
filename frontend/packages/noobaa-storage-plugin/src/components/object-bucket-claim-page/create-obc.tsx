@@ -3,31 +3,30 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { match } from 'react-router';
 import { Link } from 'react-router-dom';
-import {
-  ButtonBar,
-  history,
-  resourceObjPath,
-  resourcePathFromModel,
-  Firehose,
-} from '@console/internal/components/utils';
 import { StorageClassDropdown } from '@console/internal/components/utils/storage-class-dropdown';
-import {
-  apiVersionForModel,
-  k8sCreate,
-  K8sResourceKind,
-  referenceFor,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { apiVersionForModel, referenceForModel } from '@console/internal/module/k8s/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import {
   NooBaaObjectBucketClaimModel,
   NooBaaBucketClassModel,
 } from '@console/noobaa-storage-plugin/src/models';
 import { ActionGroup, Button } from '@patternfly/react-core';
 import { StorageClass } from '@console/internal/components/storage-class-form';
-import { filterScOnProvisioner, getName, ResourceDropdown } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
+import { filterScOnProvisioner } from '@console/shared/src/utils/storage-utils';
+import ResourceDropdown from '@console/shared/src/components/dropdown/ResourceDropdown';
 import { commonReducer, defaultState } from '../object-bucket-page/state';
 import { OCS_NS } from '../../constants';
 import './create-obc.scss';
+import { history } from '@console/internal/components/utils/router';
+import {
+  resourceObjPath,
+  resourcePathFromModel,
+} from '@console/internal/components/utils/resource-link';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 
 export const CreateOBCPage: React.FC<CreateOBCPageProps> = (props) => {
   const [state, dispatch] = React.useReducer(commonReducer, defaultState);

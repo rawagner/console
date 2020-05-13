@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import * as _ from 'lodash';
-import { ItemSelectorField } from '@console/shared';
 import { FormGroup } from '@patternfly/react-core';
+import ItemSelectorField from '@console/shared/src/components/formik-fields/item-selector-field/ItemSelectorField';
 import BuilderImageSelector from '../BuilderImageSelector';
 import { NormalizedBuilderImages } from '../../../../utils/imagestream-utils';
 

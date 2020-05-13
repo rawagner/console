@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
-import { ALL_APPLICATIONS_KEY } from '@console/shared';
-import { history } from '@console/internal/components/utils';
+import { ALL_APPLICATIONS_KEY } from '@console/shared/src/constants/common';
+import { history } from '@console/internal/components/utils/router';
 import { getActiveApplication } from '@console/internal/reducers/ui-selectors';
 import { RootState } from '@console/internal/redux-types';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { doContextualBinding, sanitizeApplicationValue } from '../../utils/application-utils';
 import { ALLOW_SERVICE_BINDING } from '../../const';
 import { DeployImageFormData, FirehoseList, Resources } from './import-types';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { safeDump } from 'js-yaml';
 import { useFormikContext, FormikValues } from 'formik';
-import { YAMLEditorField } from '@console/shared';
+import YAMLEditorField from '@console/shared/src/components/formik-fields/YAMLEditorField';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import {
   getEventSourcesDepResource,

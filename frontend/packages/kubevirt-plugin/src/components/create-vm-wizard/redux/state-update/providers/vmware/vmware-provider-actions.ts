@@ -1,4 +1,4 @@
-import { getName } from '@console/shared/src';
+import { getName } from '@console/shared/src/selectors/common';
 import { VMImportProvider, VMWareProviderField, VMWizardProps } from '../../../../types';
 import { InternalActionType, UpdateOptions } from '../../../types';
 import { iGetCommonData } from '../../../../selectors/immutable/selectors';

@@ -1,4 +1,4 @@
-import { PodKind, ContainerSpec } from '@console/internal/module/k8s';
+import { PodKind, ContainerSpec } from '@console/internal/module/k8s/types';
 
 export const podData: PodKind = {
   kind: 'Pod',

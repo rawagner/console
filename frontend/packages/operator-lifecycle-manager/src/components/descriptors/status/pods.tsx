@@ -8,9 +8,9 @@ import {
   chart_color_blue_300 as blue300,
   /* eslint-enable camelcase */
 } from '@patternfly/react-tokens';
-import { useRefWidth } from '@console/internal/components/utils';
+import { useRefWidth } from '@console/internal/components/utils/ref-width-hook';
 import { Descriptor } from '../types';
-import { calculateRadius } from '@console/shared/';
+import { calculateRadius } from '@console/shared/src/utils/pod-utils';
 
 const colorScale = [blue300.value, blue200.value, blue100.value];
 

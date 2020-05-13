@@ -3,17 +3,14 @@ import { match as RouterMatch } from 'react-router-dom';
 import { getYamlTemplates } from '../models/yaml-templates';
 import { connectToPlural } from '../kinds';
 import { AsyncComponent } from './utils/async';
-import { Firehose, LoadingBox } from './utils';
-import {
-  K8sKind,
-  apiVersionForModel,
-  referenceForModel,
-  K8sResourceKindReference,
-  K8sResourceKind,
-} from '../module/k8s';
+import { K8sKind, K8sResourceKindReference, K8sResourceKind } from '../module/k8s/types';
+import { apiVersionForModel, referenceForModel } from '../module/k8s/k8s';
 import { ErrorPage404 } from './error';
 import { safeYAMLToJS } from '@console/shared/src/utils/yaml';
-import { useExtensions, isYAMLTemplate, YAMLTemplate } from '@console/plugin-sdk';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { isYAMLTemplate, YAMLTemplate } from '@console/plugin-sdk/src/typings';
+import { LoadingBox } from './utils/status-box';
+import { Firehose } from './utils/firehose';
 
 export const CreateYAML = connectToPlural((props: CreateYAMLProps) => {
   const {

@@ -8,7 +8,7 @@ import {
   Handler,
   HTTPGetProbe,
   TCPSocketProbe,
-} from './';
+} from './types';
 
 const HookAction = Object.freeze({
   exec: {

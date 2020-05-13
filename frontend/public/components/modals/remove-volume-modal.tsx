@@ -1,18 +1,18 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 
-import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory';
+import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
 import {
   ContainerSpec,
-  getVolumeType,
   K8sKind,
-  k8sPatch,
   K8sResourceKind,
   Volume,
   VolumeMount,
-} from '../../module/k8s/';
+} from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
+import { getVolumeType } from '../../module/k8s/pods';
 import { RowVolumeData } from '../volumes-table';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
 
 export const RemoveVolumeModal: React.FC<RemoveVolumeModalProps> = (props) => {
   const [inProgress, setInProgress] = React.useState(false);

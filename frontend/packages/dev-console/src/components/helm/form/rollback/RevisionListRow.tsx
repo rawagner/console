@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Status, RadioButtonField } from '@console/shared';
-import { TableRow, TableData, RowFunction } from '@console/internal/components/factory';
-import { Timestamp } from '@console/internal/components/utils';
+import RadioButtonField from '@console/shared/src/components/formik-fields/RadioButtonField';
+import { Status } from '@console/shared/src/components/status/Status';
+import { TableRow, TableData, RowFunction } from '@console/internal/components/factory/table';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 import { tableColumnClasses } from './RevisionListHeader';
 
 const RevisionListRow: RowFunction = ({ obj, index, key, style }) => {

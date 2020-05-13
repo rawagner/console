@@ -1,4 +1,4 @@
-import { Extension } from '@console/plugin-sdk';
+import { Extension } from '@console/plugin-sdk/src/typings';
 
 interface DashboardsExtensionProperties {
   /** Feature flags which are required for this extension to be effective. */

@@ -3,8 +3,9 @@ import { Base64 } from 'js-base64';
 import { saveAs } from 'file-saver';
 import { EyeIcon, EyeSlashIcon } from '@patternfly/react-icons';
 import { Button } from '@patternfly/react-core';
-
-import { CopyToClipboard, EmptyBox, SectionHeading } from './utils';
+import { EmptyBox } from './utils/status-box';
+import { CopyToClipboard } from './utils/copy-to-clipboard';
+import { SectionHeading } from './utils/headings';
 
 export const MaskedData: React.FC<{}> = () => (
   <>

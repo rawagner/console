@@ -1,5 +1,5 @@
 import { Node } from '@console/topology';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { createTopologyResourceConnection } from '../topology-utils';
 
 export const createConnection = (

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { Tooltip } from '@patternfly/react-core';
-import { K8sEntityMap } from '@console/shared/src';
+import { K8sEntityMap } from '@console/shared/src/utils/utils';
 import { parseURL, resolveURL } from '../../utils/url';
 import { ProvisionSource } from '../../constants/vm/provision-source';
 import { V1alpha1DataVolume } from '../../types/vm/disk/V1alpha1DataVolume';

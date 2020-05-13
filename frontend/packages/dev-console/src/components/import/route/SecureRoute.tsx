@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
 import { FormHelperText } from '@patternfly/react-core';
-import { DropdownField, DroppableFileInputField, CheckboxField } from '@console/shared';
+import CheckboxField from '@console/shared/src/components/formik-fields/CheckboxField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import DroppableFileInputField from '@console/shared/src/components/formik-fields/DroppableFileInputField';
 import {
   TerminationTypes,
   PassthroughInsecureTrafficTypes,

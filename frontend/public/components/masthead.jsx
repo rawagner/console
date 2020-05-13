@@ -3,12 +3,12 @@ import * as PropTypes from 'prop-types';
 import { Brand, PageHeader } from '@patternfly/react-core';
 
 import { MastheadToolbar } from './masthead-toolbar';
-import { history } from './utils';
 import okdLogoImg from '../imgs/okd-logo.svg';
 import openshiftLogoImg from '../imgs/openshift-logo.svg';
 import ocpLogoImg from '../imgs/openshift-platform-logo.svg';
 import onlineLogoImg from '../imgs/openshift-online-logo.svg';
 import dedicatedLogoImg from '../imgs/openshift-dedicated-logo.svg';
+import { history } from './utils/router';
 
 export const getBrandingDetails = () => {
   let logoImg, productName;

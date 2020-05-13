@@ -3,33 +3,31 @@ import './_volume-snapshot.scss';
 import * as React from 'react';
 import * as classNames from 'classnames';
 
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { Status } from '@console/shared/src/components/status/Status';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import {
-  DetailsPage,
-  ListPage,
   Table,
   TableData,
   TableProps,
   TableRow,
   RowFunction,
-} from '@console/internal/components/factory';
-import { K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import {
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  navFactory,
-  PageComponentProps,
-  Timestamp,
-} from '@console/internal/components/utils';
-import { getName, getNamespace, Status } from '@console/shared';
+} from '@console/internal/components/factory/table';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 
 import { PersistentVolumeClaimModel } from '@console/internal/models';
 import { VolumeSnapshotModel } from '../../models';
 import { getKebabActionsForKind } from '../../utils/kebab-actions';
 import { sortable } from '@patternfly/react-table';
 import { volumeSnapshotModal } from '../modals/volume-snapshot-modal/volume-snapshot-modal';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { navFactory, PageComponentProps } from '@console/internal/components/utils/horizontal-nav';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 export const snapshotMenuActions = [...getKebabActionsForKind(VolumeSnapshotModel)];
 

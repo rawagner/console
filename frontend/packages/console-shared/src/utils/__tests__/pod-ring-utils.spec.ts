@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { DeploymentConfigModel } from '@console/internal/models';
-import { RevisionModel } from '@console/knative-plugin';
+import { RevisionModel } from '@console/knative-plugin/src/models';
 import * as utils from '../pod-utils';
 import { usePodScalingAccessStatus, podRingLabel } from '../pod-ring-utils';
 import { testHook } from '../../test-utils/hooks-utils';
@@ -12,7 +12,7 @@ import {
   daemonSet,
   mockPod,
 } from '../__mocks__/pod-utils-test-data';
-import { ExtPodKind } from '../../types';
+import { ExtPodKind } from '../../types/pod';
 
 describe('pod-ring utils:', () => {
   it('should return proper title, subtitle for podRingLabel', () => {

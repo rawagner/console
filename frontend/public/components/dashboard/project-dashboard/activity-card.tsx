@@ -12,18 +12,18 @@ import ActivityBody, {
   OngoingActivityBody,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
 import { DashboardItemProps, withDashboardResources } from '../with-dashboard-resources';
-import { FirehoseResource, FirehoseResult } from '../../utils';
+import { FirehoseResource, FirehoseResult } from '../../utils/types';
 import { EventModel } from '../../../models';
-import { EventKind, K8sKind } from '../../../module/k8s';
+import { EventKind, K8sKind } from '../../../module/k8s/types';
 import {
-  useExtensions,
   DashboardsOverviewResourceActivity,
   isDashboardsOverviewResourceActivity,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { uniqueResource } from '../dashboards-page/cluster-dashboard/utils';
 import { RootState } from '../../../redux-types';
 import { ProjectDashboardContext } from './project-dashboard-context';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 
 const getEventsResource = (projectName: string): FirehoseResource => ({
   isList: true,

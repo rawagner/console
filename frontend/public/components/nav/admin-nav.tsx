@@ -2,8 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { NavItemSeparator } from '@patternfly/react-core';
 
-import { FLAGS } from '@console/shared';
-import { formatNamespacedRouteForResource } from '@console/shared/src/utils';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { formatNamespacedRouteForResource } from '@console/shared/src/utils/namespace';
 
 import {
   BuildConfigModel,
@@ -21,7 +21,7 @@ import {
   UserModel,
 } from '../../models';
 
-import { referenceForModel } from '../../module/k8s';
+import { referenceForModel } from '../../module/k8s/k8s';
 import { ExternalLink, HrefLink, ResourceNSLink, ResourceClusterLink } from './items';
 import { NavSection } from './section';
 import { RootState, MonitoringRoutes } from '../../redux-types';

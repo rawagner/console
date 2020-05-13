@@ -2,8 +2,8 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 
-import { ExpandCollapse } from '../../utils';
 import { SendResolvedAlertsCheckbox, FormProps } from './alert-manager-receiver-forms';
+import { ExpandCollapse } from '../../utils/expand-collapse';
 
 export const Form: React.FC<FormProps> = ({ formValues, dispatchFormChange }) => (
   <div data-test-id="webhook-receiver-form" className="form-group">

@@ -1,8 +1,8 @@
 /* eslint-disable camelcase, @typescript-eslint/camelcase,no-await-in-loop */
 import * as _ from 'lodash';
 import { SecretModel } from '@console/internal/models';
-import { SecretKind } from '@console/internal/module/k8s';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { SecretKind } from '@console/internal/module/k8s/types';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { CreateVMParams } from '../../vm/create/types';
 import { ImporterResult } from '../../vm/types';

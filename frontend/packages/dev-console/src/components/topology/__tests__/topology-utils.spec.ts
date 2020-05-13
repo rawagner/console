@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import * as k8s from '@console/internal/module/k8s';
+import * as k8s from '@console/internal/module/k8s/resource';
 import {
   createTopologyResourceConnection,
   getTopologyResourceObject,

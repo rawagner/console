@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Firehose } from '@console/internal/components/utils';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import ProjectAccess from './ProjectAccess';
 
 export interface ProjectAccessPageProps {

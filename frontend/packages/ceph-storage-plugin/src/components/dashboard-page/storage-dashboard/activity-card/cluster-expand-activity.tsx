@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ActivityItem from '@console/shared/src/components/dashboard/activity-card/ActivityItem';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 export const ClusterExpandActivity: React.FC = () => (
   <ActivityItem>Expanding OCS Cluster</ActivityItem>

@@ -2,9 +2,11 @@ import * as _ from 'lodash';
 import * as React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 import { WidgetProps } from 'react-jsonschema-form';
-import { NumberSpinner, ListDropdown, Dropdown } from '@console/internal/components/utils';
-import { K8sKind, GroupVersionKind, ImagePullPolicy } from '@console/internal/module/k8s';
+import { K8sKind, GroupVersionKind, ImagePullPolicy } from '@console/internal/module/k8s/types';
 import { RadioGroup } from '@console/internal/components/radio';
+import { NumberSpinner } from '@console/internal/components/utils/number-spinner';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { ListDropdown } from '@console/internal/components/utils/list-dropdown';
 
 export const TextWidget: React.FC<WidgetProps> = ({
   disabled = false,

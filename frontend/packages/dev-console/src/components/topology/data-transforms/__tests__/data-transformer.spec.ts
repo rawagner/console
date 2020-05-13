@@ -4,7 +4,7 @@ import {
   getKnativeServingConfigurations,
   getKnativeServingRoutes,
 } from '@console/knative-plugin/src/utils/get-knative-resources';
-import { getPodStatus, podStatus } from '@console/shared';
+import { podStatus, getPodStatus } from '@console/shared/src/utils/pod-utils';
 import { getImageForIconClass } from '@console/internal/components/catalog/catalog-item-icon';
 import { WorkloadData, TopologyDataResources, TopologyDataMap } from '../../topology-types';
 import { TYPE_TRAFFIC_CONNECTOR, TYPE_SERVICE_BINDING } from '../../components/const';

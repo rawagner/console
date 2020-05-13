@@ -3,7 +3,10 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 
 import { ErrorBoundaryFallbackProps } from '@console/shared/src/components/error/error-boundary';
-import { CopyToClipboard, getQueryArgument, PageHeading, ExpandCollapse } from './utils';
+import { getQueryArgument } from './utils/router';
+import { PageHeading } from './utils/headings';
+import { ExpandCollapse } from './utils/expand-collapse';
+import { CopyToClipboard } from './utils/copy-to-clipboard';
 
 // User messages for error_types returned in auth.go
 const messages = {

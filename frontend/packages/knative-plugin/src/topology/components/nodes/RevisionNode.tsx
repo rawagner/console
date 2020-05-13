@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAnchor, AnchorEnd, Node, observer } from '@console/topology';
-import { WorkloadNode } from '@console/dev-console/src/components/topology';
 import RevisionTrafficTargetAnchor from '../anchors/RevisionTrafficTargetAnchor';
+import { WorkloadNode } from '@console/dev-console/src/components/topology/components';
 
 const DECORATOR_RADIUS = 13;
 const RevisionNode: React.FC<React.ComponentProps<typeof WorkloadNode>> = (props) => {

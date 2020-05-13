@@ -1,6 +1,6 @@
 import { coFetch } from '@console/internal/co-fetch';
-import { resourceURL } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared';
+import { resourceURL } from '@console/internal/module/k8s/resource';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { VirtualMachineInstanceModel } from '../../../models';
 import { VMIKind } from '../../../types/vm';
 

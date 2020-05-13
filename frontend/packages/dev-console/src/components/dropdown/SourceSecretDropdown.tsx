@@ -1,7 +1,7 @@
 import * as React from 'react';
+import ResourceDropdown from '@console/shared/src/components/dropdown/ResourceDropdown';
 import { SecretModel } from '@console/internal/models';
-import { Firehose } from '@console/internal/components/utils';
-import { ResourceDropdown } from '@console/shared';
+import { Firehose } from '@console/internal/components/utils/firehose';
 
 interface SourceSecretDropdownProps {
   dropDownClassName?: string;

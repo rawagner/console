@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { HorizontalNav, PageHeading } from '@console/internal/components/utils';
+import { HorizontalNav } from '@console/internal/components/utils/horizontal-nav';
+import { PageHeading } from '@console/internal/components/utils/headings';
 import { MonitoringPage } from '../MonitoringPage';
 import ProjectListPage from '../../projects/ProjectListPage';
 

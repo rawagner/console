@@ -4,33 +4,26 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { Status, SuccessStatus } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
+import { SuccessStatus } from '@console/shared/src/components/status/statuses';
 import { Conditions } from '@console/internal/components/conditions';
 import { ErrorPage404 } from '@console/internal/components/error';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage, ListPage } from '@console/internal/components/factory/list-page';
 import {
-  MultiListPage,
-  ListPage,
-  DetailsPage,
   Table,
   TableRow,
   TableData,
   RowFunctionArgs,
-} from '@console/internal/components/factory';
-import {
-  Kebab,
-  KebabAction,
-  LabelList,
-  LoadingBox,
-  MsgBox,
-  ResourceKebab,
-  ResourceSummary,
-  SectionHeading,
-  StatusBox,
-  Timestamp,
-  navFactory,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/factory/table';
 import { connectToModel, connectToPlural } from '@console/internal/kinds';
+import {
+  apiGroupForReference,
+  apiVersionForReference,
+  kindForReference,
+  referenceForModel,
+} from '@console/internal/module/k8s/k8s';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import {
   GroupVersionKind,
   K8sKind,
@@ -38,13 +31,7 @@ import {
   K8sResourceKind,
   K8sResourceKindReference,
   OwnerReference,
-  apiGroupForReference,
-  apiVersionForReference,
-  kindForReference,
-  modelFor,
-  referenceFor,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { deleteModal } from '@console/internal/components/modals';
 import { RootState } from '@console/internal/redux-types';
 import { ClusterServiceVersionModel } from '../../models';
@@ -59,9 +46,17 @@ import { OperandLink } from './operand-link';
 import ErrorAlert from '@console/shared/src/components/alerts/error';
 import {
   ClusterServiceVersionAction,
-  useExtensions,
   isClusterServiceVersionAction,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { LabelList } from '@console/internal/components/utils/label-list';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { ResourceKebab, KebabAction, Kebab } from '@console/internal/components/utils/kebab';
+import { MsgBox, StatusBox, LoadingBox } from '@console/internal/components/utils/status-box';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 const csvName = () =>
   window.location.pathname

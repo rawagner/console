@@ -1,26 +1,27 @@
 import * as React from 'react';
 
-import {
-  Dropdown,
-  Firehose,
-  FirehoseResourcesResult,
-  HandlePromiseProps,
-  withHandlePromise,
-} from '@console/internal/components/utils';
 import { Form, FormGroup, TextInput } from '@patternfly/react-core';
-import { getName, getNamespace } from '@console/shared';
-import { K8sResourceKind, k8sCreate } from '@console/internal/module/k8s';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import {
   ModalBody,
   ModalComponentProps,
   ModalSubmitFooter,
   ModalTitle,
   createModalLauncher,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import { PersistentVolumeClaimModel } from '@console/internal/models';
 import { VolumeSnapshotModel } from '../../../models';
 
 import './_volume-snapshot-modal.scss';
+import { FirehoseResourcesResult } from '@console/internal/components/utils/types';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { Firehose } from '@console/internal/components/utils/firehose';
 
 export type VolumeSnapshotModalProps = {
   pvcData?: FirehoseResourcesResult;

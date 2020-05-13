@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { Patch } from '@console/internal/module/k8s';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { Patch } from '@console/internal/module/k8s/types';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { getDisks, getInterfaces, getNetworks } from '../../../selectors/vm';
 import { getVMLikePatches } from '../vm-template';
 import { VMLikeEntityKind } from '../../../types/vmLike';

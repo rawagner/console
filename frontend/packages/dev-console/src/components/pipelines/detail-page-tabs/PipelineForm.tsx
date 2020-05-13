@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Formik } from 'formik';
-import { k8sUpdate, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
 import { PipelineModel } from '../../../models';
 
 export interface PipelineFormProps {

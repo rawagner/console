@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as fuzzy from 'fuzzysearch';
 import { useFormikContext, FormikValues } from 'formik';
 import { FormGroup } from '@patternfly/react-core';
-import { getFieldId, ResourceDropdownField } from '@console/shared';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import { knativeServingResourcesServices } from '../../../utils/get-knative-resources';
 

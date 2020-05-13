@@ -1,16 +1,18 @@
 import { get } from 'lodash';
 import {
+  Patch,
+  K8sKind,
+  K8sResourceCommon,
+  K8sResourceKind,
+} from '@console/internal/module/k8s/types';
+import {
   k8sCreate as _k8sCreate,
   k8sGet as _k8sGet,
   k8sKill as _k8sKill,
-  K8sKind,
   k8sPatch as _k8sPatch,
-  K8sResourceCommon,
-  K8sResourceKind,
-  Patch,
-  referenceFor,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/resource';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { getFullResourceId } from '../../utils/utils';
 import {
   K8sCreateError,

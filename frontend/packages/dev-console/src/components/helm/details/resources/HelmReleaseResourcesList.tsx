@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { TableProps, Table } from '@console/internal/components/factory';
-import { MsgBox } from '@console/internal/components/utils';
+import { TableProps, Table } from '@console/internal/components/factory/table';
 import HelmReleaseResourcesHeader from './HelmReleaseResourcesHeader';
 import HelmReleaseResourcesRow from './HelmReleaseResourcesRow';
+import { MsgBox } from '@console/internal/components/utils/status-box';
 
 const HelmReleaseResourcesList: React.FC<TableProps> = (props) => (
   <Table

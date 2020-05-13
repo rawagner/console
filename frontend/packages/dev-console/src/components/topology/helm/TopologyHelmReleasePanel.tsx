@@ -1,19 +1,17 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  navFactory,
-  ResourceIcon,
-  SimpleTabNav,
-  StatusBox,
-  ActionsMenu,
-} from '@console/internal/components/utils';
 import * as UIActions from '@console/internal/actions/ui';
 import { Node } from '@console/topology';
 import HelmReleaseOverview from '../../helm/details/overview/HelmReleaseOverview';
 import { helmReleaseActions } from './actions/helmReleaseActions';
 import TopologyHelmReleaseResourcesPanel from './TopologyHelmReleaseResourcesPanel';
 import TopologyHelmReleaseNotesPanel from './TopologyHelmReleaseNotesPanel';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { ActionsMenu } from '@console/internal/components/utils/dropdown';
+import { SimpleTabNav } from '@console/internal/components/utils/simple-tab-nav';
 
 type PropsFromState = {
   selectedDetailsTab?: any;

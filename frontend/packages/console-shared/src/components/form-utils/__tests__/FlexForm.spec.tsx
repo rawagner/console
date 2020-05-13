@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { TextInputTypes, Form } from '@patternfly/react-core';
-import { InputField } from '@console/shared';
 import FlexForm from '../FlexForm';
+import InputField from '../../formik-fields/InputField';
 
 describe('Page Body', () => {
   let wrapper: ShallowWrapper<any>;

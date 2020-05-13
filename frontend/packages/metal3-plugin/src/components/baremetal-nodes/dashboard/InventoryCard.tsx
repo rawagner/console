@@ -9,7 +9,7 @@ import { getPodStatusGroups } from '@console/shared/src/components/dashboard/inv
 import { PodModel, NodeModel } from '@console/internal/models';
 import { NodeDashboardContext } from '@console/app/src/components/nodes/node-dashboard/NodeDashboardContext';
 import { NodeInventoryItem } from '@console/app/src/components/nodes/node-dashboard/InventoryCard';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 import { BareMetalNodeDashboardContext } from './BareMetalNodeDashboardContext';
 import { getHostStorage, getHostNICs, getHostCPU } from '../../../selectors';

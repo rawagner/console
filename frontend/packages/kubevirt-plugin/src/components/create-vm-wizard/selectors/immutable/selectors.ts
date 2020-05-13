@@ -1,4 +1,4 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { iGetIn, iGetLoadedData } from '../../../../utils/immutable';
 import { CommonDataProp, VMWizardTab } from '../../types';
 import { iGetCreateVMWizard, iGetCreateVMWizardTabs } from './common';

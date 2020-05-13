@@ -1,9 +1,10 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
 
 import { GroupModel } from '../../models';
-import { GroupKind, k8sPatch } from '../../module/k8s';
+import { k8sPatch } from '../../module/k8s/resource';
+import { GroupKind } from '../../module/k8s/types';
 import {
   ModalBody,
   ModalComponentProps,
@@ -11,7 +12,7 @@ import {
   ModalTitle,
   createModalLauncher,
 } from '../factory/modal';
-import { HandlePromiseProps, withHandlePromise } from '../utils';
+import { withHandlePromise, HandlePromiseProps } from '../utils/promise-component';
 
 export const RemoveUserModal = withHandlePromise((props: RemoveUserModalProps) => {
   const submit: React.FormEventHandler<HTMLFormElement> = (e) => {

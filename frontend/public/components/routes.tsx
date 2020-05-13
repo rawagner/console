@@ -5,20 +5,10 @@ import { Button, Popover } from '@patternfly/react-core';
 import { sortable } from '@patternfly/react-table';
 import { EyeIcon, EyeSlashIcon, QuestionCircleIcon } from '@patternfly/react-icons';
 
-import { Status } from '@console/shared';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  CopyToClipboard,
-  DetailsItem,
-  ExternalLink,
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  detailsPage,
-  navFactory,
-} from './utils';
+import { Status } from '@console/shared/src/components/status/Status';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { MaskedData } from './configmap-and-secret-data';
 import {
   K8sResourceKindReference,
@@ -26,10 +16,18 @@ import {
   RouteIngress,
   RouteTarget,
   K8sResourceCondition,
-} from '../module/k8s';
+} from '../module/k8s/types';
 import { RouteModel } from '../models';
 import { Conditions } from './conditions';
 import { RouteCharts } from './routes/route-charts';
+import { ExternalLink } from './utils/link';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { DetailsItem } from './utils/details-item';
+import { CopyToClipboard } from './utils/copy-to-clipboard';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, detailsPage } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
 
 const RoutesReference: K8sResourceKindReference = 'Route';
 const menuActions = [...Kebab.getExtensionsActionsForKind(RouteModel), ...Kebab.factory.common];

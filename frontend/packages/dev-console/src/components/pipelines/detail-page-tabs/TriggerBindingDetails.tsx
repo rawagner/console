@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { SectionHeading, ResourceSummary } from '@console/internal/components/utils';
 import { EventListenerModel } from '../../../models';
 import { getResourceModelFromBindingKind } from '../../../utils/pipeline-augment';
 import ResourceLinkList from '../resource-overview/ResourceLinkList';
 import { useTriggerBindingEventListenerNames } from '../utils/triggers';
 import { TriggerBindingKind } from '../resource-types';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
 
 export interface TriggerBindingDetailsProps {
   obj: TriggerBindingKind;

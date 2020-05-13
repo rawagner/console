@@ -1,10 +1,9 @@
 import * as _ from 'lodash';
-import { ALL_APPLICATIONS_KEY } from '@console/shared/src';
+import { ALL_APPLICATIONS_KEY } from '@console/shared/src/constants/common';
 import { TopologyFilters } from '@console/dev-console/src/components/topology/filters/filter-utils';
-import {
-  transformTopologyData,
-  topologyModelFromDataModel,
-} from '@console/dev-console/src/components/topology';
+import { transformTopologyData } from '@console/dev-console/src/components/topology/data-transforms/data-transformer';
+import { topologyModelFromDataModel } from '@console/dev-console/src/components/topology/data-transforms/topology-model';
+
 import { TYPE_EVENT_SOURCE } from '../const';
 import { MockKnativeResources } from './topology-knative-test-data';
 

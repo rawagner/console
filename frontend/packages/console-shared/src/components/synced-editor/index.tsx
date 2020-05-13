@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { EditorType, EditorToggle } from './editor-toggle';
-import { prune } from '../../utils';
+import { prune } from '../../utils/utils';
 import { safeYAMLToJS, safeJSToYAML } from '../../utils/yaml';
 
 const YAML_KEY_ORDER = ['apiVerion', 'kind', 'metadata', 'spec', 'status'];

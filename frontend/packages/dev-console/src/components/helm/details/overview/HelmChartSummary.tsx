@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HelmRelease } from '../../helm-types';
-import { Timestamp } from '@console/internal/components/utils';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 interface HelmChartSummaryProps {
   obj: K8sResourceKind;

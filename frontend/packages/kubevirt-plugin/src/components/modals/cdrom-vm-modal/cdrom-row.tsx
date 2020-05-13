@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { MinusCircleIcon } from '@patternfly/react-icons';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 import {
   FormSelect,
   FormGroup,
@@ -12,7 +12,7 @@ import {
   Button,
 } from '@patternfly/react-core';
 import { PersistentVolumeClaimModel, StorageClassModel } from '@console/internal/models';
-import { FirehoseResult } from '@console/internal/components/utils';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { K8sResourceSelectRow } from '../../form/k8s-resource-select-row';
 import { VMKind } from '../../../types';
 import { FormSelectPlaceholderOption } from '../../form/form-select-placeholder-option';

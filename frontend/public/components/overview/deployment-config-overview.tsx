@@ -2,12 +2,14 @@ import * as React from 'react';
 
 import { DeploymentConfigModel } from '../../models';
 import { DeploymentConfigDetailsList, menuActions } from '../deployment-config';
-import { LoadingInline, ResourceSummary, WorkloadPausedAlert } from '../utils';
 
 import { OverviewDetailsResourcesTab } from './resource-overview-page';
 import { ResourceOverviewDetails } from './resource-overview-details';
 import PodRingSet from '@console/shared/src/components/pod/PodRingSet';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { WorkloadPausedAlert } from '../utils/workload-pause';
+import { ResourceSummary } from '../utils/details-page';
+import { LoadingInline } from '../utils/status-box';
 
 const DeploymentConfigOverviewDetails: React.SFC<DeploymentConfigOverviewDetailsProps> = ({
   item: { obj: dc, pods: pods, current, previous, isRollingOut },

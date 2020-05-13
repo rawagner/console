@@ -13,9 +13,10 @@ import { getBrandingDetails, Masthead } from './masthead';
 import { ConsoleNotifier } from './console-notifier';
 import { ConnectedNotificationDrawer } from './notification-drawer';
 import { Navigation } from './nav';
-import { history, Firehose } from './utils';
 import * as UIActions from '../actions/ui';
-import { fetchSwagger, getCachedResources, referenceForModel } from '../module/k8s';
+import { fetchSwagger } from '../module/k8s/swagger';
+import { getCachedResources } from '../module/k8s/get-resources';
+import { referenceForModel } from '../module/k8s/k8s';
 import { receivedResources, watchAPIServices } from '../actions/k8s';
 import { ClusterVersionModel } from '../models';
 // cloud shell imports must come later than features
@@ -43,6 +44,8 @@ const cvResource = [
 
 // Edge lacks URLSearchParams
 import 'url-search-params-polyfill';
+import { history } from './utils/router';
+import { Firehose } from './utils/firehose';
 
 class App extends React.PureComponent {
   constructor(props) {

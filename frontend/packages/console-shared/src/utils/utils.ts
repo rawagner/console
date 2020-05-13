@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { FirehoseResult } from '@console/internal/components/utils/types';
 import { getUID } from '../selectors/common';
 

@@ -5,23 +5,21 @@ import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
 import { GroupModel, UserModel } from '../models';
-import { referenceForModel, GroupKind, K8sKind } from '../module/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { referenceForModel } from '../module/k8s/k8s';
+import { GroupKind, K8sKind } from '../module/k8s/types';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { addUsersModal, removeUserModal } from './modals';
 import { RoleBindingsPage } from './RBAC';
-import {
-  asAccessReview,
-  EmptyBox,
-  Kebab,
-  KebabAction,
-  KebabOption,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-} from './utils';
+import { asAccessReview } from './utils/rbac';
+import { KebabAction, Kebab, ResourceKebab, KebabOption } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { EmptyBox } from './utils/status-box';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
 
 const addUsers: KebabAction = (kind: K8sKind, group: GroupKind) => ({
   label: 'Add Users',

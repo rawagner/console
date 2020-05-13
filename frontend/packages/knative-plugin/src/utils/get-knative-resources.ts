@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
-import { K8sResourceKind, PodKind, referenceForModel } from '@console/internal/module/k8s';
-import { FirehoseResource } from '@console/internal/components/utils';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import { KNATIVE_SERVING_LABEL } from '../const';
 import { ServiceModel, RevisionModel, ConfigurationModel, RouteModel } from '../models';
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import * as _ from 'lodash';
-import { K8sResourceKind, PodKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
 import { DEFAULT_RDP_PORT } from '../../../constants/vm';
 import { getServicePort } from '../selectors';
 

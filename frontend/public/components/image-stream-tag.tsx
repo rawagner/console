@@ -1,13 +1,16 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { K8sResourceKind, K8sResourceKindReference } from '../module/k8s';
+import { K8sResourceKind, K8sResourceKindReference } from '../module/k8s/types';
 import { ImageStreamTagModel } from '../models';
-import { DetailsPage } from './factory';
-import { Kebab, SectionHeading, navFactory, ResourceSummary } from './utils';
+import { DetailsPage } from './factory/details';
 import { humanizeBinaryBytes } from './utils/units';
 import { ExampleDockerCommandPopover } from './image-stream';
 import { ImageStreamTimeline } from './image-stream-timeline';
+import { Kebab } from './utils/kebab';
+import { SectionHeading } from './utils/headings';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceSummary } from './utils/details-page';
 
 const ImageStreamTagsReference: K8sResourceKindReference = 'ImageStreamTag';
 const ImageStreamsReference: K8sResourceKindReference = 'ImageStream';

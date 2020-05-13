@@ -1,7 +1,8 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { createBasicLookup, getName, getNamespace } from '@console/shared/src';
-import { FirehoseResult } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { createBasicLookup } from '@console/shared/src/utils/utils';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { V1Disk } from '../../../types/vm/disk/V1Disk';
 import { V1Volume } from '../../../types/vm/disk/V1Volume';
 import { V1alpha1DataVolume } from '../../../types/vm/disk/V1alpha1DataVolume';

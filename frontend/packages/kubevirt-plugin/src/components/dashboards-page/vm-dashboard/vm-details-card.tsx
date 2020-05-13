@@ -7,13 +7,19 @@ import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboa
 import DashboardCardLink from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardLink';
 import DetailsBody from '@console/shared/src/components/dashboard/details-card/DetailsBody';
 import DetailItem from '@console/shared/src/components/dashboard/details-card/DetailItem';
-import { getName, getNamespace, getUID, getCreationTimestamp, getNodeName } from '@console/shared';
 import {
-  ResourceLink,
-  Timestamp,
+  getName,
+  getNamespace,
+  getUID,
+  getCreationTimestamp,
+} from '@console/shared/src/selectors/common';
+import { getNodeName } from '@console/shared/src/selectors/pod';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import {
   NodeLink,
+  ResourceLink,
   resourcePath,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/resource-link';
 import { VMDashboardContext } from '../../vms/vm-dashboard-context';
 import { VirtualMachineModel, VirtualMachineInstanceModel } from '../../../models';
 import { getVmiIpAddresses, getVMINodeName } from '../../../selectors/vmi';

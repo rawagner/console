@@ -3,18 +3,18 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import { Conditions } from './conditions';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import { referenceFor, kindForReference } from '../module/k8s';
-import {
-  Kebab,
-  kindObj,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-} from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { kindForReference } from '../module/k8s/k8s';
+import { referenceFor } from '../module/k8s/k8s-models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { kindObj } from './utils/inject';
 
 const { common } = Kebab.factory;
 

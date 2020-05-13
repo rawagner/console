@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { KebabAction, KebabOption } from '@console/internal/components/utils';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
+import { KebabAction, KebabOption } from '@console/internal/components/utils/kebab';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { menuActions as deploymentConfigMenuActions } from '@console/internal/components/deployment-config';
 import { menuActions as deploymentMenuActions } from '@console/internal/components/deployment';
 import { menuActions as statefulSetMenuActions } from '@console/internal/components/stateful-set';

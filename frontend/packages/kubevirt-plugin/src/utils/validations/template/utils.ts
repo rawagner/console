@@ -1,10 +1,8 @@
 import * as _ from 'lodash';
-import {
-  asValidationObject,
-  joinGrammaticallyListOfItems,
-  ValidationErrorType,
-} from '@console/shared/src';
-import { humanizeBinaryBytes } from '@console/internal/components/utils';
+import { asValidationObject } from '@console/shared/src/utils/validation/validation';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
+import { joinGrammaticallyListOfItems } from '@console/shared/src/utils/grammar';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 import { intervalBracket } from '../../strings';
 import { Interval } from './types';
 import { IntervalValidationResult } from './interval-validation-result';

@@ -1,4 +1,4 @@
-import { k8sKill, k8sList, k8sPatch } from '@console/internal/module/k8s';
+import { k8sKill, k8sList, k8sPatch } from '@console/internal/module/k8s/resource';
 import { EventListenerModel, TriggerTemplateModel } from '../../../../models';
 import { Pipeline } from '../../../../utils/pipeline-augment';
 import { EventListenerKind } from '../../resource-types';

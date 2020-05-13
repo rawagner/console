@@ -1,5 +1,5 @@
 import { coFetchJSON } from '@console/internal/co-fetch';
-import { history } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import { deleteResourceModal } from '../components/modals';
 
 export const deleteHelmRelease = (releaseName: string, namespace: string, redirect?: string) => {

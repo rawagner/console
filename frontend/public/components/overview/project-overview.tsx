@@ -6,25 +6,21 @@ import { Link } from 'react-router-dom';
 import { Button, Tooltip } from '@patternfly/react-core';
 
 import { ListView, ListViewItem } from './list-view';
-import {
-  KEYBOARD_SHORTCUTS,
-  Status as TooltipStatus,
-  YellowExclamationTriangleIcon,
-  PodControllerOverviewItem,
-  OverviewItem,
-} from '@console/shared';
-import { K8sResourceKind } from '../../module/k8s';
+import { KEYBOARD_SHORTCUTS } from '@console/shared/src/constants/common';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import { PodControllerOverviewItem } from '@console/shared/src/types/pod';
+import { Status as TooltipStatus } from '@console/shared/src/components/status/Status';
+import { OverviewItem } from '@console/shared/src/types/resource';
+
+import { K8sResourceKind } from '../../module/k8s/types';
 import * as UIActions from '../../actions/ui';
-import {
-  ResourceIcon,
-  formatBytesAsMiB,
-  formatCores,
-  pluralize,
-  resourceObjPath,
-  truncateMiddle,
-} from '../utils';
 
 import { OverviewGroup, OverviewMetrics } from '.';
+import { resourceObjPath } from '../utils/resource-link';
+import { truncateMiddle } from '../utils/truncate-middle';
+import { formatBytesAsMiB, formatCores } from '../utils/units';
+import { pluralize } from '../utils/details-page';
+import { ResourceIcon } from '../utils/resource-icon';
 
 // Consider this mobile if the device screen width is less than 768. (This value shouldn't change.)
 const isMobile = window.screen.width < 768;

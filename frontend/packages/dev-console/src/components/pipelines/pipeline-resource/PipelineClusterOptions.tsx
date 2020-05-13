@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { InputField, DroppableFileInputField } from '@console/shared';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DroppableFileInputField from '@console/shared/src/components/formik-fields/DroppableFileInputField';
 
 type PipelineClusterOptionsProps = { prefixName: string };
 

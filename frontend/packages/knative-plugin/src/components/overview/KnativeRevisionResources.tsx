@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { K8sResourceKind, PodKind, podPhase } from '@console/internal/module/k8s';
-import { PodControllerOverviewItem } from '@console/shared';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
+import { podPhase } from '@console/internal/module/k8s/pods';
 import { PodsOverview } from '@console/internal/components/overview/pods-overview';
 import ConfigurationsOverviewList from './ConfigurationsOverviewList';
 import KSRoutesOverviewList from './RoutesOverviewList';
 import DeploymentOverviewList from './DeploymentOverviewList';
+import { PodControllerOverviewItem } from '@console/shared/src/types/pod';
 
 const AUTOSCALED = 'Autoscaled to 0';
 type KnativeRevisionResourceProps = {

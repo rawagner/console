@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { PromiseComponent, history } from '@console/internal/components/utils';
+import { PromiseComponent } from '@console/internal/components/utils/promise-component';
+import { history } from '@console/internal/components/utils/router';
 import {
   createModalLauncher,
   ModalTitle,
@@ -8,8 +9,9 @@ import {
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
 import { Formik, FormikProps, FormikValues } from 'formik';
-import { YellowExclamationTriangleIcon, InputField } from '@console/shared';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 type DeleteResourceModalProps = {
   resourceName: string;

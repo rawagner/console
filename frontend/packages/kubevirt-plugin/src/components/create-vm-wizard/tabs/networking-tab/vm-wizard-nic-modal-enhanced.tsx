@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Firehose, FirehoseResult } from '@console/internal/components/utils';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { NetworkAttachmentDefinitionModel } from '@console/network-attachment-definition-plugin';
 import { NetworkWrapper } from '../../../../k8s/wrapper/vm/network-wrapper';
 import { NetworkInterfaceWrapper } from '../../../../k8s/wrapper/vm/network-interface-wrapper';

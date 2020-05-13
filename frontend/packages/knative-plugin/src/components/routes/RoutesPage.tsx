@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ListPage } from '@console/internal/components/factory';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { ListPage } from '@console/internal/components/factory/list-page';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { RouteModel } from '../../models';
 import RouteList from './RouteList';
 

@@ -1,19 +1,13 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import * as fuzzy from 'fuzzysearch';
-import {
-  Dropdown,
-  FirehoseResult,
-  LoadingInline,
-  ResourceIcon,
-} from '@console/internal/components/utils';
-import {
-  K8sResourceKind,
-  referenceForModel,
-  K8sKind,
-  modelFor,
-  referenceFor,
-} from '@console/internal/module/k8s';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 
 type DropdownItemProps = {
   model: K8sKind;

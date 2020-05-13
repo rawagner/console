@@ -2,13 +2,17 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Form, Button, Tooltip, Alert, Text, TextVariants } from '@patternfly/react-core';
 import {
-  FirehoseResult,
   HandlePromiseProps,
   withHandlePromise,
-} from '@console/internal/components/utils';
-import { ModalTitle, ModalBody, ModalComponentProps } from '@console/internal/components/factory';
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  ModalTitle,
+  ModalBody,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import { PlusCircleIcon, OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
-import { k8sPatch } from '@console/internal/module/k8s';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { ModalFooter } from '../modal/modal-footer';
 import { getCDsPatch } from '../../../k8s/patches/vm/vm-cdrom-patches';
 import { getVMLikeModel, asVM, isWindows } from '../../../selectors/vm';

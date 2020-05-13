@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Firehose, FirehoseResult } from '@console/internal/components/utils';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import {
   NamespaceModel,
   PersistentVolumeClaimModel,
@@ -20,7 +24,7 @@ import { VM_TEMPLATE_NAME_PARAMETER } from '../../../../constants/vm-templates';
 import { PersistentVolumeClaimWrapper } from '../../../../k8s/wrapper/vm/persistent-volume-claim-wrapper';
 import { TemplateValidations } from '../../../../utils/validations/template/template-validations';
 import { getTemplateValidation } from '../../selectors/template';
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 import { toShallowJS } from '../../../../utils/immutable';
 import { getStorages } from '../../selectors/selectors';
 

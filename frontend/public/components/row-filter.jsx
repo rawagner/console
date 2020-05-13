@@ -5,7 +5,7 @@ import * as classNames from 'classnames';
 import { Button } from '@patternfly/react-core';
 
 import { filterList } from '../actions/k8s';
-import { getQueryArgument, setQueryArgument } from './utils';
+import { getQueryArgument, setQueryArgument } from './utils/router';
 
 export const CheckBox = ({ title, active, number, toggle }) => {
   const klass = classNames('row-filter__box', {

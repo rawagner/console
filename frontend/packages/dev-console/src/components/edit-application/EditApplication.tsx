@@ -4,8 +4,9 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import { getActivePerspective } from '@console/internal/reducers/ui-selectors';
 import { RootState } from '@console/internal/redux-types';
-import { history } from '@console/internal/components/utils';
-import { useExtensions, Perspective, isPerspective } from '@console/plugin-sdk';
+import { history } from '@console/internal/components/utils/router';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { Perspective, isPerspective } from '@console/plugin-sdk/src/typings';
 import { NormalizedBuilderImages, normalizeBuilderImages } from '../../utils/imagestream-utils';
 import {
   createOrUpdateResources as createOrUpdateGitResources,

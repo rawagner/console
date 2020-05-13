@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { Dropdown } from '@console/internal/components/utils';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 import DropdownField from '../DropdownField';
 
 jest.mock('formik', () => ({

@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
-import { SubscriptionModel } from '@console/operator-lifecycle-manager';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { SubscriptionModel } from '@console/operator-lifecycle-manager/src/models';
 import { withDashboardResources } from '@console/internal/components/dashboard/with-dashboard-resources';
-import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
-import { getName, getInfrastructurePlatform } from '@console/shared';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
+import { getName } from '@console/shared/src/selectors/common';
+import { getInfrastructurePlatform } from '@console/shared/src/selectors/infrastructure';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import DetailItem from '@console/shared/src/components/dashboard/details-card/DetailItem';

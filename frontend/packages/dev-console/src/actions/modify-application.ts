@@ -1,7 +1,7 @@
-import { KebabOption } from '@console/internal/components/utils';
+import { KebabOption } from '@console/internal/components/utils/kebab';
 import { truncateMiddle } from '@console/internal/components/utils/truncate-middle';
-import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s';
-import { ServiceModel as KnativeServiceModel } from '@console/knative-plugin';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
+import { ServiceModel as KnativeServiceModel } from '@console/knative-plugin/src/models';
 import { RESOURCE_NAME_TRUNCATE_LENGTH } from '../const';
 import { editApplicationModal } from '../components/modals';
 

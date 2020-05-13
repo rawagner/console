@@ -3,10 +3,14 @@ import { Helmet } from 'react-helmet';
 import { ActionGroup, Button } from '@patternfly/react-core';
 
 import { SecretModel } from '../../models';
-import { IdentityProvider, k8sCreate, K8sResourceKind, OAuthKind } from '../../module/k8s';
-import { AsyncComponent, ButtonBar, PromiseComponent, history } from '../utils';
+import { k8sCreate } from '../../module/k8s/resource';
+import { IdentityProvider, K8sResourceKind, OAuthKind } from '../../module/k8s/types';
+import { history } from '../utils/router';
 import { addIDP, getOAuthResource, redirectToOAuthPage, mockNames } from './';
 import { IDPNameInput } from './idp-name-input';
+import { AsyncComponent } from '../utils/async';
+import { PromiseComponent } from '../utils/promise-component';
+import { ButtonBar } from '../utils/button-bar';
 
 export const DroppableFileInput = (props: any) => (
   <AsyncComponent

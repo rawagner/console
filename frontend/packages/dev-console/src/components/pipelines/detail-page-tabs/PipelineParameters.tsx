@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { MultiColumnField, InputField } from '@console/shared';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 
 type PipelineParametersProps = {
   addLabel?: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as fuzzy from 'fuzzysearch';
 import { connect } from 'react-redux';
-import { ResourceDropdownField } from '@console/shared';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
 import { ServiceAccountModel } from '@console/internal/models';
 import { RootState } from '@console/internal/redux-types';
 import { getActiveNamespace } from '@console/internal/reducers/ui-selectors';

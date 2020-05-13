@@ -1,6 +1,6 @@
 import { KebabOption } from '@console/internal/components/utils/kebab';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
-import { asAccessReview } from '@console/internal/components/utils';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
 import { Edge, Node } from '@console/topology';
 import {
   TYPE_EVENT_SOURCE,

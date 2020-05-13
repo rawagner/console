@@ -2,26 +2,13 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { K8sResourceKind, K8sResourceKindReference, referenceFor } from '../module/k8s';
+import { referenceFor } from '../module/k8s/k8s-models';
+import { K8sResourceKind, K8sResourceKindReference } from '../module/k8s/types';
 import { startBuild } from '../module/k8s/builds';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { errorModal } from './modals';
-import {
-  BuildHooks,
-  BuildStrategy,
-  history,
-  Kebab,
-  KebabAction,
-  LabelList,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  resourceObjPath,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-  WebhookTriggers,
-} from './utils';
 import {
   BuildsPage,
   BuildEnvironmentComponent,
@@ -30,6 +17,17 @@ import {
 } from './build';
 import { ResourceEventStream } from './events';
 import { BuildConfigModel } from '../models';
+import { history } from './utils/router';
+import { KebabAction, Kebab, ResourceKebab } from './utils/kebab';
+import { resourceObjPath, ResourceLink } from './utils/resource-link';
+import { ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { WebhookTriggers } from './utils/webhooks';
+import { BuildHooks } from './utils/build-hooks';
+import { BuildStrategy } from './utils/build-strategy';
+import { LabelList } from './utils/label-list';
+import { Timestamp } from './utils/timestamp';
+import { navFactory } from './utils/horizontal-nav';
 
 const BuildConfigsReference: K8sResourceKindReference = 'BuildConfig';
 

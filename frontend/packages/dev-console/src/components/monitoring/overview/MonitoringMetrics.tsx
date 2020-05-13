@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { requirePrometheus } from '@console/internal/components/graphs';
+import { requirePrometheus } from '@console/internal/components/graphs/require-prometheus';
 import { topWorkloadMetricsQueries } from '../queries';
 import ConnectedMonitoringDashboardGraph from '../dashboard/MonitoringDashboardGraph';
 

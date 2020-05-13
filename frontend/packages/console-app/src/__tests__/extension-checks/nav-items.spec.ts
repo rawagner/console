@@ -1,4 +1,4 @@
-import { isNavItem, isPerspective } from '@console/plugin-sdk';
+import { isNavItem, isPerspective } from '@console/plugin-sdk/src/typings';
 import { testedExtensions } from '../plugin-test-utils';
 
 describe('NavItem', () => {

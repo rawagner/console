@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import {
   CloudInitDataHelper,
   CloudInitDataFormKeys,

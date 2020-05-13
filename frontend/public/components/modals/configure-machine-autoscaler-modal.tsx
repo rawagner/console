@@ -3,8 +3,12 @@ import * as _ from 'lodash-es';
 
 import { MachineAutoscalerModel } from '../../models';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { history, NumberSpinner, PromiseComponent, resourcePathFromModel } from '../utils';
-import { k8sCreate, K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { k8sCreate } from '../../module/k8s/resource';
+import { PromiseComponent } from '../utils/promise-component';
+import { history } from '../utils/router';
+import { resourcePathFromModel } from '../utils/resource-link';
+import { NumberSpinner } from '../utils/number-spinner';
 
 export class ConfigureMachineAutoscalerModal extends PromiseComponent<
   ConfigureMachineAutoscalerModalProps,

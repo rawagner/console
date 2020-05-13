@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory';
-import { KebabAction, navFactory } from '@console/internal/components/utils';
-import { k8sGet, k8sList } from '@console/internal/module/k8s';
+import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory/details';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { KebabAction } from '@console/internal/components/utils/kebab';
+import { k8sGet, k8sList } from '@console/internal/module/k8s/resource';
 import { ErrorPage404 } from '@console/internal/components/error';
 import { getPipelineKebabActions } from '../../utils/pipeline-actions';
 import { getLatestRun } from '../../utils/pipeline-augment';

@@ -2,12 +2,10 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { EnvironmentPage } from '../../public/components/environment';
-// eslint-disable-next-line import/no-duplicates
-import { FieldLevelHelp } from '../../public/components/utils';
-// eslint-disable-next-line import/no-duplicates
-import * as utils from '../../public/components/utils';
+import * as utils from '../../public/components/utils/rbac';
 import { DeploymentModel } from '../../public/models';
-import * as k8s from '../../public/module/k8s';
+import * as k8s from '../../public/module/k8s/resource';
+import { FieldLevelHelp } from '@console/internal/components/utils/field-level-help';
 
 describe(EnvironmentPage.name, () => {
   const configMaps = {},

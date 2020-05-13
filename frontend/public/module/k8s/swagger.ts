@@ -1,8 +1,9 @@
 import * as _ from 'lodash-es';
 
-import { STORAGE_PREFIX } from '@console/shared/src/constants';
+import { STORAGE_PREFIX } from '@console/shared/src/constants/common';
 import { coFetchJSON } from '../../co-fetch';
-import { K8sKind, referenceForModel } from './';
+import { referenceForModel } from './k8s';
+import { K8sKind, SwaggerDefinition, SwaggerDefinitions, SwaggerAPISpec } from './types';
 
 const SWAGGER_LOCAL_STORAGE_KEY = `${STORAGE_PREFIX}/swagger-definitions`;
 
@@ -140,26 +141,3 @@ export const getResourceDescription = _.memoize((kindObj: K8sKind): string => {
   const key = getDefinitionKey(kindObj, allDefinitions);
   return _.get(allDefinitions, [key, 'description']);
 }, referenceForModel);
-
-export type SwaggerDefinition = {
-  description?: string;
-  type?: string;
-  enum?: string[];
-  $ref?: string;
-  items?: SwaggerDefinition;
-  required?: string[];
-  properties?: {
-    [prop: string]: SwaggerDefinition;
-  };
-};
-
-export type SwaggerDefinitions = {
-  [name: string]: SwaggerDefinition;
-};
-
-export type SwaggerAPISpec = {
-  swagger: string;
-  info: { title: string; version: string };
-  paths: { [path: string]: any };
-  definitions: SwaggerDefinitions;
-};

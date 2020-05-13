@@ -5,20 +5,19 @@ import { Base64 } from 'js-base64';
 import { ActionGroup, Button } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
-import { k8sCreate, k8sUpdate, K8sResourceKind, referenceFor } from '../../module/k8s';
-import {
-  ButtonBar,
-  Firehose,
-  history,
-  StatusBox,
-  LoadingBox,
-  Dropdown,
-  resourceObjPath,
-} from '../utils';
+import { k8sCreate, k8sUpdate } from '../../module/k8s/resource';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { referenceFor } from '../../module/k8s/k8s-models';
 import { ModalBody, ModalTitle, ModalSubmitFooter } from '../factory/modal';
 import { AsyncComponent } from '../utils/async';
 import { SecretModel } from '../../models';
 import { WebHookSecretKey } from '../secret';
+import { resourceObjPath } from '../utils/resource-link';
+import { ButtonBar } from '../utils/button-bar';
+import { Dropdown } from '../utils/dropdown';
+import { StatusBox, LoadingBox } from '../utils/status-box';
+import { Firehose } from '../utils/firehose';
+import { history } from '../utils/router';
 
 export enum SecretTypeAbstraction {
   generic = 'generic',

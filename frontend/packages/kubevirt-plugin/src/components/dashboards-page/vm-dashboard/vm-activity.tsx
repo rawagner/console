@@ -9,10 +9,11 @@ import ActivityBody, {
   RecentEventsBodyContent,
   PauseButton,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
-import { getName, getNamespace } from '@console/shared';
-import { resourcePath, FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
+import { resourcePath } from '@console/internal/components/utils/resource-link';
 import { EventModel } from '@console/internal/models';
-import { EventKind } from '@console/internal/module/k8s';
+import { EventKind } from '@console/internal/module/k8s/types';
 import {
   withDashboardResources,
   DashboardItemProps,

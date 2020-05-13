@@ -3,22 +3,20 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import { CronJobKind } from '../module/k8s';
-import {
-  ContainerTable,
-  DetailsItem,
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-  navFactory,
-  pluralize,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { CronJobKind } from '../module/k8s/types';
 import { ResourceEventStream } from './events';
 import { CronJobModel } from '../models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { DetailsItem } from './utils/details-item';
+import { pluralize, ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { ContainerTable } from './utils/container-table';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(CronJobModel), ...common];

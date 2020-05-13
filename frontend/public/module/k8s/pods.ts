@@ -141,9 +141,6 @@ export const getVolumeLocation = (volume: Volume) => {
 
 export const getRestartPolicyLabel = (pod: PodKind) => _.get(getRestartPolicy(pod), 'label', '');
 
-export type PodReadiness = string;
-export type PodPhase = string;
-
 export const getVolumeMountPermissions = (v: VolumeMount) => {
   if (!v) {
     return null;
@@ -208,7 +205,7 @@ export const podReadiness = (pod: PodKind): { readyCount: number; totalContainer
 
 // This logic is replicated from k8s (at this writing, Kubernetes 1.17)
 // (See https://github.com/kubernetes/kubernetes/blob/release-1.17/pkg/printers/internalversion/printers.go)
-export const podPhase = (pod: PodKind): PodPhase => {
+export const podPhase = (pod: PodKind): string => {
   if (!pod || !pod.status) {
     return '';
   }
@@ -280,7 +277,7 @@ export const podPhase = (pod: PodKind): PodPhase => {
   return phase;
 };
 
-export const podPhaseFilterReducer = (pod: PodKind): PodPhase => {
+export const podPhaseFilterReducer = (pod: PodKind): string => {
   const status = podPhase(pod);
   if (status === 'Terminating') {
     return status;

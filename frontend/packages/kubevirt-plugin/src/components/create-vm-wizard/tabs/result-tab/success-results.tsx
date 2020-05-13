@@ -11,7 +11,7 @@ import {
   EmptyStateVariant,
   Title,
 } from '@patternfly/react-core';
-import { history } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import { iGetCommonData } from '../../selectors/immutable/selectors';
 import { VMSettingsField, VMWizardProps } from '../../types';
 import { iGetVmSettingValue } from '../../selectors/immutable/vm-settings';

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import { SidebarSectionHeading } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
 import { getActiveNamespace } from '@console/internal/actions/ui';
 import TopologyApplicationResourceList from './TopologyApplicationList';
 

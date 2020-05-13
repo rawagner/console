@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Kebab, KebabOption, pluralize } from '@console/internal/components/utils';
 import { asVM, isVMRunning } from '../../../../../../selectors/vm';
 import { isVMI } from '../../../../../../selectors/check-type';
 import { VMLikeEntityKind } from '../../../../../../types/vmLike';
-import { TableData, TableRow, RowFunction } from '@console/internal/components/factory';
-import { DASH, dimensifyRow } from '@console/shared';
+import { TableData, TableRow, RowFunction } from '@console/internal/components/factory/table';
+import { dimensifyRow } from '@console/shared/src/utils/table-utils';
+import { DASH } from '@console/shared/src/constants/ui';
 import { ValidationCell } from '../../../../../table/validation-cell';
 import { AffinityRowData } from '../../types';
 import { AFFINITY_CONDITION_LABELS, AFFINITY_TYPE_LABLES } from '../../../shared/consts';
+import { Kebab, KebabOption } from '@console/internal/components/utils/kebab';
+import { pluralize } from '@console/internal/components/utils/details-page';
 
 type AffinityRowCustomData = {
   isDisabled: boolean;

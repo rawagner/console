@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind, ImagePullPolicy } from '@console/internal/module/k8s';
+import { K8sResourceKind, ImagePullPolicy } from '@console/internal/module/k8s/types';
 import { Resources } from '@console/dev-console/src/components/import/import-types';
 import { RequestType } from '@console/dev-console/src/components/health-checks/health-checks-types';
 import { healthChecksDefaultValues } from '@console/dev-console/src/components/health-checks/health-checks-probe-utils';

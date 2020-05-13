@@ -1,4 +1,4 @@
-import { k8sCreate } from '@console/internal/module/k8s';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import { buildNodeMaintenance } from '../../objects/node-maintenance';
 import { NodeMaintenanceModel } from '../../../models';
 

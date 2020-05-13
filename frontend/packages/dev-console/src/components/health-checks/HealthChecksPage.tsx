@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { FirehoseResource, Firehose } from '@console/internal/components/utils';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import AddHealthChecksForm from './AddHealthChecksForm';
 
 type HealthChecksProps = RouteComponentProps<{

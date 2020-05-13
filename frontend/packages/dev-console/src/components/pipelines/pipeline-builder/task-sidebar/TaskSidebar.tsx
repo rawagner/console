@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useField } from 'formik';
-import { ActionsMenu, ResourceIcon } from '@console/internal/components/utils';
-import { referenceFor } from '@console/internal/module/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import {
   getResourceModelFromTaskKind,
   PipelineResource,
@@ -19,6 +18,8 @@ import TaskSidebarResource from './TaskSidebarResource';
 import TaskSidebarName from './TaskSidebarName';
 
 import './TaskSidebar.scss';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { ActionsMenu } from '@console/internal/components/utils/dropdown';
 
 type TaskSidebarProps = {
   errorMap: TaskErrorMap;

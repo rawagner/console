@@ -17,9 +17,9 @@ import {
 import { referenceForModel } from '../module/k8s/k8s';
 import { ActionType as K8sActionType } from '../actions/k8s';
 import { FeatureAction, ActionType } from '../actions/features';
-import { FLAGS } from '@console/shared/src/constants';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { pluginStore } from '../plugins';
-import { isModelFeatureFlag } from '@console/plugin-sdk';
+import { isModelFeatureFlag } from '@console/plugin-sdk/src/typings';
 import { FeatureState } from '../redux-types';
 
 export const defaults = _.mapValues(FLAGS, (flag) =>
@@ -51,11 +51,6 @@ pluginStore
       CRDs[modelRef] = ff.properties.flag as FLAGS;
     }
   });
-<<<<<<< HEAD
-=======
-
-export type FeatureState = ImmutableMap<string, boolean>;
->>>>>>> Reduce usage of plugins.registry
 
 export const featureReducer = (state: FeatureState, action: FeatureAction): FeatureState => {
   if (!state) {

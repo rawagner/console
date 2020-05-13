@@ -2,12 +2,6 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
-import {
-  LoadingBox,
-  PageHeading,
-  ExternalLink,
-  StatusBox,
-} from '@console/internal/components/utils';
 import { getActiveNamespace } from '@console/internal/actions/ui';
 import { RoleBindingModel, RoleModel } from '@console/internal/models';
 import { filterRoleBindings, getUserRoleBindings } from './project-access-form-utils';
@@ -20,6 +14,9 @@ import {
 import { validationSchema } from './project-access-form-validation-utils';
 import ProjectAccessForm from './ProjectAccessForm';
 import { Verb, UserRoleBinding, Roles, roleBinding } from './project-access-form-utils-types';
+import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { PageHeading } from '@console/internal/components/utils/headings';
 
 export interface ProjectAccessProps {
   formName: string;

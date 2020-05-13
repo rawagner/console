@@ -1,6 +1,6 @@
-import { DeploymentKind, K8sResourceKind, PodKind, PodPhase } from '@console/internal/module/k8s';
-import { FirehoseResult } from '@console/internal/components/utils';
-import { AllPodStatus } from '../constants';
+import { DeploymentKind, K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { AllPodStatus } from '../constants/pod';
 
 export interface PodDataResources {
   replicationControllers: FirehoseResult;
@@ -46,7 +46,7 @@ export type ExtPodPhase =
   | AllPodStatus.ScalingUp;
 
 export type ExtPodStatus = {
-  phase: ExtPodPhase | PodPhase;
+  phase: ExtPodPhase | string;
 };
 
 export type ExtPodKind = {

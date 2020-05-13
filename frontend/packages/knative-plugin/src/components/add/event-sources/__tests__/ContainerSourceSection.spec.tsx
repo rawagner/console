@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { MultiColumnField } from '@console/shared';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import { AsyncComponent } from '@console/internal/components/utils/async';
 import ContainerSourceSection from '../ContainerSourceSection';
 import { EventSources } from '../../import-types';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
 
 type ContainerSourceSectionProps = React.ComponentProps<typeof ContainerSourceSection>;
 

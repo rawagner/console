@@ -3,13 +3,6 @@ import { Helmet } from 'react-helmet';
 import { matchPath, match as RMatch, Link, Redirect } from 'react-router-dom';
 import { Tooltip, Popover, Button } from '@patternfly/react-core';
 import { ListIcon, TopologyIcon, QuestionCircleIcon } from '@patternfly/react-icons';
-import {
-  StatusBox,
-  Firehose,
-  HintBlock,
-  AsyncComponent,
-  removeQueryArgument,
-} from '@console/internal/components/utils';
 
 // FIXME upgrading redux types is causing many errors at this time
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -30,6 +23,11 @@ import { LAST_TOPOLOGY_VIEW_LOCAL_STORAGE_KEY } from './components/const';
 import './TopologyPage.scss';
 import { TOPOLOGY_SEARCH_FILTER_KEY } from './redux/const';
 import { setTopologyFilters } from './redux/action';
+import { HintBlock } from '@console/internal/components/utils/hint-block';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { AsyncComponent } from '@console/internal/components/utils/async';
+import { removeQueryArgument } from '@console/internal/components/utils/router';
 
 export interface TopologyPageProps {
   match: RMatch<{

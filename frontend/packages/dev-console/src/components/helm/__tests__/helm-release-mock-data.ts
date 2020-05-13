@@ -1,4 +1,4 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { HelmRelease, HelmChartMetaData } from '../helm-types';
 
 /* eslint-disable @typescript-eslint/camelcase */

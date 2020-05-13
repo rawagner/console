@@ -8,25 +8,24 @@ import {
   getMachineRegion,
   getMachineRole,
   getMachineZone,
-  Status,
   getMachinePhase,
-} from '@console/shared';
+} from '@console/shared/src/selectors/machine';
+import { Status } from '@console/shared/src/components/status/Status';
 import { MachineModel } from '../models';
-import { MachineKind, referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
+import { MachineKind } from '../module/k8s/types';
 import { Conditions } from './conditions';
 import NodeIPList from '@console/app/src/components/nodes/NodeIPList';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  DetailsItem,
-  Kebab,
-  NodeLink,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  navFactory,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink, NodeLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
+import { DetailsItem } from './utils/details-item';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(MachineModel), ...common];

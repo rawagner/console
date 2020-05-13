@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import { safeLoad } from 'js-yaml';
 import { FormikValues, useFormikContext } from 'formik';
 import { GridItem } from '@patternfly/react-core';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 import { coFetchJSON, coFetch } from '@console/internal/co-fetch';
-import { DropdownField } from '@console/shared';
 import { HelmChartMetaData, HelmRelease, HelmChart } from '../helm-types';
 import { getChartURL, getChartVersions, getChartValuesYAML } from '../helm-utils';
 

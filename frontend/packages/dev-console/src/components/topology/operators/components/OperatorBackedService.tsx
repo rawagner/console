@@ -6,8 +6,8 @@ import {
   WithDndDropProps,
   WithContextMenuProps,
 } from '@console/topology';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import { getTopologyResourceObject } from '../../topology-utils';
 import OperatorBackedServiceGroup from './OperatorBackedServiceGroup';
 import OperatorBackedServiceNode from './OperatorBackedServiceNode';

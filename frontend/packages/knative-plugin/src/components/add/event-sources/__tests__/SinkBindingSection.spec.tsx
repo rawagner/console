@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { InputField } from '@console/shared';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import { AsyncComponent } from '@console/internal/components/utils/async';
 import SinkBindingSection from '../SinkBindingSection';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 
 type SinkBindingSectionProps = React.ComponentProps<typeof SinkBindingSection>;
 

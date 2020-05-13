@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { DataPoint } from '@console/internal/components/graphs';
-import { Humanize } from '@console/internal/components/utils';
+import { DataPoint } from '@console/internal/components/graphs/types';
+import { Humanize } from '@console/internal/components/utils/types';
 import { Colors, COLORMAP, OTHER_TOOLTIP } from './consts';
 
 const getTotal = (stats: StackDataPoint[]) =>

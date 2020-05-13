@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { confirmModal } from '@console/internal/components/modals/confirm-modal';
-import { k8sKill, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sKill } from '@console/internal/module/k8s/resource';
 import { NodeMaintenanceModel } from '../../models';
 import { getNodeMaintenanceReason, getNodeMaintenanceNodeName } from '../../selectors';
 

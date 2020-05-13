@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { Volume } from '../../module/k8s';
+import { Volume } from '../../module/k8s/types';
 import { getVolumeLocation, getVolumeType } from '../../module/k8s/pods';
 import { ResourceLink } from './resource-link';
 

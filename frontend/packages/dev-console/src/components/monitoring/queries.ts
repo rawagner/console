@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
 import { GraphTypes } from './dashboard/MonitoringDashboardGraph';
 import {
-  Humanize,
   humanizeBinaryBytes,
   humanizeCpuCores,
   humanizeDecimalBytesPerSec,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/units';
+import { Humanize } from '@console/internal/components/utils/types';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 
 export interface MonitoringQuery {

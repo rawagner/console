@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import Helmet from 'react-helmet';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { FirehoseResource } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import { MachineModel, NodeModel } from '@console/internal/models';
-import { createLookup, getName, getMachineNodeName } from '@console/shared';
-import { MultiListPage } from '@console/internal/components/factory';
+import { createLookup } from '@console/shared/src/utils/utils';
+import { getName } from '@console/shared/src/selectors/common';
+import { getMachineNodeName } from '@console/shared/src/selectors/machine';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import { useFlag } from '@console/shared/src/hooks/flag';
 import { getNodeMaintenanceNodeName, getHostMachineName } from '../../selectors';
 import { BareMetalNodeBundle } from '../types';

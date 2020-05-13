@@ -4,7 +4,7 @@ import { useFormikContext, FormikValues } from 'formik';
 import { NameValueEditor } from '@console/internal/components/utils/name-value-editor';
 import { FormGroup } from '@patternfly/react-core';
 import { SecretModel, ConfigMapModel } from '@console/internal/models';
-import { k8sGet } from '@console/internal/module/k8s';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { errorModal } from '@console/internal/components/modals';
 import { EnvironmentFieldProps } from './field-types';
 import { getFieldId } from './field-utils';

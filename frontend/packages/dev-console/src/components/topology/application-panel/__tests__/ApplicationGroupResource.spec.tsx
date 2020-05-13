@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import TopologyApplicationResourceList from '../TopologyApplicationList';
 import ApplicationGroupResource from '../ApplicationGroupResource';
 import { sampleDeployments } from '../../__tests__/topology-test-data';

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { Timestamp } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 import { Progress, ProgressSize, Alert, Expandable, Button } from '@patternfly/react-core';
 import {
   getNodeMaintenanceReason,

@@ -2,9 +2,10 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Alert, Expandable } from '@patternfly/react-core';
 import { DaemonSetModel, PodModel } from '@console/internal/models';
-import { FirehoseResult, ResourceLink } from '@console/internal/components/utils';
-import { PodKind } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared';
+import { PodKind } from '@console/internal/module/k8s/types';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import {
   NODE_STATUS_STARTING_MAINTENANCE,
   HOST_STATUS_UNKNOWN,

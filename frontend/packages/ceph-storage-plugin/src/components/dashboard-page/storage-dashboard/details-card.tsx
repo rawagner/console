@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { getInfrastructurePlatform } from '@console/shared';
+import { getInfrastructurePlatform } from '@console/shared/src/selectors/infrastructure';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
@@ -11,10 +11,10 @@ import {
   withDashboardResources,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
 import DetailsBody from '@console/shared/src/components/dashboard/details-card/DetailsBody';
-import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/index';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
 import { InfrastructureModel } from '@console/internal/models/index';
 import { SubscriptionModel } from '@console/operator-lifecycle-manager/src/models';
-import { K8sResourceKind } from '@console/internal/module/k8s/index';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getName } from '@console/shared/src/selectors/common';
 import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { useK8sGet } from '@console/internal/components/utils/k8s-get-hook';

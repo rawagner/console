@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { getName, getAnnotations } from '@console/shared/src/selectors/common';
-import { MachineKind } from '@console/internal/module/k8s';
+import { MachineKind } from '@console/internal/module/k8s/types';
 import {
   BareMetalHostDisk,
   BareMetalHostNIC,

@@ -11,7 +11,9 @@ import {
 } from '../../models';
 import { ClusterServiceClassInfo } from '../cluster-service-class-info';
 import { ButtonBar } from '../utils/button-bar';
-import { k8sCreate, K8sResourceKind, referenceForModel } from '../../module/k8s';
+import { k8sCreate } from '../../module/k8s/resource';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { referenceForModel } from '../../module/k8s/k8s';
 import {
   createParametersSecret,
   getInstanceCreateParametersForm,
@@ -19,14 +21,12 @@ import {
   getUISchema,
   ServiceCatalogParametersForm,
 } from './schema-form';
-import {
-  Firehose,
-  history,
-  NsDropdown,
-  PageHeading,
-  resourcePathFromModel,
-  StatusBox,
-} from '../utils';
+import { resourcePathFromModel } from '../utils/resource-link';
+import { history } from '../utils/router';
+import { StatusBox } from '../utils/status-box';
+import { PageHeading } from '../utils/headings';
+import { NsDropdown } from '../utils/list-dropdown';
+import { Firehose } from '../utils/firehose';
 
 const PARAMETERS_SECRET_KEY = 'parameters';
 

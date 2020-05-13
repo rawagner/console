@@ -14,15 +14,15 @@ import {
   createSvgIdUrl,
   WithCreateConnectorProps,
 } from '@console/topology';
+import { TYPE_KNATIVE_SERVICE } from '../../const';
 import {
   NodeShadows,
-  NODE_SHADOW_FILTER_ID,
   NODE_SHADOW_FILTER_ID_HOVER,
-  nodeDragSourceSpec,
+  NODE_SHADOW_FILTER_ID,
   GroupNode,
-  useSearchFilter,
-} from '@console/dev-console/src/components/topology';
-import { TYPE_KNATIVE_SERVICE } from '../../const';
+  nodeDragSourceSpec,
+} from '@console/dev-console/src/components/topology/components';
+import { useSearchFilter } from '@console/dev-console/src/components/topology/filters';
 
 type KnativeServiceNodeProps = {
   element: Node;

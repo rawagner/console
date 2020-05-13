@@ -3,8 +3,11 @@ import { FieldArray, useFormikContext, FormikValues } from 'formik';
 import * as _ from 'lodash';
 import cx from 'classnames';
 import { PlusCircleIcon, MinusCircleIcon } from '@patternfly/react-icons';
-import { DropdownField, InputField, getFieldId, useFormikValidationFix } from '@console/shared';
 import { TextInputTypes, Button, FormGroup } from '@patternfly/react-core';
+import { useFormikValidationFix } from '@console/shared/src/hooks/formik-validation-fix';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 import './MultipleKeySelector.scss';
 
 interface MultipleKeySelectorProps {

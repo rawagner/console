@@ -1,5 +1,5 @@
-import { Status } from '@console/shared';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { Status } from '@console/shared/src/components/status/Status';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { BuildModel } from '@console/internal/models';
 import { PipelineRunModel } from '../../../../../../models';
 import { getBuildDecoratorParts } from '../build-decorator-utils';

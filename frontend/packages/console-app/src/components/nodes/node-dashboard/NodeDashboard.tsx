@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
 import DashboardGrid from '@console/shared/src/components/dashboard/DashboardGrid';
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
 import { LimitRequested } from '@console/shared/src/components/dashboard/utilization-card/UtilizationItem';
 
 import { NodeDashboardContext } from './NodeDashboardContext';

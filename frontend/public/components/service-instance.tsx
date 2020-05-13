@@ -5,14 +5,13 @@ import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 import { Alert, Button } from '@patternfly/react-core';
 
-import {
-  k8sList,
-  K8sResourceKind,
-  planExternalName,
-  serviceCatalogStatus,
-  referenceForModel,
-} from '../module/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { referenceForModel } from '../module/k8s/k8s';
+import { serviceCatalogStatus, planExternalName } from '../module/k8s/service-catalog';
+import { k8sList } from '../module/k8s/resource';
+import { K8sResourceKind } from '../module/k8s/types';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ExternalLink } from './utils/link';
 import { Kebab, ResourceKebab } from './utils/kebab';
 import { ResourceIcon } from './utils/resource-icon';

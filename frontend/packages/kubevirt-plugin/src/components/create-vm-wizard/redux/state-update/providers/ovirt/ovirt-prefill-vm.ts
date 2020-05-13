@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { alignWithDNS1123 } from '@console/shared/src';
+import { alignWithDNS1123 } from '@console/shared/src/utils/validation';
 import { InternalActionType, UpdateOptions } from '../../../types';
 import {
   OvirtProviderField,
@@ -25,7 +25,7 @@ import { NetworkInterfaceWrapper } from '../../../../../../k8s/wrapper/vm/networ
 import { BinaryUnit, convertToHighestUnit } from '../../../../../form/size-unit-utils';
 import { OvirtVM } from '../../../../../../types/vm-import/ovirt/ovirt-vm';
 import { iGetOvirtFieldAttribute } from '../../../../selectors/immutable/provider/ovirt/selectors';
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 import { DiskWrapper } from '../../../../../../k8s/wrapper/vm/disk-wrapper';
 import { VolumeWrapper } from '../../../../../../k8s/wrapper/vm/volume-wrapper';
 import {

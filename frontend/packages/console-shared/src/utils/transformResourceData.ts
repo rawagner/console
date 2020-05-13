@@ -1,11 +1,5 @@
-import { DeploymentKind, K8sResourceKind, RouteKind } from '@console/internal/module/k8s';
-import {
-  BuildConfigOverviewItem,
-  PodControllerOverviewItem,
-  OverviewItem,
-  PodRCData,
-} from '../types';
-import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager';
+import { DeploymentKind, K8sResourceKind, RouteKind } from '@console/internal/module/k8s/types';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
 import {
   createDaemonSetItems,
   createDeploymentConfigItems,
@@ -19,6 +13,8 @@ import {
   getRoutesForServices,
   getServicesForResource,
 } from './resource-utils';
+import { OverviewItem, BuildConfigOverviewItem } from '../types/resource';
+import { PodControllerOverviewItem, PodRCData } from '../types/pod';
 
 export class TransformResourceData {
   private resources: any;

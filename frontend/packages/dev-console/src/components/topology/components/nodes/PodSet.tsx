@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { get } from 'lodash';
 import {
-  PodStatus,
   calculateRadius,
   getPodData,
-  podRingLabel,
   podDataInProgress,
-} from '@console/shared';
+} from '@console/shared/src/utils/pod-utils';
+import PodStatus from '@console/shared/src/components/pod/PodStatus';
+import { podRingLabel } from '@console/shared/src/utils/pod-ring-utils';
 import { DonutStatusData } from '../../topology-types';
 
 interface PodSetProps {

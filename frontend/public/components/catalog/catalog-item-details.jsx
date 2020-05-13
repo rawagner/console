@@ -4,9 +4,11 @@ import * as PropTypes from 'prop-types';
 import { PropertiesSidePanel, PropertyItem } from '@patternfly/react-catalog-view-extension';
 
 import { ClusterServicePlanModel } from '../../models';
-import { k8sGet } from '../../module/k8s';
-import { Timestamp, ExternalLink, SectionHeading } from '../utils';
+import { k8sGet } from '../../module/k8s/resource';
 import { SyncMarkdownView } from '../markdown-view';
+import { ExternalLink } from '../utils/link';
+import { SectionHeading } from '../utils/headings';
+import { Timestamp } from '../utils/timestamp';
 
 export class CatalogTileDetails extends React.Component {
   state = {

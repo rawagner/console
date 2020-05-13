@@ -1,4 +1,4 @@
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { updateStrategyModal } from '../../modals/update-strategy-modal';
 import { Descriptor } from '../types';
 

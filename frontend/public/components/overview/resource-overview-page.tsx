@@ -1,19 +1,19 @@
 import * as React from 'react';
 
 import { connectToModel } from '../../kinds';
-import { referenceForModel } from '../../module/k8s';
-import OperatorBackedOwnerReferences, {
-  AsyncComponent,
-  Kebab,
-  ResourceOverviewHeading,
-  ResourceSummary,
-} from '../utils';
+import { referenceForModel } from '../../module/k8s/k8s';
 
 import { BuildOverview } from './build-overview';
 import { NetworkingOverview } from './networking-overview';
 import { PodsOverview } from './pods-overview';
 import { resourceOverviewPages } from './resource-overview-pages';
-import { OverviewItem, usePluginsOverviewTabSection } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { usePluginsOverviewTabSection } from '@console/shared/src/hooks/plugins-overview-tab-section';
+import { Kebab } from '../utils/kebab';
+import OperatorBackedOwnerReferences from '../utils/operator-backed-owner-references';
+import { ResourceOverviewHeading } from '../utils/headings';
+import { ResourceSummary } from '../utils/details-page';
+import { AsyncComponent } from '../utils/async';
 
 const { common } = Kebab.factory;
 

@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 import { AccessMode, VolumeMode } from '../../constants/vm/storage';
 
 const getSCConfigMapAttribute = (

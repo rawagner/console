@@ -1,10 +1,11 @@
 import * as React from 'react';
-import * as k8s from '@console/internal/module/k8s';
+import * as k8s from '@console/internal/module/k8s/resource';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { ShallowWrapper, shallow } from 'enzyme';
 import { TextInput, FormGroup } from '@patternfly/react-core';
 
-import { Dropdown } from '@console/internal/components/utils';
-import { ModalTitle, ModalSubmitFooter } from '@console/internal/components/factory';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { ModalTitle, ModalSubmitFooter } from '@console/internal/components/factory/modal';
 
 import { newSnapshotData, pvcData } from '../__mocks__/volume-snapshot-data';
 import {
@@ -66,7 +67,7 @@ describe(VolumeSnapshotModal.name, () => {
   it('calls `k8sCreate` to create volume snapshot', (done) => {
     wrapper.find(TextInput).simulate('change', 'fakeSnapshot');
     spyAndExpect(spyOn(k8s, 'k8sCreate'))(Promise.resolve({}))
-      .then(([modelArgs, data]: [k8s.K8sKind, k8s.K8sResourceKind]) => {
+      .then(([modelArgs, data]: [K8sKind, K8sResourceKind]) => {
         expect(modelArgs).toEqual(VolumeSnapshotModel);
         expect(data).toEqual(newSnapshotData.items[0]);
         done();

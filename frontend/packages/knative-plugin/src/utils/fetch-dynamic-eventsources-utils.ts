@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
 import { coFetch } from '@console/internal/co-fetch';
-import { K8sKind, kindToAbbr, referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { kindToAbbr } from '@console/internal/module/k8s/get-resources';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { chart_color_red_300 as knativeEventingColor } from '@patternfly/react-tokens';
 import {
   EventSourceContainerModel,

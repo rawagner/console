@@ -6,8 +6,8 @@ import {
   getLabels,
   getOwnerReferences,
   getCreationTimestamp,
-} from '@console/shared/src';
-import { K8sKind, K8sResourceCommon } from '@console/internal/module/k8s';
+} from '@console/shared/src/selectors/common';
+import { K8sKind, K8sResourceCommon } from '@console/internal/module/k8s/types';
 import { Wrapper } from './wrapper';
 import { K8sResourceKindMethods } from '../types/types';
 import { clearRuntimeMetadata, initK8sObject, K8sInitAddon } from './util/k8s-mixin';

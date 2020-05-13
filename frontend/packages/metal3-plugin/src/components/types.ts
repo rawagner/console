@@ -3,7 +3,7 @@ import {
   MachineKind,
   MachineSetKind,
   NodeKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { BareMetalHostKind } from '../types';
 
 export type StatusProps = {

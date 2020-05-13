@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { DASH, getName, getNamespace } from '@console/shared';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { DASH } from '@console/shared/src/constants/ui';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { CUSTOM_FLAVOR } from '../../../constants/vm';
 import { VMKind } from '../../../types/vm';
 import {

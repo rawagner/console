@@ -1,16 +1,17 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { Kebab, ResourceLink } from '@console/internal/components/utils';
 import { sortable } from '@patternfly/react-table';
-import { DASH, getName, getUID, getNamespace, SecondaryStatus } from '@console/shared';
+import { DASH } from '@console/shared/src/constants/ui';
+import { getName, getUID, getNamespace } from '@console/shared/src/selectors/common';
+import SecondaryStatus from '@console/shared/src/components/status/SecondaryStatus';
 import {
   TableRow,
   TableData,
   Table,
   RowFunction,
   RowFunctionArgs,
-} from '@console/internal/components/factory';
-import { referenceForModel } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/table';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import NodeRoles from '@console/app/src/components/nodes/NodeRoles';
 import { useFlag } from '@console/shared/src/hooks/flag';
 import { MachineModel, NodeModel } from '@console/internal/models';
@@ -21,6 +22,8 @@ import { baremetalNodeSecondaryStatus } from '../../status/baremetal-node-status
 import { menuActions } from './menu-actions';
 import BareMetalNodeStatus from './BareMetalNodeStatus';
 import { NODE_MAINTENANCE_FLAG } from '../../features';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Kebab } from '@console/internal/components/utils/kebab';
 
 const tableColumnClasses = {
   name: classNames('col-lg-3', 'col-md-4', 'col-sm-12', 'col-xs-12'),

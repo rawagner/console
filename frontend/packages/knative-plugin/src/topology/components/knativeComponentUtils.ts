@@ -10,15 +10,15 @@ import {
   CREATE_CONNECTOR_OPERATION,
   DragSpecOperationType,
 } from '@console/topology';
-import {
-  NodeComponentProps,
-  NODE_DRAG_TYPE,
-  EDGE_DRAG_TYPE,
-  EdgeComponentProps,
-  EditableDragOperationType,
-} from '@console/dev-console/src/components/topology';
 import { TYPE_EVENT_SOURCE_LINK, TYPE_KNATIVE_SERVICE } from '../const';
 import { createSinkConnection } from '../knative-topology-utils';
+import {
+  NodeComponentProps,
+  EditableDragOperationType,
+  EdgeComponentProps,
+  EDGE_DRAG_TYPE,
+  NODE_DRAG_TYPE,
+} from '@console/dev-console/src/components/topology/components';
 
 export const MOVE_EV_SRC_CONNECTOR_OPERATION = 'moveeventsourceconnector';
 

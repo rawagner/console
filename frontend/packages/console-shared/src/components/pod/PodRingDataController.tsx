@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Firehose, FirehoseResource } from '@console/internal/components/utils';
-import { PodRingResources, PodRingData } from '../../types';
-import { transformPodRingData, podRingFirehoseProps } from '../../utils';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import {
   DaemonSetModel,
   PodModel,
@@ -11,6 +10,8 @@ import {
   DeploymentConfigModel,
   StatefulSetModel,
 } from '@console/internal/models';
+import { PodRingData, PodRingResources } from '../../types/pod';
+import { transformPodRingData, podRingFirehoseProps } from '../../utils/pod-ring-utils';
 
 interface RenderPropsType {
   loaded: boolean;

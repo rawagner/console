@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { Timestamp } from './utils';
+import { Timestamp } from './utils/timestamp';
 import { CamelCaseWrap } from './utils/camel-case-wrap';
-import { K8sResourceCondition } from '../module/k8s';
+import { K8sResourceCondition } from '../module/k8s/types';
 
 export const Conditions: React.SFC<ConditionsProps> = ({ conditions }) => {
   const rows = (conditions || []).map((condition: K8sResourceCondition, i: number) => (

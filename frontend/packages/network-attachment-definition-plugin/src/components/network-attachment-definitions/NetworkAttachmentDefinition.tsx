@@ -1,21 +1,23 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import {
-  ListPage,
   Table,
-  TableData,
   TableRow,
+  TableData,
   RowFunction,
-} from '@console/internal/components/factory';
-import { Kebab, ResourceKebab, ResourceLink } from '@console/internal/components/utils';
+} from '@console/internal/components/factory/table';
 import { NamespaceModel } from '@console/internal/models';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { dimensifyHeader, dimensifyRow, getName, getNamespace, getUID } from '@console/shared';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { getName, getNamespace, getUID } from '@console/shared/src/selectors/common';
+import { dimensifyHeader, dimensifyRow } from '@console/shared/src/utils/table-utils';
 import { NetworkAttachmentDefinitionModel } from '../../models';
 import { getConfigAsJSON, getType } from '../../selectors';
 import { NetworkAttachmentDefinitionKind } from '../../types';
 import { NetAttachDefBundle, NetworkAttachmentDefinitionsPageProps } from './types';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
 
 const { common } = Kebab.factory;
 const menuActions = [...common];

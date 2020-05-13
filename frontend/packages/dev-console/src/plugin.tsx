@@ -19,10 +19,10 @@ import {
   YAMLTemplate,
   OverviewTabSection,
   ReduxReducer,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import { NamespaceRedirect } from '@console/internal/components/utils/namespace-redirect';
-import { FLAGS } from '@console/shared/src/constants';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   BuildConfigModel,
   ImageStreamModel,

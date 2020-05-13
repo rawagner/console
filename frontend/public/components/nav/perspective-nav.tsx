@@ -4,17 +4,18 @@ import * as _ from 'lodash-es';
 import { NavItemSeparator, Button } from '@patternfly/react-core';
 import { MinusCircleIcon } from '@patternfly/react-icons';
 import {
-  useExtensions,
   NavItem,
   isNavItem,
   isSeparatorNavItem,
   Perspective,
   isPerspective,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { RootState } from '../../redux-types';
 import { setPinnedResources } from '../../actions/ui';
 import { getActivePerspective, getPinnedResources } from '../../reducers/ui-selectors';
-import { modelFor, referenceForModel } from '../../module/k8s';
+import { modelFor } from '../../module/k8s/k8s-models';
+import { referenceForModel } from '../../module/k8s/k8s';
 import confirmNavUnpinModal from './confirmNavUnpinModal';
 import { NavSection } from './section';
 import AdminNav from './admin-nav';

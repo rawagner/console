@@ -1,4 +1,4 @@
-import { NodeKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { NodeKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { nodeStatus } from '@console/app/src/status/node';
 import { isNodeUnschedulable } from '@console/shared/src/selectors/node';
 import { StatusProps } from '../components/types';

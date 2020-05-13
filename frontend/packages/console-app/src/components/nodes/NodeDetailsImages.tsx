@@ -1,7 +1,8 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { NodeKind } from '@console/internal/module/k8s';
-import { SectionHeading, units } from '@console/internal/components/utils';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { units } from '@console/internal/components/utils/units';
 
 type NodeDetailsImagesProps = {
   node: NodeKind;

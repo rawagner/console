@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as _ from 'lodash';
-import { referenceForModel, K8sResourceKind } from '@console/internal/module/k8s';
-import {
-  Table,
-  MultiListPage,
-  DetailsPage,
-  RowFunctionArgs,
-} from '@console/internal/components/factory';
-import { ResourceKebab, ResourceLink, Kebab } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
+import { Table, RowFunctionArgs } from '@console/internal/components/factory/table';
 import {
   SubscriptionModel,
   ClusterServiceVersionModel,
@@ -39,6 +36,8 @@ import {
   SubscriptionUpdatesState,
 } from './subscription';
 import { Button } from '@patternfly/react-core';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
 
 describe(SubscriptionTableHeader.displayName, () => {
   it('returns column header definition for subscription table header', () => {

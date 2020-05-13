@@ -10,23 +10,17 @@ import {
   SplitItem,
   Split,
 } from '@patternfly/react-core';
-import { Status, HealthChecksAlert } from '@console/shared';
-import {
-  ActionsMenu,
-  ResourceIcon,
-  KebabAction,
-  resourcePath,
-  FirehoseResult,
-  KebabOption,
-} from './index';
+import { Status } from '@console/shared/src/components/status/Status';
+import HealthChecksAlert from '@console/shared/src/components/health-checks/HealthChecksAlert';
 import { connectToModel } from '../../kinds';
-import {
-  K8sKind,
-  K8sResourceKind,
-  K8sResourceKindReference,
-  referenceForModel,
-} from '../../module/k8s';
+import { K8sKind, K8sResourceKind, K8sResourceKindReference } from '../../module/k8s/types';
+import { referenceForModel } from '../../module/k8s/k8s';
 import { ResourceItemDeleting } from '../overview/project-overview';
+import { ResourceIcon } from './resource-icon';
+import { ActionsMenu } from './dropdown';
+import { resourcePath } from './resource-link';
+import { KebabOption, KebabAction } from './kebab';
+import { FirehoseResult } from './types';
 
 export const BreadCrumbs: React.SFC<BreadCrumbsProps> = ({ breadcrumbs }) => (
   <Breadcrumb>

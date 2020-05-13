@@ -1,7 +1,12 @@
 import { get } from 'lodash';
-import { getName, getNamespace, getOwnerReferences, getUID } from '@console/shared/src/selectors';
+import {
+  getName,
+  getNamespace,
+  getOwnerReferences,
+  getUID,
+} from '@console/shared/src/selectors/common';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
-import { PodKind } from '@console/internal/module/k8s';
+import { PodKind } from '@console/internal/module/k8s/types';
 import { getLabelValue } from '../selectors';
 import { VMKind, VMIKind } from '../../types';
 import { getDataVolumeTemplates } from '../vm';

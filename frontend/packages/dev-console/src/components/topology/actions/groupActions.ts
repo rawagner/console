@@ -1,9 +1,11 @@
 import * as _ from 'lodash';
 import { KebabOption } from '@console/internal/components/utils/kebab';
-import { modelFor, referenceFor, referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { Node } from '@console/topology';
-import { asAccessReview } from '@console/internal/components/utils';
-import { ServiceModel, addEventSource } from '@console/knative-plugin';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
+import { ServiceModel } from '@console/knative-plugin/src/models';
+import { addEventSource } from '@console/knative-plugin/src/actions';
 import { addResourceMenuWithoutCatalog } from '../../../actions/add-resources';
 import { TopologyDataMap, TopologyApplicationObject, GraphData } from '../topology-types';
 import { getTopologyResourceObject } from '../topology-utils';

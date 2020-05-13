@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SectionHeading, ResourceSummary } from '@console/internal/components/utils';
 import {
   getResourceModelFromTaskKind,
   Pipeline,
@@ -10,6 +9,8 @@ import { usePipelineTriggerTemplateNames, RouteTemplate } from '../../utils/trig
 import DynamicResourceLinkList from '../../resource-overview/DynamicResourceLinkList';
 import TriggerTemplateResourceLink from '../../resource-overview/TriggerTemplateResourceLink';
 import PipelineVisualization from './PipelineVisualization';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
 
 interface PipelineDetailsProps {
   obj: Pipeline;

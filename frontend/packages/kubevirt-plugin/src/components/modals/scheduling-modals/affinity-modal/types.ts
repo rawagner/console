@@ -1,4 +1,4 @@
-import { Selector } from '@console/internal/module/k8s';
+import { Selector } from '@console/internal/module/k8s/types';
 import { IDEntity } from '../../../../types';
 
 export type MatchExpression =

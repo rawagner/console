@@ -1,32 +1,30 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import {
-  DetailsPage,
-  ListPage,
   Table,
-  TableData,
   TableRow,
+  TableData,
   RowFunction,
-} from '@console/internal/components/factory';
-import {
-  Kebab,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/factory/table';
 import { ResourceEventStream } from '@console/internal/components/events';
 import {
   NooBaaObjectBucketClaimModel,
   NooBaaObjectBucketModel,
 } from '@console/noobaa-storage-plugin/src/models';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { sortable } from '@patternfly/react-table';
 import { getPhase } from '../../utils';
 import { obStatusFilter } from '../../table-filters';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 
 const kind = referenceForModel(NooBaaObjectBucketModel);
 const menuActions = [...Kebab.factory.common];

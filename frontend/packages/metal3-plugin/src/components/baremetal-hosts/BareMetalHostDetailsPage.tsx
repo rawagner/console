@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { DetailsPage } from '@console/internal/components/factory';
-import { navFactory, FirehoseResource } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { FirehoseResource } from '@console/internal/components/utils/types';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 import { MachineModel, MachineSetModel, NodeModel } from '@console/internal/models';
 import { ResourceEventStream } from '@console/internal/components/events';
 import { useFlag } from '@console/shared/src/hooks/flag';

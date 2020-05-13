@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { calculateRadius } from '@console/shared';
+import { calculateRadius } from '@console/shared/src/utils/pod-utils';
 import {
   Node,
   observer,

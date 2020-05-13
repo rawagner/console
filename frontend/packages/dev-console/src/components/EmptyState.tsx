@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Gallery, GalleryItem } from '@patternfly/react-core';
 import { CatalogTile } from '@patternfly/react-catalog-view-extension';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import { connect } from 'react-redux';
-import { history, PageHeading, useAccessReview } from '@console/internal/components/utils';
-import { useExtensions } from '@console/plugin-sdk';
+import { history } from '@console/internal/components/utils/router';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { RootState } from '@console/internal/redux-types';
 import { isAddAction, AddAction } from '../extensions/add-actions';
 import './EmptyState.scss';

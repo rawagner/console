@@ -3,8 +3,10 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 import { Button } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
-import { withHandlePromise } from '@console/internal/components/utils';
-import { k8sUpdate, referenceFor, K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { withHandlePromise } from '@console/internal/components/utils/promise-component';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import {
   createModalLauncher,
   ModalTitle,

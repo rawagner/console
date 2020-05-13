@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { OverviewItem, PodRing } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import PodRing from '@console/shared/src/components/pod/PodRing';
 import { DaemonSetModel } from '../../models';
-import { ResourceSummary } from '../utils';
 import { menuActions, DaemonSetDetailsList } from '../daemon-set';
 import { OverviewDetailsResourcesTab } from './resource-overview-page';
 import { ResourceOverviewDetails } from './resource-overview-details';
+import { ResourceSummary } from '../utils/details-page';
 
 const DaemonSetOverviewDetails: React.SFC<DaemonSetOverviewDetailsProps> = ({
   item: { obj, pods },

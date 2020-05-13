@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { NodeKind, Taint } from '@console/internal/module/k8s';
+import { NodeKind, Taint } from '@console/internal/module/k8s/types';
 import { ocsTaint } from '../constants/ocs-install';
-import { humanizeBinaryBytes, convertToBaseValue } from '@console/internal/components/utils';
+import { humanizeBinaryBytes, convertToBaseValue } from '@console/internal/components/utils/units';
 
 export const hasTaints = (node: NodeKind) => {
   return !_.isEmpty(node.spec?.taints);

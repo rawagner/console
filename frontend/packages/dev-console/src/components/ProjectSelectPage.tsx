@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { match } from 'react-router';
-import { LoadingBox } from '@console/internal/components/utils';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import { connectToPlural } from '@console/internal/kinds';
 import {
   apiVersionForReference,
   isGroupVersionKind,
   kindForReference,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/k8s';
 import { ErrorPage404 } from '@console/internal/components/error';
 import { withStartGuide } from '@console/internal/components/start-guide';
 import ProjectListPage from './projects/ProjectListPage';
-import { getBadgeFromType } from '@console/shared/src';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
 
 export interface ProjectSelectPageProps {
   match: match<any>;

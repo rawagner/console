@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Firehose } from '@console/internal/components/utils';
-import { StorageClassResourceKind } from '@console/internal/module/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { StorageClassResourceKind } from '@console/internal/module/k8s/types';
 import { StorageClassDropdownInner } from '@console/internal/components/utils/storage-class-dropdown';
 import './storage-class-dropdown.scss';
 

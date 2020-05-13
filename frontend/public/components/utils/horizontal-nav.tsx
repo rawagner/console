@@ -7,10 +7,11 @@ import { Route, Switch, Link, withRouter, match, matchPath } from 'react-router-
 import { EmptyBox, StatusBox } from './status-box';
 import { PodsPage } from '../pod';
 import { AsyncComponent } from './async';
-import { K8sResourceKind, K8sResourceCommon } from '../../module/k8s';
+import { K8sResourceKind, K8sResourceCommon } from '../../module/k8s/types';
 import { referenceForModel } from '../../module/k8s/k8s';
 import { referenceFor } from '../../module/k8s/k8s-models';
-import { useExtensions, HorizontalNavTab, isHorizontalNavTab } from '@console/plugin-sdk';
+import { HorizontalNavTab, isHorizontalNavTab } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 
 const editYamlComponent = (props) => (
   <AsyncComponent loader={() => import('../edit-yaml').then((c) => c.EditYAML)} obj={props.obj} />

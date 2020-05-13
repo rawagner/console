@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { LoadingBox } from '@console/internal/components/utils';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import ProjectsExistWrapper from '../ProjectsExistWrapper';
 import ODCEmptyState from '../EmptyState';
 

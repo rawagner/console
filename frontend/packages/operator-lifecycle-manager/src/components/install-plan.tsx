@@ -5,35 +5,33 @@ import { Map as ImmutableMap, Set as ImmutableSet, fromJS } from 'immutable';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 import { Button } from '@patternfly/react-core';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import {
-  MultiListPage,
-  DetailsPage,
   Table,
   TableRow,
   TableData,
   RowFunction,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/table';
 import { Conditions } from '@console/internal/components/conditions';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
-  SectionHeading,
-  MsgBox,
-  ResourceLink,
-  ResourceKebab,
-  Kebab,
-  ResourceIcon,
-  navFactory,
-  ResourceSummary,
-  history,
-  HintBlock,
-} from '@console/internal/components/utils';
-import {
-  K8sResourceKind,
   referenceForModel,
   referenceForOwnerRef,
-  k8sUpdate,
   apiVersionForReference,
-} from '@console/internal/module/k8s';
-import { GreenCheckCircleIcon, Status } from '@console/shared';
+} from '@console/internal/module/k8s/k8s';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
+import { HintBlock } from '@console/internal/components/utils/hint-block';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { history } from '@console/internal/components/utils/router';
+import { MsgBox } from '@console/internal/components/utils/status-box';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { Status } from '@console/shared/src/components/status/Status';
+import { GreenCheckCircleIcon } from '@console/shared/src/components/status/icons';
 import {
   SubscriptionModel,
   ClusterServiceVersionModel,

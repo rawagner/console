@@ -2,18 +2,12 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
-import { K8sResourceKind } from '../module/k8s';
-import { TableRow, TableData } from './factory';
-
-import {
-  Kebab,
-  KebabAction,
-  LabelList,
-  ResourceKebab,
-  ResourceLink,
-  resourcePath,
-  Selector,
-} from './utils';
+import { K8sResourceKind } from '../module/k8s/types';
+import { TableRow, TableData } from './factory/table';
+import { Kebab, ResourceKebab, KebabAction } from './utils/kebab';
+import { ResourceLink, resourcePath } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { Selector } from './utils/selector';
 
 const tableColumnClasses = [
   '',

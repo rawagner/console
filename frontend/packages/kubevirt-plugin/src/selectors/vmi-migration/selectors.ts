@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 export const getMigrationStatusPhase = (value: K8sResourceKind) =>
   _.get(value, 'status.phase') as K8sResourceKind['status']['phase'];

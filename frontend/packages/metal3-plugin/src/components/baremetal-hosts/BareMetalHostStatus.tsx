@@ -5,11 +5,11 @@ import {
   ProgressStatus,
   SuccessStatus,
   ErrorStatus,
-  Status,
-  StatusIconAndText,
-  getNamespace,
-} from '@console/shared';
-import { RequireCreatePermission } from '@console/internal/components/utils';
+} from '@console/shared/src/components/status/statuses';
+import { Status } from '@console/shared/src/components/status/Status';
+import StatusIconAndText from '@console/shared/src/components/status/StatusIconAndText';
+import { getNamespace } from '@console/shared/src/selectors/common';
+import { RequireCreatePermission } from '@console/internal/components/utils/rbac';
 import {
   HOST_STATUS_DISCOVERED,
   HOST_PROGRESS_STATES,
@@ -24,7 +24,7 @@ import { getHostErrorMessage } from '../../selectors';
 import { StatusProps } from '../types';
 import MaintenancePopover from '../maintenance/MaintenancePopover';
 import { BareMetalHostKind } from '../../types';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 // TODO(jtomasek): Update this with onClick handler once add discovered host functionality
 // is available

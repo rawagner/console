@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { TemplateKind, Patch } from '@console/internal/module/k8s';
+import { TemplateKind, Patch } from '@console/internal/module/k8s/types';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import { VMKind } from '../../../types/vm';
 import { isVM } from '../../../selectors/check-type';

@@ -1,16 +1,14 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
-
 import {
-  ContainerDropdown,
-  getQueryArgument,
+  LOG_SOURCE_WAITING,
   LOG_SOURCE_RESTARTING,
   LOG_SOURCE_RUNNING,
   LOG_SOURCE_TERMINATED,
-  LOG_SOURCE_WAITING,
   ResourceLog,
-  setQueryArgument,
-} from './utils';
+} from './utils/resource-log';
+import { getQueryArgument, setQueryArgument } from './utils/router';
+import { ContainerDropdown } from './utils/dropdown';
 
 const containersToStatuses = ({ status }, containers) => {
   return _.reduce(

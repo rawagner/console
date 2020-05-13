@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PipelineModel } from '../../../models';
 import { PipelinesPage } from '../PipelinesPage';
 import ProjectListPage from '../../projects/ProjectListPage';

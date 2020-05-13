@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { safeLoad, safeDump } from 'js-yaml';
-import * as extensionHooks from '@console/plugin-sdk';
+import * as extensionHooks from '@console/plugin-sdk/src/useExtensions';
 
 import { CreateYAML, CreateYAMLProps } from '../../public/components/create-yaml';
 import { PodModel } from '../../public/models';
 import { getYamlTemplates } from '../../public/models/yaml-templates';
-import { AsyncComponent, LoadingBox } from '../../public/components/utils';
-import { referenceForModel } from '../../public/module/k8s';
+import { AsyncComponent } from '../../public/components/utils/async';
+import { LoadingBox } from '../../public/components/utils/status-box';
+import { referenceForModel } from '../../public/module/k8s/k8s';
 
 describe(CreateYAML.displayName, () => {
   let wrapper: ShallowWrapper<CreateYAMLProps>;

@@ -12,20 +12,17 @@ import {
   PodTemplate,
   Volume,
   VolumeMount,
-} from '../module/k8s';
-import {
-  asAccessReview,
-  EmptyBox,
-  Kebab,
-  KebabOption,
-  ResourceIcon,
-  SectionHeading,
-  VolumeType,
-} from './utils';
-import { Table } from './factory';
+} from '../module/k8s/types';
+import { Table } from './factory/table';
 import { sortable } from '@patternfly/react-table';
 import { removeVolumeModal } from './modals';
 import { connectToModel } from '../kinds';
+import { asAccessReview } from './utils/rbac';
+import { KebabOption, Kebab } from './utils/kebab';
+import { ResourceIcon } from './utils/resource-icon';
+import { VolumeType } from './utils/volume-type';
+import { SectionHeading } from './utils/headings';
+import { EmptyBox } from './utils/status-box';
 
 const removeVolume = (kind: K8sKind, obj: K8sResourceKind, volume: RowVolumeData): KebabOption => {
   return {

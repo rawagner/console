@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { referenceForModel, K8sResourceKindReference } from '@console/internal/module/k8s';
-import { DetailsPage } from '@console/internal/components/factory';
-import { Kebab, navFactory } from '@console/internal/components/utils';
+import { K8sResourceKindReference } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { DetailsPage } from '@console/internal/components/factory/details';
 import { NetworkAttachmentDefinitionModel } from '../..';
 import { NetworkAttachmentDefinitionDetails } from './NetworkAttachmentDefinitionDetails';
+import { Kebab } from '@console/internal/components/utils/kebab';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [

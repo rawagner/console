@@ -3,7 +3,7 @@ import {
   getInstantVectorStats,
 } from '@console/internal/components/graphs/utils';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
-import { Humanize } from '@console/internal/components/utils';
+import { Humanize } from '@console/internal/components/utils/types';
 
 const RANGE_VECTOR_RESPONSE: PrometheusResponse = {
   status: 'success',

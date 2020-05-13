@@ -4,7 +4,7 @@ import DashboardCardBody from '@console/shared/src/components/dashboard/dashboar
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import HealthBody from '@console/shared/src/components/dashboard/status-card/HealthBody';
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
 import { ProjectDashboardContext } from './project-dashboard-context';
 
 export const StatusCard: React.FC = () => {

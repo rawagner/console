@@ -1,8 +1,11 @@
 import * as React from 'react';
-import { TableData, TableRow, RowFunction } from '@console/internal/components/factory';
-import { asAccessReview, Kebab, KebabOption } from '@console/internal/components/utils';
+import { TableData, TableRow, RowFunction } from '@console/internal/components/factory/table';
 import { TemplateModel } from '@console/internal/models';
-import { DASH, dimensifyRow, getDeletetionTimestamp } from '@console/shared';
+import { getDeletetionTimestamp } from '@console/shared/src/selectors/common';
+import { dimensifyRow } from '@console/shared/src/utils/table-utils';
+import { DASH } from '@console/shared/src/constants/ui';
+import { Kebab, KebabOption } from '@console/internal/components/utils/kebab';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
 import { deleteDeviceModal, DeviceType } from '../modals/delete-device-modal';
 import { VirtualMachineModel } from '../../models';
 import { asVM, isVMRunning } from '../../selectors/vm';

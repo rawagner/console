@@ -9,22 +9,22 @@ import {
   Expandable,
 } from '@patternfly/react-core';
 import {
-  FirehoseResult,
   HandlePromiseProps,
   withHandlePromise,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import {
   createModalLauncher,
   ModalBody,
   ModalComponentProps,
   ModalTitle,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import {
   NamespaceModel,
   PersistentVolumeClaimModel,
   StorageClassModel,
 } from '@console/internal/models';
-import { getName } from '@console/shared/src';
+import { getName } from '@console/shared/src/selectors/common';
 import { getLoadedData, isLoaded, prefixedID } from '../../../utils';
 import { validateDisk } from '../../../utils/validations/vm';
 import { isValidationError } from '../../../utils/validations/common';
@@ -59,7 +59,7 @@ import { PersistentVolumeClaimWrapper } from '../../../k8s/wrapper/vm/persistent
 import { BinaryUnit, stringValueUnitSplit } from '../../form/size-unit-utils';
 import { StorageUISource } from './storage-ui-source';
 import { TemplateValidations } from '../../../utils/validations/template/template-validations';
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 import { UIStorageEditConfig } from '../../../types/ui/storage';
 import { isFieldDisabled } from '../../../utils/ui/edit-config';
 

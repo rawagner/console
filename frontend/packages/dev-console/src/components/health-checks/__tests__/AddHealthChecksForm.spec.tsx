@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AddHealthChecksForm from '../AddHealthChecksForm';
 import { shallow } from 'enzyme';
-import { LoadingBox, StatusBox } from '@console/internal/components/utils';
+import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';
 import { sampleDeployments } from '../../topology/__tests__/topology-test-data';
 import { Formik } from 'formik';
 

@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import { Alert, FormGroup, ValidatedOptions } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import { useFormikContext, FormikValues } from 'formik';
-import { CheckboxField } from '@console/shared';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import CheckboxField from '@console/shared/src/components/formik-fields/CheckboxField';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   RegistryType,
   BuilderImagesNamespace,

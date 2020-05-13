@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { useDocumentListener, getLabelsAsString } from '@console/shared';
-import { KeyEventModes } from '@console/shared/src/hooks';
+import { getLabelsAsString } from '@console/shared/src/utils/label-filter';
+import { useDocumentListener, KeyEventModes } from '@console/shared/src/hooks/document-listener';
 import { fuzzyCaseInsensitive } from './factory/table-filters';
-import { K8sResourceCommon } from '../module/k8s';
-import { TextFilter } from './factory';
+import { K8sResourceCommon } from '../module/k8s/types';
+import { TextFilter } from './factory/list-page';
 
 const MAX_SUGGESTIONS = 5;
 

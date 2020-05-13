@@ -1,17 +1,17 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
-import { FieldLevelHelp, humanizeBinaryBytes } from '@console/internal/components/utils/index';
 import {
   createModalLauncher,
   ModalBody,
   ModalSubmitFooter,
   ModalTitle,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import { usePrometheusPoll } from '@console/internal/components/graphs/prometheus-poll-hook';
-import { k8sPatch, StorageClassResourceKind } from '@console/internal/module/k8s';
+import { StorageClassResourceKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { PrometheusEndpoint } from '@console/internal/components/graphs/helpers';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 import { OCSServiceModel } from '../../../models';
 import { OSD_CAPACITY_SIZES } from '../../../utils/osd-size-dropdown';
 import { CEPH_STORAGE_NAMESPACE, NO_PROVISIONER } from '../../../constants';
@@ -20,6 +20,8 @@ import { CAPACITY_USAGE_QUERIES, StorageDashboardQuery } from '../../../constant
 import { OCSStorageClassDropdown } from '../storage-class-dropdown';
 import { PVsAvailableCapacity } from '../../ocs-install/pvs-available-capacity';
 import './_add-capacity-modal.scss';
+import { FieldLevelHelp } from '@console/internal/components/utils/field-level-help';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 
 const getProvisionedCapacity = (value: number) => (value % 1 ? (value * 3).toFixed(2) : value * 3);
 

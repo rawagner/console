@@ -1,13 +1,15 @@
 import { JSONSchema6 } from 'json-schema';
-import { k8sCreate, K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { history, useScrollToTopOnMount } from '@console/internal/components/utils';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import * as _ from 'lodash';
 import * as React from 'react';
 import { ClusterServiceVersionKind, CRDDescription, APIServiceDefinition } from '../../types';
 import { ClusterServiceVersionLogo } from '../index';
 import { DynamicForm } from '@console/shared/src/components/dynamic-form';
 import { getUISchema } from './utils';
-import { prune } from '@console/shared';
+import { prune } from '@console/shared/src/utils/utils';
+import { history } from '@console/internal/components/utils/router';
+import { useScrollToTopOnMount } from '@console/internal/components/utils/scroll-to-top-on-mount';
 
 export const OperandForm: React.FC<OperandFormProps> = ({
   csv,

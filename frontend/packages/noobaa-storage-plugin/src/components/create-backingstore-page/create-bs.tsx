@@ -12,23 +12,12 @@ import {
   TextArea,
 } from '@patternfly/react-core';
 import { HelpIcon, MinusIcon, PlusIcon } from '@patternfly/react-icons';
-import {
-  ButtonBar,
-  Dropdown,
-  ExternalLink,
-  Firehose,
-  HandlePromiseProps,
-  RequestSizeInput,
-  withHandlePromise,
-} from '@console/internal/components/utils';
-import {
-  apiVersionForModel,
-  k8sCreate,
-  referenceForModel,
-  K8sResourceKind,
-} from '@console/internal/module/k8s';
-import { ModalComponentProps } from '@console/internal/components/factory';
-import { ResourceDropdown, getAPIVersion, getName } from '@console/shared';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
+import { apiVersionForModel, referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { ModalComponentProps } from '@console/internal/components/factory/modal';
+import ResourceDropdown from '@console/shared/src/components/dropdown/ResourceDropdown';
+import { getAPIVersion, getName } from '@console/shared/src/selectors/common';
 import { SecretModel } from '@console/internal/models';
 import { DashboardCardPopupLink } from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardLink';
 import { SecretType } from '@console/internal/components/secrets/create-secret';
@@ -43,6 +32,15 @@ import {
   PROVIDERS_NOOBAA_MAP,
   BUCKET_LABEL_NOOBAA_MAP,
 } from '../../constants';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { RequestSizeInput } from '@console/internal/components/utils/request-size-input';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
 
 const PROVIDERS = (() => {
   const values = _.values(BC_PROVIDERS);

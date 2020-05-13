@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
 import { LimitRequested } from '@console/shared/src/components/dashboard/utilization-card/UtilizationItem';
 
 export const NodeDashboardContext = React.createContext<NodeDashboardContext>({

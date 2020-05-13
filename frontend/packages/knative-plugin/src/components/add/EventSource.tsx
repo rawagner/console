@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { Formik } from 'formik';
 import { connect } from 'react-redux';
-import { history } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import { getActiveApplication } from '@console/internal/reducers/ui-selectors';
 import { RootState } from '@console/internal/redux-types';
-import { ALL_APPLICATIONS_KEY } from '@console/shared';
-import { K8sResourceKind, modelFor, referenceFor, k8sCreate } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import { sanitizeApplicationValue } from '@console/dev-console/src/utils/application-utils';
 import { eventSourceValidationSchema } from './eventSource-validation-utils';
 import EventSourceForm from './EventSourceForm';
 import { getEventSourceResource } from '../../utils/create-eventsources-utils';
 import { EventSourceFormData } from './import-types';
+import { ALL_APPLICATIONS_KEY } from '@console/shared/src/constants/common';
 
 interface EventSourceProps {
   namespace: string;

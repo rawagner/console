@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Edge, observer, EdgeConnectorArrow } from '@console/topology';
-import { BaseEdge } from '@console/dev-console/src/components/topology';
+import { BaseEdge } from '@console/dev-console/src/components/topology/components';
 
 import './TrafficLink.scss';
 

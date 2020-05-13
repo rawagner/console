@@ -1,14 +1,8 @@
-import {
-  k8sPatch,
-  k8sCreate,
-  K8sResourceKind,
-  MachineKind,
-  MachineSetKind,
-  k8sKill,
-} from '@console/internal/module/k8s';
+import { K8sResourceKind, MachineKind, MachineSetKind } from '@console/internal/module/k8s/types';
+import { k8sPatch, k8sCreate, k8sKill } from '@console/internal/module/k8s/resource';
 import { MachineModel, MachineSetModel, SecretModel } from '@console/internal/models';
-import { PatchBuilder } from '@console/shared/src/k8s';
-import { getAnnotations } from '@console/shared/src';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
+import { getAnnotations } from '@console/shared/src/selectors/common';
 import { BareMetalHostModel } from '../../models';
 import { BareMetalHostKind } from '../../types';
 import { DELETE_MACHINE_ANNOTATION } from '../../constants/machine';

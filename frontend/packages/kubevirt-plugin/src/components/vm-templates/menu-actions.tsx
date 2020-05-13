@@ -1,6 +1,7 @@
-import { getName, getNamespace } from '@console/shared';
-import { K8sKind, TemplateKind } from '@console/internal/module/k8s';
-import { asAccessReview, Kebab } from '@console/internal/components/utils';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { K8sKind, TemplateKind } from '@console/internal/module/k8s/types';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
+import { Kebab } from '@console/internal/components/utils/kebab';
 import { VMWizardName, VMWizardMode } from '../../constants/vm';
 import { VirtualMachineModel } from '../../models';
 import { getVMWizardCreateLink } from '../../utils/url';

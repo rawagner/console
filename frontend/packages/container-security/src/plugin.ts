@@ -1,4 +1,4 @@
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   Plugin,
   ModelDefinition,
@@ -11,8 +11,8 @@ import {
   ResourceDetailsPage,
   ResourceNSNavItem,
   HorizontalNavTab,
-} from '@console/plugin-sdk';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+} from '@console/plugin-sdk/src/typings';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { ImageManifestVulnModel } from './models';
 import { ContainerSecurityFlag } from './const';
 import { securityHealthHandler } from './components/summary';

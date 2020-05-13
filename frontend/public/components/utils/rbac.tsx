@@ -2,18 +2,18 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import * as _ from 'lodash-es';
 
-import { getName, getNamespace } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 
 import store from '../../redux';
 import { impersonateStateToProps } from '../../reducers/ui-selectors';
+import { k8sCreate } from '../../module/k8s/resource';
 import {
   AccessReviewResourceAttributes,
-  k8sCreate,
   K8sKind,
   K8sResourceKind,
   K8sVerb,
   SelfSubjectAccessReviewKind,
-} from '../../module/k8s';
+} from '../../module/k8s/types';
 import { ProjectModel, SelfSubjectAccessReviewModel } from '../../models';
 import { useSafetyFirst } from '../../components/safety-first';
 

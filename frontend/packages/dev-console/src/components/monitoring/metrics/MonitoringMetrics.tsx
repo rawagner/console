@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import MetricsQueryInput from './MetricsQueryInput';
 import { connect } from 'react-redux';
-import { getURLSearchParams } from '@console/internal/components/utils';
 import { queryBrowserRunQueries, queryBrowserPatchQuery } from '@console/internal/actions/ui';
 import { QueryObj } from '@console/internal/components/monitoring/query-browser';
 import ConnectedMetricsChart from './MetricsChart';
+import { getURLSearchParams } from '@console/internal/components/utils/link';
 
 type MonitoringMetricsProps = {
   patchQuery?: (patch: QueryObj) => void;

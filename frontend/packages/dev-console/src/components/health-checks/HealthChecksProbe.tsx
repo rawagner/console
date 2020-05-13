@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
 import { PlusCircleIcon, MinusCircleIcon } from '@patternfly/react-icons';
-import { GreenCheckCircleIcon } from '@console/shared';
+import { GreenCheckCircleIcon } from '@console/shared/src/components/status/icons';
 import { Button, ButtonVariant } from '@patternfly/react-core';
 import ProbeForm from './ProbeForm';
 import {

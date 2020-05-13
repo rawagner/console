@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Button } from '@patternfly/react-core';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
-import { SidebarSectionHeading, useAccessReview } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
 import { setTrafficDistributionModal } from '../modals';
 import { ServiceModel, RevisionModel } from '../../models';
 import RevisionsOverviewListItem from './RevisionsOverviewListItem';

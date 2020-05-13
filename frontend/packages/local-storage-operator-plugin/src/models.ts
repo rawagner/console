@@ -1,4 +1,4 @@
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 
 export const LocalVolumeSetModel: K8sKind = {
   label: 'Local Volume Set',

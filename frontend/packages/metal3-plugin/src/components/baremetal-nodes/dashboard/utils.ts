@@ -1,7 +1,7 @@
 import { StatusGroupMapper } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
 import { createBasicLookup } from '@console/shared/src/utils/utils';
 import { getName } from '@console/shared/src/selectors/common';
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
 import { InventoryStatusGroup } from '@console/shared/src/components/dashboard/inventory-card/status-group';
 import { getNodeMaintenanceNodeName } from '../../../selectors';
 import { bareMetalNodeStatus } from '../../../status/baremetal-node-status';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, FormSelect, FormSelectOption } from '@patternfly/react-core';
-import { ValidationErrorType } from '@console/shared';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { VMWizardNetwork } from '../../types';
 import { PXE_INFO, PXE_NIC_NOT_FOUND_ERROR, SELECT_PXE_NIC } from '../../strings/networking';
 import { FormRow } from '../../../form/form-row';

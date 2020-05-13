@@ -3,7 +3,8 @@ import * as _ from 'lodash-es';
 import { Base64 } from 'js-base64';
 import { safeLoad, safeDump } from 'js-yaml';
 
-import { k8sPatch, K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import { AlertmanagerConfig } from './alert-manager-config';
 import { SecretModel } from '../../models';
 

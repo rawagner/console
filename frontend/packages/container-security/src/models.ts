@@ -1,4 +1,4 @@
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 
 export const ImageManifestVulnModel: K8sKind = {
   kind: 'ImageManifestVuln',

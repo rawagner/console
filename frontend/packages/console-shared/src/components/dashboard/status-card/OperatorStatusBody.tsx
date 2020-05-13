@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { GetOperatorsWithStatuses, LazyLoader } from '@console/plugin-sdk';
-import { AsyncComponent, FirehoseResourcesResult } from '@console/internal/components/utils';
+import { GetOperatorsWithStatuses, LazyLoader } from '@console/plugin-sdk/src/typings';
+import { FirehoseResourcesResult } from '@console/internal/components/utils/types';
+import { AsyncComponent } from '@console/internal/components/utils/async';
 import { HealthState } from './states';
 import { getMostImportantStatuses } from './state-utils';
 

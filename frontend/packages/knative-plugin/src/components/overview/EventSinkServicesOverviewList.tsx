@@ -1,15 +1,14 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { K8sResourceKind, referenceForModel, PodKind } from '@console/internal/module/k8s';
-import {
-  ResourceLink,
-  ExternalLink,
-  SidebarSectionHeading,
-} from '@console/internal/components/utils';
-import { PodControllerOverviewItem } from '@console/shared';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
 import { PodModel } from '@console/internal/models';
 import { PodsOverview } from '@console/internal/components/overview/pods-overview';
 import { ServiceModel } from '../../models';
+import { PodControllerOverviewItem } from '@console/shared/src/types/pod';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 
 export type EventSinkServicesOverviewListProps = {
   obj: K8sResourceKind;

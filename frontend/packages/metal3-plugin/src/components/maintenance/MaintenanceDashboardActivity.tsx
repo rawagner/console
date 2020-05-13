@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ActivityProgress } from '@console/shared/src/components/dashboard/activity-card/ActivityItem';
 import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { NodeModel } from '@console/internal/models';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getNodeMaintenanceProgressPercent } from '../../selectors';
 
 const MaintenanceActivity: React.FC<MaintenanceActivityProps> = ({ resource }) => (

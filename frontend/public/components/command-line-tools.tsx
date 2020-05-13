@@ -2,12 +2,14 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import * as _ from 'lodash-es';
 
-import { FLAGS } from '@console/shared';
-import { ExternalLink, Firehose, FirehoseResult } from './utils';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { connectToFlags } from './utils/connect-flags';
 import { ConsoleCLIDownloadModel } from '../models';
-import { referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
 import { SyncMarkdownView } from './markdown-view';
+import { ExternalLink } from './utils/link';
+import { Firehose } from './utils/firehose';
+import { FirehoseResult } from './utils/types';
 
 export const CommandLineTools: React.FC<CommandLineToolsProps> = ({ obj }) => {
   const title = 'Command Line Tools';

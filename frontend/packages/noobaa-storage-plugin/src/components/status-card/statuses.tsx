@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { HealthState } from '@console/shared/src/components/dashboard/status-card/states';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
-import { FirehoseResult } from '@console/internal/components/utils';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { getGaugeValue } from '../../utils';
 
 const NooBaaStatus = [

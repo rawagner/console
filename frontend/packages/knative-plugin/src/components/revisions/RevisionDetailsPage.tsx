@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { DetailsPage } from '@console/internal/components/factory';
-import { navFactory } from '@console/internal/components/utils';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 import { DetailsForKind } from '@console/internal/components/default-resource';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getRevisionActions } from '../../actions/getRevisionActions';
 
 const RevisionsPage: React.FC<React.ComponentProps<typeof DetailsPage>> = (props) => {

@@ -1,6 +1,6 @@
 import { JSONSchema6 } from 'json-schema';
-import { BadgeType, NodeAddress } from '@console/shared';
-import { EventInvolvedObject } from './event';
+import { BadgeType } from '@console/shared/src/components/badges/badge-factory';
+import { NodeAddress } from '@console/shared/src/types/node';
 
 export type OwnerReference = {
   name: string;
@@ -960,4 +960,61 @@ export type MachineHealthCheckKind = K8sResourceCommon & {
     selector: Selector;
     unhealthyConditions: MachineHealthCondition[];
   };
+};
+
+export enum OperatorStatus {
+  Available = 'Available',
+  Updating = 'Updating',
+  Degraded = 'Degraded',
+  Unknown = 'Unknown',
+}
+
+export enum ClusterUpdateStatus {
+  UpToDate = 'Up to Date',
+  UpdatesAvailable = 'Updates Available',
+  Updating = 'Updating',
+  Failing = 'Failing',
+  ErrorRetrieving = 'Error Retrieving',
+  Invalid = 'Invalid Cluster Version',
+}
+
+export type SwaggerDefinition = {
+  description?: string;
+  type?: string;
+  enum?: string[];
+  $ref?: string;
+  items?: SwaggerDefinition;
+  required?: string[];
+  properties?: {
+    [prop: string]: SwaggerDefinition;
+  };
+};
+
+export type SwaggerDefinitions = {
+  [name: string]: SwaggerDefinition;
+};
+
+export type SwaggerAPISpec = {
+  swagger: string;
+  info: { title: string; version: string };
+  paths: { [path: string]: any };
+  definitions: SwaggerDefinitions;
+};
+
+export enum BuildPhase {
+  Cancelled = 'Cancelled',
+  Complete = 'Complete',
+  Error = 'Error',
+  Failed = 'Failed',
+  New = 'New',
+  Pending = 'Pending',
+  Running = 'Running',
+}
+
+export type EventInvolvedObject = {
+  apiVersion?: string;
+  kind?: string;
+  name?: string;
+  uid?: string;
+  namespace?: string;
 };

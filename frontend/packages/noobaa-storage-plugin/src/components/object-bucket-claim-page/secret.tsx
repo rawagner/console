@@ -3,11 +3,13 @@ import * as _ from 'lodash';
 import { Base64 } from 'js-base64';
 import { SecretValue } from '@console/internal/components/configmap-and-secret-data';
 import { ConfigMapModel, SecretModel } from '@console/internal/models';
-import { k8sGet, K8sResourceKind } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared';
-import { SectionHeading, EmptyBox } from '@console/internal/components/utils';
+import { k8sGet } from '@console/internal/module/k8s/resource';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { Button } from '@patternfly/react-core';
 import { EyeSlashIcon, EyeIcon } from '@patternfly/react-icons';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { EmptyBox } from '@console/internal/components/utils/status-box';
 
 export const GetSecret: React.FC<GetSecretProps> = ({ obj }) => {
   const [reveal, setReveal] = React.useState(false);

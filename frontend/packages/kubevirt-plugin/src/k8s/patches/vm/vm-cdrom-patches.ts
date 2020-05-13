@@ -1,7 +1,7 @@
 import { last, includes } from 'lodash';
-import { getName } from '@console/shared';
-import { ConfigMapKind, Volume } from '@console/internal/module/k8s';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { getName } from '@console/shared/src/selectors/common';
+import { ConfigMapKind, Volume } from '@console/internal/module/k8s/types';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { StorageType } from '../../../components/modals/cdrom-vm-modal/constants';
 import { DataVolumeWrapper } from '../../wrapper/vm/data-volume-wrapper';
 import {

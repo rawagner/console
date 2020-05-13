@@ -7,7 +7,7 @@ import {
   ModalComponentProps,
   ModalSubmitFooter,
   ModalTitle,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 
 type ModalStructureProps = {
   children: React.ReactNode;

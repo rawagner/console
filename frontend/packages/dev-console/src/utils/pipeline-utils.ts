@@ -3,17 +3,16 @@ import { formatDuration } from '@console/internal/components/utils/datetime';
 import {
   ContainerStatus,
   K8sResourceKind,
-  k8sUpdate,
-  k8sGet,
   SecretKind,
   K8sResourceCommon,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import {
   LOG_SOURCE_RESTARTING,
   LOG_SOURCE_WAITING,
   LOG_SOURCE_RUNNING,
   LOG_SOURCE_TERMINATED,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/utils/resource-log';
+import { k8sUpdate, k8sGet } from '@console/internal/module/k8s/resource';
 import { ServiceAccountModel } from '@console/internal/models';
 import { errorModal } from '@console/internal/components/modals/error-modal';
 import { PIPELINE_SERVICE_ACCOUNT, SecretAnnotationId } from '../components/pipelines/const';

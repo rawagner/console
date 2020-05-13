@@ -1,5 +1,5 @@
-import { getName } from '@console/shared';
-import { k8sCreate } from '@console/internal/module/k8s';
+import { getName } from '@console/shared/src/selectors/common';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import { VMIKind } from '../../../types/vm';
 import { VirtualMachineInstanceMigrationModel } from '../../../models';
 import { prefixedID } from '../../../utils';

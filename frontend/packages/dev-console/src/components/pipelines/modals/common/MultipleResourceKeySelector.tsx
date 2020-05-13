@@ -6,14 +6,16 @@ import * as fuzzy from 'fuzzysearch';
 import * as _ from 'lodash';
 import { RootState } from '@console/internal/redux-types';
 import { getActiveNamespace } from '@console/internal/reducers/ui-selectors';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { ResourceDropdown, getFieldId, useFormikValidationFix } from '@console/shared';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { FormGroup } from '@patternfly/react-core';
 import {
   useK8sWatchResource,
   WatchK8sResource,
 } from '@console/internal/components/utils/k8s-watch-hook';
 import MultipleKeySelector from './MultipleKeySelector';
+import ResourceDropdown from '@console/shared/src/components/dropdown/ResourceDropdown';
+import { useFormikValidationFix } from '@console/shared/src/hooks/formik-validation-fix';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
 
 interface MultipleResourceKeySelectorProps {
   label: string;

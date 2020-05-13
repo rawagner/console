@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { InputField, YAMLEditorField } from '@console/shared';
 import HelmInstallUpgradeForm from '../HelmInstallUpgradeForm';
 import HelmChartVersionDropdown from '../HelmChartVersionDropdown';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import YAMLEditorField from '@console/shared/src/components/formik-fields/YAMLEditorField';
 
 let helmInstallUpgradeFormProps: React.ComponentProps<typeof HelmInstallUpgradeForm>;
 

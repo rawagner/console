@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { useField } from 'formik';
 import { useFlag } from '@console/shared/src/hooks/flag';
-import { K8sKind } from '@console/internal/module/k8s';
+import RadioGroupField from '@console/shared/src/components/formik-fields/RadioGroupField';
+import { RadioGroupOption } from '@console/shared/src/components/formik-fields/field-types';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { DeploymentModel, DeploymentConfigModel } from '@console/internal/models';
-import { FLAG_KNATIVE_SERVING_SERVICE, ServiceModel } from '@console/knative-plugin';
-import { RadioGroupField, RadioGroupOption } from '@console/shared';
-import { useAccessReview } from '@console/internal/components/utils';
+import { ServiceModel } from '@console/knative-plugin/src/models';
+import { FLAG_KNATIVE_SERVING_SERVICE } from '@console/knative-plugin/src/const';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import { getActiveNamespace } from '@console/internal/actions/ui';
 import { Resources, ReadableResourcesNames } from '../import-types';
 import FormSection from './FormSection';

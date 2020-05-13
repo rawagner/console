@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { ResourceIcon } from '@console/internal/components/utils';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 
 export const EndpointRow: React.SFC<EndpointRowProps> = ({ endpoint }) => {
   const detail = ['scheme', 'honorLabels', 'targetPort'].reduce(

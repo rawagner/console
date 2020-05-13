@@ -15,50 +15,26 @@ import {
   CardHeader,
   Popover,
 } from '@patternfly/react-core';
-import { ALL_NAMESPACES_KEY, Status, WarningStatus, getNamespace, getUID } from '@console/shared';
+import { ALL_NAMESPACES_KEY } from '@console/shared/src/constants/common';
+import { Status } from '@console/shared/src/components/status/Status';
+import { WarningStatus } from '@console/shared/src/components/status/statuses';
+import { getNamespace, getUID } from '@console/shared/src/selectors/common';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import {
-  DetailsPage,
   Table,
   TableRow,
   TableData,
-  MultiListPage,
   RowFunctionArgs,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/table';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
-import {
-  modelFor,
-  referenceForModel,
-  referenceFor,
-  GroupVersionKind,
-  K8sKind,
-  k8sKill,
-  k8sPatch,
-  k8sGet,
-} from '@console/internal/module/k8s';
+import { GroupVersionKind, K8sKind } from '@console/internal/module/k8s/types';
+import { k8sKill, k8sPatch, k8sGet } from '@console/internal/module/k8s/resource';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { ResourceEventStream } from '@console/internal/components/events';
 import { Conditions } from '@console/internal/components/conditions';
-import {
-  Kebab,
-  MsgBox,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  Timestamp,
-  SectionHeading,
-  ResourceSummary,
-  ScrollToTopOnMount,
-  AsyncComponent,
-  ExternalLink,
-  FirehoseResult,
-  StatusBox,
-  Page,
-  RequireCreatePermission,
-  resourcePathFromModel,
-  KebabOption,
-  resourceObjPath,
-  KebabAction,
-} from '@console/internal/components/utils';
-import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { useAccessReview, RequireCreatePermission } from '@console/internal/components/utils/rbac';
 import { RootState } from '@console/internal/redux-types';
 import {
   ClusterServiceVersionModel,
@@ -85,6 +61,26 @@ import { createUninstallOperatorModal } from './modals/uninstall-operator-modal'
 import { operatorGroupFor, operatorNamespaceFor } from './operator-group';
 import { SubscriptionDetails, catalogSourceForSubscription } from './subscription';
 import { ClusterServiceVersionLogo, referenceForProvidedAPI, providedAPIsFor } from './index';
+import {
+  Kebab,
+  ResourceKebab,
+  KebabOption,
+  KebabAction,
+} from '@console/internal/components/utils/kebab';
+import {
+  ResourceLink,
+  resourceObjPath,
+  resourcePathFromModel,
+} from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { MsgBox, StatusBox } from '@console/internal/components/utils/status-box';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { AsyncComponent } from '@console/internal/components/utils/async';
+import { ScrollToTopOnMount } from '@console/internal/components/utils/scroll-to-top-on-mount';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { navFactory, Page } from '@console/internal/components/utils/horizontal-nav';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 const clusterServiceVersionStateToProps = (state: RootState): ClusterServiceVersionStateProps => {
   return {

@@ -1,4 +1,5 @@
-import { k8sCreate, K8sResourceCommon } from '@console/internal/module/k8s';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import { PipelineRunModel } from '../../../../models';
 import { Pipeline, PipelineRun } from '../../../../utils/pipeline-augment';
 import {

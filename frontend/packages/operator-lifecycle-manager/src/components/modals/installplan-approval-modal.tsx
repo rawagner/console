@@ -6,14 +6,10 @@ import {
   ModalBody,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import { PromiseComponent } from '@console/internal/components/utils';
-import {
-  K8sKind,
-  K8sResourceKind,
-  modelFor,
-  referenceFor,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+import { PromiseComponent } from '@console/internal/components/utils/promise-component';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { RadioInput } from '@console/internal/components/radio';
 import { SubscriptionKind, InstallPlanApproval, InstallPlanKind } from '../../types';
 import { SubscriptionModel, InstallPlanModel } from '../../models';

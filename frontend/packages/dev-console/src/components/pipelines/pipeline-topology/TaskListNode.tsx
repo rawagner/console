@@ -3,7 +3,7 @@ import * as FocusTrap from 'focus-trap-react';
 import { Button } from '@patternfly/react-core';
 import { CaretDownIcon } from '@patternfly/react-icons';
 import Popper from '@console/shared/src/components/popper/Popper';
-import { KebabItem, KebabOption } from '@console/internal/components/utils';
+import { KebabItem, KebabOption } from '@console/internal/components/utils/kebab';
 import { observer, Node } from '@console/topology';
 import { PipelineResourceTask } from '../../../utils/pipeline-augment';
 import { NewTaskNodeCallback, TaskListNodeModelData } from './types';

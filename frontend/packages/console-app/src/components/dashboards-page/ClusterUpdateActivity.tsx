@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ClusterVersionKind } from '@console/internal/module/k8s';
+import { ClusterVersionKind } from '@console/internal/module/k8s/types';
 import ActivityItem from '@console/shared/src/components/dashboard/activity-card/ActivityItem';
 
 const getVersion = (cv: ClusterVersionKind) =>

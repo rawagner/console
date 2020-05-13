@@ -1,20 +1,24 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { NodeKind, referenceForModel } from '@console/internal/module/k8s';
-import {
-  useAccessReview,
-  SectionHeading,
-  LabelList,
-  Kebab,
-  ResourceLink,
-  cloudProviderNames,
-  cloudProviderID,
-  Timestamp,
-} from '@console/internal/components/utils';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { NodeModel, MachineModel } from '@console/internal/models';
 import { Button, pluralize } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
-import { getNodeMachineNameAndNamespace, getNodeAddresses } from '@console/shared';
+import {
+  getNodeMachineNameAndNamespace,
+  getNodeAddresses,
+} from '@console/shared/src/selectors/node';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { LabelList } from '@console/internal/components/utils/label-list';
+import { Kebab } from '@console/internal/components/utils/kebab';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import {
+  cloudProviderNames,
+  cloudProviderID,
+} from '@console/internal/components/utils/cloud-provider';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 import NodeIPList from './NodeIPList';
 import NodeStatus from './NodeStatus';
 import NodeGraphs from './NodeGraphs';

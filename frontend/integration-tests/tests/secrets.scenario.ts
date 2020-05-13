@@ -5,7 +5,7 @@ import { execSync } from 'child_process';
 import { appHost, testName, checkLogs, checkErrors, waitForCount } from '../protractor.conf';
 import * as crudView from '../views/crud.view';
 import * as secretsView from '../views/secrets.view';
-import { DeploymentKind } from '../../public/module/k8s';
+import { DeploymentKind } from '../../public/module/k8s/types';
 
 describe('Interacting with the create secret forms', () => {
   afterEach(() => {

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { FormFooter } from '@console/shared';
 import { formikFormProps } from '@console/shared/src/test-utils/formik-props-utils';
-import { ContainerDropdown, ResourceLink } from '@console/internal/components/utils';
+import { ContainerDropdown } from '@console/internal/components/utils/dropdown';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 import AddHealthChecks from '../AddHealthChecks';
 import { sampleDeployments } from '../../topology/__tests__/topology-test-data';
 import { getHealthChecksData } from '../create-health-checks-probe-utils';

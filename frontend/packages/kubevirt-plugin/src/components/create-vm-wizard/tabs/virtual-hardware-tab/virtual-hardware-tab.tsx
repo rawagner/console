@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Title } from '@patternfly/react-core';
-import { Firehose, FirehoseResult } from '@console/internal/components/utils';
-import { createLookup, getName } from '@console/shared/src';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { createLookup } from '@console/shared/src/utils/utils';
+import { getName } from '@console/shared/src/selectors/common';
 import { PersistentVolumeClaimModel } from '@console/internal/models';
 import { iGetCommonData } from '../../selectors/immutable/selectors';
 import {

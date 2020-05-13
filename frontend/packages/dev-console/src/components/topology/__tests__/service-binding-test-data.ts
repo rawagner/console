@@ -1,4 +1,4 @@
-import { DeploymentKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { DeploymentKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { TopologyDataResources } from '../topology-types';
 
 export const serviceBindingRequest: K8sResourceKind = {

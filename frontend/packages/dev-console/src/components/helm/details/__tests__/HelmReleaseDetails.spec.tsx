@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ErrorPage404 } from '@console/internal/components/error';
-import { DetailsPage } from '@console/internal/components/factory';
-import { LoadingBox, StatusBox } from '@console/internal/components/utils';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';
 import { mockHelmReleases } from '../../__tests__/helm-release-mock-data';
 import HelmReleaseDetails, { LoadedHelmReleaseDetails } from '../HelmReleaseDetails';
 

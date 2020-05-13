@@ -5,21 +5,18 @@ import { connect } from 'react-redux';
 import { Alert, Button, ActionGroup, AlertActionCloseButton } from '@patternfly/react-core';
 import * as classNames from 'classnames';
 
-import { k8sPatch, k8sGet, referenceFor, referenceForOwnerRef } from '../module/k8s';
-import {
-  AsyncComponent,
-  checkAccess,
-  ContainerDropdown,
-  EnvFromPair,
-  EnvType,
-  FieldLevelHelp,
-  LoadingBox,
-  LoadingInline,
-  NameValueEditorPair,
-  PromiseComponent,
-  ResourceLink,
-} from './utils';
+import { referenceFor } from '../module/k8s/k8s-models';
+import { referenceForOwnerRef } from '../module/k8s/k8s';
+import { k8sPatch, k8sGet } from '../module/k8s/resource';
 import { ConfigMapModel, SecretModel } from '../models';
+import { AsyncComponent } from './utils/async';
+import { EnvType, NameValueEditorPair, EnvFromPair } from './utils/types';
+import { PromiseComponent } from './utils/promise-component';
+import { checkAccess } from './utils/rbac';
+import { LoadingInline, LoadingBox } from './utils/status-box';
+import { ContainerDropdown } from './utils/dropdown';
+import { ResourceLink } from './utils/resource-link';
+import { FieldLevelHelp } from './utils/field-level-help';
 
 /**
  * Set up an AsyncComponent to wrap the name-value-editor to allow on demand loading to reduce the

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
-import { SelectorInput } from '@console/internal/components/utils';
 import FormSection from '../section/FormSection';
+import { SelectorInput } from '@console/internal/components/utils/selector-input';
 
 const LabelSection: React.FC = () => {
   const { values, setFieldValue } = useFormikContext<FormikValues>();

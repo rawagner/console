@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { VMGenericLikeEntityKind } from '../types/vmLike';
 
 export const getKind = (value) => _.get(value, 'kind') as K8sResourceKind['kind'];

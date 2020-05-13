@@ -2,8 +2,9 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { useFormikContext, FormikValues } from 'formik';
 import { FormGroup } from '@patternfly/react-core';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
 import { AsyncComponent } from '@console/internal/components/utils/async';
-import { DropdownField, getFieldId } from '@console/shared';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import ServiceAccountDropdown from '../../dropdowns/ServiceAccountDropdown';
 

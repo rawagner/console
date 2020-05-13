@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ResourceLink } from '@console/internal/components/utils';
-import { K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 
 type TopologyHelmReleaseResourceItemProps = {
   item: K8sResourceKind;

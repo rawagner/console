@@ -27,7 +27,7 @@ import {
 } from '../../__mocks__/catalogItemsMocks';
 import { developerCatalogItems, groupedByOperator } from './catalog-data';
 import { categorizeItems } from '../../public/components/utils/tile-view-page';
-import { Dropdown } from '../../public/components/utils';
+import { Dropdown } from '../../public/components/utils/dropdown';
 
 describe(CatalogTileViewPage.displayName, () => {
   let wrapper: ReactWrapper<CatalogListPageProps, CatalogListPageState>;

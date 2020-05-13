@@ -1,4 +1,4 @@
-import { K8sResourceKind, ContainerSpec } from '@console/internal/module/k8s';
+import { K8sResourceKind, ContainerSpec } from '@console/internal/module/k8s/types';
 import * as _ from 'lodash';
 import { getProbesData } from './create-health-checks-probe-utils';
 import { getResourcesType } from '../edit-application/edit-application-utils';

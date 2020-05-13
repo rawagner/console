@@ -1,4 +1,4 @@
-import { ImagePullPolicy } from '@console/internal/module/k8s';
+import { ImagePullPolicy } from '@console/internal/module/k8s/types';
 import { TopologyDataResources } from '../topology-types';
 
 export const MockGraphResources: TopologyDataResources = {

@@ -1,15 +1,21 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import { SectionHeading, detailsPage, navFactory, ResourceLink, ResourceSummary } from './utils';
-import { K8sResourceKind, referenceForModel, servicePlanDisplayName } from '../module/k8s';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { servicePlanDisplayName } from '../module/k8s/service-catalog';
+import { referenceForModel } from '../module/k8s/k8s';
+import { K8sResourceKind } from '../module/k8s/types';
 import {
   ClusterServicePlanModel,
   ClusterServiceBrokerModel,
   ClusterServiceClassModel,
 } from '../models';
-import { viewYamlComponent } from './utils/horizontal-nav';
+import { viewYamlComponent, navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, detailsPage } from './utils/details-page';
 
 const tableColumnClasses = [
   classNames('col-sm-4', 'col-xs-6'),

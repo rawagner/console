@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
-import { K8sResourceCommon } from '@console/internal/module/k8s';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
 import {
   OperatorStatusWithResources,
   OperatorHealth,
   GetOperatorStatusPriority,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import { operatorHealthPriority, HealthState } from './states';
 
 export const getMostImportantStatuses = (

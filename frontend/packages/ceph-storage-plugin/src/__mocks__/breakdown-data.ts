@@ -1,4 +1,4 @@
-import { humanizeBinaryBytes } from '@console/internal/components/utils';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 
 export const breakdownData = {
   top5: [

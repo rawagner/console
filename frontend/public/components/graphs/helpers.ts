@@ -1,6 +1,6 @@
 import * as _ from 'lodash-es';
 
-import { PROMETHEUS_BASE_PATH, PROMETHEUS_TENANCY_BASE_PATH } from './index';
+import { PROMETHEUS_BASE_PATH, PROMETHEUS_TENANCY_BASE_PATH } from './constants';
 
 export enum PrometheusEndpoint {
   LABEL = 'api/v1/label',

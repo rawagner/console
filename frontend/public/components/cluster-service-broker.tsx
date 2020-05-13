@@ -1,23 +1,22 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  Kebab,
-  SectionHeading,
-  detailsPage,
-  navFactory,
-  ResourceLink,
-  ResourceKebab,
-  ResourceSummary,
-  StatusWithIcon,
-  Timestamp,
-  ExternalLink,
-} from './utils';
-import { K8sResourceKind, referenceForModel } from '../module/k8s';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { referenceForModel } from '../module/k8s/k8s';
+import { K8sResourceKind } from '../module/k8s/types';
 import { ClusterServiceBrokerModel } from '../models';
 import { Conditions } from './conditions';
 import { ClusterServiceClassPage } from './cluster-service-class';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { StatusWithIcon } from './utils/service-catalog-status';
+import { Timestamp } from './utils/timestamp';
+import { ResourceSummary, detailsPage } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { navFactory } from './utils/horizontal-nav';
+import { ExternalLink } from './utils/link';
 
 const menuActions = [
   ...Kebab.getExtensionsActionsForKind(ClusterServiceBrokerModel),

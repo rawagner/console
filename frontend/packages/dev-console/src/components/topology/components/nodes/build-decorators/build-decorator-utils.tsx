@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Status } from '@console/shared';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { Status } from '@console/shared/src/components/status/Status';
 import { BuildModel } from '@console/internal/models';
 import { PipelineRunModel } from '../../../../../models';
 import { constructCurrentPipeline } from '../../../../../utils/pipeline-utils';
 import { WorkloadData } from '../../../topology-types';
 import PipelineBuildDecoratorTooltip from './PipelineBuildDecoratorTooltip';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 type BuildDecoratorData = {
   decoratorIcon: React.ReactElement;

@@ -11,9 +11,10 @@ import {
   ChartTooltip,
 } from '@patternfly/react-charts';
 import { Tooltip } from '@patternfly/react-core';
-import { K8sKind, referenceForModel } from '@console/internal/module/k8s';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { K8sKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { CEPH_STORAGE_NAMESPACE } from '@console/ceph-storage-plugin/src/constants';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 import { getBarRadius, StackDataPoint } from './utils';
 import { OTHER, CLUSTERWIDE, BUCKETCLASSKIND } from './consts';
 import './breakdown-card.scss';

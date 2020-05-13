@@ -3,15 +3,18 @@ import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
-import { Dropdown, EmptyBox, PromiseComponent } from '../utils';
-import { K8sKind, k8sPatch, Toleration, TolerationOperator } from '../../module/k8s';
+import { K8sKind, Toleration, TolerationOperator } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import {
   createModalLauncher,
   ModalBody,
   ModalComponentProps,
   ModalSubmitFooter,
   ModalTitle,
-} from '../factory';
+} from '../factory/modal';
+import { PromiseComponent } from '../utils/promise-component';
+import { EmptyBox } from '../utils/status-box';
+import { Dropdown } from '../utils/dropdown';
 
 class TolerationsModal extends PromiseComponent<TolerationsModalProps, TolerationsModalState> {
   readonly state: TolerationsModalState;

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { SectionHeading, ResourceSummary, ResourceLink } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PipelineRun, PipelineRunReferenceResource } from '../../../utils/pipeline-augment';
 import { PipelineModel, PipelineResourceModel } from '../../../models';
 import ResourceLinkList from '../../pipelines/resource-overview/ResourceLinkList';
@@ -8,6 +7,9 @@ import PipelineRunVisualization from './PipelineRunVisualization';
 import TriggeredBySection from './TriggeredBySection';
 
 import './TriggeredBySection.scss';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 
 export interface PipelineRunDetailsProps {
   obj: PipelineRun;

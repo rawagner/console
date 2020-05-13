@@ -4,7 +4,7 @@ import {
   K8sResourceKind,
   OwnerReference,
   Selector,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { Descriptor } from './components/descriptors/types';
 
 export enum AppCatalog {

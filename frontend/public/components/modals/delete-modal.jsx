@@ -2,9 +2,11 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { PromiseComponent, history, resourceListPathFromModel } from '../utils';
-import { k8sKill } from '../../module/k8s/';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { k8sKill } from '../../module/k8s/resource';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import { PromiseComponent } from '../utils/promise-component';
+import { resourceListPathFromModel } from '../utils/resource-link';
+import { history } from '../utils/router';
 
 //Modal for resource deletion and allows cascading deletes if propagationPolicy is provided for the enum
 class DeleteModal extends PromiseComponent {

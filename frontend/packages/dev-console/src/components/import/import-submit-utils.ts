@@ -9,12 +9,13 @@ import {
   ServiceModel,
   RouteModel,
 } from '@console/internal/models';
-import { k8sCreate, K8sResourceKind, k8sUpdate, K8sVerb } from '@console/internal/module/k8s';
-import { ServiceModel as KnServiceModel } from '@console/knative-plugin';
+import { K8sResourceKind, K8sVerb } from '@console/internal/module/k8s/types';
+import { k8sCreate, k8sUpdate } from '@console/internal/module/k8s/resource';
+import { ServiceModel as KnServiceModel } from '@console/knative-plugin/src/models';
 import { getKnativeServiceDepResource } from '@console/knative-plugin/src/utils/create-knative-utils';
 import { SecretType } from '@console/internal/components/secrets/create-secret';
-import { history } from '@console/internal/components/utils';
-import { getRandomChars } from '@console/shared/src/utils';
+import { history } from '@console/internal/components/utils/router';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 import {
   getAppLabels,
   getPodLabels,
@@ -34,7 +35,7 @@ import {
   Resources,
 } from './import-types';
 import { createPipelineForImportFlow } from './pipeline/pipeline-template-utils';
-import { Perspective } from '@console/plugin-sdk';
+import { Perspective } from '@console/plugin-sdk/src/typings';
 
 export const generateSecret = () => {
   // http://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript

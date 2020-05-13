@@ -9,11 +9,11 @@ import {
   NAMESPACE_LOCAL_STORAGE_KEY,
   LAST_PERSPECTIVE_LOCAL_STORAGE_KEY,
   PINNED_RESOURCES_LOCAL_STORAGE_KEY,
-} from '@console/shared/src/constants';
+} from '@console/shared/src/constants/common';
 import { legalNamePattern, getNamespace } from '../components/utils/link';
 import { OverviewSpecialGroup } from '../components/overview/constants';
 import { pluginStore } from '../plugins';
-import { isPerspective } from '@console/plugin-sdk';
+import { isPerspective } from '@console/plugin-sdk/src/typings';
 import { NotificationAlerts } from '../redux-types';
 import { SilenceStates, AlertStates } from '@console/shared/src/types/monitoring';
 import { isSilenced } from '@console/shared/src/selectors/monitoring';

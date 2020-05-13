@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { K8sResourceKind } from '../../../module/k8s';
+import { K8sResourceKind } from '../../../module/k8s/types';
 
 export const ProjectDashboardContext = React.createContext<ProjectDashboardContext>({});
 

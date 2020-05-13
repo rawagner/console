@@ -2,7 +2,8 @@ import * as _ from 'lodash';
 import * as Immutable from 'immutable';
 import { JSONSchema6 } from 'json-schema';
 import { SpecCapability, Descriptor } from '../descriptors/types';
-import { modelFor, definitionFor } from '@console/internal/module/k8s';
+import { modelFor } from '@console/internal/module/k8s/k8s-models';
+import { definitionFor } from '@console/internal/module/k8s/swagger';
 import { capabilityFieldMap, capabilityWidgetMap } from '../descriptors/spec/spec-descriptor-input';
 import {
   DEFAULT_K8S_SCHEMA,

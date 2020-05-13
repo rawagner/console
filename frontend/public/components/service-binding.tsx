@@ -5,8 +5,12 @@ import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 import { Alert } from '@patternfly/react-core';
 
-import { serviceCatalogStatus, referenceForModel, K8sResourceKind } from '../module/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { K8sResourceKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
+import { serviceCatalogStatus } from '../module/k8s/service-catalog';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { Kebab, ResourceKebab } from './utils/kebab';
 import { SectionHeading } from './utils/headings';
 import { navFactory } from './utils/horizontal-nav';

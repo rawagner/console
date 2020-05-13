@@ -2,7 +2,7 @@ import {
   K8sResourceKind,
   K8sKind,
   CustomResourceDefinitionKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import {
   OperatorGroupKind,
   PackageManifestKind,

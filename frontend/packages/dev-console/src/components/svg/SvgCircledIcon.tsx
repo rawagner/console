@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSize, createSvgIdUrl } from '@console/topology';
-import { isIconUrl } from '@console/shared/';
+import { isIconUrl } from '@console/shared/src/utils/icon-utils';
 import { getImageForIconClass } from '@console/internal/components/catalog/catalog-item-icon';
 import SvgDropShadowFilter from './SvgDropShadowFilter';
 

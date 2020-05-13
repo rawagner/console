@@ -10,23 +10,23 @@ import {
   UnknownIcon,
 } from '@patternfly/react-icons';
 
-import { FLAGS, YellowExclamationTriangleIcon } from '@console/shared';
-import { DetailsPage, MultiListPage, Table, TableRow, TableData } from './factory';
-import {
-  Kebab,
-  SectionHeading,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  convertToBaseValue,
-  FieldLevelHelp,
-} from './utils';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import { Table, TableRow, TableData } from './factory/table';
+import { MultiListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { connectToFlags, flagPending } from './utils/connect-flags';
 import { GaugeChart } from './graphs/gauge';
 import { LoadingBox } from './utils/status-box';
-import { referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
 import { ResourceQuotaModel, ClusterResourceQuotaModel } from '../models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { convertToBaseValue } from './utils/units';
+import { ResourceLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { FieldLevelHelp } from './utils/field-level-help';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const resourceQuotaMenuActions = [

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { match as RMatch } from 'react-router';
 import { coFetchJSON } from '@console/internal/co-fetch';
 import { SortByDirection } from '@patternfly/react-table';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { useDeepCompareMemoize } from '@console/shared';
+import { useDeepCompareMemoize } from '@console/shared/src/hooks/deep-compare-memoize';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 import { HelmRelease } from '../../helm-types';
 import CustomResourceList from '../../../custom-resource-list/CustomResourceList';

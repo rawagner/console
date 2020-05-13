@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Button, ButtonVariant, Checkbox, Text, TextVariants } from '@patternfly/react-core';
-import { ModalTitle, ModalBody, ModalComponentProps } from '@console/internal/components/factory';
-import { NodeModel } from '@console/internal/models';
 import {
-  withHandlePromise,
-  HandlePromiseProps,
-  FirehoseResult,
-  Label,
-} from '@console/internal/components/utils';
-import { k8sPatch, NodeKind } from '@console/internal/module/k8s';
+  ModalTitle,
+  ModalBody,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
+import { NodeModel } from '@console/internal/models';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { VMLikeEntityKind } from '../../../../types/vmLike';
 import { getVMLikeModel, isDedicatedCPUPlacement, asVM } from '../../../../selectors/vm';
 import { getDedicatedCpuPatch } from '../../../../k8s/patches/vm/vm-cpu-patches';
@@ -19,6 +18,12 @@ import { ModalFooter } from '../../modal/modal-footer';
 import { NodeChecker } from '../shared/NodeChecker/node-checker';
 import { DEDICATED_RESOURCES_MODAL_TITLE, DEDICATED_RESOURCES_LABELS } from '../shared/consts';
 import './dedicated-resources-modal.scss';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
+import { Label } from '@console/internal/components/utils/label-list';
 
 export const DedicatedResourcesModal = withHandlePromise<DedicatedResourcesModalProps>(
   ({

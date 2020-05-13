@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Link } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
-import * as utils from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import * as utils from '@console/internal/components/utils/rbac';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { MockKnativeResources } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
 import {
   mockRevisions,
@@ -14,6 +14,7 @@ import * as modal from '../../modals';
 import RevisionsOverviewList, { RevisionsOverviewListProps } from '../RevisionsOverviewList';
 import RevisionsOverviewListItem from '../RevisionsOverviewListItem';
 import { RevisionModel } from '../../../models';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
 
 describe('RevisionsOverviewList', () => {
   let wrapper: ShallowWrapper<RevisionsOverviewListProps>;
@@ -27,10 +28,10 @@ describe('RevisionsOverviewList', () => {
   });
 
   it('should have title Revisions', () => {
-    expect(wrapper.find(utils.SidebarSectionHeading)).toHaveLength(1);
+    expect(wrapper.find(SidebarSectionHeading)).toHaveLength(1);
     expect(
       wrapper
-        .find(utils.SidebarSectionHeading)
+        .find(SidebarSectionHeading)
         .at(0)
         .props().text,
     ).toEqual('Revisions');

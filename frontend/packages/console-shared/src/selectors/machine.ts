@@ -4,7 +4,7 @@ import {
   MachineSetKind,
   MachineDeploymentKind,
   NodeKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { getName } from './common';
 
 export const getMachineRole = (obj: MachineKind | MachineSetKind | MachineDeploymentKind): string =>

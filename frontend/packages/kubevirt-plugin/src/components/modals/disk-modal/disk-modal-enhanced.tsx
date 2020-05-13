@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Firehose, FirehoseResult } from '@console/internal/components/utils';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
-import { k8sPatch } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared/src';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import {
   NamespaceModel,
   PersistentVolumeClaimModel,

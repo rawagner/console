@@ -1,5 +1,5 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { getDeletetionTimestamp } from '@console/shared/src/selectors';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { getDeletetionTimestamp } from '@console/shared/src/selectors/common';
 import { getNodeMaintenancePhase } from '../selectors';
 import {
   NODE_STATUS_TITLES,

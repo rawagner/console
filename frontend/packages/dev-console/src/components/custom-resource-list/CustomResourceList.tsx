@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Table, TextFilter } from '@console/internal/components/factory';
+import { Table } from '@console/internal/components/factory/table';
+import { TextFilter } from '@console/internal/components/factory/list-page';
 import { CheckBoxes } from '@console/internal/components/row-filter';
-import { getQueryArgument } from '@console/internal/components/utils';
 import { CustomResourceListProps } from './custom-resource-list-types';
+import { getQueryArgument } from '@console/internal/components/utils/router';
 
 const CustomResourceList: React.FC<CustomResourceListProps> = ({
   dependentResource,

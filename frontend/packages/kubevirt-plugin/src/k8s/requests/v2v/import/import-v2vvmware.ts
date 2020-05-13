@@ -2,9 +2,10 @@
 import { CreateVMParams } from '../../vm/create/types';
 import { ImporterResult } from '../../vm/types';
 import { buildOwnerReference } from '../../../../utils';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { SecretModel, ServiceAccountModel } from '@console/internal/models';
-import { createBasicLookup, getName, getNamespace } from '@console/shared/src';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { createBasicLookup } from '@console/shared/src/utils/utils';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { SecretWrappper } from '../../../wrapper/k8s/secret-wrapper';
 import {
@@ -18,7 +19,7 @@ import {
   VMWizardStorageType,
 } from '../../../../components/create-vm-wizard/types';
 import { getVmwareField } from '../../../../components/create-vm-wizard/selectors/provider/vmware/selectors';
-import { K8sResourceCommon } from '@console/internal/module/k8s';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
 import { ServiceAccountWrappper } from '../../../wrapper/k8s/service-account-wrapper';
 import { RoleWrappper } from '../../../wrapper/k8s/role-wrapper';
 import { RoleBindingWrappper } from '../../../wrapper/k8s/role-binding-wrapper';

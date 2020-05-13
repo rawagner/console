@@ -13,16 +13,18 @@ import {
   createSvgIdUrl,
 } from '@console/topology';
 import SvgBoxedText from '@console/dev-console/src/components/svg/SvgBoxedText';
+import { getKnativeEventSourceIcon } from '../../../utils/get-knative-icon';
+
+import './EventSource.scss';
 import {
   NodeShadows,
   NODE_SHADOW_FILTER_ID_HOVER,
   NODE_SHADOW_FILTER_ID,
+} from '@console/dev-console/src/components/topology/components';
+import {
   useSearchFilter,
   useDisplayFilters,
-} from '@console/dev-console/src/components/topology';
-import { getKnativeEventSourceIcon } from '../../../utils/get-knative-icon';
-
-import './EventSource.scss';
+} from '@console/dev-console/src/components/topology/filters';
 
 export type EventSourceProps = {
   element: Node;

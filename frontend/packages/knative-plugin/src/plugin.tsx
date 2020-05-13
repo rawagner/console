@@ -12,9 +12,9 @@ import {
   GlobalConfig,
   KebabActions,
   YAMLTemplate,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import { NamespaceRedirect } from '@console/internal/components/utils/namespace-redirect';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { AddAction } from '@console/dev-console/src/extensions/add-actions';
 import * as models from './models';
 import { yamlTemplates } from './yaml-templates';

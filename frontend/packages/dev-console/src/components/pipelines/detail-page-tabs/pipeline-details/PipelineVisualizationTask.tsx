@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import * as cx from 'classnames';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@patternfly/react-core';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
-import { Firehose, resourcePathFromModel } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { runStatus } from '../../../../utils/pipeline-augment';
 import { PipelineRunModel, TaskModel, ClusterTaskModel } from '../../../../models';
 import { ColoredStatusIcon } from './StatusIcon';
@@ -13,6 +13,8 @@ import TaskComponentTaskStatus from './TaskComponentTaskStatus';
 import { createStepStatus, StepStatus, TaskStatus } from './pipeline-step-utils';
 
 import './PipelineVisualizationTask.scss';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 interface TaskProps {
   pipelineRunName?: string;

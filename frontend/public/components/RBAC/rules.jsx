@@ -2,10 +2,12 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { k8sPatch } from '../../module/k8s';
+import { k8sPatch } from '../../module/k8s/resource';
 import { RoleModel, ClusterRoleModel } from '../../models';
-import { Kebab, EmptyBox, ResourceIcon } from '../utils';
 import { confirmModal } from '../modals';
+import { EmptyBox } from '../utils/status-box';
+import { ResourceIcon } from '../utils/resource-icon';
+import { Kebab } from '../utils/kebab';
 
 export const RulesList = ({ rules, name, namespace }) =>
   _.isEmpty(rules) ? (

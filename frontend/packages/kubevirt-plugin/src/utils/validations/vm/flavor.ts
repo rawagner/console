@@ -1,4 +1,5 @@
-import { ValidationObject, validateEmptyValue } from '@console/shared/src';
+import { validateEmptyValue } from '@console/shared/src/utils/validation/validation';
+import { ValidationObject } from '@console/shared/src/utils/validation/types';
 
 export const validateFlavor = (
   {

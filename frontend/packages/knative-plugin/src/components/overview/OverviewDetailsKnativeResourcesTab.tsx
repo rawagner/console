@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { OverviewItem } from '@console/shared';
-import OperatorBackedOwnerReferences from '@console/internal/components/utils';
-import { referenceFor } from '@console/internal/module/k8s';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { RevisionModel, ServiceModel } from '../../models';
 import KnativeServiceResources from './KnativeServiceResources';
 import KnativeRevisionResources from './KnativeRevisionResources';
@@ -10,6 +9,7 @@ import KSRoutesOverviewList from './RoutesOverviewList';
 import ConfigurationsOverviewList from './ConfigurationsOverviewList';
 import EventSinkServicesOverviewList from './EventSinkServicesOverviewList';
 import { isDynamicEventResourceKind } from '../../utils/fetch-dynamic-eventsources-utils';
+import OperatorBackedOwnerReferences from '@console/internal/components/utils/operator-backed-owner-references';
 
 type OverviewDetailsResourcesTabProps = {
   item: OverviewItem;

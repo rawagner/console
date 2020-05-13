@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import * as classNames from 'classnames';
 
-import { K8sResourceKind, TemplateKind } from '../../module/k8s';
+import { K8sResourceKind, TemplateKind } from '../../module/k8s/types';
 import * as threeScaleImg from '../../imgs/logos/3scale.svg';
 import * as aerogearImg from '../../imgs/logos/aerogear.svg';
 import * as amqImg from '../../imgs/logos/amq.svg';

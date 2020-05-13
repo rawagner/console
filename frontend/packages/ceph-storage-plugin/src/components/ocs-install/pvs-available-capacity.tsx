@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
-import { StorageClassResourceKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { humanizeBinaryBytes } from '@console/internal/components/utils/';
-import { getName } from '@console/shared';
+import { StorageClassResourceKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
+import { getName } from '@console/shared/src/selectors/common';
 import { pvResource } from '../../constants/resources';
 import { calcPVsCapacity, getSCAvailablePVs } from '../../selectors';
 import '../modals/add-capacity-modal/_add-capacity-modal.scss';

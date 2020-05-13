@@ -3,14 +3,15 @@ import * as _ from 'lodash';
 import { FormikValues, useFormikContext } from 'formik';
 import { ActionGroup, Button, ButtonVariant, TextInputTypes } from '@patternfly/react-core';
 import { CheckIcon, CloseIcon } from '@patternfly/react-icons';
-import { ButtonBar } from '@console/internal/components/utils';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 import {
   SecretType,
   BasicAuthSubform,
   SSHAuthSubform,
   CreateConfigSubform,
 } from '@console/internal/components/secrets/create-secret';
-import { DropdownField, InputField } from '@console/shared';
 import SecretAnnotation from './SecretAnnotation';
 import './SecretForm.scss';
 

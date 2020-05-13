@@ -1,8 +1,11 @@
 import { ValidatedOptions } from '@patternfly/react-core';
-import { K8sResourceKind, ContainerPort } from '@console/internal/module/k8s';
+import {
+  NameValuePair,
+  NameValueFromPair,
+} from '@console/shared/src/components/formik-fields/field-types';
+import { K8sResourceKind, ContainerPort } from '@console/internal/module/k8s/types';
 import { DeploymentModel, DeploymentConfigModel } from '@console/internal/models';
-import { LazyLoader } from '@console/plugin-sdk';
-import { NameValuePair, NameValueFromPair } from '@console/shared';
+import { LazyLoader } from '@console/plugin-sdk/src/typings';
 import { ServiceModel } from '@console/knative-plugin/src/models';
 import { NormalizedBuilderImages } from '../../utils/imagestream-utils';
 import { HealthCheckProbe } from '../health-checks/health-checks-types';

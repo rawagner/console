@@ -3,18 +3,13 @@ import * as _ from 'lodash';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import store from '@console/internal/redux';
-import {
-  Firehose,
-  AccessDenied,
-  history,
-  MsgBox,
-  Box,
-  FirehoseResource,
-  FirehoseResult,
-} from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import { ModalErrorContent } from '@console/internal/components/modals/error-modal';
-import { createModal, GetModalContainer } from '@console/internal/components/factory';
-import { RedExclamationCircleIcon } from '@console/shared';
+import { createModal, GetModalContainer } from '@console/internal/components/factory/modal';
+import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
+import { Box, MsgBox, AccessDenied } from '@console/internal/components/utils/status-box';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult, FirehoseResource } from '@console/internal/components/utils/types';
 
 const NotFound: React.FC<NotFoundProps> = ({ message }) => (
   <Box className="text-center">

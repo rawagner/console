@@ -4,11 +4,12 @@ import * as PropTypes from 'prop-types';
 import { Base64 } from 'js-base64';
 import { Alert } from '@patternfly/react-core';
 
-import { CONST } from '@console/shared';
-import { k8sPatch, k8sPatchByName, k8sCreate } from '../../module/k8s';
+import { CONST } from '@console/shared/src/constants/common';
+import { k8sPatch, k8sPatchByName, k8sCreate } from '../../module/k8s/resource';
 import { SecretModel, ServiceAccountModel } from '../../models';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { PromiseComponent, ResourceIcon } from '../utils';
+import { PromiseComponent } from '../utils/promise-component';
+import { ResourceIcon } from '../utils/resource-icon';
 
 const parseExisitingPullSecret = (pullSecret) => {
   let invalidData = false;

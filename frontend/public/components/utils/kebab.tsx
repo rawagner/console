@@ -16,17 +16,19 @@ import {
   deleteModal,
   expandPVCModal,
 } from '../modals';
-import { asAccessReview, checkAccess, history, resourceObjPath, useAccessReview } from './index';
+import { referenceForModel } from '../../module/k8s/k8s';
 import {
   AccessReviewResourceAttributes,
   K8sKind,
   K8sResourceKind,
   K8sResourceKindReference,
-  referenceForModel,
-} from '../../module/k8s';
+} from '../../module/k8s/types';
 import { impersonateStateToProps } from '../../reducers/ui-selectors';
 import { connectToModel } from '../../kinds';
 import * as plugins from '../../plugins';
+import { useAccessReview, asAccessReview, checkAccess } from './rbac';
+import { resourceObjPath } from './resource-link';
+import { history } from './router';
 
 export const kebabOptionsToMenu = (options: KebabOption[]): KebabMenuOption[] => {
   const subs: { [key: string]: KebabSubMenu } = {};

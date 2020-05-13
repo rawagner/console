@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import * as _ from 'lodash';
-import { PodRing, OverviewItem } from '@console/shared';
-import { ResourceSummary } from '@console/internal/components/utils';
 import { revisionObj } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
 import { RevisionModel } from '../../../models';
 import KnativeOverview from '../KnativeOverview';
+import PodRing from '@console/shared/src/components/pod/PodRing';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { OverviewItem } from '@console/shared/src/types/resource';
 
 describe('KnativeOverview', () => {
   let item: OverviewItem;

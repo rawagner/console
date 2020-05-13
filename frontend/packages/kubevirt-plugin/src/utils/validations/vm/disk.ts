@@ -1,11 +1,9 @@
+import { ValidationErrorType, ValidationObject } from '@console/shared/src/utils/validation/types';
 import {
-  addMissingSubject,
   asValidationObject,
-  makeSentence,
   validateDNS1123SubdomainValue,
-  ValidationErrorType,
-  ValidationObject,
-} from '@console/shared';
+} from '@console/shared/src/utils/validation/validation';
+import { makeSentence, addMissingSubject } from '@console/shared/src/utils/grammar';
 import { validateTrim, validateURL } from '../common';
 import { DiskWrapper } from '../../../k8s/wrapper/vm/disk-wrapper';
 import { VolumeWrapper } from '../../../k8s/wrapper/vm/volume-wrapper';

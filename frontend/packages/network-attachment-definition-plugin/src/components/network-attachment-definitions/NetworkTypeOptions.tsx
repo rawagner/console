@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import { FormControl, FormGroup, HelpBlock } from 'patternfly-react';
-import { Dropdown } from '@console/internal/components/utils';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 import { ELEMENT_TYPES, networkTypeParams, NetworkTypeParams } from '../../constants';
 
 const handleTypeParamChange = (

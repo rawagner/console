@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
 import { OwnerReferences } from './owner-references';
 
 const OperatorBackedOwnerReferences: React.FC<OperatorBackedOwnerReferencesProps> = ({ item }) => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { InputField } from '@console/shared';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 import FormSection from '../section/FormSection';
 
 export interface DockerSectionProps {

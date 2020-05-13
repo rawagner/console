@@ -3,7 +3,10 @@ import * as _ from 'lodash';
 import { useFormikContext, FormikValues, useField } from 'formik';
 import { TextInputTypes } from '@patternfly/react-core';
 import { ProjectModel } from '@console/internal/models';
-import { InputField, ResourceDropdownField, useFormikValidationFix, FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { useFormikValidationFix } from '@console/shared/src/hooks/formik-validation-fix';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
 import { CREATE_NAMESPACE_KEY } from './cloud-shell-setup-utils';
 import { connectToFlags, WithFlagsProps } from '@console/internal/components/utils/connect-flags';
 

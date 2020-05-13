@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { FormGroup, Title, Dropdown, DropdownItem, DropdownToggle } from '@patternfly/react-core';
 import { CaretDownIcon } from '@patternfly/react-icons';
 import { Formik, FormikProps, FormikValues } from 'formik';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { PromiseComponent, ResourceIcon } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   createModalLauncher,
   ModalTitle,
@@ -19,6 +18,8 @@ import { RootState } from '@console/internal/redux-types';
 import { getServiceBindingStatus } from '../topology-utils';
 import { TYPE_CONNECTS_TO, TYPE_SERVICE_BINDING } from './const';
 import { createConnection } from './createConnection';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { PromiseComponent } from '@console/internal/components/utils/promise-component';
 
 interface StateProps {
   serviceBinding: boolean;

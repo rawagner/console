@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
 import { RootState } from '@console/internal/redux-types';
-import { getURLSearchParams, ResourceLink } from '@console/internal/components/utils';
 import {
   TimespanDropdown,
   PollIntervalDropdown,
@@ -18,6 +17,8 @@ import {
   topWorkloadMetricsQueries,
 } from '../queries';
 import './MonitoringDashboard.scss';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { getURLSearchParams } from '@console/internal/components/utils/link';
 
 type MonitoringDashboardProps = {
   match: RMatch<{

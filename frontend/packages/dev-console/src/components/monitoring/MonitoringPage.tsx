@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { match as RMatch } from 'react-router';
-import { HorizontalNav, PageHeading, history } from '@console/internal/components/utils';
-import { TechPreviewBadge, ALL_NAMESPACES_KEY } from '@console/shared';
+import TechPreviewBadge from '@console/shared/src/components/badges/TechPreviewBadge';
+import { ALL_NAMESPACES_KEY } from '@console/shared/src/constants/common';
+import { history } from '@console/internal/components/utils/router';
 import NamespacedPage, { NamespacedPageVariants } from '../NamespacedPage';
 import ProjectListPage from '../projects/ProjectListPage';
 import ConnectedMonitoringDashboard from './dashboard/MonitoringDashboard';
 import ConnectedMonitoringMetrics from './metrics/MonitoringMetrics';
 import MonitoringEvents from './events/MonitoringEvents';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { HorizontalNav } from '@console/internal/components/utils/horizontal-nav';
 
 export const MONITORING_ALL_NS_PAGE_URI = '/dev-monitoring/all-namespaces';
 

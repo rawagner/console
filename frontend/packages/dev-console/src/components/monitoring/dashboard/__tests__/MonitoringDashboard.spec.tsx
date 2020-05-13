@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import * as link from '@console/internal/components/utils';
+import * as link from '@console/internal/components/utils/link';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import {
   TimespanDropdown,
   PollIntervalDropdown,
@@ -75,13 +76,13 @@ describe('Monitoring Dashboard Tab', () => {
       workloadType: 'Deployment',
     });
     const wrapper = shallow(<MonitoringDashboard {...monitoringDashboardProps} />);
-    expect(wrapper.find(link.ResourceLink).exists()).toBe(true);
+    expect(wrapper.find(ResourceLink).exists()).toBe(true);
   });
 
   it('should not render ResourceLink for namespace queries dashboard', () => {
     const spygetURLSearchParams = jest.spyOn(link, 'getURLSearchParams');
     spygetURLSearchParams.mockReturnValue({});
     const wrapper = shallow(<MonitoringDashboard {...monitoringDashboardProps} />);
-    expect(wrapper.find(link.ResourceLink).exists()).toBe(false);
+    expect(wrapper.find(ResourceLink).exists()).toBe(false);
   });
 });

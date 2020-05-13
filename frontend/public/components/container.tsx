@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
 import {
   ContainerLifecycle,
   ContainerLifecycleStage,
@@ -13,21 +13,16 @@ import {
   PodKind,
   ResourceList,
   VolumeMount,
-} from '../module/k8s';
+} from '../module/k8s/types';
 import * as k8sProbe from '../module/k8s/probe';
 import { getContainerState, getContainerStatus, getPullPolicyLabel } from '../module/k8s/container';
-import {
-  Firehose,
-  HorizontalNav,
-  MsgBox,
-  NodeLink,
-  PageHeading,
-  ResourceLink,
-  ScrollToTopOnMount,
-  SectionHeading,
-  Timestamp,
-} from './utils';
-import { resourcePath } from './utils/resource-link';
+import { resourcePath, ResourceLink, NodeLink } from './utils/resource-link';
+import { MsgBox } from './utils/status-box';
+import { ScrollToTopOnMount } from './utils/scroll-to-top-on-mount';
+import { SectionHeading, PageHeading } from './utils/headings';
+import { Timestamp } from './utils/timestamp';
+import { HorizontalNav } from './utils/horizontal-nav';
+import { Firehose } from './utils/firehose';
 
 const formatComputeResources = (resources: ResourceList) =>
   _.map(resources, (v, k) => `${k}: ${v}`).join(', ');

@@ -3,27 +3,21 @@ import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import { match } from 'react-router';
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
 import {
-  ResourceLink,
-  Timestamp,
-  MsgBox,
-  FirehoseResource,
-} from '@console/internal/components/utils';
-import {
-  MultiListPage,
   Table,
   TableRow,
   TableData,
   RowFunction,
-} from '@console/internal/components/factory';
-import {
-  K8sResourceKind,
-  GroupVersionKind,
-  kindForReference,
-  modelFor,
-  referenceForGroupVersionKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/table';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { MsgBox } from '@console/internal/components/utils/status-box';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { FirehoseResource } from '@console/internal/components/utils/types';
+import { K8sResourceKind, GroupVersionKind } from '@console/internal/module/k8s/types';
+import { kindForReference, referenceForGroupVersionKind } from '@console/internal/module/k8s/k8s';
+import { modelFor } from '@console/internal/module/k8s/k8s-models';
 import { CRDDescription, ClusterServiceVersionKind } from '../types';
 import { referenceForProvidedAPI, providedAPIsFor } from './index';
 import { OperandLink } from './operand/operand-link';

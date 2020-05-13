@@ -1,23 +1,25 @@
 import { EdgeModel, NodeModel, NodeShape } from '@console/topology';
 import {
-  TopologyDataModel as DataModel,
-  TopologyDataObject,
-  dataObjectFromModel,
-  Group,
-  Node,
-  Edge,
-  NODE_HEIGHT,
-  NODE_PADDING,
-  NODE_WIDTH,
-  TopologyFilters as Filters,
-} from '@console/dev-console/src/components/topology';
-import {
   KNATIVE_GROUP_NODE_HEIGHT,
   KNATIVE_GROUP_NODE_PADDING,
   KNATIVE_GROUP_NODE_WIDTH,
   TYPE_EVENT_SOURCE,
   TYPE_KNATIVE_SERVICE,
 } from './const';
+import {
+  NODE_WIDTH,
+  NODE_HEIGHT,
+  NODE_PADDING,
+} from '@console/dev-console/src/components/topology/components';
+import {
+  Group,
+  TopologyDataObject,
+  Edge,
+  TopologyDataModel as DataModel,
+  Node,
+} from '@console/dev-console/src/components/topology/topology-types';
+import { dataObjectFromModel } from '@console/dev-console/src/components/topology/data-transforms/transform-utils';
+import { TopologyFilters as Filters } from '@console/dev-console/src/components/topology/filters';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getKnativeGroupModel = (d: Group, model: DataModel, filters: Filters): NodeModel => {

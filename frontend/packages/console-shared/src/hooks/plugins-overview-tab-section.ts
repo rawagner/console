@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { AsyncComponent, AsyncComponentProps } from '@console/internal/components/utils';
-import { OverviewTabSection, isOverviewTabSection, useExtensions } from '@console/plugin-sdk';
-import { OverviewItem } from '../types';
+import { AsyncComponent, AsyncComponentProps } from '@console/internal/components/utils/async';
+import { OverviewTabSection, isOverviewTabSection } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { OverviewItem } from '../types/resource';
 
 export const getResourceTabSectionComp = (t: OverviewTabSection): React.FC<AsyncComponentProps> => (
   props: AsyncComponentProps,

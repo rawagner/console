@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
 import DashboardGrid from '@console/shared/src/components/dashboard/DashboardGrid';
-import { NodeKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { NodeKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import UtilizationCard from '@console/app/src/components/nodes/node-dashboard/UtilizationCard';
 import ActivityCard from '@console/app/src/components/nodes/node-dashboard/ActivityCard';
 import { NodeDashboardContext } from '@console/app/src/components/nodes/node-dashboard/NodeDashboardContext';
@@ -10,7 +10,9 @@ import {
   initialState,
   ActionType,
 } from '@console/app/src/components/nodes/node-dashboard/NodeDashboard';
-import { createBasicLookup, getNodeMachineName, getName } from '@console/shared';
+import { getNodeMachineName } from '@console/shared/src/selectors/node';
+import { getName } from '@console/shared/src/selectors/common';
+import { createBasicLookup } from '@console/shared/src/utils/utils';
 import { LimitRequested } from '@console/shared/src/components/dashboard/utilization-card/UtilizationItem';
 
 import InventoryCard from './InventoryCard';

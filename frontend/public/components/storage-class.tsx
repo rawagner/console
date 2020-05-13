@@ -2,19 +2,21 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import {
-  DetailsItem,
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  detailsPage,
-  navFactory,
-} from './utils';
-import { StorageClassResourceKind, K8sResourceKind, K8sResourceKindReference } from '../module/k8s';
+  StorageClassResourceKind,
+  K8sResourceKind,
+  K8sResourceKindReference,
+} from '../module/k8s/types';
 import { StorageClassModel } from '../models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { ResourceSummary, detailsPage } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { DetailsItem } from './utils/details-item';
+import { navFactory } from './utils/horizontal-nav';
 
 export const StorageClassReference: K8sResourceKindReference = 'StorageClass';
 

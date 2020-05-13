@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { getName } from '@console/shared';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { getName } from '@console/shared/src/selectors/common';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import {
   CUSTOM_FLAVOR,
   TEMPLATE_FLAVOR_LABEL,

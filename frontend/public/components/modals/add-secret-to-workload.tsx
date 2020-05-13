@@ -2,11 +2,15 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import * as fuzzy from 'fuzzysearch';
 
-import { K8sKind, k8sList, k8sPatch, K8sResourceKind } from '../../module/k8s';
+import { K8sKind, K8sResourceKind } from '../../module/k8s/types';
+import { k8sList, k8sPatch } from '../../module/k8s/resource';
 import { DeploymentModel, DeploymentConfigModel, StatefulSetModel } from '../../models';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { Dropdown, history, ResourceIcon, ResourceName, resourcePathFromModel } from '../utils';
 import { RadioInput } from '../radio';
+import { ResourceName, ResourceIcon } from '../utils/resource-icon';
+import { history } from '../utils/router';
+import { resourcePathFromModel } from '../utils/resource-link';
+import { Dropdown } from '../utils/dropdown';
 
 const workloadResourceModels = [DeploymentModel, DeploymentConfigModel, StatefulSetModel];
 const getContainers = (workload: K8sResourceKind) =>

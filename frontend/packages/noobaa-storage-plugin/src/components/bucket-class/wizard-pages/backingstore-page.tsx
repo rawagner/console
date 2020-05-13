@@ -21,17 +21,16 @@ import {
   TableHeader,
   TableVariant,
 } from '@patternfly/react-table';
-import {
-  Firehose,
-  FirehoseResult,
-  ResourceLink,
-  ExternalLink,
-} from '@console/internal/components/utils';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { NooBaaBackingStoreModel } from '@console/noobaa-storage-plugin/src/models';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import { Action, BackingStoreStateType, State } from '../state';
 import CreateBackingStoreFormModal from '../../create-backingstore-page/create-bs-modal';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 const tableColumnClasses = [
   classNames('col-md-4', 'col-sm-4', 'col-xs-6', 'nb-bc-bs-table__data'),

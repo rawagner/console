@@ -1,8 +1,14 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import { asAccessReview, Kebab, KebabOption } from '@console/internal/components/utils';
-import { K8sKind, K8sResourceCommon, K8sResourceKind, PodKind } from '@console/internal/module/k8s';
-import { getName, getNamespace } from '@console/shared';
+import {
+  K8sKind,
+  K8sResourceCommon,
+  K8sResourceKind,
+  PodKind,
+} from '@console/internal/module/k8s/types';
+import { KebabOption, Kebab } from '@console/internal/components/utils/kebab';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { confirmModal } from '@console/internal/components/modals';
 import { ModifyApplication } from '@console/dev-console/src/actions/modify-application';
 import { VMIKind, VMKind } from '../../types/vm';

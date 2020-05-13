@@ -10,16 +10,8 @@ import {
   K8sResourceConditionStatus,
   ClusterVersionCondition,
   UpdateHistory,
-} from '.';
-
-export enum ClusterUpdateStatus {
-  UpToDate = 'Up to Date',
-  UpdatesAvailable = 'Updates Available',
-  Updating = 'Updating',
-  Failing = 'Failing',
-  ErrorRetrieving = 'Error Retrieving',
-  Invalid = 'Invalid Cluster Version',
-}
+  ClusterUpdateStatus,
+} from './types';
 
 export const clusterVersionReference = referenceForModel(ClusterVersionModel);
 

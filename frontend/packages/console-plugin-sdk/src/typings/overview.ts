@@ -1,5 +1,5 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { FirehoseResource } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 import { OverviewDetailsResourcesTabProps } from '@console/internal/components/overview/resource-overview-page';
 import { OverviewMainContentProps } from '@console/internal/components/overview';
 import { Extension, LazyLoader } from './base';

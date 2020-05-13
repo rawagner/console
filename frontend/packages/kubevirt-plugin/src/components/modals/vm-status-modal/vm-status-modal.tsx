@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { Modal } from '@patternfly/react-core';
-import { HandlePromiseProps, withHandlePromise } from '@console/internal/components/utils';
-import { ModalComponentProps } from '@console/internal/components/factory';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
+import { ModalComponentProps } from '@console/internal/components/factory/modal';
 import { ModalFooter } from '../modal/modal-footer';
 import { PAUSED_VM_MODAL_MESSAGE } from '../../../constants/vm';
 import { VMIKind } from '../../../types';

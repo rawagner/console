@@ -5,32 +5,28 @@ import { connect } from 'react-redux';
 import * as classNames from 'classnames';
 import { ActionGroup, Button } from '@patternfly/react-core';
 import { sortable } from '@patternfly/react-table';
-import { FLAGS } from '@console/shared/src/constants';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { ClusterRoleBindingModel } from '../../models';
-import { getQN, k8sCreate, k8sPatch, referenceFor } from '../../module/k8s';
+import { k8sCreate, k8sPatch } from '../../module/k8s/resource';
+import { getQN } from '../../module/k8s/k8s';
+import { referenceFor } from '../../module/k8s/k8s-models';
 import * as UIActions from '../../actions/ui';
-import { MultiListPage, Table, TableRow, TableData } from '../factory';
 import { RadioGroup } from '../radio';
 import { confirmModal } from '../modals';
-import {
-  ButtonBar,
-  Kebab,
-  Firehose,
-  ListDropdown,
-  MsgBox,
-  NsDropdown,
-  ResourceKebab,
-  ResourceLink,
-  ResourceName,
-  StatusBox,
-  getQueryArgument,
-  history,
-  kindObj,
-  resourceObjPath,
-  useAccessReview,
-} from '../utils';
 import { isSystemRole } from './index';
 import { connectToFlags, flagPending } from '../utils/connect-flags';
+import { resourceObjPath, ResourceLink } from '../utils/resource-link';
+import { Kebab, ResourceKebab } from '../utils/kebab';
+import { MsgBox, StatusBox } from '../utils/status-box';
+import { ListDropdown, NsDropdown } from '../utils/list-dropdown';
+import { kindObj } from '../utils/inject';
+import { history, getQueryArgument } from '../utils/router';
+import { ResourceName } from '../utils/resource-icon';
+import { ButtonBar } from '../utils/button-bar';
+import { useAccessReview } from '../utils/rbac';
+import { Firehose } from '../utils/firehose';
+import { Table, TableRow, TableData } from '../factory/table';
+import { MultiListPage } from '../factory/list-page';
 
 const bindingKind = (binding) =>
   binding.metadata.namespace ? 'RoleBinding' : 'ClusterRoleBinding';

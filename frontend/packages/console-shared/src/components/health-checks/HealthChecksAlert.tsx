@@ -2,21 +2,18 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { Alert, AlertActionCloseButton } from '@patternfly/react-core';
-import { useAccessReview } from '@console/internal/components/utils';
-import { ServiceModel as KnativeServiceModel } from '@console/knative-plugin';
-import {
-  K8sResourceKind,
-  referenceForModel,
-  referenceFor,
-  modelFor,
-} from '@console/internal/module/k8s';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { ServiceModel as KnativeServiceModel } from '@console/knative-plugin/src/models';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
 import {
   DeploymentConfigModel,
   DeploymentModel,
   DaemonSetModel,
   StatefulSetModel,
 } from '@console/internal/models';
-import { STORAGE_PREFIX } from '../../constants';
+import { STORAGE_PREFIX } from '../../constants/common';
 import './HealthChecksAlert.scss';
 
 type HealthChecksAlertProps = {

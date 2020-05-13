@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { resourceObjPath } from '@console/internal/components/utils';
-import { K8sResourceKind, PodKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
 import { PodStatus } from '@console/internal/components/pod';
-import { PodControllerOverviewItem } from '../types';
+import { PodControllerOverviewItem } from '../types/pod';
 import { DaemonSetModel } from '@console/internal/models';
+import { resourceObjPath } from '@console/internal/components/utils/resource-link';
 
 export const resourceStatus = (
   obj: K8sResourceKind,

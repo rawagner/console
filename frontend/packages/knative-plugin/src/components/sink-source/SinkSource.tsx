@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Formik, FormikValues, FormikHelpers } from 'formik';
-import { K8sResourceKind, k8sUpdate, referenceFor, modelFor } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
 import SinkSourceModal from './SinkSourceModal';
 
 export interface SinkSourceProps {

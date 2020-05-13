@@ -2,11 +2,10 @@ import { RouteComponentProps, RouteProps } from 'react-router-dom';
 import {
   K8sKind,
   K8sResourceKindReference,
-  K8sResourceKind,
   K8sResourceCommon,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { Extension, LazyLoader } from './base';
-import { PageComponentProps } from '@console/internal/components/utils';
+import { PageComponentProps } from '@console/internal/components/utils/horizontal-nav';
 
 namespace ExtensionProperties {
   export interface ResourcePage<T> {
@@ -37,7 +36,7 @@ namespace ExtensionProperties {
     namespace: string;
   }> & {
     /** Some Resources require ReferenceFor instead of ReferenceForModel */
-    modelParser?: (obj: K8sResourceKind) => string;
+    referenceFor?: boolean;
   };
 
   export type ResourceDetailsPage = ResourcePage<{
@@ -51,7 +50,7 @@ namespace ExtensionProperties {
     name: string;
   }> & {
     /** Some Resources require ReferenceFor instead of ReferenceForModel */
-    modelParser?: (obj: K8sResourceKind) => string;
+    referenceFor?: boolean;
   };
 
   // Maps to react-router#https://reacttraining.com/react-router/web/api/Route

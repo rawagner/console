@@ -1,6 +1,6 @@
-import { getName } from '@console/shared/src';
-import { Patch } from '@console/internal/module/k8s';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { getName } from '@console/shared/src/selectors/common';
+import { Patch } from '@console/internal/module/k8s/types';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import {
   getDataVolumeTemplates,
   getDisks,

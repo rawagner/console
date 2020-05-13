@@ -1,4 +1,4 @@
-import { NameValuePair } from '@console/shared';
+import { NameValuePair } from '@console/shared/src/components/formik-fields/field-types';
 
 export enum HealthChecksProbeType {
   ReadinessProbe = 'readinessProbe',

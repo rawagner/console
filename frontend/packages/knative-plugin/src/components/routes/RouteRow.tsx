@@ -1,18 +1,15 @@
 import * as React from 'react';
 import * as cx from 'classnames';
-import { TableRow, TableData, RowFunction } from '@console/internal/components/factory';
-import {
-  Kebab,
-  ResourceLink,
-  ResourceKebab,
-  Timestamp,
-  ExternalLink,
-} from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { TableRow, TableData, RowFunction } from '@console/internal/components/factory/table';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { RevisionModel, RouteModel } from '../../models';
 import { getConditionString } from '../../utils/condition-utils';
 import { RouteKind } from '../../types';
 import { tableColumnClasses } from './route-table';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
 
 const routeReference = referenceForModel(RouteModel);
 const revisionReference = referenceForModel(RevisionModel);

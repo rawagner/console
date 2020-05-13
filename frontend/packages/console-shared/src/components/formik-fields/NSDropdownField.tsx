@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useField, useFormikContext, FormikValues } from 'formik';
-import { NsDropdown } from '@console/internal/components/utils';
 import { FormGroup } from '@patternfly/react-core';
+import { NsDropdown } from '@console/internal/components/utils/list-dropdown';
 import { DropdownFieldProps } from './field-types';
 import { getFieldId } from './field-utils';
-import { useFormikValidationFix } from '../../hooks';
+import { useFormikValidationFix } from '../../hooks/formik-validation-fix';
 
 const NSDropdownField: React.FC<DropdownFieldProps> = ({
   label,

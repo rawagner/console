@@ -1,12 +1,11 @@
-import { FirehoseResult } from '@console/internal/components/utils';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import {
   DeploymentKind,
   PodKind,
   K8sResourceConditionStatus,
-  referenceForModel,
   K8sKind,
-} from '@console/internal/module/k8s';
-import { TopologyDataResources } from '@console/dev-console/src/components/topology';
+} from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   ConfigurationModel,
   RouteModel,
@@ -26,6 +25,7 @@ import {
   RouteKind,
   ServiceKind as knativeServiceKind,
 } from '../../types';
+import { TopologyDataResources } from '@console/dev-console/src/components/topology/topology-types';
 
 export const sampleKnativeDeployments: FirehoseResult<DeploymentKind[]> = {
   loaded: true,

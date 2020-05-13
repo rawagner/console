@@ -3,7 +3,7 @@ import {
   Selector,
   K8sResourceKind,
   K8sResourceCommon,
-} from '../../module/k8s';
+} from '../../module/k8s/types';
 
 export type FirehoseResult<
   R extends K8sResourceCommon | K8sResourceCommon[] = K8sResourceKind[]

@@ -4,27 +4,25 @@ import { Link } from 'react-router-dom';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
-import { Status } from '@console/shared';
-import { getJobTypeAndCompletions, K8sKind, JobKind } from '../module/k8s';
+import { Status } from '@console/shared/src/components/status/Status';
+import { K8sKind, JobKind } from '../module/k8s/types';
+import { getJobTypeAndCompletions } from '../module/k8s/job';
 import { Conditions } from './conditions';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { configureJobParallelismModal } from './modals';
-import {
-  ContainerTable,
-  DetailsItem,
-  Kebab,
-  KebabAction,
-  LabelList,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-  navFactory,
-  pluralize,
-} from './utils';
 import { ResourceEventStream } from './events';
 import { JobModel } from '../models';
+import { KebabAction, Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { DetailsItem } from './utils/details-item';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, pluralize } from './utils/details-page';
+import { Timestamp } from './utils/timestamp';
+import { ContainerTable } from './utils/container-table';
+import { navFactory } from './utils/horizontal-nav';
 
 const ModifyJobParallelism: KebabAction = (kind: K8sKind, obj: JobKind) => ({
   label: 'Edit Parallelism',

@@ -4,19 +4,17 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { ActionGroup, Button } from '@patternfly/react-core';
 
-import { k8sGet, k8sUpdate } from '../../module/k8s';
+import { k8sGet, k8sUpdate } from '../../module/k8s/resource';
 import { RoleModel, ClusterRoleModel } from '../../models';
 import { errorModal } from '../modals';
-import {
-  SectionHeading,
-  history,
-  ResourceIcon,
-  resourceObjPath,
-  PromiseComponent,
-  ButtonBar,
-  LoadingBox,
-} from '../utils';
 import * as k8sActions from '../../actions/k8s';
+import { PromiseComponent } from '../utils/promise-component';
+import { history } from '../utils/router';
+import { resourceObjPath } from '../utils/resource-link';
+import { SectionHeading } from '../utils/headings';
+import { ResourceIcon } from '../utils/resource-icon';
+import { LoadingBox } from '../utils/status-box';
+import { ButtonBar } from '../utils/button-bar';
 
 const NON_RESOURCE_VERBS = ['get', 'post', 'put', 'delete'];
 const READ_VERBS = new Set(['get', 'list', 'proxy', 'redirect', 'watch']);

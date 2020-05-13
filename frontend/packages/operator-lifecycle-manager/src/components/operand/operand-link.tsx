@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { referenceForModel, K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import { ResourceIcon } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 import { ClusterServiceVersionModel } from '../../models';
 
 export const OperandLink: React.SFC<OperandLinkProps> = (props) => {

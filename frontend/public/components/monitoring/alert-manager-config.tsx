@@ -14,10 +14,10 @@ import {
   Title,
 } from '@patternfly/react-core';
 
-import { K8sResourceKind } from '../../module/k8s';
-import { history, Kebab, MsgBox, SectionHeading, StatusBox } from '../utils';
+import { K8sResourceKind } from '../../module/k8s/types';
 import { confirmModal, createAlertRoutingModal } from '../modals';
-import { Table, TableData, TableRow, TextFilter, RowFunction } from '../factory';
+import { Table, TableRow, TableData, RowFunction } from '../factory/table';
+import { TextFilter } from '../factory/list-page';
 import {
   getAlertmanagerConfig,
   patchAlertmanagerConfig,
@@ -25,6 +25,10 @@ import {
 } from './alert-manager-utils';
 import { Helmet } from 'react-helmet';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import { SectionHeading } from '../utils/headings';
+import { Kebab } from '../utils/kebab';
+import { history } from '../utils/router';
+import { MsgBox, StatusBox } from '../utils/status-box';
 
 let secret: K8sResourceKind = null; // alertmanager-main Secret which holds alertmanager configuration yaml
 let config: AlertmanagerConfig = null; // alertmanager configuration yaml as object

@@ -1,4 +1,4 @@
-import * as k8s from '@console/internal/module/k8s';
+import * as k8s from '@console/internal/module/k8s/resource';
 import {
   ImageStreamModel,
   ServiceModel,
@@ -11,8 +11,8 @@ import {
 import {
   ServiceModel as KnativeServiceModel,
   RouteModel as KnativeRouteModel,
-} from '@console/knative-plugin';
-import * as utils from '@console/internal/components/utils';
+} from '@console/knative-plugin/src/models';
+import * as utils from '@console/internal/components/utils/rbac';
 import { TopologyDataResources } from '../../components/topology/topology-types';
 import { getTopologyResourceObject } from '../../components/topology/topology-utils';
 import { transformTopologyData } from '../../components/topology/data-transforms/data-transformer';

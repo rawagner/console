@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { K8sResourceKind } from '../module/k8s';
-import { SectionHeading, ResourceLink } from './utils';
+import { K8sResourceKind } from '../module/k8s/types';
 import { MaskedData } from './configmap-and-secret-data';
+import { ResourceLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
 
 export const ServiceCatalogParametersSecrets: React.SFC<ServiceCatalogParametersSecretsProps> = ({
   obj: obj,

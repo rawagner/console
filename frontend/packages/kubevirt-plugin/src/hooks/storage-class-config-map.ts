@@ -1,12 +1,13 @@
-import { ConfigMapKind, k8sGet } from '@console/internal/module/k8s';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import * as React from 'react';
 import {
   STORAGE_CLASS_CONFIG_MAP_NAME,
   STORAGE_CLASS_CONFIG_MAP_NAMESPACES,
 } from '../constants/sc';
 import { ConfigMapModel } from '@console/internal/models';
-import { joinGrammaticallyListOfItems } from '@console/shared/src';
-import { FirehoseResult } from '@console/internal/components/utils';
+import { joinGrammaticallyListOfItems } from '@console/shared/src/utils/grammar';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 type UseConfigMapResult = [ConfigMapKind, boolean, string];
 

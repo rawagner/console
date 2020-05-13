@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { DASH } from '@console/shared';
-import { ResourceLink } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { DASH } from '@console/shared/src/constants/ui';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { NodeModel } from '@console/internal/models';
 
 type NodeLinkProps = {

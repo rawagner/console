@@ -15,9 +15,11 @@ import ErrorAlert from '@console/shared/src/components/alerts/error';
 import { formatNumber } from './format';
 import { ColumnStyle, Panel } from './types';
 import { getPrometheusURL, PrometheusEndpoint } from '../../graphs/helpers';
-import { EmptyBox, usePoll, useSafeFetch } from '../../utils';
 import { TablePagination } from '../metrics';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
+import { useSafeFetch } from '../../utils/safe-fetch-hook';
+import { usePoll } from '../../utils/poll-hook';
+import { EmptyBox } from '../../utils/status-box';
 
 type AugmentedColumnStyle = ColumnStyle & {
   className?: string;

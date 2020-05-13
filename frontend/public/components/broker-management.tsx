@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { HorizontalNav, PageHeading } from './utils';
 import { ClusterServiceBrokerPage } from './cluster-service-broker';
 import { ClusterServiceClassPage } from './cluster-service-class';
+import { PageHeading } from './utils/headings';
+import { HorizontalNav } from './utils/horizontal-nav';
 
 const pages = [
   {

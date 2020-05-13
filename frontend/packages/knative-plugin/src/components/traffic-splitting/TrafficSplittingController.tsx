@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { Firehose, FirehoseResult } from '@console/internal/components/utils';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import {
   transformTrafficSplittingData,
   knativeServingResourcesTrafficSplitting,

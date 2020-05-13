@@ -4,27 +4,19 @@ import { Helmet } from 'react-helmet';
 import { ActionGroup, Button } from '@patternfly/react-core';
 
 import { connectToPlural } from '../../kinds';
-import {
-  ContainerSpec,
-  k8sCreate,
-  k8sGet,
-  K8sKind,
-  k8sPatch,
-  referenceFor,
-} from '../../module/k8s';
-import {
-  ButtonBar,
-  history,
-  ListDropdown,
-  LoadingBox,
-  ResourceLink,
-  resourceObjPath,
-} from '../utils';
+import { k8sCreate, k8sGet, k8sPatch } from '../../module/k8s/resource';
+import { ContainerSpec, K8sKind } from '../../module/k8s/types';
+import { referenceFor } from '../../module/k8s/k8s-models';
 import { Checkbox } from '../checkbox';
 import { RadioInput } from '../radio';
 import { CreatePVCForm } from './create-pvc';
 import { PersistentVolumeClaimModel } from '../../models';
 import { ContainerSelector } from '../container-selector';
+import { resourceObjPath, ResourceLink } from '../utils/resource-link';
+import { ButtonBar } from '../utils/button-bar';
+import { LoadingBox } from '../utils/status-box';
+import { ListDropdown } from '../utils/list-dropdown';
+import { history } from '../utils/router';
 
 const PVCDropdown: React.FC<PVCDropdownProps> = (props) => {
   const kind = 'PersistentVolumeClaim';

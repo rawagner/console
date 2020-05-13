@@ -6,19 +6,18 @@ import * as classNames from 'classnames';
 import { MachineHealthCheckModel, MachineModel } from '../models';
 import { K8sResourceKind, MachineHealthCheckKind } from '../module/k8s/types';
 import { referenceForModel } from '../module/k8s/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  DetailsItem,
-  EmptyBox,
-  Kebab,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Selector,
-  Timestamp,
-  navFactory,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
+import { EmptyBox } from './utils/status-box';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { DetailsItem } from './utils/details-item';
+import { Selector } from './utils/selector';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(MachineHealthCheckModel), ...common];

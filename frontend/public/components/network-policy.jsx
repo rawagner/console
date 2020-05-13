@@ -4,20 +4,19 @@ import { Link } from 'react-router-dom';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 import { connectToFlags } from './utils/connect-flags';
-import { FLAGS } from '@console/shared';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import {
-  Kebab,
-  navFactory,
-  ResourceKebab,
-  SectionHeading,
-  ResourceLink,
-  ResourceSummary,
-  Selector,
-  ExternalLink,
-} from './utils';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { NetworkPolicyModel } from '../models';
 import { getNetworkPolicyDocLink } from './utils/documentation';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { Selector } from './utils/selector';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { ExternalLink } from './utils/link';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(NetworkPolicyModel), ...common];

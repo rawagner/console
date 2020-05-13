@@ -7,9 +7,9 @@ import { DRAGGABLE_TYPE } from './draggable-item-types';
 import { Button } from '@patternfly/react-core';
 import { PficonDragdropIcon, MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 
-import { NameValueEditorPair, EnvFromPair, EnvType } from './index';
 import { ValueFromPair } from './value-from-pair';
 import withDragDropContext from './drag-drop-context';
+import { NameValueEditorPair, EnvType, EnvFromPair } from './types';
 
 export const NameValueEditor = withDragDropContext(
   class NameValueEditor extends React.Component {

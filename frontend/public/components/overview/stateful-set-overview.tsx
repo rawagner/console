@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import { StatefulSetModel } from '../../models';
 import { menuActions } from '../stateful-set';
-import { ResourceSummary } from '../utils';
 import PodRingSet from '@console/shared/src/components/pod/PodRingSet';
 
 import { OverviewDetailsResourcesTab } from './resource-overview-page';
 import { ResourceOverviewDetails } from './resource-overview-details';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { ResourceSummary } from '../utils/details-page';
 
 const StatefulSetOverviewDetails: React.SFC<StatefulSetOverviewDetailsProps> = ({
   item: { obj: ss, pods: pods, current, previous, isRollingOut },

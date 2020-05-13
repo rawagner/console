@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { PodControllerOverviewItem } from '@console/shared';
-import { ResourceLink, SidebarSectionHeading } from '@console/internal/components/utils';
+import { PodControllerOverviewItem } from '@console/shared/src/types/pod';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 
 type DeploymentOverviewListProps = {
   current: PodControllerOverviewItem;

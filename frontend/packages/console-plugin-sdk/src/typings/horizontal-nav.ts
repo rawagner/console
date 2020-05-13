@@ -1,4 +1,4 @@
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { PageComponentProps, Page } from '@console/internal/components/utils/horizontal-nav';
 import { Extension, LazyLoader } from './base';
 

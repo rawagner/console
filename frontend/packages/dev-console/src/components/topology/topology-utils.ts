@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
-import { K8sResourceKind, modelFor, referenceFor } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { RootState } from '@console/internal/redux-types';
 import { getRouteWebURL } from '@console/internal/components/routes';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
 import {
   createResourceConnection,
   updateResourceApplication,

@@ -13,7 +13,7 @@ import store from '@console/internal/redux';
 import { RootState, NotificationAlerts } from '@console/internal/redux-types';
 import { alertURL } from '@console/shared/src/selectors/monitoring';
 import { Alert } from '@console/shared/src/types/monitoring';
-import { RedExclamationCircleIcon } from '@console/shared';
+import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
 import {
   getAlertDescription,
   getAlertMessage,
@@ -33,7 +33,7 @@ import {
 
 import { coFetchJSON } from '../co-fetch';
 import { FirehoseResult } from './utils/types';
-import { ClusterUpdate, ClusterVersionKind } from '../module/k8s';
+import { ClusterUpdate, ClusterVersionKind } from '../module/k8s/types';
 import { getSortedUpdates } from './modals/cluster-update-modal';
 import { usePrevious } from '@console/metal3-plugin/src/hooks';
 

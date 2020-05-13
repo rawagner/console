@@ -3,21 +3,19 @@ import * as _ from 'lodash';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { match } from 'react-router';
-import {
-  Firehose,
-  PageHeading,
-  StatusBox,
-  MsgBox,
-  ExternalLink,
-  skeletonCatalog,
-} from '@console/internal/components/utils';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
 import { ErrorBoundaryFallback } from '@console/internal/components/error';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { fromRequirements } from '@console/internal/module/k8s/selector';
+import { parseJSONAnnotation } from '@console/shared/src/utils/resource-utils';
+import { StatusBox, MsgBox } from '@console/internal/components/utils/status-box';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { skeletonCatalog } from '@console/internal/components/utils/skeleton-catalog';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import { PackageManifestModel, OperatorGroupModel, SubscriptionModel } from '../../models';
 import { PackageManifestKind, OperatorGroupKind, SubscriptionKind } from '../../types';
-import { iconFor } from '..';
+import { iconFor } from '../utils';
 import { installedFor, subscriptionFor } from '../operator-group';
 import { getOperatorProviderType } from './operator-hub-utils';
 import { OperatorHubTileView } from './operator-hub-items';
@@ -27,7 +25,6 @@ import {
   InstalledState,
   OperatorHubCSVAnnotationKey,
 } from './index';
-import { parseJSONAnnotation } from '@console/shared';
 
 const ANNOTATIONS_WITH_JSON = [
   OperatorHubCSVAnnotationKey.infrastructureFeatures,

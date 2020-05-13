@@ -9,10 +9,10 @@ import {
   Text,
   TextVariants,
 } from '@patternfly/react-core';
-import { FirehoseResult } from '@console/internal/components/utils';
-import { NodeKind } from '@console/internal/module/k8s';
-import { ModalBody } from '@console/internal/components/factory';
-import { ValidationErrorType } from '@console/shared';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { ModalBody } from '@console/internal/components/factory/modal';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { isLoaded } from '../../../../../../utils';
 import { ModalFooter } from '../../../../modal/modal-footer';
 import {

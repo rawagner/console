@@ -1,15 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import {
-  ResourceLink,
-  Firehose,
-  FirehoseResult,
-  FirehoseResource,
-} from '@console/internal/components/utils';
+import { FirehoseResult, FirehoseResource } from '@console/internal/components/utils/types';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import { SecretModel, ServiceAccountModel } from '@console/internal/models';
 import { SecretType } from '@console/internal/components/secrets/create-secret';
-import { SecondaryStatus } from '@console/shared';
-import { SecretKind } from '@console/internal/module/k8s';
+import SecondaryStatus from '@console/shared/src/components/status/SecondaryStatus';
+import { SecretKind } from '@console/internal/module/k8s/types';
 import { ServiceAccountType } from '../../../../utils/pipeline-utils';
 import { PIPELINE_SERVICE_ACCOUNT } from '../../const';
 import './SecretsList.scss';

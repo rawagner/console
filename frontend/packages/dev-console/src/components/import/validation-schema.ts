@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import * as _ from 'lodash';
-import { convertToBaseValue } from '@console/internal/components/utils';
+import { convertToBaseValue } from '@console/internal/components/utils/units';
 import { isInteger } from '../../utils/yup-validation-util';
 import { CREATE_APPLICATION_KEY } from '../../const';
 import { Resources } from './import-types';

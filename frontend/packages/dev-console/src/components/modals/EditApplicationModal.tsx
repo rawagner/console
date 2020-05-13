@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Title } from '@patternfly/react-core';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { PromiseComponent } from '@console/internal/components/utils';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { PromiseComponent } from '@console/internal/components/utils/promise-component';
 import { Node } from '@console/topology';
 import {
   createModalLauncher,

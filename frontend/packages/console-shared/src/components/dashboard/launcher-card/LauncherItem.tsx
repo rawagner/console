@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { ExternalLink } from '@console/internal/components/utils/link';
 
 const LauncherItem: React.FC<LauncherItemProps> = ({ consoleLink }) => (

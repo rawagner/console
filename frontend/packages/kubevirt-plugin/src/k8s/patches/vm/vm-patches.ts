@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Patch, TemplateKind } from '@console/internal/module/k8s';
+import { Patch, TemplateKind } from '@console/internal/module/k8s/types';
 import { VMGenericLikeEntityKind, VMLikeEntityKind } from '../../../types/vmLike';
 import { getAnnotations, getDescription } from '../../../selectors/selectors';
 import { getFlavor, getCPU, getMemory, parseCPU, DEFAULT_CPU } from '../../../selectors/vm';
@@ -8,8 +8,8 @@ import { CUSTOM_FLAVOR, TEMPLATE_FLAVOR_LABEL } from '../../../constants';
 import { getVMLikePatches } from '../vm-template';
 import { selectVM } from '../../../selectors/vm-template/basic';
 import { CPU, VMITemplate, VMKind } from '../../../types/vm';
-import { PatchBuilder } from '@console/shared/src/k8s';
-import { getLabels } from '@console/shared/src';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
+import { getLabels } from '@console/shared/src/selectors/common';
 
 const getDomainPatches = (vm: VMKind): Patch[] => {
   let patch: Patch = null;

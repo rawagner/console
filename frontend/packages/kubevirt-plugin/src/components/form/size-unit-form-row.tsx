@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormSelect, FormSelectOption, Split, SplitItem } from '@patternfly/react-core';
-import { ValidationObject } from '@console/shared';
+import { ValidationObject } from '@console/shared/src/utils/validation/types';
 import { prefixedID } from '../../utils';
 import { getStringEnumValues } from '../../utils/types';
 import { isValidationError } from '../../utils/validations/common';

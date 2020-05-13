@@ -1,9 +1,9 @@
 import { OVirtProviderModel } from '../../../models';
 import { EnhancedK8sMethods } from '../../enhancedK8sMethods/enhancedK8sMethods';
 import { getDefaultSecretName } from './utils/utils';
-import { getName, getOwnerReferences } from '@console/shared/src';
+import { getName, getOwnerReferences } from '@console/shared/src/selectors/common';
 import { SecretModel } from '@console/internal/models';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { buildOwnerReference } from '../../../utils';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { SecretWrappper } from '../../wrapper/k8s/secret-wrapper';

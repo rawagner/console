@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import Helmet from 'react-helmet';
-import { PageHeading, Firehose } from '@console/internal/components/utils';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import { SecretModel } from '@console/internal/models';
 import ProjectListPage from '../projects/ProjectListPage';
 import NamespacedPage, { NamespacedPageVariants } from '../NamespacedPage';

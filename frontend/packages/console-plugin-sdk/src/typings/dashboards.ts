@@ -4,8 +4,8 @@ import {
   FirehoseResource,
   FirehoseResult,
   FirehoseResourcesResult,
-} from '@console/internal/components/utils';
-import { K8sKind, K8sResourceKind, K8sResourceCommon } from '@console/internal/module/k8s';
+} from '@console/internal/components/utils/types';
+import { K8sKind, K8sResourceKind, K8sResourceCommon } from '@console/internal/module/k8s/types';
 import {
   StatusGroupMapper,
   ExpandedComponentProps,

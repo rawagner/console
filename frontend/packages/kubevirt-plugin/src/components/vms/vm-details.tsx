@@ -1,15 +1,12 @@
 import * as React from 'react';
-import {
-  Firehose,
-  StatusBox,
-  ScrollToTopOnMount,
-  SectionHeading,
-  FirehoseResult,
-  useAccessReview,
-  asAccessReview,
-} from '@console/internal/components/utils';
-import { getNamespace } from '@console/shared';
-import { K8sKind, PodKind, TemplateKind } from '@console/internal/module/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { useAccessReview, asAccessReview } from '@console/internal/components/utils/rbac';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { ScrollToTopOnMount } from '@console/internal/components/utils/scroll-to-top-on-mount';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { getNamespace } from '@console/shared/src/selectors/common';
+import { K8sKind, PodKind, TemplateKind } from '@console/internal/module/k8s/types';
 import { ServiceModel } from '@console/internal/models';
 import { ServicesList } from '@console/internal/components/service';
 import { VMKind, VMIKind } from '../../types';

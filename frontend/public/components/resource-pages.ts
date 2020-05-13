@@ -1,8 +1,14 @@
 import { Map as ImmutableMap } from 'immutable';
-import { ResourceDetailsPage, ResourcePage, ResourceListPage } from '@console/plugin-sdk';
+import {
+  ResourceDetailsPage,
+  ResourcePage,
+  ResourceListPage,
+} from '@console/plugin-sdk/src/typings';
 
 import { ReportReference, ReportGenerationQueryReference } from './chargeback';
-import { referenceForModel, GroupVersionKind } from '../module/k8s';
+import { GroupVersionKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
+import { referenceFor } from '../module/k8s/k8s-models';
 import {
   AlertmanagerModel,
   BuildConfigModel,
@@ -66,8 +72,8 @@ const addResourcePage = (
   map: ImmutableMap<ResourceMapKey, ResourceMapValue>,
   page: ResourcePage,
 ) => {
-  const key = page.properties?.modelParser
-    ? page.properties?.modelParser(page.properties.model)
+  const key = page.properties?.referenceFor
+    ? referenceFor(page.properties.model)
     : referenceForModel(page.properties.model);
   if (!map.has(key)) {
     map.set(key, page.properties.loader);

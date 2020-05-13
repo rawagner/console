@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
 import { AlertmanagerConfig } from '../monitoring/alert-manager-config';
 import { patchAlertmanagerConfig } from '../monitoring/alert-manager-utils';
 

@@ -1,10 +1,9 @@
+import { ValidationErrorType, ValidationObject } from '@console/shared/src/utils/validation/types';
 import {
   asValidationObject,
-  makeSentence,
   validateDNS1123SubdomainValue,
-  ValidationErrorType,
-  ValidationObject,
-} from '@console/shared';
+} from '@console/shared/src/utils/validation/validation';
+import { makeSentence } from '@console/shared/src/utils/grammar';
 import {
   MAC_ADDRESS_INVALID_ERROR,
   NETWORK_MULTUS_NAME_EXISTS,

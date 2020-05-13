@@ -4,22 +4,10 @@ import { Link } from 'react-router-dom';
 import * as _ from 'lodash';
 import { CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
 import { ErrorBoundary } from '@console/shared/src/components/error/error-boundary';
-import {
-  DetailsPage,
-  TableInnerProps,
-  Table,
-  TableRow,
-} from '@console/internal/components/factory';
-import {
-  Timestamp,
-  ResourceKebab,
-  ScrollToTopOnMount,
-  SectionHeading,
-  resourceObjPath,
-  StatusBox,
-} from '@console/internal/components/utils';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { Table, TableRow, TableInnerProps } from '@console/internal/components/factory/table';
 import * as rbac from '@console/internal/components/utils/rbac';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import * as operatorLogo from '@console/internal/imgs/operator.svg';
 import {
   testClusterServiceVersion,
@@ -52,6 +40,12 @@ import {
   ClusterServiceVersionLogoProps,
   referenceForProvidedAPI,
 } from '.';
+import { ResourceKebab } from '@console/internal/components/utils/kebab';
+import { resourceObjPath } from '@console/internal/components/utils/resource-link';
+import { ScrollToTopOnMount } from '@console/internal/components/utils/scroll-to-top-on-mount';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 describe('SingleProjectTableHeader.displayName', () => {
   it('returns single project column header definition for cluster service version table header', () => {

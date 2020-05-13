@@ -16,7 +16,7 @@ import {
   ResourceDetailsPage,
   DashboardsOverviewResourceActivity,
   CustomFeatureFlag,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import {
   OCS_INDEPENDENT_FLAG,
   detectIndependentMode,
@@ -26,7 +26,7 @@ import {
 import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import { GridPosition } from '@console/shared/src/components/dashboard/DashboardGrid';
 import { OverviewQuery } from '@console/internal/components/dashboard/dashboards-page/cluster-dashboard/queries';
-import { referenceForModel, referenceFor } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PersistentVolumeClaimModel } from '@console/internal/models';
 import { getCephHealthState } from './components/dashboard-page/storage-dashboard/status-card/utils';
 import { isClusterExpandActivity } from './components/dashboard-page/storage-dashboard/activity-card/cluster-expand-activity';
@@ -378,7 +378,7 @@ const plugin: Plugin<ConsumedExtensions> = [
         import(
           './components/volume-snapshot/volume-snapshot' /* webpackChunkName: "ceph-storage-volume-snapshot-details" */
         ).then((m) => m.VolumeSnapshotDetails),
-      modelParser: referenceFor,
+      referenceFor: true,
     },
     flags: {
       required: [OCS_SUPPORT_FLAGS.SNAPSHOT, CEPH_FLAG],

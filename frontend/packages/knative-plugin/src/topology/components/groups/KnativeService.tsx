@@ -7,9 +7,9 @@ import {
   WithDndDropProps,
   WithCreateConnectorProps,
 } from '@console/topology';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
-import { getTopologyResourceObject } from '@console/dev-console/src/components/topology';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { getTopologyResourceObject } from '@console/dev-console/src/components/topology/topology-utils';
 import KnativeServiceNode from './KnativeServiceNode';
 import KnativeServiceGroup from './KnativeServiceGroup';
 

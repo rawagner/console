@@ -4,13 +4,8 @@ import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import { Edge } from '@console/topology';
 import { RootState } from '@console/internal/redux-types';
-import { referenceFor, K8sResourceKind } from '@console/internal/module/k8s';
-import {
-  ActionsMenu,
-  ResourceLink,
-  SidebarSectionHeading,
-  ExternalLink,
-} from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import {
   TYPE_EVENT_SOURCE_LINK,
   TYPE_REVISION_TRAFFIC,
@@ -19,6 +14,10 @@ import { TYPE_CONNECTS_TO, TYPE_SERVICE_BINDING, TYPE_TRAFFIC_CONNECTOR } from '
 import { edgeActions } from './actions/edgeActions';
 import { TopologyDataModel, TopologyDataObject } from './topology-types';
 import { getKialiLink } from './topology-utils';
+import { ActionsMenu } from '@console/internal/components/utils/dropdown';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ExternalLink } from '@console/internal/components/utils/link';
 
 type StateProps = {
   consoleLinks?: K8sResourceKind[];

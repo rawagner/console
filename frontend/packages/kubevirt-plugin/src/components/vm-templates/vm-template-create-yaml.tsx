@@ -4,14 +4,13 @@ import { safeLoad } from 'js-yaml';
 import { TemplateModel } from '@console/internal/models';
 import { connectToPlural } from '@console/internal/kinds';
 import { CreateYAMLProps } from '@console/internal/components/create-yaml';
-import { k8sList, K8sResourceKind, TemplateKind } from '@console/internal/module/k8s';
-import {
-  LoadingBox,
-  AsyncComponent,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
+import { K8sResourceKind, TemplateKind } from '@console/internal/module/k8s/types';
+import { k8sList } from '@console/internal/module/k8s/resource';
 import { ErrorPage404 } from '@console/internal/components/error';
-import { getNamespace, getName } from '@console/shared';
+import { getNamespace, getName } from '@console/shared/src/selectors/common';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { AsyncComponent } from '@console/internal/components/utils/async';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import { VMTemplateYAMLTemplates } from '../../models/templates';
 import { VM_TEMPLATE_CREATE_HEADER } from '../../constants/vm-templates';
 import { resolveDefaultVMTemplate } from '../../k8s/requests/vm/create/default-template';

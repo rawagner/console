@@ -9,44 +9,41 @@ import * as fuzzy from 'fuzzysearch';
 import { Tooltip } from '@patternfly/react-core';
 import { sortable } from '@patternfly/react-table';
 
-import { ALL_NAMESPACES_KEY, FLAGS, APIError } from '@console/shared';
-import { useAccessReview } from '@console/internal/components/utils';
+import { ALL_NAMESPACES_KEY, FLAGS } from '@console/shared/src/constants/common';
+import { APIError } from '@console/shared/src/types/resource';
 import { connectToModel } from '../kinds';
 import { LocalResourceAccessReviewsModel, ResourceAccessReviewsModel } from '../models';
 import {
-  apiVersionForModel,
-  k8sCreate,
   K8sKind,
   K8sResourceKindReference,
   K8sVerb,
-  getResourceDescription,
-  referenceForModel,
   ResourceAccessReviewRequest,
   ResourceAccessReviewResponse,
-} from '../module/k8s';
+} from '../module/k8s/types';
+import { apiVersionForModel, referenceForModel } from '../module/k8s/k8s';
+import { k8sCreate } from '../module/k8s/resource';
+import { getResourceDescription } from '../module/k8s/swagger';
 import { connectToFlags, FlagsObject } from './utils/connect-flags';
 import { RootState } from '../redux-types';
 import { CheckBox, CheckBoxControls } from './row-filter';
 import { DefaultPage } from './default-resource';
-import { Table, TextFilter } from './factory';
+import { Table } from './factory/table';
+import { TextFilter } from './factory/list-page';
 import { fuzzyCaseInsensitive } from './factory/table-filters';
 import { getResourceListPages } from './resource-pages';
 import { ExploreType } from './sidebars/explore-type-sidebar';
-import {
-  AsyncComponent,
-  BreadCrumbs,
-  Dropdown,
-  EmptyBox,
-  HorizontalNav,
-  LinkifyExternal,
-  LoadError,
-  LoadingBox,
-  removeQueryArgument,
-  ResourceIcon,
-  ScrollToTopOnMount,
-  setQueryArgument,
-} from './utils';
-import { isResourceListPage, useExtensions, ResourceListPage } from '@console/plugin-sdk';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { isResourceListPage, ResourceListPage } from '@console/plugin-sdk/src/typings';
+import { ResourceIcon } from './utils/resource-icon';
+import { EmptyBox, LoadError, LoadingBox } from './utils/status-box';
+import { removeQueryArgument, setQueryArgument } from './utils/router';
+import { Dropdown } from './utils/dropdown';
+import { LinkifyExternal } from './utils/link';
+import { AsyncComponent } from './utils/async';
+import { useAccessReview } from './utils/rbac';
+import { ScrollToTopOnMount } from './utils/scroll-to-top-on-mount';
+import { BreadCrumbs } from './utils/headings';
+import { HorizontalNav } from './utils/horizontal-nav';
 
 const mapStateToProps = (state: RootState): APIResourceLinkStateProps => {
   return {

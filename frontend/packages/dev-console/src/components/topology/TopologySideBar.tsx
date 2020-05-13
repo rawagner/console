@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TopologySideBar as PFTopologySideBar } from '@patternfly/react-topology';
-import { CloseButton } from '@console/internal/components/utils';
+import { CloseButton } from '@console/internal/components/utils/close-button';
 
 export type TopologySideBarProps = {
   show: boolean;

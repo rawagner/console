@@ -1,4 +1,4 @@
-import { OwnerReference } from '@console/internal/module/k8s';
+import { OwnerReference } from '@console/internal/module/k8s/types';
 
 export const compareOwnerReference = (
   obj: OwnerReference,

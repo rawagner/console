@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { requirePrometheus } from '@console/internal/components/graphs';
+import { requirePrometheus } from '@console/internal/components/graphs/require-prometheus';
 import { Area } from '@console/internal/components/graphs/area';
 import {
   humanizeBinaryBytes,
   humanizeCpuCores,
   humanizeDecimalBytesPerSec,
-} from '@console/internal/components/utils';
-import { NodeKind } from '@console/internal/module/k8s';
-import { getNodeAddresses } from '@console/shared';
+} from '@console/internal/components/utils/units';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { getNodeAddresses } from '@console/shared/src/selectors/node';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 
 type NodeGraphsProps = {

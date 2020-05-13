@@ -1,4 +1,4 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { pipelineTestData, PipelineExampleNames, DataState } from '../../test/pipeline-data';
 
 export const mockPipelinesJSON: K8sResourceKind[] = [

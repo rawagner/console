@@ -1,6 +1,6 @@
 import { DISK_SOURCE, POD_STATUS, VM_STATUS } from './consts';
 import { Flavor, OperatingSystem, WorkloadProfile } from './constants/wizard';
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 
 export type ProvisionOption = {
   method: string;

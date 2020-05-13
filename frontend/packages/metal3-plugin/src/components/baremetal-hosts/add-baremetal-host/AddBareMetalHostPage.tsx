@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Firehose, FirehoseResource } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { FirehoseResource } from '@console/internal/components/utils/types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { SecretModel } from '@console/internal/models';
 import { BareMetalHostModel } from '../../../models';
 import { getSecretName } from '../../../k8s/objects/bare-metal-host';

@@ -1,4 +1,4 @@
-import { NodeKind } from '@console/internal/module/k8s';
+import { NodeKind } from '@console/internal/module/k8s/types';
 
 export const createConfigureUnschedulableModal = (props: { resource: NodeKind }) =>
   import(

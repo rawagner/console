@@ -3,8 +3,8 @@ import { HistoryItem, HistoryType } from '../types';
 
 import { VirtualMachineModel } from '../../../models';
 import { VMWrapper } from '../../wrapper/vm/vm-wrapper';
-import { PatchBuilder } from '@console/shared/src/k8s';
-import { K8sKind, K8sResourceCommon, Patch } from '@console/internal/module/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
+import { K8sKind, K8sResourceCommon, Patch } from '@console/internal/module/k8s/types';
 import { K8sKillError } from '../errors';
 
 const disableHistoryOpts = { disableHistory: true };

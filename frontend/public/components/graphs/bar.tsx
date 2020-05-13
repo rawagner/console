@@ -12,10 +12,11 @@ import { usePrometheusPoll } from './prometheus-poll-hook';
 import { PrometheusEndpoint } from './helpers';
 import { PrometheusGraph, PrometheusGraphLink } from './prometheus-graph';
 import { barTheme } from './themes';
-import { humanizeNumber, Humanize } from '../utils';
-import { DataPoint } from '.';
+import { DataPoint } from './types';
 import { getInstantVectorStats } from './utils';
 import { GraphEmpty } from './graph-empty';
+import { humanizeNumber } from '../utils/units';
+import { Humanize } from '../utils/types';
 
 const DEFAULT_BAR_WIDTH = 10;
 const PADDING_RATIO = 1 / 3;

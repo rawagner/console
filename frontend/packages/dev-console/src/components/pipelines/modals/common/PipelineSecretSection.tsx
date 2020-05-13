@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Formik, useField, useFormikContext, FormikValues } from 'formik';
 import { PlusCircleIcon } from '@patternfly/react-icons';
 import { Button } from '@patternfly/react-core';
-import { ExpandCollapse } from '@console/internal/components/utils';
+import { ExpandCollapse } from '@console/internal/components/utils/expand-collapse';
 import { SecretType } from '@console/internal/components/secrets/create-secret';
 import { SecretModel } from '@console/internal/models';
-import { k8sCreate } from '@console/internal/module/k8s';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import {
   associateServiceAccountToSecret,
   getSecretAnnotations,

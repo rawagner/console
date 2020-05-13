@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FirehoseResult } from '@console/internal/components/utils';
-import { useDeepCompareMemoize } from '@console/shared';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { SortByDirection } from '@patternfly/react-table';
+import { useDeepCompareMemoize } from '@console/shared/src/hooks/deep-compare-memoize';
 import CustomResourceList from '../../custom-resource-list/CustomResourceList';
 import {
   helmReleasesRowFilters,

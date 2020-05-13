@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ListPage } from '@console/internal/components/factory';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import { shallow } from 'enzyme';
 import PipelineRuns from '../PipelineRuns';
 

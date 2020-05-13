@@ -1,5 +1,5 @@
 import { createEquals, requirementFromString, requirementToString } from './selector-requirement';
-import { Selector, MatchExpression, MatchLabels } from './index';
+import { Selector, MatchExpression, MatchLabels } from './types';
 
 const isOldFormat = (selector: Selector | MatchLabels) =>
   !selector.matchLabels && !selector.matchExpressions;

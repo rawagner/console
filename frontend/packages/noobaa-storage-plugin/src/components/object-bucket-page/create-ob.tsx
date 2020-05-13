@@ -1,23 +1,21 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import {
-  ButtonBar,
-  history,
-  resourceObjPath,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
 import { StorageClassDropdown } from '@console/internal/components/utils/storage-class-dropdown';
-import {
-  apiVersionForModel,
-  k8sCreate,
-  K8sResourceKind,
-  referenceFor,
-} from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
 import { NooBaaObjectBucketModel } from '@console/noobaa-storage-plugin/src/models';
-import { getName } from '@console/shared';
+import { getName } from '@console/shared/src/selectors/common';
 import { ActionGroup, Button } from '@patternfly/react-core';
 import { commonReducer, defaultState } from './state';
+import { history } from '@console/internal/components/utils/router';
+import {
+  resourceObjPath,
+  resourcePathFromModel,
+} from '@console/internal/components/utils/resource-link';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 
 export const CreateOBPage: React.FC = () => {
   const [state, dispatch] = React.useReducer(commonReducer, defaultState);

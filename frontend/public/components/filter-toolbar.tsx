@@ -16,12 +16,12 @@ import {
   Badge,
 } from '@patternfly/react-core';
 import { CaretDownIcon, CloseIcon, FilterIcon } from '@patternfly/react-icons';
-import { Dropdown as DropdownInternal } from '@console/internal/components/utils';
-import { setQueryArgument, removeQueryArgument } from './utils';
+import { Dropdown as DropdownInternal } from './utils/dropdown';
 import { filterList } from '../actions/k8s';
 import { searchFilterValues } from './search-filter-dropdown';
 import AutocompleteInput from './autocomplete';
 import { storagePrefix } from './row-filter';
+import { setQueryArgument, removeQueryArgument } from './utils/router';
 
 /**
  * Housing both the row filter and name/label filter in the same file.

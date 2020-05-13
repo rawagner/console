@@ -1,4 +1,5 @@
-import { k8sCreate, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import { VMKind } from '../../../types/vm';
 import { VirtualMachineModel } from '../../../models';
 import { CloneTo, VMClone } from '../../helpers/vm-clone';

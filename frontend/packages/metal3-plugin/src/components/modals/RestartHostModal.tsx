@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { getName } from '@console/shared';
-import { withHandlePromise } from '@console/internal/components/utils';
+import { getName } from '@console/shared/src/selectors/common';
+import { withHandlePromise } from '@console/internal/components/utils/promise-component';
 import {
   createModalLauncher,
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import { BareMetalHostKind } from '../../types';
 import { restartHost } from '../../k8s/requests/bare-metal-host';
 

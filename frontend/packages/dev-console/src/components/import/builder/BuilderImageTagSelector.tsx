@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { useFormikContext, FormikValues } from 'formik';
-import { ResourceName } from '@console/internal/components/utils';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { ImageStreamTagModel } from '@console/internal/models';
-import { DropdownField } from '@console/shared';
 import {
   BuilderImage,
   getTagDataWithDisplayName,
@@ -12,6 +11,7 @@ import {
 } from '../../../utils/imagestream-utils';
 import { useSafeK8s } from '../../../utils/safe-k8s-hook';
 import ImageStreamInfo from './ImageStreamInfo';
+import { ResourceName } from '@console/internal/components/utils/resource-icon';
 
 export interface BuilderImageTagSelectorProps {
   selectedBuilderImage: BuilderImage;

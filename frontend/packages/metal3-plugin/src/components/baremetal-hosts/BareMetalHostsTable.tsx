@@ -1,16 +1,18 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { Kebab, ResourceLink } from '@console/internal/components/utils';
+import { Kebab } from '@console/internal/components/utils/kebab';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { sortable } from '@patternfly/react-table';
-import { getName, getUID, getNamespace, DASH } from '@console/shared';
+import { getName, getNamespace, getUID } from '@console/shared/src/selectors/common';
+import { DASH } from '@console/shared/src/constants/ui';
 import {
   TableRow,
   TableData,
   Table,
   RowFunction,
   RowFunctionArgs,
-} from '@console/internal/components/factory';
-import { referenceForModel } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/table';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { useFlag } from '@console/shared/src/hooks/flag';
 import { BareMetalHostBundle } from '../types';
 import { getHostBMCAddress, getHostVendorInfo } from '../../selectors';

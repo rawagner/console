@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { TextArea } from '@patternfly/react-core';
-import { HandlePromiseProps, withHandlePromise } from '@console/internal/components/utils';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
 import {
   createModalLauncher,
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
   ModalComponentProps,
-} from '@console/internal/components/factory';
-import { k8sPatch } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/modal';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { getDescription } from '../../../selectors/selectors';
 import { VMGenericLikeEntityKind } from '../../../types/vmLike';
 import { getVMLikeModel } from '../../../selectors/vm';

@@ -1,6 +1,7 @@
 import { RouteModel, ServiceModel } from '@console/internal/models';
 import { errorModal } from '@console/internal/components/modals';
-import { k8sCreate, k8sGet, K8sResourceKind, RouteKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, RouteKind } from '@console/internal/module/k8s/types';
+import { k8sCreate, k8sGet } from '@console/internal/module/k8s/resource';
 import { EventListenerModel, TriggerTemplateModel } from '../../../../models';
 import { Pipeline, PipelineRun } from '../../../../utils/pipeline-augment';
 import {

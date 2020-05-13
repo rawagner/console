@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { ClusterServiceVersionKind } from './types';
 import { referenceForProvidedAPI, providedAPIsFor } from './components';
 import * as operatorLogo from './operator.svg';

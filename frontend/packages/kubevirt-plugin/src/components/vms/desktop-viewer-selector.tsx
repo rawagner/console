@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Form, FormGroup, Alert } from '@patternfly/react-core';
 import { DesktopViewer } from '@patternfly/react-console';
-import { Dropdown } from '@console/internal/components/utils';
-import { getName } from '@console/shared';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { getName } from '@console/shared/src/selectors/common';
 import { DEFAULT_RDP_PORT, TEMPLATE_VM_NAME_LABEL, NetworkType } from '../../constants';
 import { VMKind, VMIKind } from '../../types';
 import { getNetworks } from '../../selectors/vm';

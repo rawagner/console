@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
-import { FirehoseResult } from '@console/internal/components/utils';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import {
   K8sKind,
   K8sResourceKind,
   OwnerReference,
   MatchExpression,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { NamespaceModel, ProjectModel } from '@console/internal/models';
 import {
   getName,
@@ -13,7 +13,7 @@ import {
   getAPIVersion,
   getKind,
   getUID,
-} from '@console/shared/src/selectors';
+} from '@console/shared/src/selectors/common';
 import { VM_TEMPLATE_NAME_PARAMETER } from '../constants/vm-templates';
 import { pluralize } from './strings';
 

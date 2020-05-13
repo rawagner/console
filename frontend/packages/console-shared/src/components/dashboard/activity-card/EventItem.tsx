@@ -5,8 +5,9 @@ import { typeFilter, getLastTime } from '@console/internal/components/events';
 import { twentyFourHourTime } from '@console/internal/components/utils/datetime';
 import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 import { ResourceLink } from '@console/internal/components/utils/resource-link';
-import { EventKind, referenceFor } from '@console/internal/module/k8s';
-import { YellowExclamationTriangleIcon } from '../../status';
+import { EventKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { YellowExclamationTriangleIcon } from '../../status/icons';
 
 const propsAreEqual = (prevProps: EventItemProps, nextProps: EventItemProps) =>
   prevProps.event.metadata.uid === nextProps.event.metadata.uid &&

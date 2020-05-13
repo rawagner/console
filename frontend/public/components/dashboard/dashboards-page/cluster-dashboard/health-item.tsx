@@ -5,7 +5,7 @@ import {
   DashboardsOverviewHealthURLSubsystem,
   DashboardsOverviewHealthPrometheusSubsystem,
   DashboardsOverviewHealthResourceSubsystem,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import HealthItem from '@console/shared/src/components/dashboard/status-card/HealthItem';
 import { OperatorsSection } from '@console/shared/src/components/dashboard/status-card/OperatorStatusBody';
 import {
@@ -13,12 +13,14 @@ import {
   getMostImportantStatuses,
 } from '@console/shared/src/components/dashboard/status-card/state-utils';
 import { HealthState } from '@console/shared/src/components/dashboard/status-card/states';
-import { K8sKind } from '../../../../module/k8s';
-import { FirehoseResourcesResult, AsyncComponent, resourcePath } from '../../../utils';
+import { K8sKind } from '../../../../module/k8s/types';
 import { useK8sWatchResources } from '../../../utils/k8s-watch-hook';
 import { withDashboardResources, DashboardItemProps } from '../../with-dashboard-resources';
 import { uniqueResource } from './utils';
 import { getPrometheusQueryResponse } from '../../../../actions/dashboards';
+import { AsyncComponent } from '../../../utils/async';
+import { resourcePath } from '../../../utils/resource-link';
+import { FirehoseResourcesResult } from '../../../utils/types';
 
 export const OperatorsPopup: React.FC<OperatorsPopupProps> = ({
   resources,

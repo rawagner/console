@@ -1,23 +1,14 @@
-import { apiVersionForModel, K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
 import {
-  OverviewItem,
   getRoutesForServices,
   getBuildConfigsForResource,
   getReplicationControllersForResource,
   getServicesForResource,
-} from '@console/shared';
+} from '@console/shared/src/utils/resource-utils';
+import { OverviewItem } from '@console/shared/src/types/resource';
 import { getImageForIconClass } from '@console/internal/components/catalog/catalog-item-icon';
-import {
-  TopologyDataModel,
-  TopologyDataObject,
-  TopologyDataResources,
-  getRoutesURL,
-  addToTopologyDataModel,
-  getTopologyEdgeItems,
-  getTopologyGroupItems,
-  getTopologyNodeItem,
-  mergeGroup,
-} from '@console/dev-console/src/components/topology';
 import { VMIKind, VMKind } from '../types';
 import { VirtualMachineModel } from '../models';
 import { TYPE_VIRTUAL_MACHINE } from './components/const';
@@ -26,6 +17,19 @@ import { getVMStatus } from '../statuses/vm/vm-status';
 import { V1alpha1DataVolume } from '../types/vm/disk/V1alpha1DataVolume';
 import { VMImportKind } from '../types/vm-import/ovirt/vm-import';
 import { VMNodeData } from './types';
+import {
+  TopologyDataResources,
+  TopologyDataObject,
+  TopologyDataModel,
+} from '@console/dev-console/src/components/topology/topology-types';
+import { getRoutesURL } from '@console/dev-console/src/components/topology/topology-utils';
+import {
+  getTopologyNodeItem,
+  getTopologyEdgeItems,
+  getTopologyGroupItems,
+  addToTopologyDataModel,
+  mergeGroup,
+} from '@console/dev-console/src/components/topology/data-transforms/transform-utils';
 
 export const kubevirtAllowedResources = ['virtualmachines'];
 

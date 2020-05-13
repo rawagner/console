@@ -3,19 +3,18 @@ import * as _ from 'lodash-es';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 
-import { Status } from '@console/shared';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import {
-  Kebab,
-  LabelList,
-  navFactory,
-  ResourceKebab,
-  SectionHeading,
-  ResourceLink,
-  ResourceSummary,
-  Timestamp,
-} from './utils';
+import { Status } from '@console/shared/src/components/status/Status';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { PersistentVolumeModel } from '../models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { Timestamp } from './utils/timestamp';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(PersistentVolumeModel), ...common];

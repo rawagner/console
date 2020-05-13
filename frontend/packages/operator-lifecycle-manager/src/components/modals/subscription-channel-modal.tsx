@@ -6,11 +6,13 @@ import {
   ModalBody,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import { PromiseComponent, ResourceLink } from '@console/internal/components/utils';
-import { K8sKind, K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { RadioInput } from '@console/internal/components/radio';
 import { SubscriptionKind, PackageManifestKind } from '../../types';
 import { SubscriptionModel, ClusterServiceVersionModel } from '../../models';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { PromiseComponent } from '@console/internal/components/utils/promise-component';
 
 const getSelectedChannel = (props: SubscriptionChannelModalProps) =>
   props.subscription.spec.channel || props.pkg.status.channels[0].name;

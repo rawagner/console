@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { InfoCircleIcon } from '@patternfly/react-icons';
-import { ShortcutTable, Shortcut } from '@console/shared';
-
 import './RegroupHint.scss';
+import ShortcutTable from '@console/shared/src/components/shortcuts/ShortcutTable';
+import Shortcut from '@console/shared/src/components/shortcuts/Shortcut';
 
 const RegroupHint: React.FC = () => (
   <div className="odc-regroup-hint">

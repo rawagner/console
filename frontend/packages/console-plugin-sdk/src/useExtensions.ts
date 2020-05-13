@@ -31,7 +31,7 @@ import { Extension, ExtensionTypeGuard } from './typings';
  *   Perspective,
  *   isNavItem,
  *   isPerspective,
- * } from '@console/plugin-sdk';
+ * } from '@console/plugin-sdk/src/typings';
  *
  * const Example = () => {
  *   const navItemExtensions = useExtensions<NavItem>(isNavItem);

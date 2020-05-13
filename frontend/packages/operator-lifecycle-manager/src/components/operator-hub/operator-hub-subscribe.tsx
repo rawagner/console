@@ -3,32 +3,26 @@ import * as _ from 'lodash';
 import { Helmet } from 'react-helmet';
 import { match } from 'react-router';
 import { ActionGroup, Alert, Button, Checkbox, Tooltip } from '@patternfly/react-core';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
+import { k8sCreate, k8sGet, k8sListPartialMetadata } from '@console/internal/module/k8s/resource';
 import {
-  Dropdown,
-  ExternalLink,
-  Firehose,
-  history,
-  NsDropdown,
-  openshiftHelpBase,
-  BreadCrumbs,
-  MsgBox,
-  StatusBox,
-  ResourceIcon,
-  ResourceName,
-  resourceListPathFromModel,
-} from '@console/internal/components/utils';
-import {
-  K8sResourceCommon,
   apiVersionForModel,
   apiVersionForReference,
-  k8sCreate,
-  k8sGet,
-  k8sListPartialMetadata,
   kindForReference,
   referenceForModel,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/k8s';
 import { RadioGroup, RadioInput } from '@console/internal/components/radio';
 import { fromRequirements } from '@console/internal/module/k8s/selector';
+import { ResourceName, ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { MsgBox, StatusBox } from '@console/internal/components/utils/status-box';
+import { history } from '@console/internal/components/utils/router';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { NsDropdown } from '@console/internal/components/utils/list-dropdown';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { openshiftHelpBase } from '@console/internal/components/utils/documentation';
+import { resourceListPathFromModel } from '@console/internal/components/utils/resource-link';
 import {
   SubscriptionModel,
   OperatorGroupModel,
@@ -49,8 +43,8 @@ import {
   ClusterServiceVersionLogo,
   providedAPIsForChannel,
   referenceForProvidedAPI,
-  iconFor,
 } from '../index';
+import { iconFor } from '../utils';
 import { installedFor, supports, providedAPIsFor, isGlobal } from '../operator-group';
 import { CRDCard } from '../clusterserviceversion';
 

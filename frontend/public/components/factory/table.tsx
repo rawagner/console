@@ -2,14 +2,9 @@ import * as _ from 'lodash-es';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {
-  getNodeRoles,
-  getMachinePhase,
-  nodeMemory,
-  nodeCPU,
-  nodeFS,
-  nodePods,
-} from '@console/shared';
+import { getNodeRoles } from '@console/shared/src/selectors/node';
+import { getMachinePhase } from '@console/shared/src/selectors/machine';
+import { nodeMemory, nodeCPU, nodeFS, nodePods } from '@console/shared/src/sorts/nodes';
 import {
   alertStateOrder,
   silenceFiringAlertsOrder,
@@ -17,24 +12,25 @@ import {
 } from '@console/shared/src/selectors/monitoring';
 import * as UIActions from '../../actions/ui';
 import { ingressValidHosts } from '../ingress';
-import { convertToBaseValue, EmptyBox, StatusBox, WithScrollContainer } from '../utils';
+import { getJobTypeAndCompletions } from '../../module/k8s/job';
+import { getTemplateInstanceStatus } from '../../module/k8s/template';
+import {
+  planExternalName,
+  serviceCatalogStatus,
+  serviceClassDisplayName,
+} from '../../module/k8s/service-catalog';
+import { podPhase, podReadiness, podRestarts } from '../../module/k8s/pods';
 import {
   getClusterOperatorStatus,
   getClusterOperatorVersion,
-  getJobTypeAndCompletions,
-  getTemplateInstanceStatus,
+} from '../../module/k8s/cluster-operator';
+import {
   K8sResourceKind,
   K8sResourceKindReference,
   NodeKind,
-  planExternalName,
   PodKind,
-  podPhase,
-  podReadiness,
-  podRestarts,
-  serviceCatalogStatus,
-  serviceClassDisplayName,
   MachineKind,
-} from '../../module/k8s';
+} from '../../module/k8s/types';
 
 import {
   IRowData, // eslint-disable-line no-unused-vars
@@ -56,6 +52,9 @@ import {
 } from '@patternfly/react-virtualized-extension';
 
 import { tableFilters } from './table-filters';
+import { convertToBaseValue } from '../utils/units';
+import { WithScrollContainer } from '../utils/dom-utils';
+import { StatusBox, EmptyBox } from '../utils/status-box';
 
 const rowFiltersToFilterFuncs = (rowFilters) => {
   return (rowFilters || [])

@@ -1,11 +1,14 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Modal, Button, ButtonVariant } from '@patternfly/react-core';
-import { createBasicLookup } from '@console/shared/src';
-import { withHandlePromise, HandlePromiseProps } from '@console/internal/components/utils';
-import { ModalComponentProps } from '@console/internal/components/factory';
-import { k8sPatch } from '@console/internal/module/k8s';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { createBasicLookup } from '@console/shared/src/utils/utils';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { ModalComponentProps } from '@console/internal/components/factory/modal';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { BootableDeviceType } from '../../../types';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import { getVMLikeModel, getDevices } from '../../../selectors/vm';

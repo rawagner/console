@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MachineKind, NodeKind } from '@console/internal/module/k8s';
+import { MachineKind, NodeKind } from '@console/internal/module/k8s/types';
 import { BareMetalHostKind } from '../../../types';
 
 export const BareMetalHostDashboardContext = React.createContext<BareMetalDashboardContext>({});

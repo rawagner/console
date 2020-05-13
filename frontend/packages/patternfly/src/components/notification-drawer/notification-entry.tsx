@@ -7,10 +7,11 @@ import {
   GreenCheckCircleIcon,
   BlueInfoCircleIcon,
   RedExclamationCircleIcon,
-} from '@console/shared';
+} from '@console/shared/src/components/status/icons';
 import { ArrowCircleUpIcon } from '@patternfly/react-icons';
 import { global_info_color_100 as blueInfoColor } from '@patternfly/react-tokens';
-import { history, Timestamp } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 export enum NotificationTypes {
   info = 'info',

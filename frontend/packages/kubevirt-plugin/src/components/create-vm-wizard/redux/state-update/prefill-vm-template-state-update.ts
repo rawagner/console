@@ -1,4 +1,5 @@
-import { createBasicLookup, getName } from '@console/shared/src';
+import { createBasicLookup } from '@console/shared/src/utils/utils';
+import { getName } from '@console/shared/src/selectors/common';
 import { InternalActionType, UpdateOptions } from '../types';
 import { iGetProvisionSource, iGetVmSettingValue } from '../../selectors/immutable/vm-settings';
 import {

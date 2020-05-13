@@ -7,7 +7,7 @@ import { getControlPlaneComponentHealth } from './status';
 import Status, {
   StatusPopupSection,
 } from '@console/shared/src/components/dashboard/status-card/StatusPopup';
-import { PrometheusHealthPopupProps } from '@console/plugin-sdk';
+import { PrometheusHealthPopupProps } from '@console/plugin-sdk/src/typings';
 
 const titles = ['API Servers', 'Controller Managers', 'Schedulers', 'API Request Success Rate'];
 

@@ -1,5 +1,5 @@
 import { KebabOption } from '@console/internal/components/utils/kebab';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { Node } from '@console/topology';
 import { editApplicationModal, groupEditApplicationModal } from '../../modals';
 

@@ -1,17 +1,15 @@
 import * as _ from 'lodash';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { LabelSelector } from '@console/internal/module/k8s/label-selector';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
 import {
-  K8sKind,
   k8sGet,
   k8sList,
   k8sPatch,
   k8sKill,
-  K8sResourceKind,
-  modelFor,
   k8sCreate,
-  LabelSelector,
-  referenceFor,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/resource';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   ImageStreamModel,
   BuildConfigModel,
@@ -23,19 +21,19 @@ import {
   DaemonSetModel,
   StatefulSetModel,
 } from '@console/internal/models';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 import {
   ServiceModel as KnativeServiceModel,
   RouteModel as KnativeRouteModel,
-} from '@console/knative-plugin';
+} from '@console/knative-plugin/src/models';
 import { isDynamicEventResourceKind } from '@console/knative-plugin/src/utils/fetch-dynamic-eventsources-utils';
-import { checkAccess } from '@console/internal/components/utils';
-import { getOperatorBackedServiceKindMap } from '@console/shared';
+import { checkAccess } from '@console/internal/components/utils/rbac';
 import { CREATE_APPLICATION_KEY, UNASSIGNED_KEY } from '../const';
 import { TopologyDataObject } from '../components/topology/topology-types';
 import { detectGitType } from '../components/import/import-validation-utils';
 import { GitTypes } from '../components/import/import-types';
 import { ServiceBindingRequestModel } from '../models';
+import { getOperatorBackedServiceKindMap } from '@console/shared/src/utils/resource-utils';
 
 export const sanitizeApplicationValue = (
   application: string,

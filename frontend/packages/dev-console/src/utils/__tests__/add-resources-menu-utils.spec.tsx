@@ -1,7 +1,7 @@
 import { URL } from 'url';
 import * as React from 'react';
 import { GitAltIcon } from '@patternfly/react-icons';
-import { KebabOption } from '@console/internal/components/utils';
+import { KebabOption } from '@console/internal/components/utils/kebab';
 import {
   getMenuPath,
   getAddPageUrl,
@@ -13,7 +13,7 @@ import { UNASSIGNED_KEY } from '../../const';
 import { ImportOptions } from '../../components/import/import-types';
 import { MockResources } from '../../components/topology/__tests__/topology-test-data';
 import { TopologyDataResources } from '../../components/topology/topology-types';
-import { referenceFor } from '@console/internal/module/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
 import { transformTopologyData } from '../../components/topology/data-transforms/data-transformer';
 
 const getTopologyData = (

@@ -2,14 +2,18 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { SyncAltIcon } from '@patternfly/react-icons';
 import { Button } from '@patternfly/react-core';
-import { Status, StatusIconAndText, BuildConfigOverviewItem } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
+import StatusIconAndText from '@console/shared/src/components/status/StatusIconAndText';
+import { BuildConfigOverviewItem } from '@console/shared/src/types/resource';
 import { BuildNumberLink, BuildLogLink } from '../build';
 import { errorModal } from '../modals/error-modal';
 import { fromNow } from '../utils/datetime';
-import { K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind, BuildPhase } from '../../module/k8s/types';
 import { BuildConfigModel } from '../../models';
-import { BuildPhase, startBuild } from '../../module/k8s/builds';
-import { ResourceLink, SidebarSectionHeading, useAccessReview } from '../utils';
+import { startBuild } from '../../module/k8s/builds';
+import { useAccessReview } from '../utils/rbac';
+import { ResourceLink } from '../utils/resource-link';
+import { SidebarSectionHeading } from '../utils/headings';
 
 const conjugateBuildPhase = (phase: BuildPhase): string => {
   switch (phase) {

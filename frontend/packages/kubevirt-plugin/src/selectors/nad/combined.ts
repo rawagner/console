@@ -1,5 +1,5 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { getName } from '@console/shared/src';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { getName } from '@console/shared/src/selectors/common';
 import { NetworkType } from '../../constants/vm';
 import { NetworkWrapper } from '../../k8s/wrapper/vm/network-wrapper';
 

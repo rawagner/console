@@ -6,16 +6,14 @@ import {
   ModalBody,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import {
-  history,
-  resourceListPathFromModel,
-  withHandlePromise,
-} from '@console/internal/components/utils';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getActiveNamespace } from '@console/internal/actions/ui';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
 import { ClusterServiceVersionKind, SubscriptionKind } from '../../types';
 import { ClusterServiceVersionModel, SubscriptionModel } from '../../models';
+import { resourceListPathFromModel } from '@console/internal/components/utils/resource-link';
+import { history } from '@console/internal/components/utils/router';
+import { withHandlePromise } from '@console/internal/components/utils/promise-component';
 
 export const UninstallOperatorModal = withHandlePromise((props: UninstallOperatorModalProps) => {
   const submit = (event) => {

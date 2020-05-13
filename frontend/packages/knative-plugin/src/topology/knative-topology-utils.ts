@@ -1,43 +1,43 @@
 import * as _ from 'lodash';
 import { Node as TopologyNode } from '@console/topology';
+import { K8sResourceKind, PodKind } from '@console/internal/module/k8s/types';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
 import {
-  K8sResourceKind,
-  apiVersionForModel,
-  referenceFor,
-  modelFor,
-  k8sUpdate,
-  PodKind,
-} from '@console/internal/module/k8s';
-import {
-  TransformResourceData,
+  getOwnedResources,
+  getBuildConfigsForResource,
   getResourcePausedAlert,
   getBuildAlerts,
-  getOwnedResources,
-  OperatorBackedServiceKindMap,
-  getBuildConfigsForResource,
-} from '@console/shared';
-import {
-  Node,
-  Edge,
-  TopologyDataResources,
-  TopologyDataModel,
-  TopologyDataObject,
-  getTopologyGroupItems,
-  createTopologyNodeData,
-  getTopologyNodeItem,
-  getTopologyEdgeItems,
-  mergeGroup,
-  getRoutesURL,
-  filterBasedOnActiveApplication,
-  getTopologyResourceObject,
-  TopologyOverviewItem,
-} from '@console/dev-console/src/components/topology';
+} from '@console/shared/src/utils/resource-utils';
+import { TransformResourceData } from '@console/shared/src/utils/transformResourceData';
+import { OperatorBackedServiceKindMap } from '@console/shared/src/types/resource';
 import { getImageForIconClass } from '@console/internal/components/catalog/catalog-item-icon';
 import { DeploymentModel } from '@console/internal/models';
 import { RootState } from '@console/internal/redux-types';
 import { FLAG_KNATIVE_EVENTING } from '../const';
 import { ServiceModel as knServiceModel } from '../models';
 import { KnativeItem } from '../utils/get-knative-resources';
+import {
+  TopologyDataResources,
+  TopologyOverviewItem,
+  TopologyDataObject,
+  TopologyDataModel,
+  Edge,
+  Node,
+} from '@console/dev-console/src/components/topology/topology-types';
+import {
+  filterBasedOnActiveApplication,
+  getRoutesURL,
+  getTopologyResourceObject,
+} from '@console/dev-console/src/components/topology/topology-utils';
+import {
+  getTopologyNodeItem,
+  getTopologyGroupItems,
+  mergeGroup,
+  getTopologyEdgeItems,
+  createTopologyNodeData,
+} from '@console/dev-console/src/components/topology/data-transforms/transform-utils';
 
 export enum NodeType {
   EventSource = 'event-source',

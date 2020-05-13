@@ -1,20 +1,10 @@
 import * as _ from 'lodash-es';
 
 import { BuildModel, BuildConfigModel } from '../../models';
-import { k8sCreate } from './';
+import { k8sCreate } from './resource';
 import { formatDuration } from '../../components/utils/datetime';
 
 const BUILD_NUMBER_ANNOTATION = 'openshift.io/build.number';
-
-export enum BuildPhase {
-  Cancelled = 'Cancelled',
-  Complete = 'Complete',
-  Error = 'Error',
-  Failed = 'Failed',
-  New = 'New',
-  Pending = 'Pending',
-  Running = 'Running',
-}
 
 const createBuildRequest = (obj, model, subresource) => {
   const req = {

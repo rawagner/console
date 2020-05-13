@@ -3,14 +3,12 @@ import * as React from 'react';
 import * as semver from 'semver';
 
 import { ClusterVersionModel } from '../../models';
-import { Dropdown, PromiseComponent } from '../utils';
+import { ClusterUpdate, ClusterVersionKind } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import {
-  ClusterUpdate,
-  ClusterVersionKind,
   getAvailableClusterUpdates,
   getDesiredClusterVersion,
-  k8sPatch,
-} from '../../module/k8s';
+} from '../../module/k8s/cluster-settings';
 import {
   createModalLauncher,
   ModalBody,
@@ -18,6 +16,8 @@ import {
   ModalSubmitFooter,
   ModalTitle,
 } from '../factory/modal';
+import { PromiseComponent } from '../utils/promise-component';
+import { Dropdown } from '../utils/dropdown';
 
 export const getSortedUpdates = (cv: ClusterVersionKind): ClusterUpdate[] => {
   const available = getAvailableClusterUpdates(cv) || [];

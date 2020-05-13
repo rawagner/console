@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Firehose, FirehoseResource, LoadingBox } from '@console/internal/components/utils';
 import { ImageStreamModel } from '@console/internal/models';
 import { RouteComponentProps } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { ServiceModel } from '@console/knative-plugin';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { ServiceModel } from '@console/knative-plugin/src/models';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import NamespacedPage, { NamespacedPageVariants } from '../NamespacedPage';
 import EditApplication from './EditApplication';
 import { EditApplicationProps } from './edit-application-types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
+import { FirehoseResource } from '@console/internal/components/utils/types';
 
 const INSTANCE_LABEL = 'app.kubernetes.io/instance';
 const EditApplicationComponentLoader: React.FunctionComponent<EditApplicationProps> = (

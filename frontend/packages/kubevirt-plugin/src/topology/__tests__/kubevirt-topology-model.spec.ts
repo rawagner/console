@@ -1,12 +1,10 @@
 import * as _ from 'lodash';
-import { ALL_APPLICATIONS_KEY } from '@console/shared/src';
+import { ALL_APPLICATIONS_KEY } from '@console/shared/src/constants/common';
 import { TopologyFilters } from '@console/dev-console/src/components/topology/filters/filter-utils';
-import {
-  transformTopologyData,
-  topologyModelFromDataModel,
-} from '@console/dev-console/src/components/topology';
 import { kubevirtResources } from './topology-kubevirt-test-data';
 import { TYPE_VIRTUAL_MACHINE } from '../components/const';
+import { topologyModelFromDataModel } from '@console/dev-console/src/components/topology/data-transforms/topology-model';
+import { transformTopologyData } from '@console/dev-console/src/components/topology/data-transforms/data-transformer';
 
 describe('topology model ', () => {
   let filters: TopologyFilters;

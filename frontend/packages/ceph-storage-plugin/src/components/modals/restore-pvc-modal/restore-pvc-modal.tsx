@@ -3,23 +3,24 @@ import './_restore-pvc-modal.scss';
 import * as React from 'react';
 
 import { Form, FormGroup, Grid, GridItem, TextInput } from '@patternfly/react-core';
-import {
-  HandlePromiseProps,
-  ResourceIcon,
-  withHandlePromise,
-} from '@console/internal/components/utils/index';
-import { K8sResourceKind, k8sCreate, k8sGet } from '@console/internal/module/k8s';
+import { k8sCreate, k8sGet } from '@console/internal/module/k8s/resource';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   ModalBody,
   ModalComponentProps,
   ModalSubmitFooter,
   ModalTitle,
   createModalLauncher,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import { NamespaceModel, PersistentVolumeClaimModel } from '@console/internal/models';
-import { getName, getNamespace } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 
 import { VolumeSnapshotModel } from '../../../models';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 
 export const RestorePVCModal = withHandlePromise((props: RestorePVCModalProps) => {
   const { close, cancel, resource, errorMessage, inProgress, handlePromise } = props;

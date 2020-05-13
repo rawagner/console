@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikProps, FormikValues } from 'formik';
-import { FormFooter, FlexForm } from '@console/shared';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
+import FlexForm from '@console/shared/src/components/form-utils/FlexForm';
 import EventSourcesSelector from './event-sources/EventSourcesSelector';
 import { useEventSourceList } from '../../utils/create-eventsources-utils';
 import EventSourceSection from './event-sources/EventSourceSection';

@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { match as RMatch } from 'react-router';
 import { safeLoadAll } from 'js-yaml';
-import { MultiListPage } from '@console/internal/components/factory';
-import { FirehoseResource } from '@console/internal/components/utils';
-import {
-  K8sResourceKind,
-  referenceFor,
-  modelFor,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
+import { FirehoseResource } from '@console/internal/components/utils/types';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { flattenReleaseResources } from '../../helm-utils';
 import { HelmRelease } from '../../helm-types';
 import HelmReleaseResourcesList from './HelmReleaseResourcesList';

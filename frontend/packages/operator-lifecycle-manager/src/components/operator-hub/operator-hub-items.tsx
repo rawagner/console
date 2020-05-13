@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 import { CatalogItemHeader, CatalogTile } from '@patternfly/react-catalog-view-extension';
 import * as classNames from 'classnames';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
-import { ExternalLink } from '@console/internal/components/utils';
+import { ExternalLink } from '@console/internal/components/utils/link';
 import {
   Button,
   EmptyState,
@@ -14,10 +14,8 @@ import {
   Modal,
   Title,
 } from '@patternfly/react-core';
-import {
-  COMMUNITY_PROVIDERS_WARNING_LOCAL_STORAGE_KEY,
-  GreenCheckCircleIcon,
-} from '@console/shared';
+import { COMMUNITY_PROVIDERS_WARNING_LOCAL_STORAGE_KEY } from '@console/shared/src/constants/common';
+import { GreenCheckCircleIcon } from '@console/shared/src/components/status/icons';
 import { history } from '@console/internal/components/utils/router';
 import { TileViewPage } from '@console/internal/components/utils/tile-view-page';
 import * as operatorLogo from '@console/internal/imgs/operator.svg';

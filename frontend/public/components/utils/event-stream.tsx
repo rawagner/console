@@ -10,7 +10,7 @@ import {
 import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 
-import { EventKind } from '../../module/k8s';
+import { EventKind } from '../../module/k8s/types';
 import { WithScrollContainer } from './dom-utils';
 
 // Keep track of seen events so we only animate new ones.

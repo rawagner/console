@@ -1,5 +1,5 @@
 import { EdgeModel, Model, NodeModel, createAggregateEdges } from '@console/topology';
-import { ALL_APPLICATIONS_KEY } from '@console/shared/src';
+import { ALL_APPLICATIONS_KEY } from '@console/shared/src/constants/common';
 import {
   getKnativeNodeModel,
   getKnativeGroupModel,

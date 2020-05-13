@@ -1,15 +1,21 @@
-import { Kebab, KebabOption, asAccessReview } from '@console/internal/components/utils';
 import {
   MarkAsSchedulable,
   MarkAsUnschedulable,
   Delete,
 } from '@console/app/src/components/nodes/menu-actions';
-import { K8sKind, NodeKind, K8sResourceKind, MachineKind } from '@console/internal/module/k8s';
-import { getName } from '@console/shared';
+import {
+  K8sKind,
+  NodeKind,
+  K8sResourceKind,
+  MachineKind,
+} from '@console/internal/module/k8s/types';
+import { getName } from '@console/shared/src/selectors/common';
 import { startNodeMaintenanceModal } from '../modals/StartNodeMaintenanceModal';
 import stopNodeMaintenanceModal from '../modals/StopNodeMaintenanceModal';
 import { NodeMaintenanceModel } from '../../models';
 import { findNodeMaintenance } from '../../selectors';
+import { KebabOption, Kebab } from '@console/internal/components/utils/kebab';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
 
 type ActionArgs = {
   nodeMaintenance?: K8sResourceKind;

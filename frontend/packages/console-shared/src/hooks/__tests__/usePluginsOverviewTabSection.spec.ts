@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
-import { useExtensions, OverviewTabSection, LazyLoader } from '@console/plugin-sdk';
+import { OverviewTabSection, LazyLoader } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import {
   knativeServiceObj,
   sampleKnativeRevisions,

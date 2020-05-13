@@ -2,9 +2,12 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Status } from '@console/shared';
-import { ResourceLink, resourcePath, SidebarSectionHeading } from '../utils';
-import { podPhase, PodKind, K8sResourceKind, referenceFor } from '../../module/k8s';
+import { Status } from '@console/shared/src/components/status/Status';
+import { PodKind, K8sResourceKind } from '../../module/k8s/types';
+import { podPhase } from '../../module/k8s/pods';
+import { referenceFor } from '../../module/k8s/k8s-models';
+import { ResourceLink, resourcePath } from '../utils/resource-link';
+import { SidebarSectionHeading } from '../utils/headings';
 
 const kind: string = 'Pod';
 const MAX_PODS: number = 3;

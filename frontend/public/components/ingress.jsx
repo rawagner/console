@@ -2,19 +2,17 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import {
-  Kebab,
-  SectionHeading,
-  LabelList,
-  ResourceKebab,
-  ResourceIcon,
-  detailsPage,
-  EmptyBox,
-  navFactory,
-  ResourceLink,
-  ResourceSummary,
-} from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceIcon } from './utils/resource-icon';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { EmptyBox } from './utils/status-box';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, detailsPage } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
 
 const menuActions = Kebab.factory.common;
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert, Title } from '@patternfly/react-core';
-import { LoadingInline } from '@console/internal/components/utils';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 import { State } from '../state';
 
 const ReviewPage: React.FC<ReviewPageProps> = ({ state }) => {

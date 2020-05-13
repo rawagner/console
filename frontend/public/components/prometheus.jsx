@@ -1,10 +1,14 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
-import { ListPage, Table, TableRow, TableData } from './factory';
-import { Kebab, LabelList, ResourceKebab, ResourceLink, Selector } from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
 import { PrometheusModel } from '../models';
-import { referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { Selector } from './utils/selector';
 
 const { Edit, Delete, ModifyCount } = Kebab.factory;
 const menuActions = [ModifyCount, Edit, Delete];

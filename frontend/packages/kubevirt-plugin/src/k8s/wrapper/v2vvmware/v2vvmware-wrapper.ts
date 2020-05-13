@@ -1,4 +1,4 @@
-import { K8sResourceCommon } from '@console/internal/module/k8s';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
 import { K8sResourceWrapper } from '../common/k8s-resource-wrapper';
 import { V2VVMwareModel } from '../../../models';
 import { K8sInitAddon } from '../common/util/k8s-mixin';

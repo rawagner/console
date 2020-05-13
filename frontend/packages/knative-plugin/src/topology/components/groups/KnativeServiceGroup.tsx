@@ -19,18 +19,20 @@ import {
   WithCreateConnectorProps,
 } from '@console/topology';
 import SvgBoxedText from '@console/dev-console/src/components/svg/SvgBoxedText';
-import {
-  NodeShadows,
-  NODE_SHADOW_FILTER_ID,
-  NODE_SHADOW_FILTER_ID_HOVER,
-  nodeDragSourceSpec,
-  Decorator,
-  useSearchFilter,
-  useDisplayFilters,
-} from '@console/dev-console/src/components/topology';
 import BuildDecorator from '@console/dev-console/src/components/topology/components/nodes/build-decorators/BuildDecorator';
 import { TYPE_KNATIVE_SERVICE } from '../../const';
 import RevisionTrafficSourceAnchor from '../anchors/RevisionTrafficSourceAnchor';
+import {
+  NodeShadows,
+  NODE_SHADOW_FILTER_ID_HOVER,
+  NODE_SHADOW_FILTER_ID,
+  Decorator,
+  nodeDragSourceSpec,
+} from '@console/dev-console/src/components/topology/components';
+import {
+  useDisplayFilters,
+  useSearchFilter,
+} from '@console/dev-console/src/components/topology/filters';
 
 export type KnativeServiceGroupProps = {
   element: Node;

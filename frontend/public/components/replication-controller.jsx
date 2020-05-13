@@ -4,29 +4,25 @@ import * as classNames from 'classnames';
 
 import { Link } from 'react-router-dom';
 import { sortable } from '@patternfly/react-table';
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
 import { ResourceEventStream } from './events';
-import { DetailsPage, ListPage, Table, TableData, TableRow } from './factory';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { replicaSetMenuActions } from './replicaset';
-import {
-  ContainerTable,
-  navFactory,
-  SectionHeading,
-  ResourceSummary,
-  ResourcePodCount,
-  AsyncComponent,
-  Kebab,
-  ResourceLink,
-  resourcePath,
-  ResourceKebab,
-  asAccessReview,
-  OwnerReferences,
-  Timestamp,
-} from './utils';
-
 import { VolumesTable } from './volumes-table';
 import { confirmModal } from './modals';
-import { k8sPatch } from '../module/k8s';
+import { k8sPatch } from '../module/k8s/resource';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, ResourcePodCount } from './utils/details-page';
+import { ContainerTable } from './utils/container-table';
+import { navFactory } from './utils/horizontal-nav';
+import { asAccessReview } from './utils/rbac';
+import { ResourceLink, resourcePath } from './utils/resource-link';
+import { ResourceKebab, Kebab } from './utils/kebab';
+import { Timestamp } from './utils/timestamp';
+import { OwnerReferences } from './utils/owner-references';
+import { AsyncComponent } from './utils/async';
 
 const Details = ({ obj: replicationController }) => {
   const revision = _.get(replicationController, [

@@ -1,8 +1,5 @@
-import {
-  ClusterVersionKind,
-  ClusterUpdateStatus,
-  getClusterUpdateStatus,
-} from '@console/internal/module/k8s';
+import { getClusterUpdateStatus } from '@console/internal/module/k8s/cluster-settings';
+import { ClusterVersionKind, ClusterUpdateStatus } from '@console/internal/module/k8s/types';
 
 export const isClusterUpdateActivity = (cv: ClusterVersionKind) =>
   getClusterUpdateStatus(cv) === ClusterUpdateStatus.Updating;

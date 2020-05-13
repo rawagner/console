@@ -1,4 +1,8 @@
-import { K8sVerb, K8sKind, AccessReviewResourceAttributes } from '@console/internal/module/k8s';
+import {
+  K8sVerb,
+  K8sKind,
+  AccessReviewResourceAttributes,
+} from '@console/internal/module/k8s/types';
 import { DeploymentModel, TemplateModel } from '@console/internal/models';
 import * as models from '../models';
 

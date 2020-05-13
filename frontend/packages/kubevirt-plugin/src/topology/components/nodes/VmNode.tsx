@@ -16,22 +16,24 @@ import {
   useAnchor,
   RectAnchor,
 } from '@console/topology';
-import { useAccessReview } from '@console/internal/components/utils';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
 import SvgBoxedText from '@console/dev-console/src/components/svg/SvgBoxedText';
-import {
-  useDisplayFilters,
-  getTopologyResourceObject,
-  useSearchFilter,
-  NODE_SHADOW_FILTER_ID,
-  NODE_SHADOW_FILTER_ID_HOVER,
-  NodeShadows,
-  TopologyDataObject,
-} from '@console/dev-console/src/components/topology';
 import { NodeModel } from '@console/topology/src/types';
 import './VmNode.scss';
 import { VMStatus } from '../../../constants/vm/vm-status';
 import { VMNodeData } from '../../types';
+import { TopologyDataObject } from '@console/dev-console/src/components/topology/topology-types';
+import {
+  useDisplayFilters,
+  useSearchFilter,
+} from '@console/dev-console/src/components/topology/filters';
+import { getTopologyResourceObject } from '@console/dev-console/src/components/topology/topology-utils';
+import {
+  NodeShadows,
+  NODE_SHADOW_FILTER_ID,
+  NODE_SHADOW_FILTER_ID_HOVER,
+} from '@console/dev-console/src/components/topology/components';
 
 export type VmNodeProps = {
   element: Node<NodeModel, TopologyDataObject<VMNodeData>>;

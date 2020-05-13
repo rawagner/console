@@ -18,7 +18,7 @@ import {
 import { MinusCircleIcon, PlusCircleIcon } from '@patternfly/react-icons';
 import { JSON_SCHEMA_GROUP_TYPES } from './const';
 import { getUiOptions, getSchemaType } from 'react-jsonschema-form/lib/utils';
-import { ExpandCollapse } from '@console/internal/components/utils';
+import { ExpandCollapse } from '@console/internal/components/utils/expand-collapse';
 
 export const FieldLabel: React.FC<FieldLabelProps> = ({ htmlFor, label, required }) => (
   <label className={classnames('form-label', { 'co-required': required })} htmlFor={htmlFor}>

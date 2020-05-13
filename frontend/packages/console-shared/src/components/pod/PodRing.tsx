@@ -1,12 +1,13 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Button, Split, SplitItem, Bullseye } from '@patternfly/react-core';
-import { K8sResourceKind, k8sPatch, K8sKind } from '@console/internal/module/k8s';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
 import { AngleUpIcon, AngleDownIcon } from '@patternfly/react-icons';
-import { podRingLabel, usePodScalingAccessStatus } from '../../utils';
-import { ExtPodKind } from '../../types';
 import PodStatus from './PodStatus';
 import './PodRing.scss';
+import { podRingLabel, usePodScalingAccessStatus } from '../../utils/pod-ring-utils';
+import { ExtPodKind } from '../../types/pod';
 
 interface PodRingProps {
   pods: ExtPodKind[];

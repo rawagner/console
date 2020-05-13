@@ -2,28 +2,28 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { match } from 'react-router-dom';
-import { getBadgeFromType } from '@console/shared';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
 import { connectToPlural } from '../kinds';
 import { ErrorPage404 } from './error';
 import { withStartGuide } from './start-guide';
-import { AsyncComponent, LoadingBox } from './utils';
 import { DefaultPage, DefaultDetailsPage } from './default-resource';
 import { getResourceListPages, getResourceDetailsPages } from './resource-pages';
+import { K8sKind, K8sResourceKindReference } from '../module/k8s/types';
 import {
   apiVersionForReference,
   isGroupVersionKind,
-  K8sKind,
-  K8sResourceKindReference,
   kindForReference,
   referenceForModel,
-} from '../module/k8s';
+} from '../module/k8s/k8s';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import {
-  useExtensions,
   isResourceDetailsPage,
   ResourceDetailsPage as ResourceDetailsPageExt,
   ResourceListPage as ResourceListPageExt,
   isResourceListPage,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { LoadingBox } from './utils/status-box';
+import { AsyncComponent } from './utils/async';
 
 // Parameters can be in pros.params (in URL) or in props.route (attribute of Route tag)
 const allParams = (props) => Object.assign({}, _.get(props, 'match.params'), props);

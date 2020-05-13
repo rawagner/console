@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { AccessConsoles, VncConsole } from '@patternfly/react-console';
-import { Firehose, FirehoseResult, LoadingInline } from '@console/internal/components/utils';
-import { getNamespace } from '@console/shared';
-import { PodKind } from '@console/internal/module/k8s';
+import { getNamespace } from '@console/shared/src/selectors/common';
+import { PodKind } from '@console/internal/module/k8s/types';
 import { ServiceModel } from '@console/internal/models';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
 import { VirtualMachineInstanceModel, VirtualMachineModel } from '../../models';
 import {
   findRDPService,

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import ConsumerPopover from '@console/shared/src/components/dashboard/utilization-card/TopConsumerPopover';
-import { Status, SecondaryStatus, getNodeSecondaryStatus } from '@console/shared';
-import { NodeKind } from '@console/internal/module/k8s';
-import { humanizeBinaryBytes, humanizeNumber } from '@console/internal/components/utils';
+import { Status } from '@console/shared/src/components/status/Status';
+import SecondaryStatus from '@console/shared/src/components/status/SecondaryStatus';
+import { getNodeSecondaryStatus } from '@console/shared/src/selectors/node';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { humanizeBinaryBytes, humanizeNumber } from '@console/internal/components/utils/units';
 import { nodeStatus } from '../../status/node';
 import { PressureQueries, Condition } from '../../queries';
 

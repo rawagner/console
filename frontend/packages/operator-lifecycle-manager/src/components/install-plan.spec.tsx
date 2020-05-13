@@ -3,22 +3,13 @@ import * as _ from 'lodash';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Link } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
-import {
-  Table,
-  MultiListPage,
-  DetailsPage,
-  RowFunctionArgs,
-} from '@console/internal/components/factory';
-import {
-  ResourceKebab,
-  ResourceLink,
-  ResourceIcon,
-  Kebab,
-  MsgBox,
-  HintBlock,
-} from '@console/internal/components/utils';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage } from '@console/internal/components/factory/list-page';
+import { Table, RowFunctionArgs } from '@console/internal/components/factory/table';
 import { CustomResourceDefinitionModel } from '@console/internal/models';
-import * as k8s from '@console/internal/module/k8s';
+import * as k8s from '@console/internal/module/k8s/resource';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { testInstallPlan } from '../../mocks';
 import { InstallPlanModel, ClusterServiceVersionModel, OperatorGroupModel } from '../models';
 import { InstallPlanKind, InstallPlanApproval } from '../types';
@@ -41,6 +32,11 @@ import {
 import * as modal from './modals/installplan-preview-modal';
 
 import { referenceForStepResource } from '.';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Kebab, ResourceKebab } from '@console/internal/components/utils/kebab';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { MsgBox } from '@console/internal/components/utils/status-box';
+import { HintBlock } from '@console/internal/components/utils/hint-block';
 
 import Spy = jasmine.Spy;
 
@@ -63,7 +59,7 @@ describe('InstallPlanTableRow', () => {
   let wrapper: ShallowWrapper;
 
   const updateWrapper = () => {
-    const rowArgs: RowFunctionArgs<k8s.K8sResourceKind> = {
+    const rowArgs: RowFunctionArgs<K8sResourceKind> = {
       obj,
       index: 0,
       key: '0',
@@ -95,7 +91,7 @@ describe('InstallPlanTableRow', () => {
         .childAt(NAME_INDEX)
         .find(ResourceLink)
         .props().kind,
-    ).toEqual(k8s.referenceForModel(InstallPlanModel));
+    ).toEqual(referenceForModel(InstallPlanModel));
     expect(
       wrapper
         .find('tr')
@@ -177,7 +173,7 @@ describe('InstallPlanTableRow', () => {
         .find(ResourceIcon)
         .at(0)
         .props().kind,
-    ).toEqual(k8s.referenceForModel(ClusterServiceVersionModel));
+    ).toEqual(referenceForModel(ClusterServiceVersionModel));
   });
 
   it('render column for install plan components list', () => {
@@ -187,7 +183,7 @@ describe('InstallPlanTableRow', () => {
         .childAt(COMPONENTS_INDEX)
         .find(ResourceLink)
         .props().kind,
-    ).toEqual(k8s.referenceForModel(ClusterServiceVersionModel));
+    ).toEqual(referenceForModel(ClusterServiceVersionModel));
     expect(
       wrapper
         .find('tr')
@@ -255,13 +251,13 @@ describe(InstallPlansPage.displayName, () => {
     expect(wrapper.find(MultiListPage).props().ListComponent).toEqual(InstallPlansList);
     expect(wrapper.find(MultiListPage).props().resources).toEqual([
       {
-        kind: k8s.referenceForModel(InstallPlanModel),
+        kind: referenceForModel(InstallPlanModel),
         namespace: 'default',
         namespaced: true,
         prop: 'installPlan',
       },
       {
-        kind: k8s.referenceForModel(OperatorGroupModel),
+        kind: referenceForModel(OperatorGroupModel),
         namespace: 'default',
         namespaced: true,
         prop: 'operatorGroup',
@@ -434,7 +430,7 @@ describe(InstallPlanDetails.displayName, () => {
         .find(Link)
         .props().to,
     ).toEqual(
-      `/k8s/ns/default/${k8s.referenceForModel(InstallPlanModel)}/${
+      `/k8s/ns/default/${referenceForModel(InstallPlanModel)}/${
         testInstallPlan.metadata.name
       }/components`,
     );

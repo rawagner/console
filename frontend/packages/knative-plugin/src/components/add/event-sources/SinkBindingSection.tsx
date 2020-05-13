@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { useFormikContext, FormikValues } from 'formik';
 import { TextInputTypes, FormGroup } from '@patternfly/react-core';
-import { InputField, getFieldId } from '@console/shared';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import { getFieldId } from '@console/shared/src/components/formik-fields/field-utils';
 import { AsyncComponent } from '@console/internal/components/utils/async';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 

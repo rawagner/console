@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { NodeKind } from '@console/internal/module/k8s';
-import { NodeAddress, NodeCondition } from '../types';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { NodeAddress, NodeCondition } from '../types/node';
 
 const NODE_ROLE_PREFIX = 'node-role.kubernetes.io/';
 

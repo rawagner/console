@@ -2,19 +2,19 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
-import { MachineConfigKind, referenceForModel } from '../module/k8s';
+import { MachineConfigKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
 import { MachineConfigModel } from '../models';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  Kebab,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
+import { ResourceSummary } from './utils/details-page';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { SectionHeading } from './utils/headings';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink } from './utils/resource-link';
+import { Timestamp } from './utils/timestamp';
 
 export const machineConfigReference = referenceForModel(MachineConfigModel);
 const machineConfigMenuActions = [

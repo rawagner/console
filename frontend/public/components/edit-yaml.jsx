@@ -7,18 +7,14 @@ import { connect } from 'react-redux';
 import { ActionGroup, Alert, Button, Split, SplitItem } from '@patternfly/react-core';
 import { DownloadIcon, InfoCircleIcon } from '@patternfly/react-icons';
 
-import { FLAGS, ALL_NAMESPACES_KEY, getBadgeFromType } from '@console/shared';
+import { FLAGS, ALL_NAMESPACES_KEY } from '@console/shared/src/constants/common';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
 
 import { connectToFlags } from './utils/connect-flags';
 import { errorModal } from './modals';
-import { Firehose, checkAccess, history, Loading, resourceObjPath } from './utils';
-import {
-  referenceForModel,
-  k8sCreate,
-  k8sUpdate,
-  referenceFor,
-  groupVersionFor,
-} from '../module/k8s';
+import { k8sCreate, k8sUpdate } from '../module/k8s/resource';
+import { referenceForModel, groupVersionFor } from '../module/k8s/k8s';
+import { referenceFor } from '../module/k8s/k8s-models';
 import { ConsoleYAMLSampleModel } from '../models';
 import { getResourceSidebarSamples } from './sidebars/resource-sidebar-samples';
 import { ResourceSidebar } from './sidebars/resource-sidebar';
@@ -26,7 +22,13 @@ import { getYamlTemplates } from '../models/yaml-templates';
 
 import { definitionFor } from '../module/k8s/swagger';
 import YAMLEditor from '@console/shared/src/components/editor/YAMLEditor';
-import { withExtensions, isYAMLTemplate } from '@console/plugin-sdk';
+import { withExtensions } from '@console/plugin-sdk/src/withExtensions';
+import { isYAMLTemplate } from '@console/plugin-sdk/src/typings';
+import { history } from './utils/router';
+import { checkAccess } from './utils/rbac';
+import { resourceObjPath } from './utils/resource-link';
+import { Loading } from './utils/status-box';
+import { Firehose } from './utils/firehose';
 
 const generateObjToLoad = (templateExtensions, kind, id, yaml, namespace = 'default') => {
   const sampleObj = safeLoad(yaml ? yaml : getYamlTemplates(templateExtensions).getIn([kind, id]));

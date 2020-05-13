@@ -1,9 +1,10 @@
 import * as _ from 'lodash';
-import { k8sGet, k8sPatch, SecretKind } from '@console/internal/module/k8s';
+import { SecretKind } from '@console/internal/module/k8s/types';
+import { k8sGet, k8sPatch } from '@console/internal/module/k8s/resource';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
-import { getLabels, getOwnerReferences } from '@console/shared/src';
+import { getLabels, getOwnerReferences } from '@console/shared/src/selectors/common';
 import { SecretModel } from '@console/internal/models';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { V2V_TEMPORARY_LABEL } from '../../../constants/v2v';
 import { buildOwnerReferenceForModel } from '../../../utils';
 import { VMImportProvider } from '../../../components/create-vm-wizard/types';

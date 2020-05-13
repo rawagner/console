@@ -5,13 +5,13 @@ import * as _ from 'lodash-es';
 // FIXME(alecmerdler): Do not `import store`
 import store from '../redux';
 import { history } from '../components/utils/router';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
 import {
   ALL_NAMESPACES_KEY,
   LAST_NAMESPACE_NAME_LOCAL_STORAGE_KEY,
   LAST_PERSPECTIVE_LOCAL_STORAGE_KEY,
-} from '@console/shared/src/constants';
-import { K8sResourceKind, PodKind, NodeKind } from '../module/k8s';
+} from '@console/shared/src/constants/common';
+import { K8sResourceKind, PodKind, NodeKind } from '../module/k8s/types';
 import { allModels } from '../module/k8s/k8s-models';
 import { detectFeatures, clearSSARFlags } from './features';
 import { OverviewSpecialGroup } from '../components/overview/constants';

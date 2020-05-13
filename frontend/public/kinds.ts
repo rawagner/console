@@ -2,15 +2,9 @@ import * as _ from 'lodash-es';
 import { connect } from 'react-redux';
 import { match } from 'react-router-dom';
 
-import {
-  K8sKind,
-  K8sResourceKindReference,
-  kindForReference,
-  GroupVersionKind,
-  isGroupVersionKind,
-  allModels,
-  getGroupVersionKind,
-} from './module/k8s';
+import { kindForReference, isGroupVersionKind, getGroupVersionKind } from './module/k8s/k8s';
+import { allModels } from './module/k8s/k8s-models';
+import { K8sKind, K8sResourceKindReference, GroupVersionKind } from './module/k8s/types';
 import { RootState } from './redux-types';
 
 export const connectToModel = connect(

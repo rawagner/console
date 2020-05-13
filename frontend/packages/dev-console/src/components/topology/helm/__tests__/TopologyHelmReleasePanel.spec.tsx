@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow, mount } from 'enzyme';
-import { SidebarSectionHeading, StatusBox } from '@console/internal/components/utils';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
+import { StatusBox } from '@console/internal/components/utils/status-box';
 import { mockHelmReleaseNode, mockManifest, mockReleaseNotes } from './mockData';
 import TopologyHelmReleaseResourcesPanel from '../TopologyHelmReleaseResourcesPanel';
 import TopologyHelmReleaseNotesPanel from '../TopologyHelmReleaseNotesPanel';

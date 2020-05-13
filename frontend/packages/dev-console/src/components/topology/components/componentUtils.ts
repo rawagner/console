@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { action } from 'mobx';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { errorModal } from '@console/internal/components/modals';
 import {
   Modifiers,

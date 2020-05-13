@@ -1,4 +1,4 @@
-import { K8sResourceKind, ObjectMetadata } from '@console/internal/module/k8s';
+import { K8sResourceKind, ObjectMetadata } from '@console/internal/module/k8s/types';
 import { V1alpha1DataVolume } from './disk/V1alpha1DataVolume';
 
 // https://kubevirt.io/api-reference/master/definitions.html#_v1_virtualmachineinstancespec

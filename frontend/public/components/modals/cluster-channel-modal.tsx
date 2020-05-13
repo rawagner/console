@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 
 import { ClusterVersionModel } from '../../models';
-import { Dropdown, PromiseComponent } from '../utils';
 import {
   createModalLauncher,
   ModalBody,
@@ -10,7 +9,11 @@ import {
   ModalSubmitFooter,
   ModalTitle,
 } from '../factory/modal';
-import { getAvailableClusterChannels, k8sPatch, K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
+import { getAvailableClusterChannels } from '../../module/k8s/cluster-settings';
+import { PromiseComponent } from '../utils/promise-component';
+import { Dropdown } from '../utils/dropdown';
 
 class ClusterChannelModal extends PromiseComponent<
   ClusterChannelModalProps,

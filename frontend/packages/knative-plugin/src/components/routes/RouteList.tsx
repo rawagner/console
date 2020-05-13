@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, TableProps } from '@console/internal/components/factory';
+import { Table, TableProps } from '@console/internal/components/factory/table';
 import { RouteModel } from '../../models';
 import RouteHeader from './RouteHeader';
 import RouteRow from './RouteRow';

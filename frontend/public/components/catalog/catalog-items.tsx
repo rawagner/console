@@ -9,7 +9,7 @@ import {
   CatalogTileBadge,
 } from '@patternfly/react-catalog-view-extension';
 
-import { DEV_CATALOG_FILTER_KEY as filterKey } from '@console/shared';
+import { DEV_CATALOG_FILTER_KEY as filterKey } from '@console/shared/src/constants/common';
 import { history } from '../utils/router';
 import { normalizeIconClass } from './catalog-item-icon';
 import { CatalogTileDetails } from './catalog-item-details';

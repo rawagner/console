@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ResourceSummary } from '@console/internal/components/utils';
-import { OverviewItem, PodRing } from '@console/shared';
+import PodRing from '@console/shared/src/components/pod/PodRing';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
 import { RevisionModel } from '../../models';
 
 type KnativeOverviewProps = {

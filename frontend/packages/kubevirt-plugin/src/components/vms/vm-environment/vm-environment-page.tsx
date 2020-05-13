@@ -1,15 +1,24 @@
 import * as React from 'react';
+import { getNamespace } from '@console/shared/src/selectors/common';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 import { VMKind } from '../../../types/vm';
 import {
   SecretKind,
   ConfigMapKind,
   EnvVarSource,
   TemplateKind,
-  k8sPatch,
   Patch,
   ServiceAccountKind,
-} from '@console/internal/module/k8s';
-import { getNamespace, getRandomChars } from '@console/shared';
+} from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { AsyncComponent } from '@console/internal/components/utils/async';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { FieldLevelHelp } from '@console/internal/components/utils/field-level-help';
 import { getResource } from '../../../utils';
 import {
   SecretModel,
@@ -17,14 +26,6 @@ import {
   ServiceAccountModel,
   TemplateModel,
 } from '@console/internal/models';
-import {
-  Firehose,
-  FirehoseResult,
-  FieldLevelHelp,
-  AsyncComponent,
-  HandlePromiseProps,
-  withHandlePromise,
-} from '@console/internal/components/utils';
 import { VMTabProps } from '../types';
 import { getVMLikeModel } from '../../../selectors/vm';
 import { isVM } from '../../../selectors/check-type';

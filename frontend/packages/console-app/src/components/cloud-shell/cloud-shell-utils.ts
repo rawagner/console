@@ -1,5 +1,5 @@
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { getRandomChars } from '@console/shared';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 
 type environment = {
   value: string;

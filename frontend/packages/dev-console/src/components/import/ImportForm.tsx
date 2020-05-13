@@ -2,15 +2,17 @@ import * as React from 'react';
 import { Formik } from 'formik';
 import * as _ from 'lodash';
 import { ValidatedOptions } from '@patternfly/react-core';
-import { history, AsyncComponent } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
+import { AsyncComponent } from '@console/internal/components/utils/async';
 import {
   getActivePerspective,
   getActiveApplication,
 } from '@console/internal/reducers/ui-selectors';
 import { RootState } from '@console/internal/redux-types';
 import { connect } from 'react-redux';
-import { ALL_APPLICATIONS_KEY } from '@console/shared';
-import { useExtensions, Perspective, isPerspective } from '@console/plugin-sdk';
+import { ALL_APPLICATIONS_KEY } from '@console/shared/src/constants/common';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { Perspective, isPerspective } from '@console/plugin-sdk/src/typings';
 import { NormalizedBuilderImages, normalizeBuilderImages } from '../../utils/imagestream-utils';
 import { doContextualBinding, sanitizeApplicationValue } from '../../utils/application-utils';
 import { ALLOW_SERVICE_BINDING } from '../../const';

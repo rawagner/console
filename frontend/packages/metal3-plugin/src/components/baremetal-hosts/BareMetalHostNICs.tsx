@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { OutlinedCheckSquareIcon, OutlinedSquareIcon } from '@patternfly/react-icons';
 import { sortable } from '@patternfly/react-table';
-import { Table, TableRow, TableData, RowFunction } from '@console/internal/components/factory';
+import {
+  Table,
+  TableRow,
+  TableData,
+  RowFunction,
+} from '@console/internal/components/factory/table';
 import { getHostNICs } from '../../selectors';
 import { BareMetalHostNIC, BareMetalHostKind } from '../../types';
 

@@ -2,8 +2,11 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import * as fuzzy from 'fuzzysearch';
 
-import { Firehose, LoadingInline, Dropdown, ResourceName, ResourceIcon } from '.';
 import { isDefaultClass } from '../storage-class';
+import { LoadingInline } from './status-box';
+import { ResourceName, ResourceIcon } from './resource-icon';
+import { Dropdown } from './dropdown';
+import { Firehose } from './firehose';
 
 /* Component StorageClassDropdown - creates a dropdown list of storage classes */
 

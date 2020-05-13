@@ -3,18 +3,13 @@ import { connect } from 'react-redux';
 import * as _ from 'lodash-es';
 import { NavExpandable } from '@patternfly/react-core';
 
-import {
-  withExtensions,
-  NavItem,
-  Perspective,
-  isNavItem,
-  isPerspective,
-} from '@console/plugin-sdk';
+import { NavItem, Perspective, isNavItem, isPerspective } from '@console/plugin-sdk/src/typings';
+import { withExtensions } from '@console/plugin-sdk/src/withExtensions';
 import { RootState, FeatureState } from '../../redux-types';
 import { flagPending } from '../utils/connect-flags';
-import { stripBasePath } from '../utils';
 import { stripNS, createLink } from './items';
 import { getActivePerspective } from '../../reducers/ui-selectors';
+import { stripBasePath } from '../utils/link';
 
 const navSectionStateToProps = (
   state: RootState,

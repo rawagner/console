@@ -6,8 +6,8 @@
  * The vmwareToKubevirtOsConfigMap is usually created by the web-ui-operator and can be missing.
  */
 import * as _ from 'lodash';
-import { alignWithDNS1123 } from '@console/shared/src';
-import { ConfigMapKind } from '@console/internal/module/k8s';
+import { alignWithDNS1123 } from '@console/shared/src/utils/validation';
+import { ConfigMapKind } from '@console/internal/module/k8s/types';
 import { InternalActionType, UpdateOptions } from '../../../types';
 import { iGetVMWareFieldAttribute } from '../../../../selectors/immutable/provider/vmware/selectors';
 import {

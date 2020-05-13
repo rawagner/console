@@ -3,20 +3,19 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import {
-  DetailsItem,
-  Kebab,
-  LabelList,
-  ResourceIcon,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Selector,
-  navFactory,
-} from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ServiceModel } from '../models';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { ResourceKebab, Kebab } from './utils/kebab';
+import { ResourceIcon } from './utils/resource-icon';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { DetailsItem } from './utils/details-item';
+import { navFactory } from './utils/horizontal-nav';
+import { Selector } from './utils/selector';
 
 const menuActions = [
   Kebab.factory.ModifyPodSelector,

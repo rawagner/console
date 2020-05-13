@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { modelFor, referenceFor } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import { Edge, observer, WithSourceDragProps, WithTargetDragProps } from '@console/topology';
-import { getTopologyResourceObject, BaseEdge } from '@console/dev-console/src/components/topology';
+import { getTopologyResourceObject } from '@console/dev-console/src/components/topology/topology-utils';
+import { BaseEdge } from '@console/dev-console/src/components/topology/components';
 import './EventSourceLink.scss';
 
 type EventSourceLinkProps = {

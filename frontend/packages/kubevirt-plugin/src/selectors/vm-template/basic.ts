@@ -1,4 +1,4 @@
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { VMKind } from '../../types/vm';
 import { VirtualMachineModel } from '../../models';
 

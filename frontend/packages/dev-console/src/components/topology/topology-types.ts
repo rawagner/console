@@ -1,9 +1,16 @@
 import { ComponentType } from 'react';
-import { FirehoseResult, KebabOption } from '@console/internal/components/utils';
-import { ExtPodKind, OverviewItem, PodControllerOverviewItem } from '@console/shared';
-import { DeploymentKind, K8sResourceKind, PodKind, EventKind } from '@console/internal/module/k8s';
+import {
+  DeploymentKind,
+  K8sResourceKind,
+  PodKind,
+  EventKind,
+} from '@console/internal/module/k8s/types';
 import { Pipeline, PipelineRun } from '../../utils/pipeline-augment';
 import { Node as TopologyNode, EventListener } from '@console/topology/src/types';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { ExtPodKind, PodControllerOverviewItem } from '@console/shared/src/types/pod';
+import { KebabOption } from '@console/internal/components/utils/kebab';
 
 export type Point = [number, number];
 

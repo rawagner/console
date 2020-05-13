@@ -1,11 +1,6 @@
 import * as _ from 'lodash';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import {
-  getDefaultOperatorIcon,
-  getImageForCSVIcon,
-  getOperatorBackedServiceKindMap,
-} from '@console/shared/src';
-import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
 import { TopologyDataModel, TopologyDataResources } from '../topology-types';
 import { TYPE_OPERATOR_BACKED_SERVICE, TYPE_OPERATOR_WORKLOAD } from './components/const';
 import {
@@ -17,6 +12,8 @@ import {
   getTopologyNodeItem,
   mergeGroup,
 } from '../data-transforms/transform-utils';
+import { getDefaultOperatorIcon, getImageForCSVIcon } from '@console/shared/src/utils/icon-utils';
+import { getOperatorBackedServiceKindMap } from '@console/shared/src/utils/resource-utils';
 
 export const getOperatorTopologyDataModel = (
   resources: TopologyDataResources,

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import { RouteLocation, RouteStatus } from '../../public/components/routes';
-import { ExternalLink } from '../../public/components/utils';
-import { RouteKind } from '../../public/module/k8s';
+import { ExternalLink } from '../../public/components/utils/link';
+import { RouteKind } from '../../public/module/k8s/types';
 
 describe(RouteLocation.displayName, () => {
   it('renders a https link when TLS Settings', () => {

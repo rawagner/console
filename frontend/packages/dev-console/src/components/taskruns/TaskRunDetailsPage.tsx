@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory';
-import { navFactory, viewYamlComponent } from '@console/internal/components/utils';
+import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory/details';
 import TaskRunDetails from './TaskRunDetails';
+import { navFactory, viewYamlComponent } from '@console/internal/components/utils/horizontal-nav';
 
 const TaskRunDetailsPage: React.FC<DetailsPageProps> = (props) => (
   <DetailsPage

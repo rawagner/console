@@ -4,11 +4,12 @@ import {
   K8sKind,
   SelfSubjectAccessReviewKind,
   AccessReviewResourceAttributes,
-} from '@console/internal/module/k8s';
-import { checkAccess } from '@console/internal/components/utils';
-import { podColor, AllPodStatus, DEPLOYMENT_STRATEGY, DEPLOYMENT_PHASE } from '../constants';
-import { ExtPodKind } from '../types/pod';
-import { PodControllerOverviewItem, DeploymentStrategy } from '../types';
+} from '@console/internal/module/k8s/types';
+import { checkAccess } from '@console/internal/components/utils/rbac';
+import { podColor, AllPodStatus } from '../constants/pod';
+import { ExtPodKind, PodControllerOverviewItem } from '../types/pod';
+import { DeploymentStrategy } from '../types/resource';
+import { DEPLOYMENT_PHASE, DEPLOYMENT_STRATEGY } from '../constants/resource';
 
 export const podStatus = Object.keys(podColor);
 

@@ -7,16 +7,15 @@ import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import { flatten as bindingsFlatten } from './bindings';
 import { BindingName, BindingsList, RulesList } from './index';
-import { DetailsPage, MultiListPage, TextFilter, Table, TableRow, TableData } from '../factory';
-import {
-  Kebab,
-  SectionHeading,
-  MsgBox,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  Timestamp,
-} from '../utils';
+import { Kebab, ResourceKebab } from '../utils/kebab';
+import { ResourceLink } from '../utils/resource-link';
+import { SectionHeading } from '../utils/headings';
+import { Timestamp } from '../utils/timestamp';
+import { navFactory } from '../utils/horizontal-nav';
+import { MsgBox } from '../utils/status-box';
+import { Table, TableRow, TableData } from '../factory/table';
+import { TextFilter, MultiListPage } from '../factory/list-page';
+import { DetailsPage } from '../factory/details';
 
 export const isSystemRole = (role) => _.startsWith(role.metadata.name, 'system:');
 

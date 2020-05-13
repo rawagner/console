@@ -2,12 +2,9 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
 import { Flex, FlexItem } from '@patternfly/react-core';
-import {
-  SidebarSectionHeading,
-  ResourceLink,
-  resourcePath,
-} from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { ResourceLink, resourcePath } from '@console/internal/components/utils/resource-link';
+import { SidebarSectionHeading } from '@console/internal/components/utils/headings';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PipelineRunModel, PipelineModel } from '@console/dev-console/src/models';
 import { TopologyOverviewItem } from '../../topology/topology-types';
 import TriggerLastRunButton from './TriggerLastRunButton';

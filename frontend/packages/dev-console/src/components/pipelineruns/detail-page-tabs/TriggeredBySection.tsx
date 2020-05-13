@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ResourceLink } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { EventListenerModel } from '../../../models';
 import { PipelineRun } from '../../../utils/pipeline-augment';
 import { StartedByLabel } from '../../pipelines/const';

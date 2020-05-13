@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { connectToFlags } from './utils/connect-flags';
-import { Firehose, FirehoseResult } from './utils';
-import { referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
 import { ConsoleNotificationModel } from '../models/index';
+import { Firehose } from './utils/firehose';
+import { FirehoseResult } from './utils/types';
 
 const ConsoleNotifier_: React.FC<ConsoleNotifierProps> = ({ obj, location }) => {
   if (_.isEmpty(obj)) {

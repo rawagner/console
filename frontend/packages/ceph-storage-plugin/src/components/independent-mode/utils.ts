@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { HealthState } from '@console/shared/src/components/dashboard/status-card/states';
 import { DataValidator, DataState, ErrorType, Field } from './types';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 export const getValidJSON: DataValidator = (fData) => {
   try {

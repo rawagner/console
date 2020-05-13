@@ -1,4 +1,4 @@
-import { K8sKind } from '../module/k8s';
+import { K8sKind } from '../module/k8s/types';
 
 export const PrometheusModel: K8sKind = {
   kind: 'Prometheus',

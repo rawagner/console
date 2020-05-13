@@ -3,11 +3,14 @@ import { Helmet } from 'react-helmet';
 import { ActionGroup, Button } from '@patternfly/react-core';
 
 import { SecretModel, ConfigMapModel } from '../../models';
-import { IdentityProvider, k8sCreate, K8sResourceKind, OAuthKind } from '../../module/k8s';
-import { ButtonBar, PromiseComponent, history } from '../utils';
+import { IdentityProvider, K8sResourceKind, OAuthKind } from '../../module/k8s/types';
+import { k8sCreate } from '../../module/k8s/resource';
+import { history } from '../utils/router';
 import { addIDP, getOAuthResource, redirectToOAuthPage, mockNames } from './';
 import { IDPNameInput } from './idp-name-input';
 import { IDPCAFileInput } from './idp-cafile-input';
+import { PromiseComponent } from '../utils/promise-component';
+import { ButtonBar } from '../utils/button-bar';
 
 export class AddGitLabPage extends PromiseComponent<{}, AddGitLabPageState> {
   readonly state: AddGitLabPageState = {

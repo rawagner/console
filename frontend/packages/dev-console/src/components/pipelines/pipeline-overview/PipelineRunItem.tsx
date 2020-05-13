@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import { resourcePath } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { Status } from '@console/shared';
+import { resourcePath } from '@console/internal/components/utils/resource-link';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { Status } from '@console/shared/src/components/status/Status';
 import { fromNow } from '@console/internal/components/utils/datetime';
 import { pipelineRunStatus } from '../../../utils/pipeline-filter-reducer';
 import { PipelineRunModel } from '../../../models';

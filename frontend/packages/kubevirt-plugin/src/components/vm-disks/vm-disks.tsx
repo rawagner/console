@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { Button, ButtonVariant } from '@patternfly/react-core';
-import { Table, RowFunction } from '@console/internal/components/factory';
+import { Table, RowFunction } from '@console/internal/components/factory/table';
 import { PersistentVolumeClaimModel, TemplateModel } from '@console/internal/models';
-import { Firehose, FirehoseResult, EmptyBox } from '@console/internal/components/utils';
 import { useSafetyFirst } from '@console/internal/components/safety-first';
-import { K8sResourceKind, TemplateKind } from '@console/internal/module/k8s';
-import { dimensifyHeader, getNamespace } from '@console/shared';
+import { K8sResourceKind, TemplateKind } from '@console/internal/module/k8s/types';
+import { EmptyBox } from '@console/internal/components/utils/status-box';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { dimensifyHeader } from '@console/shared/src/utils/table-utils';
+import { getNamespace } from '@console/shared/src/selectors/common';
 import { sortable } from '@patternfly/react-table';
 import { DataVolumeModel } from '../../models';
 import { VMGenericLikeEntityKind } from '../../types/vmLike';

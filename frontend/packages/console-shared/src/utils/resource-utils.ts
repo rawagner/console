@@ -2,15 +2,14 @@ import * as _ from 'lodash';
 import {
   DeploymentKind,
   K8sResourceKind,
-  LabelSelector,
   PodKind,
   PodTemplate,
   RouteKind,
-  apiVersionForModel,
-  referenceForModel,
   K8sKind,
   ObjectMetadata,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
+import { LabelSelector } from '@console/internal/module/k8s/label-selector';
+import { apiVersionForModel, referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   DeploymentConfigModel,
   ReplicationControllerModel,
@@ -21,32 +20,27 @@ import {
   PodModel,
 } from '@console/internal/models';
 import { getBuildNumber } from '@console/internal/module/k8s/builds';
-import { FirehoseResource } from '@console/internal/components/utils';
+import { FirehoseResource } from '@console/internal/components/utils/types';
+import { resourceStatus, podStatus } from './ResourceStatus';
+import { isKnativeServing, isIdled } from './pod-utils';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
+import { OverviewItemAlerts, ExtPodKind, PodControllerOverviewItem, PodRCData } from '../types/pod';
 import {
   BuildConfigOverviewItem,
-  OverviewItemAlerts,
-  PodControllerOverviewItem,
-  OverviewItem,
-  PodRCData,
-  ExtPodKind,
   OperatorBackedServiceKindMap,
-} from '../types';
+  OverviewItem,
+} from '../types/resource';
 import {
   DEPLOYMENT_REVISION_ANNOTATION,
   DEPLOYMENT_CONFIG_LATEST_VERSION_ANNOTATION,
-  TRIGGERS_ANNOTATION,
+  DEPLOYMENT_PHASE,
+  DEPLOYMENT_STRATEGY,
   DEPLOYMENT_PHASE_ANNOTATION,
   CONTAINER_WAITING_STATE_ERROR_REASONS,
-  DEPLOYMENT_STRATEGY,
-  DEPLOYMENT_PHASE,
-  AllPodStatus,
-} from '../constants';
-import { resourceStatus, podStatus } from './ResourceStatus';
-import { isKnativeServing, isIdled } from './pod-utils';
-import {
-  ClusterServiceVersionModel,
-  ClusterServiceVersionKind,
-} from '@console/operator-lifecycle-manager';
+  TRIGGERS_ANNOTATION,
+} from '../constants/resource';
+import { AllPodStatus } from '../constants/pod';
 
 export const getResourceList = (namespace: string, resList?: any) => {
   let resources: FirehoseResource[] = [

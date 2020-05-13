@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useFormikContext, useField } from 'formik';
 import { shallow } from 'enzyme';
-import { InputField, ResourceDropdownField, FLAGS } from '@console/shared';
 import { InternalNamespaceSection } from '../NamespaceSection';
 import { CREATE_NAMESPACE_KEY } from '../cloud-shell-setup-utils';
+import { FLAGS } from '@console/shared/src/constants/common';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
 
 jest.mock('formik', () => {
   const context = {

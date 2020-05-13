@@ -7,13 +7,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as fuzzy from 'fuzzysearch';
 import { RootState } from '@console/internal/redux-types';
 import { Button } from '@patternfly/react-core';
-import { Dropdown, removeQueryArgument } from '@console/internal/components/utils';
 import { queryBrowserRunQueries, queryBrowserPatchQuery } from '@console/internal/actions/ui';
 import { getActiveNamespace } from '@console/internal/reducers/ui-selectors';
 import { QueryInput } from '@console/internal/components/monitoring/metrics';
 import { QueryObj } from '@console/internal/components/monitoring/query-browser';
 import { metricsQuery, getTopMetricsQueries } from '../queries';
 import './MetricsQueryInput.scss';
+import { removeQueryArgument } from '@console/internal/components/utils/router';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 
 const ADD_NEW_QUERY = '#ADD_NEW_QUERY#';
 const CUSTOM_QUERY = 'Custom Query';

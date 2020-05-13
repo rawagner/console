@@ -1,4 +1,4 @@
-import { K8sResourceCommon, TemplateKind } from '@console/internal/module/k8s';
+import { K8sResourceCommon, TemplateKind } from '@console/internal/module/k8s/types';
 import { TemplateModel } from '@console/internal/models';
 import { VMImportKind } from '../types/vm-import/ovirt/vm-import';
 import { VMIKind, VMKind } from '../types/vm';

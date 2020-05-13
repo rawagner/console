@@ -1,17 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { getNamespace, createLookup, getName } from '@console/shared';
-import {
-  Firehose,
-  StatusBox,
-  ScrollToTopOnMount,
-  SectionHeading,
-  useAccessReview,
-  asAccessReview,
-  FirehoseResult,
-} from '@console/internal/components/utils';
-import { TemplateKind } from '@console/internal/module/k8s';
+import { getNamespace, getName } from '@console/shared/src/selectors/common';
+import { createLookup } from '@console/shared/src/utils/utils';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import { TemplateModel } from '@console/internal/models';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { ScrollToTopOnMount } from '@console/internal/components/utils/scroll-to-top-on-mount';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { useAccessReview, asAccessReview } from '@console/internal/components/utils/rbac';
 import { DataVolumeModel } from '../../models';
 import { V1alpha1DataVolume } from '../../types/vm/disk/V1alpha1DataVolume';
 import {

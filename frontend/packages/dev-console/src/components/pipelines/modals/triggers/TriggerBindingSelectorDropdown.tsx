@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FirehoseResult } from '@console/internal/components/utils';
-import { DropdownField } from '@console/shared';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { TriggerBindingKind } from '../../resource-types';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 
 type TriggerBindingSelectorProps = {
   clusterTriggerBindingData?: FirehoseResult<TriggerBindingKind[]>;

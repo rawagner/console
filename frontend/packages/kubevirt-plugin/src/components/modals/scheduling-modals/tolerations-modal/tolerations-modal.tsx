@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { ModalTitle, ModalBody, ModalComponentProps } from '@console/internal/components/factory';
-import { Button, ButtonVariant } from '@patternfly/react-core';
 import {
-  FirehoseResult,
-  withHandlePromise,
-  HandlePromiseProps,
-} from '@console/internal/components/utils';
-import { k8sPatch, NodeKind } from '@console/internal/module/k8s';
+  ModalTitle,
+  ModalBody,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
+import { Button, ButtonVariant } from '@patternfly/react-core';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { NodeModel } from '@console/internal/models';
 import { isLoaded, getLoadedData, getLoadError } from '../../../../utils';
 import { ModalFooter } from '../../modal/modal-footer';
@@ -24,6 +24,11 @@ import { useCollisionChecker } from '../../../../hooks/use-collision-checker';
 import { TolerationRow } from './toleration-row';
 import { TolerationHeader } from './toleration-header';
 import { TolerationLabel } from './types';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 export const TModal = withHandlePromise(
   ({

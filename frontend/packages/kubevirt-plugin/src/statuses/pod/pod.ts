@@ -1,4 +1,4 @@
-import { PodKind } from '@console/internal/module/k8s';
+import { PodKind } from '@console/internal/module/k8s/types';
 import {
   isPodSchedulable,
   getPodStatusPhase,

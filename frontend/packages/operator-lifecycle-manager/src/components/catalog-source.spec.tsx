@@ -2,10 +2,11 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as _ from 'lodash';
 import { safeLoad } from 'js-yaml';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { DetailsPage } from '@console/internal/components/factory';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { DetailsPage } from '@console/internal/components/factory/details';
 import { ErrorBoundary } from '@console/shared/src/components/error/error-boundary';
-import { Firehose, LoadingBox } from '@console/internal/components/utils';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import { CreateYAML, CreateYAMLProps } from '@console/internal/components/create-yaml';
 import {
   SubscriptionModel,

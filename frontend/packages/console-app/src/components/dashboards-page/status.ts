@@ -5,7 +5,7 @@ import {
   SubsystemHealth,
   GetOperatorsWithStatuses,
   GetOperatorStatusPriority,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 import {
   HealthState,
   operatorHealthPriority,
@@ -14,11 +14,11 @@ import { coFetch } from '@console/internal/co-fetch';
 import {
   ClusterVersionKind,
   ClusterUpdateStatus,
-  getClusterUpdateStatus,
-  getClusterOperatorStatus,
   OperatorStatus,
   ClusterOperator,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
+import { getClusterUpdateStatus } from '@console/internal/module/k8s/cluster-settings';
+import { getClusterOperatorStatus } from '@console/internal/module/k8s/cluster-operator';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 import { humanizePercentage } from '@console/internal/components/utils/units';
 import { getOperatorsStatus } from '@console/shared/src/components/dashboard/status-card/state-utils';

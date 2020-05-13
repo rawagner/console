@@ -1,6 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { k8sCreate, ContainerPort } from '@console/internal/module/k8s';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import { useDebounceCallback } from '@console/shared/src/hooks/debounce';
+import { ContainerPort } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import { ImageStreamImportsModel } from '@console/internal/models';
 import { useFormikContext, FormikValues, FormikTouched } from 'formik';
 import {
@@ -11,7 +14,6 @@ import {
   ValidatedOptions,
 } from '@patternfly/react-core';
 import { SecretTypeAbstraction } from '@console/internal/components/secrets/create-secret';
-import { InputField, useDebounceCallback } from '@console/shared';
 import { getSuggestedName, getPorts, makePortName } from '../../../utils/imagestream-utils';
 import { secretModalLauncher } from '../CreateSecretModal';
 import { UNASSIGNED_KEY, CREATE_APPLICATION_KEY } from '../../../const';

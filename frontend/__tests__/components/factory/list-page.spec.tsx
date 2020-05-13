@@ -7,7 +7,8 @@ import {
   FireMan_,
   MultiListPage,
 } from '../../../public/components/factory/list-page';
-import { Firehose, PageHeading } from '../../../public/components/utils';
+import { Firehose } from '../../../public/components/utils/firehose';
+import { PageHeading } from '../../../public/components/utils/headings';
 
 describe(TextFilter.displayName, () => {
   let wrapper: ShallowWrapper;

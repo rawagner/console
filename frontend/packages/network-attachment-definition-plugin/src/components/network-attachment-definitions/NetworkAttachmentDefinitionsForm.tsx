@@ -4,15 +4,10 @@ import { Link } from 'react-router-dom';
 import * as _ from 'lodash';
 import { Form, FormControl, FormGroup, HelpBlock } from 'patternfly-react';
 import { ActionGroup, Button } from '@patternfly/react-core';
-import { referenceForModel, k8sCreate } from '@console/internal/module/k8s';
-import {
-  ButtonBar,
-  Dropdown,
-  Firehose,
-  history,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
-import { validateDNS1123SubdomainValue, ValidationErrorType } from '@console/shared';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
+import { validateDNS1123SubdomainValue } from '@console/shared/src/utils/validation/validation';
 import {
   HyperConvergedModel,
   NetworkAttachmentDefinitionModel,
@@ -25,6 +20,11 @@ import {
 } from '../../types';
 import { networkTypeParams, networkTypes } from '../../constants';
 import NetworkTypeOptions from './NetworkTypeOptions';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { history } from '@console/internal/components/utils/router';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 
 const buildConfig = (name, networkType, typeParamsData): NetworkAttachmentDefinitionConfig => {
   const config: NetworkAttachmentDefinitionConfig = {

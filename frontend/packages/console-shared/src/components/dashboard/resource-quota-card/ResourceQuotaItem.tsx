@@ -7,7 +7,7 @@ import {
 } from '@console/internal/components/resource-quota';
 import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { ResourceQuotaModel } from '@console/internal/models';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 
 import './resource-quota-card.scss';
 

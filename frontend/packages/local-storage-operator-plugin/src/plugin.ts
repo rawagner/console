@@ -1,8 +1,13 @@
 import * as _ from 'lodash';
-import { ModelDefinition, ModelFeatureFlag, Plugin, RoutePage } from '@console/plugin-sdk';
-import { referenceForModel } from '@console/internal/module/k8s';
+import {
+  ModelDefinition,
+  ModelFeatureFlag,
+  Plugin,
+  RoutePage,
+} from '@console/plugin-sdk/src/typings';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import * as models from './models';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
 
 type ConsumedExtensions = ModelFeatureFlag | ModelDefinition | RoutePage;
 

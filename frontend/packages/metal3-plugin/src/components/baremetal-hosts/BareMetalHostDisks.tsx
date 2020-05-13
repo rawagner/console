@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { sortable } from '@patternfly/react-table';
-import { Table, TableRow, TableData, RowFunction } from '@console/internal/components/factory';
-import { humanizeDecimalBytes } from '@console/internal/components/utils';
+import {
+  Table,
+  TableRow,
+  TableData,
+  RowFunction,
+} from '@console/internal/components/factory/table';
+import { humanizeDecimalBytes } from '@console/internal/components/utils/units';
 import { getHostStorage } from '../../selectors';
 import { BareMetalHostDisk, BareMetalHostKind } from '../../types';
 

@@ -1,9 +1,13 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { K8sActivityProps, PrometheusActivityProps, LazyLoader } from '@console/plugin-sdk';
+import {
+  K8sActivityProps,
+  PrometheusActivityProps,
+  LazyLoader,
+} from '@console/plugin-sdk/src/typings';
 import { PlayIcon, PauseIcon } from '@patternfly/react-icons';
 import { Accordion } from '@patternfly/react-core';
-import { K8sResourceKind, EventKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, EventKind } from '@console/internal/module/k8s/types';
 import { ErrorLoadingEvents, sortEvents } from '@console/internal/components/events';
 import { Timestamp } from '@console/internal/components/utils/timestamp';
 import { AsyncComponent } from '@console/internal/components/utils/async';

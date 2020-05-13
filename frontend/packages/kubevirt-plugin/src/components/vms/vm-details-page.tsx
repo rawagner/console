@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { navFactory } from '@console/internal/components/utils';
-import { DetailsPage } from '@console/internal/components/factory';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { DetailsPage } from '@console/internal/components/factory/details';
 import { PodModel, TemplateModel } from '@console/internal/models';
 import { VMDisksFirehose } from '../vm-disks';
 import { VMNics } from '../vm-nics';

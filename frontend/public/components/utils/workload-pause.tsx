@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Alert, AlertActionLink } from '@patternfly/react-core';
 
-import { K8sKind, k8sPatch, K8sResourceKind } from '../../module/k8s/index';
+import { K8sKind, K8sResourceKind } from '../../module/k8s/types';
+import { k8sPatch } from '../../module/k8s/resource';
 import { errorModal } from '../modals/index';
 
 export const togglePaused = (model: K8sKind, obj: K8sResourceKind) => {

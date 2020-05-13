@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
-import { CheckboxField } from '@console/shared';
+import CheckboxField from '@console/shared/src/components/formik-fields/CheckboxField';
 import SecretKeySelector from '../SecretKeySelector';
 
 const KafkaSourceNetSection: React.FC = () => {

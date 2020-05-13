@@ -10,8 +10,8 @@ import {
   humanizeBinaryBytes,
   humanizeCpuCores,
   humanizeDecimalBytesPerSec,
-} from '@console/internal/components/utils';
-import { getMachineNodeName } from '@console/shared';
+} from '@console/internal/components/utils/units';
+import { getMachineNodeName } from '@console/shared/src/selectors/machine';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 import {
   PrometheusUtilizationItem,

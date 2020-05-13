@@ -2,9 +2,10 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { TextInputTypes } from '@patternfly/react-core';
 import { useFormikContext, FormikValues } from 'formik';
-import { InputField, DropdownField } from '@console/shared';
 import FormSection from '../section/FormSection';
 import { RouteData } from '../import-types';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 
 export interface ServerlessRouteSectionProps {
   route: RouteData;

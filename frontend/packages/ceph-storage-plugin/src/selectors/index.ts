@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
 import { Alert } from '@console/shared/src/types/monitoring';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { FirehoseResult, convertToBaseValue } from '@console/internal/components/utils';
-import { cephStorageProvisioners } from '@console/shared/src/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { cephStorageProvisioners } from '@console/shared/src/utils/storage-utils';
+import { convertToBaseValue } from '@console/internal/components/utils/units';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { OCS_OPERATOR } from '../constants';
 
 export const cephStorageLabel = 'cluster.ocs.openshift.io/openshift-storage';

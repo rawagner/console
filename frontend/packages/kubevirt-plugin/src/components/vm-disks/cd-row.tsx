@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { TableData, TableRow } from '@console/internal/components/factory';
-import { LoadingInline } from '@console/internal/components/utils';
-import { dimensifyRow, DASH } from '@console/shared';
+import { TableData, TableRow } from '@console/internal/components/factory/table';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
+import { dimensifyRow } from '@console/shared/src/utils/table-utils';
+import { DASH } from '@console/shared/src/constants/ui';
 import { ValidationCell } from '../table/validation-cell';
 import { StorageSimpleData, StorageSimpleDataValidation } from './types';
 

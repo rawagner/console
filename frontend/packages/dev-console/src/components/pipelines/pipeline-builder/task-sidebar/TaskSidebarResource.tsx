@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormGroup } from '@patternfly/react-core';
-import { Dropdown } from '@console/internal/components/utils';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 import {
   PipelineResource,
   PipelineResourceTaskResource,

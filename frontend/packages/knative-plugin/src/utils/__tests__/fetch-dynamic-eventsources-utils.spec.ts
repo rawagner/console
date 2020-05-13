@@ -1,6 +1,6 @@
 import { isEqual } from 'lodash';
 import * as coFetch from '@console/internal/co-fetch';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   EventSourceApiServerModel,
   EventSourceSinkBindingModel,

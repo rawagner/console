@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Status, ProgressStatus } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
+import { ProgressStatus } from '@console/shared/src/components/status/statuses';
 import {
   NODE_STATUS_UNDER_MAINTENANCE,
   NODE_STATUS_STARTING_MAINTENANCE,

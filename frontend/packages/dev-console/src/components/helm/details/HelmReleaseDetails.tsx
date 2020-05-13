@@ -1,17 +1,11 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { match as RMatch } from 'react-router';
-import {
-  navFactory,
-  LoadingBox,
-  StatusBox,
-  FirehoseResult,
-} from '@console/internal/components/utils';
 import { SecretModel } from '@console/internal/models';
 import { ErrorPage404 } from '@console/internal/components/error';
-import { DetailsPage } from '@console/internal/components/factory';
-import { K8sResourceKindReference } from '@console/internal/module/k8s';
-import { Status } from '@console/shared';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { K8sResourceKindReference } from '@console/internal/module/k8s/types';
+import { Status } from '@console/shared/src/components/status/Status';
 import { Badge } from '@patternfly/react-core';
 import { fetchHelmReleases } from '../helm-utils';
 import HelmReleaseResources from './resources/HelmReleaseResources';
@@ -24,6 +18,9 @@ import {
 } from '../../../actions/modify-helm-release';
 import HelmReleaseNotes from './HelmReleaseNotes';
 import { HelmRelease, HelmActionOrigins } from '../helm-types';
+import { LoadingBox, StatusBox } from '@console/internal/components/utils/status-box';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 const SecretReference: K8sResourceKindReference = 'Secret';
 const HelmReleaseReference = 'HelmRelease';

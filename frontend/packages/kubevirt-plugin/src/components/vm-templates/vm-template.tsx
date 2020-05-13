@@ -4,33 +4,23 @@ import * as _ from 'lodash';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 import {
-  ListPage,
   Table,
   TableRow,
   TableData,
-  MultiListPage,
   RowFunction,
-} from '@console/internal/components/factory';
-import {
-  Kebab,
-  ResourceLink,
-  ResourceKebab,
-  FirehoseResult,
-} from '@console/internal/components/utils';
+} from '@console/internal/components/factory/table';
+import { ListPage, MultiListPage } from '@console/internal/components/factory/list-page';
 import { TemplateModel } from '@console/internal/models';
-import { TemplateKind } from '@console/internal/module/k8s';
-import {
-  dimensifyHeader,
-  dimensifyRow,
-  getNamespace,
-  DASH,
-  getUID,
-  getName,
-  createLookup,
-  K8sEntityMap,
-} from '@console/shared';
+import { TemplateKind } from '@console/internal/module/k8s/types';
+import { getNamespace, getUID, getName } from '@console/shared/src/selectors/common';
+import { dimensifyHeader, dimensifyRow } from '@console/shared/src/utils/table-utils';
+import { createLookup, K8sEntityMap } from '@console/shared/src/utils/utils';
+import { DASH } from '@console/shared/src/constants/ui';
 import { match } from 'react-router';
 import { withStartGuide } from '@console/internal/components/start-guide';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Kebab, ResourceKebab } from '@console/internal/components/utils/kebab';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 import { VM_TEMPLATE_LABEL_PLURAL } from '../../constants/vm-templates';
 import {
   getTemplateOperatingSystems,

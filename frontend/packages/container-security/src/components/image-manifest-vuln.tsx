@@ -5,37 +5,34 @@ import { Tooltip } from '@patternfly/react-core';
 import { sortable } from '@patternfly/react-table';
 import { SecurityIcon } from '@patternfly/react-icons';
 import {
-  MultiListPage,
   Table,
   TableRow,
   TableData,
-  DetailsPage,
-  ListPage,
   RowFunction,
-} from '@console/internal/components/factory';
-import { GreenCheckCircleIcon } from '@console/shared/';
-import { referenceForModel, PodKind, ContainerStatus } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/table';
+import { MultiListPage, ListPage } from '@console/internal/components/factory/list-page';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { GreenCheckCircleIcon } from '@console/shared/src/components/status/icons';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { PodKind, ContainerStatus } from '@console/internal/module/k8s/types';
 import { match } from 'react-router';
-import {
-  ResourceLink,
-  ExternalLink,
-  navFactory,
-  SectionHeading,
-  ResourceSummary,
-  DetailsItem,
-  Firehose,
-  FirehoseResult,
-  Loading,
-  MsgBox,
-} from '@console/internal/components/utils';
 import { ChartDonut } from '@patternfly/react-charts';
 import { DefaultList } from '@console/internal/components/default-resource';
+import { ContainerLink } from '@console/internal/components/pod';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { DetailsItem } from '@console/internal/components/utils/details-item';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Loading, MsgBox } from '@console/internal/components/utils/status-box';
+import { Firehose } from '@console/internal/components/utils/firehose';
 import { vulnPriority, totalFor, priorityFor } from '../const';
 import { ImageManifestVuln, Feature, Vulnerability } from '../types';
 import { ImageManifestVulnModel } from '../models';
 import { quayURLFor } from './summary';
 import './image-manifest-vuln.scss';
-import { ContainerLink } from '@console/internal/components/pod';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 const shortenImage = (img: string) =>
   img

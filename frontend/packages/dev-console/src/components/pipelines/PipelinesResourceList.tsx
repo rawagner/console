@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { getBadgeFromType } from '@console/shared';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { Firehose } from '@console/internal/components/utils';
-import { FireMan_ as FireMan } from '@console/internal/components/factory';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { FireMan_ as FireMan } from '@console/internal/components/factory/list-page';
 import { PipelineModel } from '../../models';
 import PipelineAugmentRunsWrapper from './list-page/PipelineAugmentRunsWrapper';
 import { filters } from './list-page/PipelineAugmentRuns';

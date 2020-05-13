@@ -2,14 +2,15 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Button } from '@patternfly/react-core';
 
-import { ButtonBar, Dropdown } from '../../../public/components/utils';
+import { ButtonBar } from '../../../public/components/utils/button-bar';
+import { Dropdown } from '../../../public/components/utils/dropdown';
 import {
   CreateRoute,
   CreateRouteState,
   AlternateServicesGroup,
 } from '../../../public/components/routes/create-route';
 import * as UIActions from '../../../public/actions/ui';
-import * as k8sActions from '../../../public/module/k8s';
+import * as k8sActions from '../../../public/module/k8s/resource';
 
 describe('Create Route', () => {
   let wrapper: ShallowWrapper<{}, CreateRouteState>;

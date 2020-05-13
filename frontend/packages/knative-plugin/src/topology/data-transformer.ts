@@ -1,14 +1,15 @@
 import * as _ from 'lodash';
-import { getOperatorBackedServiceKindMap, OperatorBackedServiceKindMap } from '@console/shared';
-import { DeploymentKind, K8sResourceKind } from '@console/internal/module/k8s';
-import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager';
+import { getOperatorBackedServiceKindMap } from '@console/shared/src/utils/resource-utils';
+import { OperatorBackedServiceKindMap } from '@console/shared/src/types/resource';
+import { DeploymentKind, K8sResourceKind } from '@console/internal/module/k8s/types';
+import { ClusterServiceVersionKind } from '@console/operator-lifecycle-manager/src/types';
+import { getDynamicEventSourcesModelRefs } from '../utils/fetch-dynamic-eventsources-utils';
+import { NodeType, transformKnNodeData } from './knative-topology-utils';
 import {
   TopologyDataModel,
   TopologyDataResources,
-  addToTopologyDataModel,
-} from '@console/dev-console/src/components/topology';
-import { getDynamicEventSourcesModelRefs } from '../utils/fetch-dynamic-eventsources-utils';
-import { NodeType, transformKnNodeData } from './knative-topology-utils';
+} from '@console/dev-console/src/components/topology/topology-types';
+import { addToTopologyDataModel } from '@console/dev-console/src/components/topology/data-transforms/transform-utils';
 
 /**
  * Filter out deployments not created via revisions/eventsources

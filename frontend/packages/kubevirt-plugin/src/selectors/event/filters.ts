@@ -1,6 +1,6 @@
-import { getName, getNamespace } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { PodModel } from '@console/internal/models';
-import { EventInvolvedObject } from '@console/internal/module/k8s';
+import { EventInvolvedObject } from '@console/internal/module/k8s/types';
 import {
   VirtualMachineImportModel,
   VirtualMachineInstanceMigrationModel,

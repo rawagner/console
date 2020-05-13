@@ -4,11 +4,16 @@ import { Link } from 'react-router-dom';
 import { Alert, ActionGroup, Button } from '@patternfly/react-core';
 import { PlusCircleIcon, MinusCircleIcon } from '@patternfly/react-icons';
 
-import { ButtonBar, Dropdown, history, resourcePathFromModel, ResourceName } from '../utils';
-import { k8sCreate, k8sList, K8sResourceKind } from '../../module/k8s';
+import { k8sCreate, k8sList } from '../../module/k8s/resource';
+import { K8sResourceKind } from '../../module/k8s/types';
 import { getActiveNamespace } from '../../actions/ui';
 import { ServiceModel, RouteModel } from '../../models';
 import { AsyncComponent } from '../utils/async';
+import { history } from '../utils/router';
+import { resourcePathFromModel } from '../utils/resource-link';
+import { ResourceName } from '../utils/resource-icon';
+import { Dropdown } from '../utils/dropdown';
+import { ButtonBar } from '../utils/button-bar';
 
 const UNNAMED_PORT_KEY = '#unnamed';
 const MAX_ALT_SERVICE_TARGET = 3;

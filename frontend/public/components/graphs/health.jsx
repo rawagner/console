@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { Status, errorStatus } from './';
 import { coFetch, coFetchJSON } from '../../co-fetch';
-import { FLAGS } from '@console/shared';
-import { k8sBasePath } from '../../module/k8s';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { k8sBasePath } from '../../module/k8s/k8s';
 
 // Use the shorter 'OpenShift Console' instead of 'OpenShift Container Platform Console' since the title appears in the chart.
 const consoleName = window.SERVER_FLAGS.branding === 'okd' ? 'OKD Console' : 'OpenShift Console';

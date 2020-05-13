@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { match as RMatch } from 'react-router';
-import { history } from '@console/internal/components/utils';
-import { ALL_NAMESPACES_KEY } from '@console/shared';
+import { history } from '@console/internal/components/utils/router';
+import { ALL_NAMESPACES_KEY } from '@console/shared/src/constants/common';
 import { NamespaceDetails, projectMenuActions } from '@console/internal/components/namespace';
 import { ProjectModel } from '@console/internal/models';
-import { DetailsPage } from '@console/internal/components/factory';
+import { DetailsPage } from '@console/internal/components/factory/details';
 import { ProjectDashboard } from '@console/internal/components/dashboard/project-dashboard/project-dashboard';
 import { withStartGuide } from '@console/internal/components/start-guide';
 import NamespacedPage, { NamespacedPageVariants } from '../../NamespacedPage';

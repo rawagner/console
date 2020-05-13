@@ -18,15 +18,10 @@ import {
   ResourceQuotaModel,
   RoleModel,
 } from '../../models';
-import {
-  apiVersionForModel,
-  GroupVersionKind,
-  K8sKind,
-  K8sResourceKind,
-  referenceFor,
-  referenceForModel,
-} from '../../module/k8s';
-import { FirehoseResult } from '../utils';
+import { GroupVersionKind, K8sKind, K8sResourceKind } from '../../module/k8s/types';
+import { referenceFor } from '../../module/k8s/k8s-models';
+import { apiVersionForModel, referenceForModel } from '../../module/k8s/k8s';
+import { FirehoseResult } from '../utils/types';
 import * as denyOtherNamespacesImg from '../../imgs/network-policy-samples/1-deny-other-namespaces.svg';
 import * as limitCertainAppImg from '../../imgs/network-policy-samples/2-limit-certain-apps.svg';
 import * as allowIngressImg from '../../imgs/network-policy-samples/3-allow-ingress.svg';

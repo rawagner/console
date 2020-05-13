@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { getName, getNamespace, getOwnerReferences } from '@console/shared/src/selectors';
+import { getName, getNamespace, getOwnerReferences } from '@console/shared/src/selectors/common';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
-import { PodKind } from '@console/internal/module/k8s';
+import { PodKind } from '@console/internal/module/k8s/types';
 import { buildOwnerReference } from '../../utils';
 import { VMIKind, VMKind } from '../../types/vm';
 import { OS_WINDOWS_PREFIX } from '../../constants';

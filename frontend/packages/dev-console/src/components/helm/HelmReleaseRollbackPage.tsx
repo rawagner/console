@@ -2,9 +2,10 @@ import * as React from 'react';
 import Helmet from 'react-helmet';
 import { Formik } from 'formik';
 import { RouteComponentProps } from 'react-router';
-import { PageBody } from '@console/shared';
+import PageBody from '@console/shared/src/components/form-utils/PageBody';
 import { coFetchJSON } from '@console/internal/co-fetch';
-import { PageHeading, history, getQueryArgument } from '@console/internal/components/utils';
+import { history, getQueryArgument } from '@console/internal/components/utils/router';
+import { PageHeading } from '@console/internal/components/utils/headings';
 
 import { HelmRelease, HelmActionType, HelmActionOrigins } from './helm-types';
 import { getHelmActionConfig } from './helm-utils';

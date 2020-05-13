@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Table, RowFunction } from '@console/internal/components/factory';
+import { Table, RowFunction } from '@console/internal/components/factory/table';
 import { sortable } from '@patternfly/react-table';
 import { useSafetyFirst } from '@console/internal/components/safety-first';
-import { createBasicLookup, dimensifyHeader } from '@console/shared';
-import { EmptyBox } from '@console/internal/components/utils';
+import { createBasicLookup } from '@console/shared/src/utils/utils';
+import { dimensifyHeader } from '@console/shared/src/utils/table-utils';
+import { EmptyBox } from '@console/internal/components/utils/status-box';
 import { Button, ButtonVariant } from '@patternfly/react-core';
 import { VMGenericLikeEntityKind } from '../../types/vmLike';
 import { isVMI } from '../../selectors/check-type';

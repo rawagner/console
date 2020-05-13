@@ -1,20 +1,14 @@
 import * as React from 'react';
 import { ShallowWrapper, shallow } from 'enzyme';
 
-import {
-  DetailsPage,
-  ListPage,
-  RowFunctionArgs,
-  TableProps,
-  Table,
-} from '@console/internal/components/factory';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import {
-  ResourceLink,
-  ResourceKebab,
-  PageComponentProps,
-} from '@console/internal/components/utils';
-import { Status } from '@console/shared';
+import { RowFunctionArgs, TableProps, Table } from '@console/internal/components/factory/table';
+import { ListPage } from '@console/internal/components/factory/list-page';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { Status } from '@console/shared/src/components/status/Status';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { ResourceKebab } from '@console/internal/components/utils/kebab';
+import { PageComponentProps } from '@console/internal/components/utils/horizontal-nav';
 
 import {
   VolumeSnapshotDetails,

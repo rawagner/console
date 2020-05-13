@@ -1,4 +1,4 @@
-import { K8sResourceCondition, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceCondition, K8sResourceKind } from '@console/internal/module/k8s/types';
 
 type Source = {
   id: string;

@@ -1,6 +1,6 @@
 import { Map as ImmutableMap } from 'immutable';
 import * as _ from 'lodash';
-import { ValidationObject, ValidationErrorType } from '@console/shared';
+import { ValidationObject, ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { UpdateOptions, VMSettingsValidationConfig } from '../types';
 import { VMSettingsFieldType } from '../../types';
 import { isFieldRequired } from '../../selectors/immutable/field';

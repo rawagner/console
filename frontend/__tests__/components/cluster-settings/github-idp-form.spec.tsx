@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ListInput } from '../../../public/components/utils';
 import { IDPNameInput } from '../../../public/components/cluster-settings/idp-name-input';
 import { IDPCAFileInput } from '../../../public/components/cluster-settings/idp-cafile-input';
 import {
@@ -9,6 +8,7 @@ import {
   AddGitHubPageState,
 } from '../../../public/components/cluster-settings/github-idp-form';
 import { controlButtonTest } from './basicauth-idp-form.spec';
+import { ListInput } from '@console/internal/components/utils/list-input';
 
 describe('Add Identity Provider: GitHub', () => {
   let wrapper: ShallowWrapper<{}, AddGitHubPageState>;

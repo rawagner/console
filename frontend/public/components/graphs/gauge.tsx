@@ -9,9 +9,11 @@ import classNames from 'classnames';
 import { PrometheusGraph, PrometheusGraphLink } from './prometheus-graph';
 import { usePrometheusPoll } from './prometheus-poll-hook';
 import { PrometheusEndpoint } from './helpers';
-import { useRefWidth, humanizePercentage, Humanize } from '../utils';
 import { getInstantVectorStats } from './utils';
-import { DataPoint } from '.';
+import { DataPoint } from './types';
+import { humanizePercentage } from '../utils/units';
+import { useRefWidth } from '../utils/ref-width-hook';
+import { Humanize } from '../utils/types';
 
 const DEFAULT_THRESHOLDS = [{ value: 67 }, { value: 92 }];
 

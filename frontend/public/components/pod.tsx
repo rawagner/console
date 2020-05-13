@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 import * as _ from 'lodash-es';
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 
 import * as UIActions from '../actions/ui';
 import { coFetchJSON } from '../co-fetch';
-import { ContainerSpec, K8sResourceKindReference, PodKind } from '../module/k8s';
+import { ContainerSpec, K8sResourceKindReference, PodKind } from '../module/k8s/types';
 import {
   getRestartPolicyLabel,
   podPhase,
@@ -19,39 +19,35 @@ import {
 } from '../module/k8s/pods';
 import { getContainerState, getContainerStatus } from '../module/k8s/container';
 import { ResourceEventStream } from './events';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunctionArgs } from './factory';
-import {
-  AsyncComponent,
-  DetailsItem,
-  Kebab,
-  NodeLink,
-  OwnerReferences,
-  ResourceIcon,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  ScrollToTopOnMount,
-  SectionHeading,
-  Timestamp,
-  formatBytesAsMiB,
-  formatCores,
-  humanizeBinaryBytes,
-  humanizeDecimalBytesPerSec,
-  humanizeCpuCores,
-  navFactory,
-  pluralize,
-  units,
-} from './utils';
+import { Table, TableRow, TableData, RowFunctionArgs } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { PodLogs } from './pod-logs';
-import {
-  Area,
-  PROMETHEUS_BASE_PATH,
-  PROMETHEUS_TENANCY_BASE_PATH,
-  requirePrometheus,
-} from './graphs';
+import { Area } from './graphs';
+import { requirePrometheus } from './graphs/require-prometheus';
+import { PROMETHEUS_BASE_PATH, PROMETHEUS_TENANCY_BASE_PATH } from './graphs/constants';
 import { VolumesTable } from './volumes-table';
 import { PodModel } from '../models';
 import { Conditions } from './conditions';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink, NodeLink } from './utils/resource-link';
+import { OwnerReferences } from './utils/owner-references';
+import {
+  formatBytesAsMiB,
+  formatCores,
+  humanizeBinaryBytes,
+  humanizeCpuCores,
+  humanizeDecimalBytesPerSec,
+  units,
+} from './utils/units';
+import { Timestamp } from './utils/timestamp';
+import { ResourceIcon } from './utils/resource-icon';
+import { SectionHeading } from './utils/headings';
+import { DetailsItem } from './utils/details-item';
+import { ResourceSummary, pluralize } from './utils/details-page';
+import { ScrollToTopOnMount } from './utils/scroll-to-top-on-mount';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
 
 // Only request metrics if the device's screen width is larger than the
 // breakpoint where metrics are visible.

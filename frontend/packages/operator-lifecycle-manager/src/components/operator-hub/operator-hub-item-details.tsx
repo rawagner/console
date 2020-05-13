@@ -4,8 +4,9 @@ import * as classNames from 'classnames';
 import { PropertiesSidePanel, PropertyItem } from '@patternfly/react-catalog-view-extension';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
-import { ExternalLink, HintBlock } from '@console/internal/components/utils';
-import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '@console/shared';
+import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '@console/shared/src/constants/common';
+import { HintBlock } from '@console/internal/components/utils/hint-block';
+import { ExternalLink } from '@console/internal/components/utils/link';
 import { MarkdownView } from '../clusterserviceversion';
 import { OperatorHubItem } from './index';
 

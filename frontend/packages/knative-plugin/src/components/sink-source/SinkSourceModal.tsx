@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as fuzzy from 'fuzzysearch';
 import { FormikProps, FormikValues } from 'formik';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
 import {
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import { ResourceDropdownField } from '@console/shared';
 import FormSection from '@console/dev-console/src/components/import/section/FormSection';
 import { knativeServingResourcesServices } from '../../utils/get-knative-resources';
 

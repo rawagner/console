@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { PodStatus } from '@console/shared';
 import { ChartLabel } from '@patternfly/react-charts';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
-import { ResourceLink } from '@console/internal/components/utils';
+import PodStatus from '@console/shared/src/components/pod/PodStatus';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { RevisionModel } from '../../models';
 import './RevisionsOverviewListItem.scss';
 

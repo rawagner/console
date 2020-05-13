@@ -1,5 +1,6 @@
-import { history, resourcePathFromModel } from '@console/internal/components/utils';
-import { apiVersionForModel, referenceForModel } from '@console/internal/module/k8s';
+import { history } from '@console/internal/components/utils/router';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { apiVersionForModel, referenceForModel } from '@console/internal/module/k8s/k8s';
 import { ClusterTaskModel, PipelineModel } from '../../../models';
 import {
   Pipeline,

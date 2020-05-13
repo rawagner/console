@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Edge } from '@console/topology';
-import { YellowExclamationTriangleIcon } from '@console/shared/src';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
 import { confirmModal, errorModal } from '@console/internal/components/modals';
 import { removeTopologyResourceConnection } from '../topology-utils';
 

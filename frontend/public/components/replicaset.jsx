@@ -6,25 +6,22 @@ import * as classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { sortable } from '@patternfly/react-table';
 
-import { DetailsPage, ListPage, Table, TableData, TableRow } from './factory';
-import {
-  Kebab,
-  ContainerTable,
-  navFactory,
-  SectionHeading,
-  ResourceSummary,
-  ResourcePodCount,
-  AsyncComponent,
-  ResourceLink,
-  resourcePath,
-  LabelList,
-  ResourceKebab,
-  OwnerReferences,
-  Timestamp,
-} from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
 import { VolumesTable } from './volumes-table';
 import { ReplicaSetModel } from '../models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary, ResourcePodCount } from './utils/details-page';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceLink, resourcePath } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { OwnerReferences } from './utils/owner-references';
+import { Timestamp } from './utils/timestamp';
+import { ContainerTable } from './utils/container-table';
 
 const { ModifyCount, AddStorage, common } = Kebab.factory;
 

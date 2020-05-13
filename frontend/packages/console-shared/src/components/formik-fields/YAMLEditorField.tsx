@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormikValues, useField, useFormikContext } from 'formik';
-import { AsyncComponent } from '@console/internal/components/utils';
+import { AsyncComponent } from '@console/internal/components/utils/async';
 import { YAMLEditorFieldProps } from './field-types';
 
 const YAMLEditorField: React.FC<YAMLEditorFieldProps> = ({ name, onSave }) => {

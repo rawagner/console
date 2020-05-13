@@ -5,8 +5,8 @@ import { mount, ReactWrapper } from 'enzyme';
 import store from '@console/internal/redux';
 import { DetailsPage, DetailsPageProps } from '@console/internal/components/factory/details';
 import { PodModel, ConfigMapModel } from '@console/internal/models';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { Firehose } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { Firehose } from '@console/internal/components/utils/firehose';
 
 describe(DetailsPage.displayName, () => {
   let wrapper: ReactWrapper<DetailsPageProps>;

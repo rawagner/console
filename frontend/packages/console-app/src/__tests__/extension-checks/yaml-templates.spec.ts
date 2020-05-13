@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
 import { Map as ImmutableMap } from 'immutable';
-import { referenceForModel, GroupVersionKind } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { GroupVersionKind } from '@console/internal/module/k8s/types';
 import { baseTemplates } from '@console/internal/models/yaml-templates';
-import { YAMLTemplate, isYAMLTemplate } from '@console/plugin-sdk';
+import { YAMLTemplate, isYAMLTemplate } from '@console/plugin-sdk/src/typings';
 import { testedExtensions, getDuplicates } from '../plugin-test-utils';
 
 type TemplateEntry = [GroupVersionKind, ImmutableMap<string, string>];

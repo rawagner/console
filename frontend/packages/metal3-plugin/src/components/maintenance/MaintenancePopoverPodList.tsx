@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { List, AutoSizer } from 'react-virtualized';
-import { ResourceLink } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { PodModel } from '@console/internal/models';
 import './MaintenancePopoverPodList.scss';
 

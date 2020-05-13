@@ -1,7 +1,7 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { pluralize } from './';
+import { pluralize } from './details-page';
 import { STREAM_EOF, STREAM_PAUSED, STREAM_ACTIVE } from './resource-log';
 import { OutlinedPlayCircleIcon } from '@patternfly/react-icons';
 import { Button } from '@patternfly/react-core';

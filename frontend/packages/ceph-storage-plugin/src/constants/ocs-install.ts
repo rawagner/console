@@ -1,4 +1,4 @@
-import { K8sResourceKind, Taint } from '@console/internal/module/k8s';
+import { K8sResourceKind, Taint } from '@console/internal/module/k8s/types';
 
 export const minSelectedNode = 3;
 export const ocsTaint: Taint = {

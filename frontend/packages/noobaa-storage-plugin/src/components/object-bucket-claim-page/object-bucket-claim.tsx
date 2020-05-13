@@ -2,34 +2,34 @@ import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import * as React from 'react';
 import { ResourceEventStream } from '@console/internal/components/events';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import {
-  DetailsPage,
-  ListPage,
   Table,
   TableRow,
   TableData,
   RowFunction,
-} from '@console/internal/components/factory';
-import {
-  Kebab,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  resourcePathFromModel,
-  ResourceSummary,
-  SectionHeading,
-} from '@console/internal/components/utils';
-import { K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/table';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   NooBaaObjectBucketClaimModel,
   NooBaaObjectBucketModel,
 } from '@console/noobaa-storage-plugin/src/models';
-import { Status } from '@console/shared';
+import { Status } from '@console/shared/src/components/status/Status';
 import { sortable } from '@patternfly/react-table';
 import { obcStatusFilter } from '../../table-filters';
 import { isBound, getPhase } from '../../utils';
 import { menuActionCreator, menuActions } from './menu-actions';
 import { GetSecret } from './secret';
+import {
+  ResourceLink,
+  resourcePathFromModel,
+} from '@console/internal/components/utils/resource-link';
+import { ResourceKebab, Kebab } from '@console/internal/components/utils/kebab';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
+import { navFactory } from '@console/internal/components/utils/horizontal-nav';
 
 const kind = referenceForModel(NooBaaObjectBucketClaimModel);
 

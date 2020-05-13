@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Alert } from '@patternfly/react-core';
-import * as utils from '@console/internal/components/utils';
+import * as utils from '@console/internal/components/utils/rbac';
 import { sampleDeployments } from '@console/dev-console/src/components/topology/__tests__/topology-test-data';
 import HealthChecksAlert from '../HealthChecksAlert';
 

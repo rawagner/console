@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
-import { k8sCreate, k8sKill, k8sPatch, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sCreate, k8sKill, k8sPatch } from '@console/internal/module/k8s/resource';
 import { RoleBindingModel } from '@console/internal/models';
 import { generateSecret } from '../import/import-submit-utils';
 import { Verb, UserRoleBinding } from './project-access-form-utils-types';

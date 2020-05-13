@@ -8,8 +8,8 @@ import {
   YAMLTemplate,
   ModelDefinition,
   RoutePage,
-} from '@console/plugin-sdk';
-import { referenceForModel } from '@console/internal/module/k8s';
+} from '@console/plugin-sdk/src/typings';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { FLAG_KUBEVIRT } from '@console/kubevirt-plugin/src/plugin';
 import * as models from './models';
 import { NetworkAttachmentDefinitionsYAMLTemplates } from './models/templates';

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { RouteComponentProps } from 'react-router';
-import { PageBody } from '@console/shared';
-import { PageHeading } from '@console/internal/components/utils';
+import { PageHeading } from '@console/internal/components/utils/headings';
 import NamespacedPage, {
   NamespacedPageVariants,
 } from '@console/dev-console/src/components/NamespacedPage';
 import { QUERY_PROPERTIES } from '@console/dev-console/src/const';
 import EventSource from './EventSource';
 import NoKnativeServiceAlert from './NoKnativeServiceAlert';
+import PageBody from '@console/shared/src/components/form-utils/PageBody';
 
 type EventSourcePageProps = RouteComponentProps<{ ns?: string }>;
 

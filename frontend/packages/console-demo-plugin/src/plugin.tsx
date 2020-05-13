@@ -22,10 +22,10 @@ import {
   DashboardsOverviewResourceActivity,
   DashboardsOverviewPrometheusActivity,
   HorizontalNavTab,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
 // TODO(vojtech): internal code needed by plugins should be moved to console-shared package
 import { PodModel, RouteModel, NodeModel } from '@console/internal/models';
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { GridPosition } from '@console/shared/src/components/dashboard/DashboardGrid';
 import { OverviewQuery } from '@console/internal/components/dashboard/dashboards-page/cluster-dashboard/queries';
 import { FooBarModel } from './models';

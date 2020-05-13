@@ -2,9 +2,12 @@ import * as React from 'react';
 import { match as RouterMatch } from 'react-router-dom';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as _ from 'lodash';
-import * as k8sModels from '@console/internal/module/k8s';
-import { Table, DetailsPage, MultiListPage, ListPage } from '@console/internal/components/factory';
-import { Timestamp, LabelList, StatusBox, ResourceKebab } from '@console/internal/components/utils';
+import * as k8sModels from '@console/internal/module/k8s/k8s-models';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { DetailsPage } from '@console/internal/components/factory/details';
+import { MultiListPage, ListPage } from '@console/internal/components/factory/list-page';
+import { Table } from '@console/internal/components/factory/table';
 import {
   testCRD,
   testResourceInstance,
@@ -36,7 +39,11 @@ import { SpecDescriptor } from '../descriptors/spec';
 import { referenceForProvidedAPI } from '..';
 import { OperandLink } from './operand-link';
 
-import * as extensionHooks from '@console/plugin-sdk';
+import * as extensionHooks from '@console/plugin-sdk/src/useExtensions';
+import { ResourceKebab } from '@console/internal/components/utils/kebab';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { LabelList } from '@console/internal/components/utils/label-list';
+import { StatusBox } from '@console/internal/components/utils/status-box';
 
 const COLUMNS = OperandTableHeader();
 const NAME_INDEX = _.findIndex(COLUMNS, { title: 'Name' });
@@ -118,7 +125,7 @@ describe(OperandTableRow.displayName, () => {
 
 describe(OperandList.displayName, () => {
   let wrapper: ShallowWrapper<OperandListProps>;
-  let resources: k8sModels.K8sResourceKind[];
+  let resources: K8sResourceKind[];
 
   beforeEach(() => {
     resources = [testResourceInstance];
@@ -285,7 +292,7 @@ describe(OperandDetailsPage.displayName, () => {
   it('renders a `DetailsPage` which also watches the parent CSV', () => {
     expect(wrapper.find(DetailsPage).props().resources).toEqual([
       {
-        kind: k8sModels.referenceForModel(ClusterServiceVersionModel),
+        kind: referenceForModel(ClusterServiceVersionModel),
         name: match.params.appName,
         namespace: match.params.ns,
         isList: false,
@@ -495,7 +502,7 @@ describe(ProvidedAPIPage.displayName, () => {
     wrapper = shallow(
       <ProvidedAPIPage.WrappedComponent
         kindObj={readonlyModel}
-        kind={k8sModels.referenceForModel(readonlyModel)}
+        kind={referenceForModel(readonlyModel)}
         csv={testClusterServiceVersion}
       />,
     );

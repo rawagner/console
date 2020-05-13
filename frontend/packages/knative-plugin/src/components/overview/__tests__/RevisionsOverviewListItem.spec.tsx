@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { PodStatus } from '@console/shared';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { ResourceLink } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { RevisionModel } from '../../../models';
 import { MockKnativeResources } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
 import RevisionsOverviewListItem, {
   RevisionsOverviewListItemProps,
 } from '../RevisionsOverviewListItem';
+import PodStatus from '@console/shared/src/components/pod/PodStatus';
 
 describe('RevisionsOverviewListItem', () => {
   let wrapper: ShallowWrapper<RevisionsOverviewListItemProps>;

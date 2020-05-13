@@ -9,7 +9,7 @@ import {
 import { vmWizardInternalActions } from '../../../internal-actions';
 import { asDisabled, asHidden } from '../../../../utils/utils';
 import { startV2VVMWareController } from '../../../../../../k8s/requests/v2v/start-v2vvmware-controller';
-import { getName } from '@console/shared/src';
+import { getName } from '@console/shared/src/selectors/common';
 import { deleteOvirtProviderObject } from '../../../../../../k8s/requests/v2v/delete-ovrt-provider-object';
 import {
   createOvirtProviderObject,

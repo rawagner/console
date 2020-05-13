@@ -4,8 +4,8 @@ import {
   LOG_SOURCE_WAITING,
   LOG_SOURCE_RUNNING,
   LOG_SOURCE_TERMINATED,
-} from '@console/internal/components/utils';
-import { ContainerStatus } from '@console/internal/module/k8s';
+} from '@console/internal/components/utils/resource-log';
+import { ContainerStatus } from '@console/internal/module/k8s/types';
 import { SecretAnnotationId } from '../../components/pipelines/const';
 import {
   getPipelineTasks,

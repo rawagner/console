@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import * as staticModels from '@console/internal/models';
 import { testedExtensions } from '../plugin-test-utils';
-import { isModelDefinition } from '@console/plugin-sdk';
+import { isModelDefinition } from '@console/plugin-sdk/src/typings';
 
 describe('ModelDefinition', () => {
   it('duplicate models are not allowed', () => {

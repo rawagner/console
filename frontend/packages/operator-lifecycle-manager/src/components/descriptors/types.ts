@@ -1,4 +1,4 @@
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 
 export enum SpecCapability {
   podCount = 'urn:alm:descriptor:com.tectonic.ui:podCount',

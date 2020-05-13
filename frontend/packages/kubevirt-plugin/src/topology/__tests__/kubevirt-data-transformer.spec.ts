@@ -1,11 +1,9 @@
-import {
-  allowedResources,
-  transformTopologyData,
-} from '@console/dev-console/src/components/topology';
 import { kubevirtResources } from './topology-kubevirt-test-data';
 import { VirtualMachineModel } from '../../models';
 import { VMStatus } from '../../constants/vm/vm-status';
 import { VMNodeData } from '../types';
+import { transformTopologyData } from '@console/dev-console/src/components/topology/data-transforms/data-transformer';
+import { allowedResources } from '@console/dev-console/src/components/topology/topology-utils';
 
 describe('knative data transformer ', () => {
   it('should return transformed VMs', () => {

@@ -1,8 +1,9 @@
 import { Map as ImmutableMap } from 'immutable';
 
-import { GroupVersionKind, referenceForModel } from '../module/k8s';
+import { GroupVersionKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
 import * as k8sModels from '../models';
-import { YAMLTemplate } from '@console/plugin-sdk';
+import { YAMLTemplate } from '@console/plugin-sdk/src/typings';
 
 /**
  * Sample YAML manifests for some of the statically-defined Kubernetes models.

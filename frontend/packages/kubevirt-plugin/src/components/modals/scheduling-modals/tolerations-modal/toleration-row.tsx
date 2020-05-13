@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TaintEffect } from '@console/internal/module/k8s';
+import { TaintEffect } from '@console/internal/module/k8s/types';
 import { MinusCircleIcon } from '@patternfly/react-icons';
 import { GridItem, TextInput, Button, FormSelect, FormSelectOption } from '@patternfly/react-core';
 import { TOLERATIONS_EFFECTS } from '../shared/consts';

@@ -3,7 +3,6 @@ import * as _ from 'lodash-es';
 import { connect } from 'react-redux';
 import { Map as ImmutableMap } from 'immutable';
 import {
-  useExtensions,
   DashboardsOverviewHealthSubsystem,
   DashboardsOverviewHealthPrometheusSubsystem,
   isDashboardsOverviewHealthSubsystem,
@@ -12,10 +11,11 @@ import {
   isDashboardsOverviewHealthPrometheusSubsystem,
   isDashboardsOverviewHealthResourceSubsystem,
   isDashboardsOverviewHealthOperator,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { ArrowCircleUpIcon } from '@patternfly/react-icons';
 import { Gallery, GalleryItem, Button } from '@patternfly/react-core';
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import DashboardCard from '@console/shared/src/components/dashboard/dashboard-card/DashboardCard';
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import DashboardCardHeader from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardHeader';
@@ -28,12 +28,9 @@ import AlertItem, {
   StatusItem,
 } from '@console/shared/src/components/dashboard/status-card/AlertItem';
 import { alertURL } from '@console/shared/src/selectors/monitoring';
-import {
-  ClusterVersionKind,
-  referenceForModel,
-  hasAvailableUpdates,
-  K8sKind,
-} from '../../../../module/k8s';
+import { hasAvailableUpdates } from '../../../../module/k8s/cluster-settings';
+import { ClusterVersionKind, K8sKind } from '../../../../module/k8s/types';
+import { referenceForModel } from '../../../../module/k8s/k8s';
 import { ClusterVersionModel } from '../../../../models';
 import { clusterUpdateModal } from '../../../modals/cluster-update-modal';
 import { RootState } from '../../../../redux-types';

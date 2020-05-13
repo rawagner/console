@@ -2,17 +2,15 @@ import * as React from 'react';
 import { safeLoad } from 'js-yaml';
 import { CreateYAMLProps } from '@console/internal/components/create-yaml';
 import { ErrorPage404 } from '@console/internal/components/error';
-import {
-  LoadingBox,
-  AsyncComponent,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
 import { connectToPlural } from '@console/internal/kinds';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { getNamespace, getName } from '@console/shared';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { getNamespace, getName } from '@console/shared/src/selectors/common';
 import { NET_ATTACH_DEF_HEADER_LABEL } from '../../constants';
 import { NetworkAttachmentDefinitionsYAMLTemplates } from '../../models/templates';
 import { NetworkAttachmentDefinitionModel } from '../../models';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
+import { AsyncComponent } from '@console/internal/components/utils/async';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 const CreateNetAttachDefYAMLConnected = connectToPlural(
   ({ match, kindsInFlight, kindObj }: CreateYAMLProps) => {

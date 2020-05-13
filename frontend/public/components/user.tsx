@@ -8,20 +8,18 @@ import { sortable } from '@patternfly/react-table';
 
 import * as UIActions from '../actions/ui';
 import { OAuthModel, UserModel } from '../models';
-import { K8sKind, referenceForModel, UserKind } from '../module/k8s';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { K8sKind, UserKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { RoleBindingsPage } from './RBAC';
-import {
-  Kebab,
-  KebabAction,
-  MsgBox,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  resourcePathFromModel,
-} from './utils';
+import { ResourceKebab, Kebab, KebabAction } from './utils/kebab';
+import { ResourceLink, resourcePathFromModel } from './utils/resource-link';
+import { MsgBox } from './utils/status-box';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
 
 const tableColumnClasses = [
   classNames('col-sm-4', 'col-xs-6'),

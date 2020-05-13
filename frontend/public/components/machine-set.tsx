@@ -3,30 +3,27 @@ import * as _ from 'lodash-es';
 import { Link } from 'react-router-dom';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
-import { getMachineAWSPlacement, getMachineRole } from '@console/shared';
+import { getMachineAWSPlacement, getMachineRole } from '@console/shared/src/selectors/machine';
 import { Tooltip, Button } from '@patternfly/react-core';
 
 import { PencilAltIcon } from '@patternfly/react-icons';
 
 import { MachineAutoscalerModel, MachineModel, MachineSetModel } from '../models';
-import { K8sKind, MachineDeploymentKind, MachineSetKind, referenceForModel } from '../module/k8s';
+import { K8sKind, MachineDeploymentKind, MachineSetKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
 import { MachinePage } from './machine';
 import { configureMachineAutoscalerModal, configureReplicaCountModal } from './modals';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
-import {
-  Kebab,
-  KebabAction,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Selector,
-  navFactory,
-  pluralize,
-  resourcePath,
-  useAccessReview,
-} from './utils';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
+import { Kebab, KebabAction, ResourceKebab } from './utils/kebab';
+import { ResourceLink, resourcePath } from './utils/resource-link';
+import { useAccessReview } from './utils/rbac';
+import { pluralize, ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { Selector } from './utils/selector';
+import { navFactory } from './utils/horizontal-nav';
 
 const machineReplicasModal = (
   resourceKind: K8sKind,

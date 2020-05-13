@@ -1,11 +1,13 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
-import { K8sResourceKind, referenceFor } from '@console/internal/module/k8s';
-import { Status } from '@console/shared';
-import { ResourceLink, Timestamp, resourcePath } from '@console/internal/components/utils';
-import { TableData, TableRow, RowFunction } from '@console/internal/components/factory';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { Status } from '@console/shared/src/components/status/Status';
+import { TableData, TableRow, RowFunction } from '@console/internal/components/factory/table';
 import { tableColumnClasses } from './HelmReleaseResourcesHeader';
+import { resourcePath, ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 const HelmReleaseResourcesRow: RowFunction<K8sResourceKind> = ({
   obj: resource,

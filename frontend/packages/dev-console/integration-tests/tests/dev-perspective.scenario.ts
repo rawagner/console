@@ -10,7 +10,7 @@ import {
   pageSidebar,
   sideHeader,
 } from '../views/dev-perspective.view';
-import { PINNED_RESOURCES_LOCAL_STORAGE_KEY } from '@console/shared/src';
+import { PINNED_RESOURCES_LOCAL_STORAGE_KEY } from '@console/shared/src/constants/common';
 
 describe('Application Launcher Menu', () => {
   beforeAll(async () => {

@@ -4,8 +4,9 @@ import * as classNames from 'classnames';
 import { MinusCircleIcon, PlusCircleIcon, InfoCircleIcon } from '@patternfly/react-icons';
 import { Button, Tooltip } from '@patternfly/react-core';
 
-import { ExternalLink, SectionHeading } from '../../utils';
 import { RouteEditorLabel } from './alert-manager-receiver-forms';
+import { SectionHeading } from '../../utils/headings';
+import { ExternalLink } from '../../utils/link';
 
 const DEFAULT_RECEIVER_LABEL = 'All (default receiver)';
 const labelNamePattern = /^[a-zA-Z_][a-zA-Z0-9_]*$/;

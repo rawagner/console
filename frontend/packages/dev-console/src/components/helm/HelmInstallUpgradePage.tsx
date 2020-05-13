@@ -4,11 +4,13 @@ import { safeDump, safeLoad } from 'js-yaml';
 import { Formik } from 'formik';
 import { Helmet } from 'react-helmet';
 import { RouteComponentProps } from 'react-router-dom';
-import { PageHeading, history, LoadingBox } from '@console/internal/components/utils';
+import PageBody from '@console/shared/src/components/form-utils/PageBody';
+import { PageHeading } from '@console/internal/components/utils/headings';
+import { history } from '@console/internal/components/utils/router';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import { coFetchJSON } from '@console/internal/co-fetch';
-import { PageBody } from '@console/shared';
 import { SecretModel } from '@console/internal/models';
-import { k8sGet } from '@console/internal/module/k8s';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 
 import {
   HelmActionType,

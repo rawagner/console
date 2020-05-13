@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AlertsBody from '@console/shared/src/components/dashboard/status-card/AlertsBody';
 import { StatusItem } from '@console/shared/src/components/dashboard/status-card/AlertItem';
-import { BlueInfoCircleIcon } from '@console/shared/src/components/status';
+import { BlueInfoCircleIcon } from '@console/shared/src/components/status/icons';
 import { VMIKind } from '../../../types';
 import { getVMIConditionsByType } from '../../../selectors/vmi';
 

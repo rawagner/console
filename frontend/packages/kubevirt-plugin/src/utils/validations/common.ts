@@ -1,14 +1,11 @@
 import * as _ from 'lodash';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { addMissingSubject, joinGrammaticallyListOfItems } from '@console/shared/src/utils/grammar';
 import {
-  addMissingSubject,
-  getName,
-  getNamespace,
   asValidationObject,
   validateEmptyValue,
-  ValidationErrorType,
-  ValidationObject,
-  joinGrammaticallyListOfItems,
-} from '@console/shared';
+} from '@console/shared/src/utils/validation/validation';
+import { ValidationErrorType, ValidationObject } from '@console/shared/src/utils/validation/types';
 import { parseURL } from '../url';
 import { END_WHITESPACE_ERROR, START_WHITESPACE_ERROR, URL_INVALID_ERROR } from './strings';
 import { DiskBus } from '../../constants/vm/storage/disk-bus';

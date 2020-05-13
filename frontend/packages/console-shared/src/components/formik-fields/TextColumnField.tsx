@@ -11,10 +11,11 @@ import {
   ButtonType,
 } from '@patternfly/react-core';
 import { MinusCircleIcon } from '@patternfly/react-icons';
-import { InputField, useFormikValidationFix } from '@console/shared';
 import MultiColumnFieldFooter from './multi-column-field/MultiColumnFieldFooter';
 import { getFieldId } from './field-utils';
 import { FieldProps } from './field-types';
+import { useFormikValidationFix } from '../../hooks/formik-validation-fix';
+import InputField from './InputField';
 
 export interface TextColumnFieldProps extends FieldProps {
   required?: boolean;

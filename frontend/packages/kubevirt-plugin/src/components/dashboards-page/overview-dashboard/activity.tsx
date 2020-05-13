@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { ActivityProgress } from '@console/shared/src/components/dashboard/activity-card/ActivityItem';
-import { ResourceLink } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
-import { K8sActivityProps } from '@console/plugin-sdk';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sActivityProps } from '@console/plugin-sdk/src/typings';
 import { VirtualMachineModel } from '../../../models';
 
 export const DiskImportActivity: React.FC<K8sActivityProps> = ({ resource }) => (

@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
-import { getImageForCSVIcon } from '@console/shared';
 import { WorkloadData, TopologyDataResources, TopologyDataMap } from '../../topology-types';
 import { transformTopologyData } from '../../data-transforms/data-transformer';
 import { MockResources, sampleHelmResourcesMap } from '../../__tests__/topology-test-data';
 import { TYPE_OPERATOR_BACKED_SERVICE } from '../components/const';
+import { getImageForCSVIcon } from '@console/shared/src/utils/icon-utils';
 
 export function getTranformedTopologyData(
   mockData: TopologyDataResources,

@@ -1,15 +1,15 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
-import {
-  LOG_SOURCE_RUNNING,
-  LOG_SOURCE_TERMINATED,
-  LOG_SOURCE_WAITING,
-  MsgBox,
-  ResourceLog,
-} from './utils';
 import { getJenkinsLogURL, BuildPipelineLogLink } from './build-pipeline';
 import { BuildStrategyType } from './build';
-import { BuildPhase } from '../module/k8s/builds';
+import { BuildPhase } from '../module/k8s/types';
+import {
+  LOG_SOURCE_WAITING,
+  LOG_SOURCE_TERMINATED,
+  LOG_SOURCE_RUNNING,
+  ResourceLog,
+} from './utils/resource-log';
+import { MsgBox } from './utils/status-box';
 
 const PipelineLogMessage = ({ build }) => {
   const logURL = getJenkinsLogURL(build);

@@ -2,23 +2,12 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { match } from 'react-router';
 import { Alert, ActionGroup, Button, Form, FormGroup } from '@patternfly/react-core';
-import {
-  NodeKind,
-  k8sPatch,
-  k8sCreate,
-  referenceForModel,
-  StorageClassResourceKind,
-} from '@console/internal/module/k8s';
-import { ListPage } from '@console/internal/components/factory';
+import { k8sPatch, k8sCreate } from '@console/internal/module/k8s/resource';
+import { NodeKind, StorageClassResourceKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { ListPage } from '@console/internal/components/factory/list-page';
 import { NodeModel } from '@console/internal/models';
-import { hasLabel, getName } from '@console/shared';
-import {
-  withHandlePromise,
-  HandlePromiseProps,
-  history,
-  FieldLevelHelp,
-  ButtonBar,
-} from '@console/internal/components/utils';
+import { hasLabel, getName } from '@console/shared/src/selectors/common';
 import {
   ocsRequestData,
   labelTooltip,
@@ -34,6 +23,13 @@ import { cephStorageLabel } from '../../selectors';
 import NodeTable from './node-list';
 import { PVsAvailableCapacity } from './pvs-available-capacity';
 import './ocs-install.scss';
+import { history } from '@console/internal/components/utils/router';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { FieldLevelHelp } from '@console/internal/components/utils/field-level-help';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 
 const makeLabelNodesRequest = (selectedNodes: NodeKind[]): Promise<NodeKind>[] => {
   const patch = [

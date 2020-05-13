@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { YellowExclamationTriangleIcon } from '@console/shared';
-import { modelFor } from '../../module/k8s';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
+import { modelFor } from '../../module/k8s/k8s-models';
 import { confirmModal } from '../modals/confirm-modal';
 
 const confirmNavUnpinModal = (resource: string, pinnedResources: string[], updatePinsFn) => {

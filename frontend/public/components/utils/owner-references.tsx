@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
-import { K8sResourceKind, OwnerReference, referenceForOwnerRef } from '../../module/k8s';
+import { K8sResourceKind, OwnerReference } from '../../module/k8s/types';
+import { referenceForOwnerRef } from '../../module/k8s/k8s';
 import { ResourceLink } from './resource-link';
 
 export const OwnerReferences: React.FC<OwnerReferencesProps> = ({ resource }) => {

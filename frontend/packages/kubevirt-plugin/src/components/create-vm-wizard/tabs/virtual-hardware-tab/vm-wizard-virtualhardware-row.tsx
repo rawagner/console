@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Kebab } from '@console/internal/components/utils';
-import { RowFunction } from '@console/internal/components/factory';
+import { Kebab } from '@console/internal/components/utils/kebab';
+import { RowFunction } from '@console/internal/components/factory/table';
 import { CDSimpleRow } from '../../../vm-disks/cd-row';
 import { VMWizardStorageBundle, VMWizardStorageRowCustomData } from '../storage-tab/types';
 import { getActions } from '../storage-tab/vm-wizard-storage-row';

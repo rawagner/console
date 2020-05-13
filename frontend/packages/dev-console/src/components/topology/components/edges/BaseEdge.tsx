@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import { referenceFor, modelFor } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { referenceFor, modelFor } from '@console/internal/module/k8s/k8s-models';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import {
   Layer,
   Edge,

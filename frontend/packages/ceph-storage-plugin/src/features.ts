@@ -1,8 +1,12 @@
 import * as _ from 'lodash';
-import { k8sGet, K8sResourceKind } from '@console/internal/module/k8s';
-import { ClusterServiceVersionModel, SubscriptionModel } from '@console/operator-lifecycle-manager';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sGet } from '@console/internal/module/k8s/resource';
+import {
+  ClusterServiceVersionModel,
+  SubscriptionModel,
+} from '@console/operator-lifecycle-manager/src/models';
 import { handleError, setFlag } from '@console/internal/actions/features';
-import { FeatureDetector } from '@console/plugin-sdk';
+import { FeatureDetector } from '@console/plugin-sdk/src/typings';
 import { OCSServiceModel } from './models';
 import {
   OCS_INDEPENDENT_CR_NAME,

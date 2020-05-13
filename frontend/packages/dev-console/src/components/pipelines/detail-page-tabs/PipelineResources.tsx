@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { MultiColumnField, InputField, DropdownField } from '@console/shared';
+import MultiColumnField from '@console/shared/src/components/formik-fields/multi-column-field/MultiColumnField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 import { pipelineResourceTypeSelections } from '../const';
 
 type PipelineResourcesParam = {

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Title } from '@patternfly/react-core';
-import { ExternalLink, LabelList } from '@console/internal/components/utils';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { usePrometheusPoll } from '@console/internal/components/graphs/prometheus-poll-hook';
 import { PrometheusEndpoint } from '@console/internal/components/graphs/helpers';
 import { NooBaaSystemModel } from '../../models';
 import './infoPage.scss';
 import { getMetric } from '../../utils';
+import { LabelList } from '@console/internal/components/utils/label-list';
+import { ExternalLink } from '@console/internal/components/utils/link';
 
 const FAQ_TEXT_1 = 'How can I access the object service?';
 const FAQ_LINK_1 =

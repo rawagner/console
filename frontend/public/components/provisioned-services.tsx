@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { HorizontalNav, PageHeading } from './utils';
 import { ServiceInstancesPage } from './service-instance';
 import { ServiceBindingsPage } from './service-binding';
+import { PageHeading } from './utils/headings';
+import { HorizontalNav } from './utils/horizontal-nav';
 
 const pages = [
   {

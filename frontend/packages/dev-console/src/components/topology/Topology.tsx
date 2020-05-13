@@ -28,11 +28,6 @@ import { RootState } from '@console/internal/redux-types';
 import { getActiveApplication } from '@console/internal/reducers/ui-selectors';
 import { selectOverviewDetailsTab } from '@console/internal/actions/ui';
 import { getEventSourceStatus } from '@console/knative-plugin/src/topology/knative-topology-utils';
-import {
-  getQueryArgument,
-  setQueryArgument,
-  removeQueryArgument,
-} from '@console/internal/components/utils';
 import KnativeComponentFactory from '@console/knative-plugin/src/topology/components/knativeComponentFactory';
 import { KubevirtComponentFactory } from '@console/kubevirt-plugin/src/topology/components/kubevirtComponentFactory';
 import { useAddToProjectAccess } from '../../utils/useAddToProjectAccess';
@@ -60,6 +55,11 @@ import { OperatorsComponentFactory } from './operators/components/operatorsCompo
 import { getServiceBindingStatus } from './topology-utils';
 import { TYPE_VIRTUAL_MACHINE } from '@console/kubevirt-plugin/src/topology/components/const';
 import TopologyVmPanel from '@console/kubevirt-plugin/src/topology/TopologyVmPanel';
+import {
+  removeQueryArgument,
+  setQueryArgument,
+  getQueryArgument,
+} from '@console/internal/components/utils/router';
 
 interface StateProps {
   filters: TopologyFilters;

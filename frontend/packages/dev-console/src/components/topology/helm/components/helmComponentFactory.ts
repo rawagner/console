@@ -7,7 +7,7 @@ import {
   withSelection,
   withDndDrop,
 } from '@console/topology';
-import { kebabOptionsToMenu } from '@console/internal/components/utils';
+import { kebabOptionsToMenu } from '@console/internal/components/utils/kebab';
 import { WorkloadNode } from '../../components/nodes';
 import { noRegroupWorkloadContextMenu, createMenuItems } from '../../components/nodeContextMenu';
 import {

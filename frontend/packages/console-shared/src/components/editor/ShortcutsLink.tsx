@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Popover, Button } from '@patternfly/react-core';
 import { QuestionCircleIcon } from '@patternfly/react-icons';
-import { ShortcutTable, Shortcut } from '../shortcuts';
+import ShortcutTable from '../shortcuts/ShortcutTable';
+import Shortcut from '../shortcuts/Shortcut';
 
 interface ShortcutsLinkProps {
   onHideShortcuts?: () => {};

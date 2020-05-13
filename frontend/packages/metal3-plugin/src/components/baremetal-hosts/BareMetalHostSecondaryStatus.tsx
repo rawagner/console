@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SecondaryStatus } from '@console/shared';
+import SecondaryStatus from '@console/shared/src/components/status/SecondaryStatus';
 import { BareMetalHostKind } from '../../types';
 import {
   getHostPowerStatus,

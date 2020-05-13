@@ -1,5 +1,5 @@
 import { sortable } from '@patternfly/react-table';
-import { Kebab } from '@console/internal/components/utils';
+import { Kebab } from '@console/internal/components/utils/kebab';
 
 export const tableColumnClasses = {
   revision: 'col-lg-1 col-md-3 col-sm-3 col-xs-3',

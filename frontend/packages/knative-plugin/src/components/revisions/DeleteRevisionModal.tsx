@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FormikProps, FormikValues } from 'formik';
 import { Alert } from '@patternfly/react-core';
-import { YellowExclamationTriangleIcon } from '@console/shared';
+import { YellowExclamationTriangleIcon } from '@console/shared/src/components/status/icons';
 import {
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { RevisionModel } from '../../models';
 import TrafficSplittingFields from '../traffic-splitting/TrafficSplittingFields';
 import { RevisionItems } from '../../utils/traffic-splitting-utils';

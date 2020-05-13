@@ -9,12 +9,12 @@ import {
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { connectToFlags, FlagsObject } from './utils/connect-flags';
 import { getBrandingDetails } from './masthead';
-import { ExternalLink, Firehose } from './utils';
 import { ClusterVersionModel } from '../models';
-import { ClusterVersionKind, referenceForModel } from '../module/k8s';
+import { ClusterVersionKind } from '../module/k8s/types';
+import { referenceForModel } from '../module/k8s/k8s';
 import { k8sVersion } from '../module/status';
 import {
   hasAvailableUpdates,
@@ -23,6 +23,8 @@ import {
   getClusterID,
   getErrataLink,
 } from '../module/k8s/cluster-settings';
+import { ExternalLink } from './utils/link';
+import { Firehose } from './utils/firehose';
 
 const AboutModalItems: React.FC<AboutModalItemsProps> = ({ closeAboutModal, cv }) => {
   const [kubernetesVersion, setKubernetesVersion] = React.useState('');

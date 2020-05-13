@@ -5,7 +5,7 @@ import { CloseIcon } from '@patternfly/react-icons';
 
 import { ResourceSidebarSnippets, ResourceSidebarSamples } from './resource-sidebar-samples';
 import { ExploreType } from './explore-type-sidebar';
-import { SimpleTabNav } from '../utils';
+import { SimpleTabNav } from '../utils/simple-tab-nav';
 
 const sidebarScrollTop = () => {
   document.getElementsByClassName('co-p-has-sidebar__sidebar')[0].scrollTop = 0;

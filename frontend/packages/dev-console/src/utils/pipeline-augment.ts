@@ -6,7 +6,8 @@ import {
   chart_color_black_400 as skippedColor,
   chart_color_black_500 as cancelledColor,
 } from '@patternfly/react-tokens';
-import { K8sKind, K8sResourceKind, referenceForModel } from '@console/internal/module/k8s';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import {
   ClusterTaskModel,
   ClusterTriggerBindingModel,

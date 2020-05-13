@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Status } from '@console/shared';
-import { TableRow, TableData, RowFunction } from '@console/internal/components/factory';
-import { ResourceLink, Timestamp } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { Status } from '@console/shared/src/components/status/Status';
+import { TableRow, TableData, RowFunction } from '@console/internal/components/factory/table';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { pipelineRunFilterReducer } from '../../../utils/pipeline-filter-reducer';
 import { getPipelineRunKebabActions } from '../../../utils/pipeline-actions';
 import { pipelineRunDuration } from '../../../utils/pipeline-utils';
@@ -11,6 +10,8 @@ import { PipelineRunModel } from '../../../models';
 import LinkedPipelineRunTaskStatus from '../status/LinkedPipelineRunTaskStatus';
 import { ResourceKebabWithUserLabel } from '../triggered-by';
 import { tableColumnClasses } from './pipelinerun-table';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
 
 const pipelinerunReference = referenceForModel(PipelineRunModel);
 

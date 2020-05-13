@@ -13,10 +13,10 @@ import UtilizationBody from '@console/shared/src/components/dashboard/utilizatio
 import ConsumerPopover from '@console/shared/src/components/dashboard/utilization-card/TopConsumerPopover';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 import {
-  useExtensions,
   DashboardsOverviewUtilizationItem,
   isDashboardsOverviewUtilizationItem,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { PopoverPosition } from '@patternfly/react-core';
 import { DashboardItemProps, withDashboardResources } from '../../with-dashboard-resources';
 import {
@@ -42,7 +42,7 @@ import {
   Duration,
 } from '@console/shared/src/components/dashboard/duration-hook';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
-import { DataPoint } from '../../../graphs';
+import { DataPoint } from '../../../graphs/types';
 
 const cpuQueriesPopup = [
   {

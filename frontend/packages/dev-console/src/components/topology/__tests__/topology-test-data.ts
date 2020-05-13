@@ -1,5 +1,10 @@
-import { FirehoseResult } from '@console/internal/components/utils';
-import { DeploymentKind, PodKind, EventKind, ImagePullPolicy } from '@console/internal/module/k8s';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  DeploymentKind,
+  PodKind,
+  EventKind,
+  ImagePullPolicy,
+} from '@console/internal/module/k8s/types';
 import { Model } from '@console/topology';
 import { TopologyDataModel, TopologyDataResources } from '../topology-types';
 import { NODE_HEIGHT, NODE_PADDING, NODE_WIDTH } from '../components/const';

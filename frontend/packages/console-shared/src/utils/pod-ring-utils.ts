@@ -14,11 +14,11 @@ import {
   K8sResourceKind,
   K8sKind,
   SelfSubjectAccessReviewKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { useSafetyFirst } from '@console/internal/components/safety-first';
-import { PodRCData, PodRingResources, PodRingData, ExtPodKind } from '../types';
+import { PodRCData, PodRingResources, PodRingData, ExtPodKind } from '../types/pod';
 import { checkPodEditAccess } from './pod-utils';
-import { RevisionModel } from '@console/knative-plugin';
+import { RevisionModel } from '@console/knative-plugin/src/models';
 import {
   getPodsForDeploymentConfigs,
   getPodsForDeployments,

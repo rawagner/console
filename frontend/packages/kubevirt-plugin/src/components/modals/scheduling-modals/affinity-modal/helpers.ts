@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
-import { Kebab } from '@console/internal/components/utils';
+import { Kebab } from '@console/internal/components/utils/kebab';
 import {
   getNodeAffinityRequiredTerms,
   getNodeAffinityPreferredTerms,

@@ -1,14 +1,16 @@
 import * as React from 'react';
 
 import { DeploymentModel } from '../../models';
-import { DeploymentKind } from '../../module/k8s';
+import { DeploymentKind } from '../../module/k8s/types';
 import { DeploymentDetailsList, menuActions } from '../deployment';
-import { LoadingInline, ResourceSummary, WorkloadPausedAlert } from '../utils';
 
 import { OverviewDetailsResourcesTab } from './resource-overview-page';
 import { ResourceOverviewDetails } from './resource-overview-details';
 import PodRingSet from '@console/shared/src/components/pod/PodRingSet';
-import { OverviewItem } from '@console/shared';
+import { OverviewItem } from '@console/shared/src/types/resource';
+import { WorkloadPausedAlert } from '../utils/workload-pause';
+import { ResourceSummary } from '../utils/details-page';
+import { LoadingInline } from '../utils/status-box';
 
 const DeploymentOverviewDetails: React.SFC<DeploymentOverviewDetailsProps> = ({
   item: { obj: d, pods: pods, current, previous, isRollingOut },

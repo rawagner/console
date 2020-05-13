@@ -5,32 +5,29 @@ import { Helmet } from 'react-helmet';
 import * as classNames from 'classnames';
 import { ActionGroup, Button } from '@patternfly/react-core';
 
-import { ANNOTATIONS } from '@console/shared';
+import { ANNOTATIONS } from '@console/shared/src/constants/common';
 import {
   getImageForIconClass,
   getTemplateIcon,
   normalizeIconClass,
 } from './catalog/catalog-item-icon';
-import {
-  ButtonBar,
-  ExternalLink,
-  Firehose,
-  history,
-  LoadingBox,
-  LoadError,
-  NsDropdown,
-  resourcePathFromModel,
-} from './utils';
 import { SecretModel, TemplateInstanceModel } from '../models';
 import {
-  k8sCreate,
   K8sResourceKind,
   TemplateKind,
   TemplateInstanceKind,
   TemplateParameter,
-} from '../module/k8s';
+} from '../module/k8s/types';
+import { k8sCreate } from '../module/k8s/resource';
 import { getActivePerspective } from '../reducers/ui-selectors';
 import { RootState } from '../redux-types';
+import { history } from './utils/router';
+import { resourcePathFromModel } from './utils/resource-link';
+import { LoadError, LoadingBox } from './utils/status-box';
+import { NsDropdown } from './utils/list-dropdown';
+import { ButtonBar } from './utils/button-bar';
+import { Firehose } from './utils/firehose';
+import { ExternalLink } from './utils/link';
 
 const TemplateResourceDetails: React.FC<TemplateResourceDetailsProps> = ({ template }) => {
   const resources = _.uniq(_.compact(_.map(template.objects, 'kind'))).sort();

@@ -1,19 +1,18 @@
 import * as React from 'react';
 import * as cx from 'classnames';
-import { TableRow, TableData, RowFunction } from '@console/internal/components/factory';
-import {
-  Kebab,
-  ResourceLink,
-  ResourceKebab,
-  Timestamp,
-  ExternalLink,
-  kindObj,
-} from '@console/internal/components/utils';
-import { referenceForModel, referenceFor, K8sKind } from '@console/internal/module/k8s';
+import { TableRow, TableData, RowFunction } from '@console/internal/components/factory/table';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { ServiceModel } from '../../models';
 import { getConditionString, getCondition } from '../../utils/condition-utils';
 import { ServiceKind, ConditionTypes } from '../../types';
 import { tableColumnClasses } from './service-table';
+import { kindObj } from '@console/internal/components/utils/inject';
+import { Kebab, ResourceKebab } from '@console/internal/components/utils/kebab';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Timestamp } from '@console/internal/components/utils/timestamp';
+import { ExternalLink } from '@console/internal/components/utils/link';
 
 const serviceReference = referenceForModel(ServiceModel);
 

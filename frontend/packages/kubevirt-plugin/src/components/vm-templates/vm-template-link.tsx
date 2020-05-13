@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { ResourceIcon } from '@console/internal/components/utils';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 import { TemplateModel } from '@console/internal/models';
 
 export const VMTemplateLink: React.FC<VMTemplateLinkProps> = ({ name, namespace, uid }) => (

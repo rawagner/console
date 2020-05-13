@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import { CircleIcon, SquareIcon } from '@patternfly/react-icons';
 
-import { K8sResourceKindReference } from '../module/k8s';
+import { K8sResourceKindReference } from '../module/k8s/types';
 import { ResourceLink } from './utils/resource-link';
 import { Timestamp } from './utils/timestamp';
 import { EmptyBox } from './utils/status-box';

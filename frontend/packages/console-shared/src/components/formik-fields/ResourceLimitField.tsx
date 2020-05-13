@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useField, useFormikContext, FormikValues } from 'formik';
-import { RequestSizeInput } from '@console/internal/components/utils';
 import { FormGroup } from '@patternfly/react-core';
+import { RequestSizeInput } from '@console/internal/components/utils/request-size-input';
 import { ResourceLimitFieldProps } from './field-types';
 import { getFieldId } from './field-utils';
-import { useFormikValidationFix } from '../../hooks';
+import { useFormikValidationFix } from '../../hooks/formik-validation-fix';
 
 const ResourceLimitField: React.FC<ResourceLimitFieldProps> = ({
   label,

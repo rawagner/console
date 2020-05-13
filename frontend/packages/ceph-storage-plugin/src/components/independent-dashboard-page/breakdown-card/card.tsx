@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { Dropdown, humanizeBinaryBytes } from '@console/internal/components/utils';
 import {
   DashboardItemProps,
   withDashboardResources,
@@ -22,6 +21,8 @@ import {
 import { HeaderPrometheusViewLink } from '../../dashboard-page/storage-dashboard/breakdown-card/breakdown-header';
 import { BreakdownCardBody } from '../../dashboard-page/storage-dashboard/breakdown-card/breakdown-body';
 import '../../dashboard-page/storage-dashboard/capacity-breakdown/capacity-breakdown-card.scss';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 
 const keys = Object.keys(breakdownIndependentQueryMap);
 const dropdownOptions = _.zipObject(keys, keys);

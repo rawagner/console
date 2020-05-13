@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Formik, FormikHelpers } from 'formik';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import { Pipeline } from '../../../../utils/pipeline-augment';
 import ModalStructure from '../common/ModalStructure';
 import RemoveTriggerForm from './RemoveTriggerForm';

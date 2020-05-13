@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { match as RMatch } from 'react-router';
-import { Firehose, history } from '@console/internal/components/utils';
-import { ALL_NAMESPACES_KEY } from '@console/shared';
+import { ALL_NAMESPACES_KEY } from '@console/shared/src/constants/common';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { history } from '@console/internal/components/utils/router';
 import { SecretModel } from '@console/internal/models';
 import NamespacedPage, { NamespacedPageVariants } from '../NamespacedPage';
 import HelmReleaseDetails from './details/HelmReleaseDetails';

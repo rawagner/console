@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { DataPoint } from '@console/internal/components/graphs';
+import { DataPoint } from '@console/internal/components/graphs/types';
 import { getType } from '@console/internal/components/utils/units';
 
 const log = (x: number, y: number) => {

@@ -6,7 +6,8 @@ import { ActionGroup, Alert, Button, Tooltip } from '@patternfly/react-core';
 import { safeLoad } from 'js-yaml';
 import * as classNames from 'classnames';
 
-import { BlueInfoCircleIcon, APIError } from '@console/shared';
+import { BlueInfoCircleIcon } from '@console/shared/src/components/status/icons';
+import { APIError } from '@console/shared/src/types/resource';
 import { ButtonBar } from '../../utils/button-bar';
 import { Dropdown } from '../../utils/dropdown';
 import { Firehose } from '../../utils/firehose';
@@ -17,7 +18,7 @@ import {
   patchAlertmanagerConfig,
   receiverTypes,
 } from '../alert-manager-utils';
-import { K8sResourceKind } from '../../../module/k8s';
+import { K8sResourceKind } from '../../../module/k8s/types';
 import {
   AlertmanagerConfig,
   AlertmanagerReceiver,

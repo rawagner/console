@@ -1,20 +1,15 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Form, FormSelect, FormSelectOption } from '@patternfly/react-core';
-import {
-  Firehose,
-  FirehoseResult,
-  HandlePromiseProps,
-  withHandlePromise,
-} from '@console/internal/components/utils';
 import { TemplateModel } from '@console/internal/models';
 import {
   createModalLauncher,
   ModalBody,
   ModalComponentProps,
   ModalTitle,
-} from '@console/internal/components/factory';
-import { k8sPatch, TemplateKind } from '@console/internal/module/k8s';
+} from '@console/internal/components/factory/modal';
+import { TemplateKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import {
   asVM,
@@ -39,6 +34,12 @@ import { getDialogUIError } from '../../../utils/strings';
 import { flavorSort } from '../../../utils/sort';
 import { getTemplateFlavors } from '../../../selectors/vm-template/advanced';
 import { getVMTemplateNamespacedName } from '../../../selectors/vm-template/selectors';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
+import { FirehoseResult } from '@console/internal/components/utils/types';
 
 const getId = (field: string) => `vm-flavor-modal-${field}`;
 

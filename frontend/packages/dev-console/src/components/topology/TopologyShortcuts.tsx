@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Shortcut, ShortcutTable } from '@console/shared';
+import ShortcutTable from '@console/shared/src/components/shortcuts/ShortcutTable';
+import Shortcut from '@console/shared/src/components/shortcuts/Shortcut';
 
 const TopologyShortcuts: React.ReactElement = (
   <ShortcutTable>

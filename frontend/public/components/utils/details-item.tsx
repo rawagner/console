@@ -2,14 +2,9 @@ import * as React from 'react';
 import * as _ from 'lodash-es';
 import { Breadcrumb, BreadcrumbItem, Button, Popover } from '@patternfly/react-core';
 
-import {
-  getPropertyDescription,
-  K8sKind,
-  K8sResourceKind,
-  K8sResourceKindReference,
-  modelFor,
-  referenceFor,
-} from '../../module/k8s';
+import { K8sKind, K8sResourceKind, K8sResourceKindReference } from '../../module/k8s/types';
+import { modelFor, referenceFor } from '../../module/k8s/k8s-models';
+import { getPropertyDescription } from '../../module/k8s/swagger';
 import { LinkifyExternal } from './link';
 
 const PropertyPath: React.FC<{ kind: string; path: string | string[] }> = ({ kind, path }) => {

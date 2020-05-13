@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikProps, FormikValues } from 'formik';
-import { FormFooter } from '@console/shared/src/components/form-utils';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 import { Form } from '@patternfly/react-core';
 import { SourceToImageFormProps } from './import-types';
 import GitSection from './git/GitSection';

@@ -1,20 +1,14 @@
-import { asAccessReview, Kebab, KebabOption } from '@console/internal/components/utils';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   K8sKind,
-  k8sPatch,
   K8sResourceKind,
   MachineKind,
   MachineSetKind,
   NodeKind,
-  referenceForModel,
-} from '@console/internal/module/k8s';
-import {
-  getMachineNode,
-  getMachineNodeName,
-  getName,
-  getNamespace,
-  getAnnotations,
-} from '@console/shared';
+} from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
+import { getMachineNode, getMachineNodeName } from '@console/shared/src/selectors/machine';
+import { getName, getNamespace, getAnnotations } from '@console/shared/src/selectors/common';
 import { confirmModal, deleteModal } from '@console/internal/components/modals';
 import { MachineModel, MachineSetModel } from '@console/internal/models';
 import {
@@ -46,6 +40,8 @@ import { getMachineMachineSetOwner } from '../../selectors/machine';
 import { findMachineSet } from '../../selectors/machine-set';
 import { restartHostModal } from '../modals/RestartHostModal';
 import { StatusProps } from '../types';
+import { KebabOption, Kebab } from '@console/internal/components/utils/kebab';
+import { asAccessReview } from '@console/internal/components/utils/rbac';
 
 type ActionArgs = {
   machine?: MachineKind;

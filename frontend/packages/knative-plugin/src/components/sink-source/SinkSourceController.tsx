@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import SinkSource from './SinkSource';
 
 type SinkSourceControllerProps = {

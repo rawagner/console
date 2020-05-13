@@ -6,11 +6,11 @@ import {
   useCombineRefs,
   createSvgIdUrl,
 } from '@console/topology';
-import { truncateMiddle } from '@console/internal/components/utils';
 import { RESOURCE_NAME_TRUNCATE_LENGTH } from '../../const';
 import { SvgResourceIcon } from './SvgResourceIcon';
 import SvgCircledIcon from './SvgCircledIcon';
 import SvgDropShadowFilter from './SvgDropShadowFilter';
+import { truncateMiddle } from '@console/internal/components/utils/truncate-middle';
 
 export interface SvgBoxedTextProps {
   children?: string;

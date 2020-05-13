@@ -1,4 +1,4 @@
-import { K8sResourceKindReference } from '@console/internal/module/k8s';
+import { K8sResourceKindReference } from '@console/internal/module/k8s/types';
 import { Extension } from './base';
 
 namespace ExtensionProperties {

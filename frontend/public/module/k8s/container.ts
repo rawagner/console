@@ -1,6 +1,6 @@
 import * as _ from 'lodash-es';
 
-import { ContainerSpec, ContainerStatus, PodKind } from './';
+import { ContainerSpec, ContainerStatus, PodKind } from './types';
 
 const PullPolicy = {
   Always: {

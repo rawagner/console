@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ResourceLink, Selector } from '@console/internal/components/utils';
 import { DescriptorProps, SpecCapability, Descriptor } from '../types';
 import { testResourceInstance, testModel } from '../../../../mocks';
 import { EndpointList, Endpoint } from './endpoint';
 import { ResourceRequirementsModalLink } from './resource-requirements';
 import * as configureSize from './configure-size';
 import { SpecDescriptor } from '.';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { Selector } from '@console/internal/components/utils/selector';
 import { Button } from '@patternfly/react-core';
 
 describe(SpecDescriptor.name, () => {

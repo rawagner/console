@@ -3,16 +3,15 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import { FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { connectToFlags, flagPending, FlagsObject } from './utils/connect-flags';
 import { GlobalNotifications } from './global-notifications';
 import { NamespaceBar } from './namespace';
 import { SearchPage } from './search';
 import { ResourceDetailsPage, ResourceListPage } from './resource-list';
-import { AsyncComponent, LoadingBox } from './utils';
 import { namespacedPrefixes } from './utils/link';
 import { AlertmanagerModel } from '../models';
-import { referenceForModel } from '../module/k8s';
+import { referenceForModel } from '../module/k8s/k8s';
 import { NamespaceRedirect } from './utils/namespace-redirect';
 import { getActivePerspective } from '../reducers/ui-selectors';
 import { RootState } from '../redux-types';
@@ -20,12 +19,14 @@ import { RootState } from '../redux-types';
 //PF4 Imports
 import { PageSection, PageSectionVariants } from '@patternfly/react-core';
 import {
-  useExtensions,
   isPerspective,
   Perspective,
   RoutePage,
   isRoutePage,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { LoadingBox } from './utils/status-box';
+import { AsyncComponent } from './utils/async';
 
 const RedirectComponent = (props) => {
   const to = `/k8s${props.location.pathname}`;

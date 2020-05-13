@@ -1,20 +1,21 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import * as classNames from 'classnames';
+import { getName, hasLabel } from '@console/shared/src/selectors/common';
 import {
-  getName,
   getNodeRoles,
   getNodeCPUCapacity,
   getNodeAllocatableMemory,
-  hasLabel,
-} from '@console/shared';
-import { humanizeCpuCores, ResourceLink, pluralize } from '@console/internal/components/utils/';
-import { NodeKind } from '@console/internal/module/k8s';
-import { Table } from '@console/internal/components/factory';
+} from '@console/shared/src/selectors/node';
+import { NodeKind } from '@console/internal/module/k8s/types';
+import { Table } from '@console/internal/components/factory/table';
 import { IRow, OnSelect } from '@patternfly/react-table';
 import { hasOCSTaint, hasTaints, getConvertedUnits } from '../../utils/install';
 import { cephStorageLabel } from '../../selectors';
 import './ocs-install.scss';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
+import { humanizeCpuCores } from '@console/internal/components/utils/units';
+import { pluralize } from '@console/internal/components/utils/details-page';
 
 const tableColumnClasses = [
   classNames('col-md-1', 'col-sm-1', 'col-xs-1'),

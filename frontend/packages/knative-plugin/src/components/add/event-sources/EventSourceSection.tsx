@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
 import * as _ from 'lodash';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import AppSection from '@console/dev-console/src/components/import/app/AppSection';
 import { ProjectModel } from '@console/internal/models';
 import CronJobSection from './CronJobSection';

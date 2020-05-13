@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { modelFor, referenceFor, K8sVerb } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { K8sVerb } from '@console/internal/module/k8s/types';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import { Node } from '@console/topology';
 import { getTopologyResourceObject } from '../topology-utils';
 

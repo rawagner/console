@@ -7,7 +7,7 @@ import DashboardCardHeader from '@console/shared/src/components/dashboard/dashbo
 import DashboardCardBody from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardBody';
 import HealthItem from '@console/shared/src/components/dashboard/status-card/HealthItem';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { getCephHealthState } from '../../dashboard-page/storage-dashboard/status-card/utils';
 import { cephClusterResource } from '../../../constants/resources';
 

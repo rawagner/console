@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { PopoverStatus } from '@console/shared';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import PopoverStatus from '@console/shared/src/components/status/PopoverStatus';
 import { InProgressIcon, MaintenanceIcon } from '@patternfly/react-icons';
 import { getNodeMaintenancePhase } from '../../selectors';
 import UnderMaintenancePopoverContent from './UnderMaintenancePopoverContent';

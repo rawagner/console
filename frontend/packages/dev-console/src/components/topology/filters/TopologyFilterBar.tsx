@@ -3,15 +3,15 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Toolbar, ToolbarGroup, ToolbarItem, Popover, Button } from '@patternfly/react-core';
 import { RootState } from '@console/internal/redux-types';
-import { TextFilter } from '@console/internal/components/factory';
+import { TextFilter } from '@console/internal/components/factory/list-page';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 import { Visualization } from '@console/topology';
-import { setQueryArgument, removeQueryArgument } from '@console/internal/components/utils';
 import { setTopologyFilters } from '../redux/action';
 import { TOPOLOGY_SEARCH_FILTER_KEY } from '../redux/const';
 import { TopologyFilters, DisplayFilters, getTopologyFilters } from './filter-utils';
 import FilterDropdown from './FilterDropdown';
 import './TopologyFilterBar.scss';
+import { setQueryArgument, removeQueryArgument } from '@console/internal/components/utils/router';
 
 type StateProps = {
   filters: TopologyFilters;

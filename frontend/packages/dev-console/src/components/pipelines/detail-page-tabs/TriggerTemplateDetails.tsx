@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { SectionHeading, ResourceSummary } from '@console/internal/components/utils';
 import { EventListenerModel, PipelineModel } from '../../../models';
 import ResourceLinkList from '../resource-overview/ResourceLinkList';
 import {
@@ -7,6 +6,8 @@ import {
   getTriggerTemplatePipelineName,
 } from '../utils/triggers';
 import { TriggerTemplateKind } from '../resource-types';
+import { SectionHeading } from '@console/internal/components/utils/headings';
+import { ResourceSummary } from '@console/internal/components/utils/details-page';
 
 export interface TriggerTemplateDetailsProps {
   obj: TriggerTemplateKind;

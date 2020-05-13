@@ -1,11 +1,12 @@
 import * as Immutable from 'immutable';
 import uiReducer, { getDefaultPerspective } from '../../public/reducers/ui';
 import { getActivePerspective } from '../../public/reducers/ui-selectors';
-import { LAST_PERSPECTIVE_LOCAL_STORAGE_KEY } from '@console/shared';
+import { LAST_PERSPECTIVE_LOCAL_STORAGE_KEY } from '@console/shared/src/constants/common';
+import { Perspective } from '@console/plugin-sdk/src/typings';
 import * as UIActions from '../../public/actions/ui';
 import { RootState } from '@console/internal/redux-types';
-import { pluginStore, Perspective } from '../../public/plugins';
-import '../../__mocks__/localStoragee';
+import { pluginStore } from '../../public/plugins';
+import '../../__mocks__/localStorage';
 
 describe('getDefaultPerspective', () => {
   it('should default to undefined', () => {

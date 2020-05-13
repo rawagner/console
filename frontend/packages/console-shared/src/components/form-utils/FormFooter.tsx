@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as cx from 'classnames';
 import { ActionGroup, Alert, Button, ButtonVariant } from '@patternfly/react-core';
-import { ButtonBar } from '@console/internal/components/utils';
+import { ButtonBar } from '@console/internal/components/utils/button-bar';
 import { FormFooterProps } from './form-utils-types';
 import './FormFooter.scss';
 

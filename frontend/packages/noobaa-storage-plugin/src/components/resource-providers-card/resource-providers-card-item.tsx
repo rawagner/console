@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { RedExclamationCircleIcon } from '@console/shared';
+import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
 
 const ResourceProvidersItemStatus: React.FC<ResourceProvidersRowStatusProps> = React.memo(
   ({ status, link }) => (

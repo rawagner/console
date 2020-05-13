@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core';
 import { connect } from 'react-redux';
-import { getName, getUID } from '@console/shared/src';
+import { getName, getUID } from '@console/shared/src/selectors/common';
 import {
   iGetCommonData,
   iGetUID,

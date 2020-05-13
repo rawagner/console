@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Table, RowFunction } from '@console/internal/components/factory';
-import { dimensifyHeader } from '@console/shared';
+import { Table, RowFunction } from '@console/internal/components/factory/table';
+import { dimensifyHeader } from '@console/shared/src/utils/table-utils';
 import { sortable } from '@patternfly/react-table';
 import { AffinityRowData } from '../../types';
 

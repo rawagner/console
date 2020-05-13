@@ -7,7 +7,7 @@ import {
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-import { ExternalLink } from '@console/internal/components/utils';
+import { ExternalLink } from '@console/internal/components/utils/link';
 import { Action, State } from '../state';
 
 const GeneralPage: React.FC<GeneralPageProps> = ({ dispatch, state }) => {

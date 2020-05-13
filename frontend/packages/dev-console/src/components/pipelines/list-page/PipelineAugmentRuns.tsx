@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { inject } from '@console/internal/components/utils';
-import { K8sKind } from '@console/internal/module/k8s';
+import { inject } from '@console/internal/components/utils/inject';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { augmentRunsToData, PropPipelineData, KeyedRuns } from '../../../utils/pipeline-augment';
 import { ListFilterId, ListFilterLabels } from '../../../utils/pipeline-utils';
 import {

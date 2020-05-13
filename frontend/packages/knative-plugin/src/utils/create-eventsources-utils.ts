@@ -1,7 +1,8 @@
 import * as _ from 'lodash';
 import { safeLoad } from 'js-yaml';
-import { K8sResourceKind, K8sKind, referenceForModel } from '@console/internal/module/k8s';
-import { useAccessReview } from '@console/internal/components/utils';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
+import { useAccessReview } from '@console/internal/components/utils/rbac';
 import {
   getAppLabels,
   getCommonAnnotations,

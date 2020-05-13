@@ -5,7 +5,8 @@ import { PasteIcon } from '@patternfly/react-icons';
 import { Button, AlertVariant } from '@patternfly/react-core';
 import * as classNames from 'classnames';
 
-import { K8sResourceKind, k8sGet } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
+import { k8sGet } from '../../module/k8s/resource';
 import { ExpandableAlert } from './alerts';
 import { SectionHeading } from './headings';
 import { ResourceLink } from './resource-link';

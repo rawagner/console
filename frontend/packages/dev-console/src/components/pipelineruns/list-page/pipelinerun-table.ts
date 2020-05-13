@@ -1,4 +1,4 @@
-import { Kebab } from '@console/internal/components/utils';
+import { Kebab } from '@console/internal/components/utils/kebab';
 
 export const tableColumnClasses = [
   '', // name

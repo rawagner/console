@@ -4,10 +4,9 @@ import * as _ from 'lodash';
 import { safeDump } from 'js-yaml';
 import { Alert, Button } from '@patternfly/react-core';
 import { Firehose } from '@console/internal/components/utils/firehose';
-import * as k8s from '@console/internal/module/k8s';
+import * as k8s from '@console/internal/module/k8s/resource';
 import { CustomResourceDefinitionModel } from '@console/internal/models';
 import { CreateYAML } from '@console/internal/components/create-yaml';
-import { BreadCrumbs } from '@console/internal/components/utils';
 import {
   testClusterServiceVersion,
   testResourceInstance,
@@ -20,6 +19,14 @@ import { OperandYAML, OperandYAMLProps } from './operand-yaml';
 import { OperandForm, OperandFormProps } from './operand-form';
 import { referenceForProvidedAPI } from '..';
 import { EditorType } from '@console/shared/src/components/synced-editor/editor-toggle';
+import { K8sKind, K8sResourceKind, Status } from '@console/internal/module/k8s/types';
+import {
+  apiVersionForModel,
+  referenceForModel,
+  nameForModel,
+} from '@console/internal/module/k8s/k8s';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
 
 import Spy = jasmine.Spy;
 
@@ -30,7 +37,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () =>
 
   beforeEach(() => {
     const match = {
-      params: { appName: 'app', ns: 'default', plural: k8s.referenceFor(testResourceInstance) },
+      params: { appName: 'app', ns: 'default', plural: referenceFor(testResourceInstance) },
       isExact: true,
       url: '',
       path: '',
@@ -94,7 +101,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () =>
 
 describe('CreateOperandPage', () => {
   const match = {
-    params: { appName: 'app', ns: 'default', plural: k8s.referenceFor(testResourceInstance) },
+    params: { appName: 'app', ns: 'default', plural: referenceFor(testResourceInstance) },
     isExact: true,
     url: '',
     path: '',
@@ -105,7 +112,7 @@ describe('CreateOperandPage', () => {
 
     expect(wrapper.find(Firehose).props().resources).toEqual([
       {
-        kind: k8s.referenceForModel(ClusterServiceVersionModel),
+        kind: referenceForModel(ClusterServiceVersionModel),
         name: match.params.appName,
         namespace: match.params.ns,
         isList: false,
@@ -113,7 +120,7 @@ describe('CreateOperandPage', () => {
       },
       {
         kind: CustomResourceDefinitionModel.kind,
-        name: k8s.nameForModel(testModel),
+        name: nameForModel(testModel),
         isList: false,
         prop: 'customResourceDefinition',
         optional: true,
@@ -148,7 +155,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2136] CreateOperandForm', (
   it('renders form', () => {
     expect(
       referenceForProvidedAPI(testClusterServiceVersion.spec.customresourcedefinitions.owned[0]),
-    ).toEqual(k8s.referenceForModel(testModel));
+    ).toEqual(referenceForModel(testModel));
 
     expect(wrapper.find('form').exists()).toBe(true);
   });
@@ -172,9 +179,9 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2136] CreateOperandForm', (
 
   it('calls `k8sCreate` to create new operand if form is valid', (done) => {
     spyAndExpect(spyOn(k8s, 'k8sCreate'))(Promise.resolve({}))
-      .then(([model, obj]: [k8s.K8sKind, k8s.K8sResourceKind]) => {
+      .then(([model, obj]: [K8sKind, K8sResourceKind]) => {
         expect(model).toEqual(testModel);
-        expect(obj.apiVersion).toEqual(k8s.apiVersionForModel(testModel));
+        expect(obj.apiVersion).toEqual(apiVersionForModel(testModel));
         expect(obj.kind).toEqual(testModel.kind);
         expect(obj.metadata.name).toEqual('example');
         expect(obj.metadata.namespace).toEqual('default');
@@ -186,7 +193,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2136] CreateOperandForm', (
   });
 
   it('displays errors if calling `k8sCreate` fails', (done) => {
-    const error = { message: 'Failed to create' } as k8s.Status;
+    const error = { message: 'Failed to create' } as Status;
     /* eslint-disable-next-line prefer-promise-reject-errors */
     spyAndExpect(spyOn(k8s, 'k8sCreate'))(Promise.reject({ json: error }))
       .then(() => new Promise((resolve) => setTimeout(() => resolve(), 10)))
@@ -218,7 +225,7 @@ describe(OperandYAML.displayName, () => {
           params: {
             ns: 'default',
             appName: 'example',
-            plural: k8s.referenceFor(testResourceInstance),
+            plural: referenceFor(testResourceInstance),
           },
         }}
       />,

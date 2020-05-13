@@ -4,27 +4,15 @@ import { Helmet } from 'react-helmet';
 import { safeLoad } from 'js-yaml';
 
 import { PropertyItem } from '@patternfly/react-catalog-view-extension';
-import { ANNOTATIONS, FLAGS, APIError } from '@console/shared';
+import { ANNOTATIONS, FLAGS } from '@console/shared/src/constants/common';
+import { APIError } from '@console/shared/src/types/resource';
 import { CatalogTileViewPage } from './catalog-items';
-import {
-  k8sListPartialMetadata,
-  referenceForModel,
-  serviceClassDisplayName,
-  K8sResourceCommon,
-  K8sResourceKind,
-  PartialObjectMetadata,
-} from '../../module/k8s';
+import { k8sListPartialMetadata } from '../../module/k8s/resource';
+import { referenceForModel } from '../../module/k8s/k8s';
+import { serviceClassDisplayName } from '../../module/k8s/service-catalog';
+import { K8sResourceCommon, K8sResourceKind, PartialObjectMetadata } from '../../module/k8s/types';
 import { withStartGuide } from '../start-guide';
 import { connectToFlags, flagPending, FlagsObject } from '../utils/connect-flags';
-import {
-  Firehose,
-  LoadError,
-  PageHeading,
-  skeletonCatalog,
-  StatusBox,
-  FirehoseResult,
-  ExternalLink,
-} from '../utils';
 import { getAnnotationTags, getMostRecentBuilderTag, isBuilder } from '../image-stream';
 import {
   getImageForIconClass,
@@ -35,12 +23,16 @@ import {
 } from './catalog-item-icon';
 import { ClusterServiceClassModel, TemplateModel } from '../../models';
 import { coFetch, coFetchJSON } from '../../co-fetch';
-import {
-  useExtensions,
-  isDevCatalogModel,
-  DevCatalogModel,
-  withExtensions,
-} from '@console/plugin-sdk';
+import { isDevCatalogModel, DevCatalogModel } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { withExtensions } from '@console/plugin-sdk/src/withExtensions';
+
+import { ExternalLink } from '../utils/link';
+import { LoadError, StatusBox } from '../utils/status-box';
+import { Firehose } from '../utils/firehose';
+import { PageHeading } from '../utils/headings';
+import { FirehoseResult } from '../utils/types';
+import { skeletonCatalog } from '../utils/skeleton-catalog';
 
 export const CatalogListPage = withExtensions<CatalogListPageExtensionProps>({
   devCatalogExtensions: isDevCatalogModel,

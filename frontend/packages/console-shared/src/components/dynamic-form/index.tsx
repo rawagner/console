@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as React from 'react';
 import Form, { FormProps } from 'react-jsonschema-form';
 import { Accordion, ActionGroup, Button, Alert } from '@patternfly/react-core';
-import { history } from '@console/internal/components/utils';
+import { history } from '@console/internal/components/utils/router';
 import defaultWidgets from './widgets';
 import defaultFields from './fields';
 import {

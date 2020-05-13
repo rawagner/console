@@ -3,21 +3,21 @@ import * as _ from 'lodash-es';
 import { sortable } from '@patternfly/react-table';
 import * as classNames from 'classnames';
 
-import { Status, FLAGS } from '@console/shared';
+import { FLAGS } from '@console/shared/src/constants/common';
+import { Status } from '@console/shared/src/components/status/Status';
 import { connectToFlags } from './utils/connect-flags';
 import { Conditions } from './conditions';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import {
-  Kebab,
-  navFactory,
-  ResourceKebab,
-  SectionHeading,
-  ResourceLink,
-  ResourceSummary,
-  Selector,
-} from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ResourceEventStream } from './events';
 import { PersistentVolumeClaimModel } from '../models';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { ResourceSummary } from './utils/details-page';
+import { Selector } from './utils/selector';
+import { navFactory } from './utils/horizontal-nav';
 
 const { common, ExpandPVC } = Kebab.factory;
 const menuActions = [

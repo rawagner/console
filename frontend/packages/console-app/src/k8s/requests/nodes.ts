@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { NodeModel } from '@console/internal/models';
-import { k8sPatch, K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sPatch } from '@console/internal/module/k8s/resource';
 
 export const makeNodeUnschedulable = (resource: K8sResourceKind): Promise<K8sResourceKind> => {
   const op = _.has(resource, 'spec.unschedulable') ? 'replace' : 'add';

@@ -8,7 +8,7 @@ import {
   BreadCrumbs,
   BreadCrumbsProps,
 } from '../../../public/components/utils/headings';
-import { ResourceIcon } from '../../../public/components/utils';
+import { ResourceIcon } from '../../../public/components/utils/resource-icon';
 import { testResourceInstance } from '../../../__mocks__/k8sResourcesMocks';
 
 describe(BreadCrumbs.displayName, () => {

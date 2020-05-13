@@ -7,7 +7,7 @@ import DetailsBody from '@console/shared/src/components/dashboard/details-card/D
 import DetailItem from '@console/shared/src/components/dashboard/details-card/DetailItem';
 import DashboardCardLink from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardLink';
 import { getNodeAddresses } from '@console/shared/src/selectors/node';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 import { NodeModel } from '@console/internal/models';
 
 import NodeIPList from '../NodeIPList';

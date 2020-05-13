@@ -2,11 +2,13 @@ import * as _ from 'lodash-es';
 import * as React from 'react';
 import { Tooltip } from '@patternfly/react-core';
 
-import { k8sPatch, Patch, DeploymentUpdateStrategy, K8sResourceKind } from '../../module/k8s';
+import { k8sPatch } from '../../module/k8s/resource';
+import { Patch, DeploymentUpdateStrategy, K8sResourceKind } from '../../module/k8s/types';
 import { DeploymentModel } from '../../models';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { pluralize, withHandlePromise } from '../utils';
 import { RadioInput } from '../radio';
+import { pluralize } from '../utils/details-page';
+import { withHandlePromise } from '../utils/promise-component';
 
 export const getNumberOrPercent = (value) => {
   if (typeof value === 'undefined') {

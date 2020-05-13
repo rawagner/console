@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Grid, Button, Split, SplitItem } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
-import { ExternalLink, resourcePath } from '@console/internal/components/utils';
-import { K8sResourceKindReference } from '@console/internal/module/k8s';
+import { K8sResourceKindReference } from '@console/internal/module/k8s/types';
+import { ExternalLink } from '@console/internal/components/utils/link';
+import { resourcePath } from '@console/internal/components/utils/resource-link';
 import { ADD_LABEL, EMPTY_ADD_LABEL } from './consts';
 import './labels-list.scss';
 

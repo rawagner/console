@@ -1,9 +1,12 @@
 import * as _ from 'lodash-es';
 import * as React from 'react';
 
-import { k8sPatch, referenceForModel } from '../../module/k8s';
+import { referenceForModel } from '../../module/k8s/k8s';
+import { k8sPatch } from '../../module/k8s/resource';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { PromiseComponent, ResourceIcon, SelectorInput } from '../utils';
+import { PromiseComponent } from '../utils/promise-component';
+import { SelectorInput } from '../utils/selector-input';
+import { ResourceIcon } from '../utils/resource-icon';
 
 const LABELS_PATH = '/metadata/labels';
 const TEMPLATE_SELECTOR_PATH = '/spec/template/metadata/labels';

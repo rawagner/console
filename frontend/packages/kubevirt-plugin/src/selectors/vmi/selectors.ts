@@ -1,4 +1,4 @@
-import { getName, getNamespace } from '@console/shared';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
 import { VirtualMachineInstanceModel } from '../../models';
 import { getConsoleAPIBase } from '../../utils/url';
 import { VMIKind } from '../../types/vm';

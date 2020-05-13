@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from '@patternfly/react-core';
 import { createProjectModal } from '@console/internal/components/modals';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import ProjectListPage, { ProjectListPageProps } from './ProjectListPage';
 
 export interface CreateProjectListPageProps extends ProjectListPageProps {

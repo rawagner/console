@@ -53,7 +53,7 @@ export type AlwaysOnExtension<P = any> = Omit<Extension<P>, 'flags'>;
  *
  * ```ts
  *  // packages/console-demo-plugin/src/plugin.ts
- *  import { Plugin } from '@console/plugin-sdk';
+ *  import { Plugin } from '@console/plugin-sdk/src/typings';
  *
  *  const plugin: Plugin<FooExtension | BarExtension> = [
  *    {

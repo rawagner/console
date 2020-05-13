@@ -1,4 +1,4 @@
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { Extension, AlwaysOnExtension } from './base';
 
 namespace ExtensionProperties {

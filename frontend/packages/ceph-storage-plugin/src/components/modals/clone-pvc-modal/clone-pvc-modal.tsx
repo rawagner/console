@@ -3,28 +3,29 @@ import './_clone-pvc-modal.scss';
 import * as React from 'react';
 
 import { Form, FormGroup, TextInput } from '@patternfly/react-core';
-import { K8sResourceKind, k8sCreate } from '@console/internal/module/k8s';
-import {
-  LoadingInline,
-  ResourceIcon,
-  humanizeBinaryBytes,
-  withHandlePromise,
-} from '@console/internal/components/utils/index';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sCreate } from '@console/internal/module/k8s/resource';
 import {
   ModalBody,
   ModalComponentProps,
   ModalSubmitFooter,
   ModalTitle,
   createModalLauncher,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 
-import { DataPoint } from '@console/internal/components/graphs/index';
-import { HandlePromiseProps } from '@console/internal/components/utils/promise-component';
+import { DataPoint } from '@console/internal/components/graphs/types';
+import {
+  HandlePromiseProps,
+  withHandlePromise,
+} from '@console/internal/components/utils/promise-component';
 import { PersistentVolumeClaimModel } from '@console/internal/models/index';
 import { PrometheusEndpoint } from '@console/internal/components/graphs/helpers';
 import { getInstantVectorStats } from '@console/internal/components/graphs/utils';
 import { getPVCUsedCapacityQuery } from '../../../constants/queries';
 import { usePrometheusPoll } from '@console/internal/components/graphs/prometheus-poll-hook';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
+import { LoadingInline } from '@console/internal/components/utils/status-box';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 
 const accessModeLabels = Object.freeze({
   ReadWriteOnce: 'Single User (RWO)',

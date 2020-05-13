@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ResourceLink } from '@console/internal/components/utils';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 import { TaskModel, ClusterTaskModel } from '../../../../models';
 import DynamicResourceLinkList from '../DynamicResourceLinkList';
 

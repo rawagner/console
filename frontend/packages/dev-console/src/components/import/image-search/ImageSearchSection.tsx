@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
-import { RadioGroupField } from '@console/shared';
+import RadioGroupField from '@console/shared/src/components/formik-fields/RadioGroupField';
 import FormSection from '../section/FormSection';
 import { imageRegistryType } from '../../../utils/imagestream-utils';
 import ImageStream from './ImageStream';

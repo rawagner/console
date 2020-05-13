@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
 import {
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
 } from '@console/internal/components/factory/modal';
-import { ResourceDropdownField } from '@console/shared';
 import { formikFormProps } from '@console/shared/src/test-utils/formik-props-utils';
 import SinkSourceModal from '../SinkSourceModal';
 import { ServiceModel } from '../../../models';

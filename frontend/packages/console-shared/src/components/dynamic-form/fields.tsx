@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import { FieldProps } from 'react-jsonschema-form';
-import { LinkifyExternal, SelectorInput, Dropdown } from '@console/internal/components/utils';
 import { ResourceRequirements } from '@console/operator-lifecycle-manager/src/components/descriptors/spec/resource-requirements';
 import { FieldSet, FormField } from './templates';
 import { ConfigureUpdateStrategy } from '@console/internal/components/modals/configure-update-strategy-modal';
@@ -15,6 +14,9 @@ import { Switch } from '@patternfly/react-core';
 import SchemaField, {
   SchemaFieldProps,
 } from 'react-jsonschema-form/lib/components/fields/SchemaField';
+import { LinkifyExternal } from '@console/internal/components/utils/link';
+import { SelectorInput } from '@console/internal/components/utils/selector-input';
+import { Dropdown } from '@console/internal/components/utils/dropdown';
 import { getSchemaErrors } from './utils';
 
 export const DescriptionField: React.FC<FieldProps> = ({ id, description }) =>

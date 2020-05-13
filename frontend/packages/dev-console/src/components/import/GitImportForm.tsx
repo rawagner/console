@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { Form } from '@patternfly/react-core';
 import { FormikProps, FormikValues } from 'formik';
-import { FormFooter } from '@console/shared/src/components/form-utils';
+import FormFooter from '@console/shared/src/components/form-utils/FormFooter';
 import { GitImportFormProps } from './import-types';
 import GitSection from './git/GitSection';
 import BuilderSection from './builder/BuilderSection';

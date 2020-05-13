@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as _ from 'lodash-es';
 
-import { KUBE_ADMIN_USERNAME } from '@console/shared';
+import { KUBE_ADMIN_USERNAME } from '@console/shared/src/constants/common';
 import { OAuthModel } from '../models';
 import { userStateToProps } from '../reducers/ui-selectors';
 import { resourcePathFromModel } from './utils/resource-link';

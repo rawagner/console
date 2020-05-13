@@ -3,7 +3,7 @@ import {
   HealthState,
   operatorHealthPriority,
 } from '@console/shared/src/components/dashboard/status-card/states';
-import { OperatorStatusPriority, GetOperatorsWithStatuses } from '@console/plugin-sdk';
+import { OperatorStatusPriority, GetOperatorsWithStatuses } from '@console/plugin-sdk/src/typings';
 import { getOperatorsStatus } from '@console/shared/src/components/dashboard/status-card/state-utils';
 import { getSubscriptionStatus, getCSVStatus, subscriptionForCSV } from '../../status/csv-status';
 import {

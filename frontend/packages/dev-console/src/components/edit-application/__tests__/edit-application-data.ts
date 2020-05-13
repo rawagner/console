@@ -1,6 +1,6 @@
 import { ValidatedOptions } from '@patternfly/react-core';
-import { K8sResourceKind } from '@console/internal/module/k8s';
-import { ServiceModel } from '@console/knative-plugin';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { ServiceModel } from '@console/knative-plugin/src/models';
 import { UNASSIGNED_KEY } from '../../../const';
 import { DeployImageFormData, GitImportFormData, Resources } from '../../import/import-types';
 import { AppResources } from '../edit-application-types';

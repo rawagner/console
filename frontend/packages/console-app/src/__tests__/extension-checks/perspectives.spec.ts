@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { testedExtensions } from '../plugin-test-utils';
-import { isPerspective } from '@console/plugin-sdk';
+import { isPerspective } from '@console/plugin-sdk/src/typings';
 
 describe('Perspective', () => {
   it('duplicate ids are not allowed', () => {

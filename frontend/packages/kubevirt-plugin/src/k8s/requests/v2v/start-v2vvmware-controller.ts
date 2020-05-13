@@ -1,16 +1,20 @@
 import { DeploymentModel, RoleModel } from '@console/internal/models';
-import { getName } from '@console/shared/src';
+import { getName } from '@console/shared/src/selectors/common';
 import { V2VVMWARE_DEPLOYMENT_NAME } from '../../../constants/v2v';
 import { getVmwareConfigMap } from './v2vvmware-configmap';
 import { getContainerImage } from '../../../selectors/pod/container';
 import { getKubevirtV2vVmwareContainerImage, getV2vImagePullPolicy } from '../../../selectors/v2v';
-import { ConfigMapKind, DeploymentKind, K8sResourceCommon } from '@console/internal/module/k8s';
+import {
+  ConfigMapKind,
+  DeploymentKind,
+  K8sResourceCommon,
+} from '@console/internal/module/k8s/types';
 import { EnhancedK8sMethods } from '../../enhancedK8sMethods/enhancedK8sMethods';
 import { ServiceAccountWrappper } from '../../wrapper/k8s/service-account-wrapper';
 import { buildV2VVMwareRole } from './objects/v2vvmware-role';
 import { RoleBindingWrappper } from '../../wrapper/k8s/role-binding-wrapper';
 import { buildV2VVMwareDeployment } from './objects/v2vvmware-deployment';
-import { PatchBuilder } from '@console/shared/src/k8s';
+import { PatchBuilder } from '@console/shared/src/k8s/patch';
 import { buildOwnerReference } from '../../../utils';
 import { compareOwnerReference } from '@console/shared/src/utils/owner-references';
 import { RoleWrappper } from '../../wrapper/k8s/role-wrapper';

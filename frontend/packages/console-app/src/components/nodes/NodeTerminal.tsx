@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { Alert } from '@patternfly/react-core';
-import {
-  Firehose,
-  FirehoseResource,
-  FirehoseResult,
-  LoadingBox,
-} from '@console/internal/components/utils';
-import { NodeKind, PodKind } from '@console/internal/module/k8s';
-import { getRandomChars } from '@console/shared/src/utils';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
+import { NodeKind, PodKind } from '@console/internal/module/k8s/types';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 import { PodExecLoader } from '../../../../../public/components/pod';
 import { ImageStreamTagModel, PodModel } from '../../../../../public/models';
-import { k8sCreate, k8sGet, k8sKillByName } from '../../../../../public/module/k8s';
+import { k8sCreate, k8sGet, k8sKillByName } from '../../../../../public/module/k8s/resource';
 
 type NodeTerminalErrorProps = {
   error: React.ReactNode;

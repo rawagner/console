@@ -8,7 +8,7 @@ import {
   PodAffinity as PodAffinityType,
   PodAffinityTerm,
   Selector,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { MatchExpressions } from './match-expressions';
 
 enum AffinityRuleType {

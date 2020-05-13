@@ -1,4 +1,4 @@
-import { ImagePullPolicy } from '@console/internal/module/k8s';
+import { ImagePullPolicy } from '@console/internal/module/k8s/types';
 import { PodWrappper } from '../../../../wrapper/k8s/pod-wrapper';
 import {
   CONVERSION_BASE_NAME,

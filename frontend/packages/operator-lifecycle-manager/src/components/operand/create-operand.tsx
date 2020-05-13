@@ -2,19 +2,15 @@ import {
   K8sKind,
   K8sResourceKind,
   K8sResourceKindReference,
+  CustomResourceDefinitionKind,
+} from '@console/internal/module/k8s/types';
+import {
   kindForReference,
   referenceForModel,
   nameForModel,
-  CustomResourceDefinitionKind,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/k8s';
 import { CustomResourceDefinitionModel } from '@console/internal/models';
 import { Firehose } from '@console/internal/components/utils/firehose';
-import {
-  StatusBox,
-  FirehoseResult,
-  BreadCrumbs,
-  resourcePathFromModel,
-} from '@console/internal/components/utils';
 import { RootState } from '@console/internal/redux-types';
 import { SyncedEditor } from '@console/shared/src/components/synced-editor';
 import { getActivePerspective } from '@console/internal/reducers/ui-selectors';
@@ -28,9 +24,27 @@ import { ClusterServiceVersionModel } from '../../models';
 import { ClusterServiceVersionKind, ProvidedAPI } from '../../types';
 import { OperandForm } from './operand-form';
 import { OperandYAML } from './operand-yaml';
-import { exampleForModel, providedAPIForModel } from '..';
+import { providedAPIForModel, parseALMExamples } from '..';
 import { FORM_HELP_TEXT, YAML_HELP_TEXT } from './const';
 import { getJSONSchema } from './utils';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
+import { StatusBox } from '@console/internal/components/utils/status-box';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import { referenceFor } from '@console/internal/module/k8s/k8s-models';
+
+export const exampleForModel = (csv: ClusterServiceVersionKind, model: K8sKind) =>
+  _.defaultsDeep(
+    {},
+    {
+      kind: model.kind,
+      apiVersion: `${model.apiGroup}/${model.apiVersion}`,
+    },
+    _.find(
+      parseALMExamples(csv),
+      (s: K8sResourceKind) => referenceFor(s) === referenceForModel(model),
+    ),
+  );
 
 export const CreateOperand: React.FC<CreateOperandProps> = ({
   clusterServiceVersion,

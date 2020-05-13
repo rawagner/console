@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { TextInputTypes } from '@patternfly/react-core';
-import { InputField, DropdownField } from '@console/shared';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
 import { SecretAnnotationType } from '../../const';
 
 type SecretAnnotationParam = {

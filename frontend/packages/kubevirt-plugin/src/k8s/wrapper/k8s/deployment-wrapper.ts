@@ -3,7 +3,7 @@ import {
   K8sResourceCommon,
   PodTemplate,
   Selector,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
 import { DeploymentModel } from '@console/internal/models';
 import { K8sResourceWrapper } from '../common/k8s-resource-wrapper';
 import { K8sInitAddon } from '../common/util/k8s-mixin';

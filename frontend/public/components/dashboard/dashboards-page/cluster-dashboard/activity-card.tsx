@@ -10,19 +10,19 @@ import DashboardCardLink from '@console/shared/src/components/dashboard/dashboar
 import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboard-card/DashboardCardTitle';
 import { DashboardItemProps, withDashboardResources } from '../../with-dashboard-resources';
 import { EventModel } from '../../../../models';
-import { FirehoseResource, FirehoseResult } from '../../../utils';
-import { EventKind, K8sKind } from '../../../../module/k8s';
+import { FirehoseResource, FirehoseResult } from '../../../utils/types';
+import { EventKind, K8sKind } from '../../../../module/k8s/types';
 import ActivityBody, {
   RecentEventsBody,
   OngoingActivityBody,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
 import {
-  useExtensions,
   DashboardsOverviewResourceActivity,
   DashboardsOverviewPrometheusActivity,
   isDashboardsOverviewResourceActivity,
   isDashboardsOverviewPrometheusActivity,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import { uniqueResource } from './utils';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 

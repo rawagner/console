@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { CheckboxField, EnvironmentField } from '@console/shared';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import CheckboxField from '@console/shared/src/components/formik-fields/CheckboxField';
+import EnvironmentField from '@console/shared/src/components/formik-fields/EnvironmentField';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import FormSection from '../section/FormSection';
 
 export interface DeploymentConfigSectionProps {

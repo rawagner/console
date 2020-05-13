@@ -4,7 +4,7 @@ import * as _ from 'lodash-es';
 
 import * as k8sActions from '../../public/actions/k8s';
 import * as k8sResource from '../../public/module/k8s/resource';
-import { K8sResourceKind, K8sKind } from '../../public/module/k8s';
+import { K8sResourceKind, K8sKind } from '../../public/module/k8s/types';
 import { PodModel, APIServiceModel } from '../../public/models';
 import { testResourceInstance } from '../../__mocks__/k8sResourcesMocks';
 import * as coFetch from '../../public/co-fetch';

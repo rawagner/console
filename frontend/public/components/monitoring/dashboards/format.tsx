@@ -5,7 +5,7 @@ import {
   humanizeDecimalBytesPerSec,
   humanizeNumber,
   humanizePacketsPerSec,
-} from '../../utils';
+} from '../../utils/units';
 
 export const formatNumber = (s: string, decimals = 2, format = 'short'): string => {
   const value = Number(s);

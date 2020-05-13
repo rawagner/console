@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Checkbox } from '@patternfly/react-core';
 import { InfoCircleIcon } from '@patternfly/react-icons';
 
-import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '@console/shared';
+import { RH_OPERATOR_SUPPORT_POLICY_LINK } from '@console/shared/src/constants/common';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory/modal';
-import { ExternalLink } from '../utils';
+import { ExternalLink } from '../utils/link';
 
 export class OperatorHubCommunityProviderModal extends React.Component<
   OperatorHubCommunityProviderModalProps,

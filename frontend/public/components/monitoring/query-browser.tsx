@@ -27,7 +27,7 @@ import {
 } from '@patternfly/react-core';
 import { ChartLineIcon } from '@patternfly/react-icons';
 import { connect } from 'react-redux';
-import { APIError } from '@console/shared';
+import { APIError } from '@console/shared/src/types/resource';
 import { withFallback } from '@console/shared/src/components/error/error-boundary';
 
 import * as UIActions from '../../actions/ui';
@@ -35,14 +35,6 @@ import { RootState } from '../../redux-types';
 import { GraphEmpty } from '../graphs/graph-empty';
 import { getPrometheusURL, PrometheusEndpoint } from '../graphs/helpers';
 import { queryBrowserTheme } from '../graphs/themes';
-import {
-  Dropdown,
-  humanizeNumberSI,
-  LoadingInline,
-  usePoll,
-  useRefWidth,
-  useSafeFetch,
-} from '../utils';
 import {
   formatPrometheusDuration,
   parsePrometheusDuration,
@@ -55,6 +47,12 @@ import {
   PrometheusResponse,
   PrometheusResult,
 } from '@console/shared/src/types/monitoring';
+import { humanizeNumberSI } from '../utils/units';
+import { Dropdown } from '../utils/dropdown';
+import { useRefWidth } from '../utils/ref-width-hook';
+import { LoadingInline } from '../utils/status-box';
+import { useSafeFetch } from '../utils/safe-fetch-hook';
+import { usePoll } from '../utils/poll-hook';
 
 // Prometheus internal labels start with "__"
 const isInternalLabel = (key: string): boolean => _.startsWith(key, '__');

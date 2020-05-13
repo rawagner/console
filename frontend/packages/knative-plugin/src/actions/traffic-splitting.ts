@@ -1,5 +1,5 @@
-import { KebabOption } from '@console/internal/components/utils';
-import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s';
+import { KebabOption } from '@console/internal/components/utils/kebab';
+import { K8sKind, K8sResourceKind } from '@console/internal/module/k8s/types';
 import { setTrafficDistributionModal } from '../components/modals';
 
 export const setTrafficDistribution = (model: K8sKind, obj: K8sResourceKind): KebabOption => {

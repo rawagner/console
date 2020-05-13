@@ -2,16 +2,11 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { RouteComponentProps } from 'react-router';
 import { Title, Wizard } from '@patternfly/react-core';
-import {
-  apiVersionForModel,
-  k8sCreate,
-  k8sGet,
-  referenceForModel,
-} from '@console/internal/module/k8s';
+import { k8sCreate, k8sGet } from '@console/internal/module/k8s/resource';
+import { apiVersionForModel, referenceForModel } from '@console/internal/module/k8s/k8s';
 import { history } from '@console/internal/components/utils/router';
-import { BreadCrumbs, resourcePathFromModel } from '@console/internal/components/utils';
-import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager';
-import { getName } from '@console/shared';
+import { ClusterServiceVersionModel } from '@console/operator-lifecycle-manager/src/models';
+import { getName } from '@console/shared/src/selectors/common';
 import { NooBaaBucketClassModel } from '../../models';
 import GeneralPage from './wizard-pages/general-page';
 import PlacementPolicyPage from './wizard-pages/placement-policy-page';
@@ -19,6 +14,8 @@ import BackingStorePageWithFirehose from './wizard-pages/backingstore-page';
 import ReviewPage from './wizard-pages/review-page';
 import { initialState, reducer } from './state';
 import './create-bc.scss';
+import { BreadCrumbs } from '@console/internal/components/utils/headings';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 
 enum CreateStepsBC {
   GENERAL = 'GENERAL',

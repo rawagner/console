@@ -1,4 +1,9 @@
-import { K8sKind, K8sResourceKind, PodKind, TemplateKind } from '@console/internal/module/k8s';
+import {
+  K8sKind,
+  K8sResourceKind,
+  PodKind,
+  TemplateKind,
+} from '@console/internal/module/k8s/types';
 import { VMIKind, VMKind } from '../../types/vm';
 import { VMGenericLikeEntityKind, VMILikeEntityKind } from '../../types/vmLike';
 import { VMImportKind } from '../../types/vm-import/ovirt/vm-import';

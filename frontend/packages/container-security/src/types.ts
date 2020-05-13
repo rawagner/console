@@ -1,4 +1,4 @@
-import { K8sResourceCommon } from '@console/internal/module/k8s';
+import { K8sResourceCommon } from '@console/internal/module/k8s/types';
 
 export type Feature = {
   name: string;

@@ -1,15 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import {
-  GroupVersionKind,
-  referenceForGroupVersionKind,
-  resourceURL,
-  referenceFor,
-  referenceForModel,
-  K8sKind,
-  K8sResourceKind,
-} from '@console/internal/module/k8s';
-import { PackageManifestModel } from '../models';
+import { GroupVersionKind, K8sKind } from '@console/internal/module/k8s/types';
+import { referenceForGroupVersionKind, referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   ClusterServiceVersionKind,
   CRDDescription,
@@ -56,20 +48,6 @@ export const providedAPIsForChannel = (pkg: PackageManifestKind) => (channel: st
     ]),
   );
 
-export const iconFor = (pkg: PackageManifestKind) =>
-  resourceURL(PackageManifestModel, {
-    ns: _.get(pkg.status, 'catalogSourceNamespace'),
-    name: pkg.metadata.name,
-    path: 'icon',
-    queryParams: {
-      resourceVersion: [
-        pkg.metadata.name,
-        _.get(pkg.status, 'channels[0].name'),
-        _.get(pkg.status, 'channels[0].currentCSV'),
-      ].join('.'),
-    },
-  });
-
 export const ClusterServiceVersionLogo: React.SFC<ClusterServiceVersionLogoProps> = (props) => {
   const { icon, displayName, provider, version } = props;
   const imgSrc: string = _.isString(icon)
@@ -115,19 +93,6 @@ export const parseALMExamples = (csv: ClusterServiceVersionKind) => {
     return [];
   }
 };
-
-export const exampleForModel = (csv: ClusterServiceVersionKind, model: K8sKind) =>
-  _.defaultsDeep(
-    {},
-    {
-      kind: model.kind,
-      apiVersion: `${model.apiGroup}/${model.apiVersion}`,
-    },
-    _.find(
-      parseALMExamples(csv),
-      (s: K8sResourceKind) => referenceFor(s) === referenceForModel(model),
-    ),
-  );
 
 export type ClusterServiceVersionLogoProps = {
   displayName: string;

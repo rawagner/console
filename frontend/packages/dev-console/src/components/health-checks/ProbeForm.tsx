@@ -2,7 +2,10 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import { FormikValues, useFormikContext } from 'formik';
 import { TextInputTypes, InputGroupText } from '@patternfly/react-core';
-import { InputGroupField, InputField, DropdownField, ActionGroupWithIcons } from '@console/shared';
+import DropdownField from '@console/shared/src/components/formik-fields/DropdownField';
+import InputField from '@console/shared/src/components/formik-fields/InputField';
+import InputGroupField from '@console/shared/src/components/formik-fields/InputGroupField';
+import ActionGroupWithIcons from '@console/shared/src/components/form-utils/ActionGroupWithIcons';
 import {
   HTTPRequestTypeForm,
   TCPRequestTypeForm,

@@ -1,5 +1,6 @@
 /* eslint-disable lines-between-class-members */
-import { getName, getNamespace, K8sEntityMap } from '@console/shared/src';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { K8sEntityMap } from '@console/shared/src/utils/utils';
 import { ObjectEnum } from '../object-enum';
 import {
   asVM,

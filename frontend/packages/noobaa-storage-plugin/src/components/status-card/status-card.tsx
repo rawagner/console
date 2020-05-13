@@ -15,8 +15,8 @@ import {
   withDashboardResources,
   DashboardItemProps,
 } from '@console/internal/components/dashboard/with-dashboard-resources';
-import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils';
-import { referenceForModel } from '@console/internal/module/k8s';
+import { FirehoseResource, FirehoseResult } from '@console/internal/components/utils/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { getDataResiliencyState } from '@console/ceph-storage-plugin/src/components/dashboard-page/storage-dashboard/status-card/utils';
 import { filterNooBaaAlerts } from '../../utils';
 import { DATA_RESILIENCE_QUERIES, StatusCardQueries } from '../../queries';

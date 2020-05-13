@@ -1,5 +1,5 @@
 import { configureCountModal } from '@console/internal/components/modals';
-import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, K8sKind } from '@console/internal/module/k8s/types';
 import { Descriptor } from '../types';
 
 export const configureSizeModal = ({

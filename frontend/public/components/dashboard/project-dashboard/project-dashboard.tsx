@@ -3,7 +3,8 @@ import * as _ from 'lodash-es';
 
 import Dashboard from '@console/shared/src/components/dashboard/Dashboard';
 import DashboardGrid from '@console/shared/src/components/dashboard/DashboardGrid';
-import { K8sResourceKind, LabelSelector, Selector } from '../../../module/k8s';
+import { K8sResourceKind, Selector } from '../../../module/k8s/types';
+import { LabelSelector } from '../../../module/k8s/label-selector';
 import { DetailsCard } from './details-card';
 import { StatusCard } from './status-card';
 import { UtilizationCard } from './utilization-card';

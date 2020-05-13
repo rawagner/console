@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { getNamespace } from '@console/shared';
-import { Firehose } from '@console/internal/components/utils';
-import { createModalLauncher, ModalComponentProps } from '@console/internal/components/factory';
+import { getNamespace } from '@console/shared/src/selectors/common';
+import { Firehose } from '@console/internal/components/utils/firehose';
+import {
+  createModalLauncher,
+  ModalComponentProps,
+} from '@console/internal/components/factory/modal';
 import { PersistentVolumeClaimModel, StorageClassModel } from '@console/internal/models';
 import { VMLikeEntityKind } from '../../../types/vmLike';
 import { asVM } from '../../../selectors/vm';

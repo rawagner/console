@@ -14,7 +14,7 @@ import {
   DataToolbarItem,
 } from '@patternfly/react-core';
 import { PlusCircleIcon, MinusCircleIcon } from '@patternfly/react-icons';
-import { getBadgeFromType } from '@console/shared';
+import { getBadgeFromType } from '@console/shared/src/components/badges/badge-factory';
 import { RootState } from '../redux-types';
 import { getActivePerspective, getPinnedResources } from '../reducers/ui-selectors';
 import { setPinnedResources } from '../actions/ui';
@@ -25,18 +25,17 @@ import { ResourceListDropdown } from './resource-dropdown';
 import { getResourceListPages } from './resource-pages';
 import { withStartGuide } from './start-guide';
 import { split, selectorFromString } from '../module/k8s/selector';
-import { kindForReference, modelFor, referenceForModel } from '../module/k8s';
-import {
-  LoadingBox,
-  MsgBox,
-  PageHeading,
-  ResourceIcon,
-  setQueryArgument,
-  AsyncComponent,
-} from './utils';
+import { modelFor } from '../module/k8s/k8s-models';
+import { kindForReference, referenceForModel } from '../module/k8s/k8s';
 import confirmNavUnpinModal from './nav/confirmNavUnpinModal';
 import { SearchFilterDropdown, searchFilterValues } from './search-filter-dropdown';
-import { useExtensions, isResourceListPage, ResourceListPage } from '@console/plugin-sdk';
+import { isResourceListPage, ResourceListPage } from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
+import { LoadingBox, MsgBox } from './utils/status-box';
+import { AsyncComponent } from './utils/async';
+import { setQueryArgument } from './utils/router';
+import { PageHeading } from './utils/headings';
+import { ResourceIcon } from './utils/resource-icon';
 
 const ResourceList = connectToModel(({ kindObj, mock, namespace, selector, nameFilter }) => {
   const resourceListPageExtensions = useExtensions<ResourceListPage>(isResourceListPage);

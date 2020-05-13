@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert } from '@patternfly/react-core';
-import { LoadingBox } from '@console/internal/components/utils';
+import { LoadingBox } from '@console/internal/components/utils/status-box';
 import { PipelineLayout } from '../pipeline-topology/const';
 import PipelineTopologyGraph from '../pipeline-topology/PipelineTopologyGraph';
 import { getEdgesFromNodes } from '../pipeline-topology/utils';

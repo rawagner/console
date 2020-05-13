@@ -1,7 +1,7 @@
 import * as _ from 'lodash-es';
 
-import { DataPoint } from '.';
-import { Humanize } from '../utils';
+import { DataPoint } from './types';
+import { Humanize } from '../utils/types';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
 
 export const getRangeVectorStats: GetStats<Date> = (response) => {

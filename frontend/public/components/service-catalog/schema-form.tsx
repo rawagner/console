@@ -5,7 +5,8 @@ import { JSONSchema6 } from 'json-schema';
 import Form, { FieldTemplateProps, FormProps, UiSchema } from 'react-jsonschema-form';
 
 import { SecretModel } from '../../models';
-import { k8sCreate, K8sResourceKind } from '../../module/k8s';
+import { k8sCreate } from '../../module/k8s/resource';
+import { K8sResourceKind } from '../../module/k8s/types';
 
 const getSchema = (plan: K8sResourceKind, path: string): JSONSchema6 => {
   const schema = _.get(plan, path);

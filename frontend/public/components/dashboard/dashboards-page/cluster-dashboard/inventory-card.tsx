@@ -8,16 +8,17 @@ import {
   StatusGroupMapper,
 } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
 import { DashboardItemProps, withDashboardResources } from '../../with-dashboard-resources';
-import { K8sKind, referenceForModel, K8sResourceCommon } from '../../../../module/k8s';
-import { AsyncComponent } from '../../../utils';
+import { K8sKind, K8sResourceCommon } from '../../../../module/k8s/types';
+import { referenceForModel } from '../../../../module/k8s/k8s';
+import { AsyncComponent } from '../../../utils/async';
 import {
-  useExtensions,
   DashboardsOverviewInventoryItem,
   DashboardsOverviewInventoryItemReplacement,
   isDashboardsOverviewInventoryItem,
   isDashboardsOverviewInventoryItemReplacement,
   LazyLoader,
-} from '@console/plugin-sdk';
+} from '@console/plugin-sdk/src/typings';
+import { useExtensions } from '@console/plugin-sdk/src/useExtensions';
 import {
   useK8sWatchResource,
   useK8sWatchResources,

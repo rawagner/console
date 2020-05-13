@@ -9,42 +9,22 @@ import { PencilAltIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
 import * as fuzzy from 'fuzzysearch';
 import {
-  Status,
-  getRequester,
   ALL_NAMESPACES_KEY,
   KEYBOARD_SHORTCUTS,
   NAMESPACE_LOCAL_STORAGE_KEY,
   FLAGS,
-} from '@console/shared';
+} from '@console/shared/src/constants/common';
+import { getRequester } from '@console/shared/src/selectors/namespace';
+import { Status } from '@console/shared/src/components/status/Status';
 import { ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 
 import { NamespaceModel, ProjectModel, SecretModel } from '../models';
 import { coFetchJSON } from '../co-fetch';
-import { k8sGet } from '../module/k8s';
+import { k8sGet } from '../module/k8s/resource';
 import * as UIActions from '../actions/ui';
-import { DetailsPage, ListPage, Table, TableRow, TableData } from './factory';
-import {
-  DetailsItem,
-  Dropdown,
-  ExternalLink,
-  Firehose,
-  Kebab,
-  LabelList,
-  LoadingInline,
-  MsgBox,
-  ResourceIcon,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-  Timestamp,
-  formatBytesAsMiB,
-  formatCores,
-  humanizeBinaryBytes,
-  humanizeCpuCores,
-  navFactory,
-  useAccessReview,
-} from './utils';
+import { Table, TableRow, TableData } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import {
   createNamespaceModal,
   createProjectModal,
@@ -52,7 +32,9 @@ import {
   configureNamespacePullSecretModal,
 } from './modals';
 import { RoleBindingsPage } from './RBAC';
-import { Bar, Area, PROMETHEUS_BASE_PATH, requirePrometheus } from './graphs';
+import { Bar, Area } from './graphs';
+import { requirePrometheus } from './graphs/require-prometheus';
+import { PROMETHEUS_BASE_PATH } from './graphs/constants';
 import { flagPending, connectToFlags } from './utils/connect-flags';
 import { setFlag } from '../actions/features';
 import { OpenShiftGettingStarted } from './start-guide';
@@ -61,6 +43,26 @@ import {
   getNamespaceDashboardConsoleLinks,
   ProjectDashboard,
 } from './dashboard/project-dashboard/project-dashboard';
+import { Kebab, ResourceKebab } from './utils/kebab';
+import { ResourceLink } from './utils/resource-link';
+import { LabelList } from './utils/label-list';
+import { Timestamp } from './utils/timestamp';
+import { ResourceIcon } from './utils/resource-icon';
+import {
+  formatCores,
+  formatBytesAsMiB,
+  humanizeBinaryBytes,
+  humanizeCpuCores,
+} from './utils/units';
+import { MsgBox, LoadingInline } from './utils/status-box';
+import { SectionHeading } from './utils/headings';
+import { useAccessReview } from './utils/rbac';
+import { ResourceSummary } from './utils/details-page';
+import { DetailsItem } from './utils/details-item';
+import { ExternalLink } from './utils/link';
+import { Dropdown } from './utils/dropdown';
+import { navFactory } from './utils/horizontal-nav';
+import { Firehose } from './utils/firehose';
 
 const getModel = (useProjects) => (useProjects ? ProjectModel : NamespaceModel);
 const getDisplayName = (obj) =>

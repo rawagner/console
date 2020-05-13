@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button } from '@patternfly/react-core';
 
-import { FLAGS } from '@console/shared/src/constants';
+import { FLAGS } from '@console/shared/src/constants/common';
 import { createProjectMessageStateToProps } from '../reducers/ui-selectors';
-import { Disabled, HintBlock, ExternalLink, openshiftHelpBase, LinkifyExternal } from './utils';
 import { connectToFlags } from './utils/connect-flags';
 import { ProjectModel, RoleModel, StorageClassModel } from '../models';
 import { createProjectModal } from './modals/create-namespace-modal';
+import { LinkifyExternal, ExternalLink } from './utils/link';
+import { openshiftHelpBase } from './utils/documentation';
+import { HintBlock } from './utils/hint-block';
+import { Disabled } from './utils/disabled';
 
 const WHITELIST = [RoleModel.kind, StorageClassModel.kind];
 

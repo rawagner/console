@@ -1,33 +1,30 @@
 import * as React from 'react';
 import * as _ from 'lodash-es';
 
-import { Status, PodRingController } from '@console/shared';
+import PodRingDataController from '@console/shared/src/components/pod/PodRingDataController';
+import { Status } from '@console/shared/src/components/status/Status';
 import PodRingSet from '@console/shared/src/components/pod/PodRingSet';
 import { AddHealthChecks, EditHealthChecks } from '@console/app/src/actions/modify-health-checks';
-import { k8sCreate, K8sKind, K8sResourceKind, K8sResourceKindReference } from '../module/k8s';
+import { K8sKind, K8sResourceKind, K8sResourceKindReference } from '../module/k8s/types';
+import { k8sCreate } from '../module/k8s/resource';
 import { errorModal } from './modals';
 import { DeploymentConfigModel } from '../models';
 import { Conditions } from './conditions';
 import { ResourceEventStream } from './events';
 import { VolumesTable } from './volumes-table';
-import { DetailsPage, ListPage, Table, RowFunction } from './factory';
-import {
-  AsyncComponent,
-  ContainerTable,
-  DetailsItem,
-  Kebab,
-  KebabAction,
-  LoadingInline,
-  ResourceSummary,
-  SectionHeading,
-  WorkloadPausedAlert,
-  getExtensionsKebabActionsForKind,
-  navFactory,
-  pluralize,
-  togglePaused,
-} from './utils';
+import { Table, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { ReplicationControllersPage } from './replication-controller';
-
+import { Kebab, KebabAction, getExtensionsKebabActionsForKind } from './utils/kebab';
+import { togglePaused, WorkloadPausedAlert } from './utils/workload-pause';
+import { DetailsItem } from './utils/details-item';
+import { pluralize, ResourceSummary } from './utils/details-page';
+import { SectionHeading } from './utils/headings';
+import { LoadingInline } from './utils/status-box';
+import { ContainerTable } from './utils/container-table';
+import { AsyncComponent } from './utils/async';
+import { navFactory } from './utils/horizontal-nav';
 import { WorkloadTableRow, WorkloadTableHeader } from './workload-table';
 
 const DeploymentConfigsReference: K8sResourceKindReference = 'DeploymentConfig';
@@ -156,7 +153,7 @@ export const DeploymentConfigsDetails: React.FC<{ obj: K8sResourceKind }> = ({ o
       <div className="co-m-pane__body">
         <SectionHeading text="Deployment Config Details" />
         {dc.spec.paused && <WorkloadPausedAlert obj={dc} model={DeploymentConfigModel} />}
-        <PodRingController
+        <PodRingDataController
           namespace={dc.metadata.namespace}
           kind={dc.kind}
           render={(d) => {

@@ -7,7 +7,7 @@ import { TabTitleResolver } from '../strings/strings';
 import { Error } from './types';
 import { iGetNetworks } from '../selectors/immutable/networks';
 import { iGetIn, toJS } from '../../../utils/immutable';
-import { joinGrammaticallyListOfItems } from '@console/shared/src';
+import { joinGrammaticallyListOfItems } from '@console/shared/src/utils/grammar';
 import { getValidationNameByKey } from '../../../utils/validations/strings';
 import { iGetStorages } from '../selectors/immutable/storage';
 

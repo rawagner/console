@@ -1,10 +1,9 @@
-import { TemplateKind } from '@console/internal/module/k8s';
+import { TemplateKind } from '@console/internal/module/k8s/types';
 import {
   asValidationObject,
-  ValidationErrorType,
-  ValidationObject,
   validateDNS1123SubdomainValue,
-} from '@console/shared';
+} from '@console/shared/src/utils/validation/validation';
+import { ValidationErrorType, ValidationObject } from '@console/shared/src/utils/validation/types';
 import { ProvisionSource } from '../../../constants/vm/provision-source';
 import { validateEntityAlreadyExists } from '../common';
 

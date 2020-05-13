@@ -1,4 +1,4 @@
-import { K8sKind } from '@console/internal/module/k8s';
+import { K8sKind } from '@console/internal/module/k8s/types';
 import { TemplateModel } from '@console/internal/models';
 import { VMKind } from '../../types/vm';
 import { VMGenericLikeEntityKind } from '../../types/vmLike';

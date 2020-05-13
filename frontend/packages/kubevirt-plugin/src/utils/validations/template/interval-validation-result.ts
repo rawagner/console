@@ -1,6 +1,6 @@
 /* eslint-disable lines-between-class-members */
-import { ValidationErrorType } from '@console/shared/src';
-import { humanizeBinaryBytes } from '@console/internal/components/utils';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
+import { humanizeBinaryBytes } from '@console/internal/components/utils/units';
 import { Interval } from './types';
 
 export class IntervalValidationResult implements Interval {

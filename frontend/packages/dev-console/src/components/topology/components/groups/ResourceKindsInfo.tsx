@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { modelFor, referenceFor, referenceForModel } from '@console/internal/module/k8s';
+import { modelFor, referenceFor } from '@console/internal/module/k8s/k8s-models';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import { getTopologyResourceObject } from '../../topology-utils';
 import { TopologyDataObject } from '../../topology-types';
-import { ResourceIcon } from '@console/internal/components/utils';
+import { ResourceIcon } from '@console/internal/components/utils/resource-icon';
 
 import './ResourceKindsInfo.scss';
 

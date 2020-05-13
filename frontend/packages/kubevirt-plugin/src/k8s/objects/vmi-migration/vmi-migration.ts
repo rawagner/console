@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
-import { getName, getNamespace } from '@console/shared';
-import { apiVersionForModel, K8sResourceKind } from '@console/internal/module/k8s';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { apiVersionForModel } from '@console/internal/module/k8s/k8s';
 import { VMIKind } from '../../../types/vm';
 import { VirtualMachineInstanceMigrationModel } from '../../../models';
 

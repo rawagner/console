@@ -7,15 +7,15 @@ import {
   HealthState,
   healthStateMapping,
 } from '@console/shared/src/components/dashboard/status-card/states';
-import { getNodeMachineNameAndNamespace } from '@console/shared';
+import { getNodeMachineNameAndNamespace } from '@console/shared/src/selectors/node';
 import { MachineModel, MachineHealthCheckModel } from '@console/internal/models';
 import {
-  referenceForModel,
   MachineKind,
   NodeKind,
   MachineHealthCheckKind,
   MachineHealthCondition,
-} from '@console/internal/module/k8s';
+} from '@console/internal/module/k8s/types';
+import { referenceForModel } from '@console/internal/module/k8s/k8s';
 import {
   useK8sWatchResource,
   WatchK8sResult,
@@ -26,7 +26,7 @@ import { LabelSelector } from '@console/internal/module/k8s/label-selector';
 import Status, {
   StatusPopupSection,
 } from '@console/shared/src/components/dashboard/status-card/StatusPopup';
-import { ResourceLink } from '@console/internal/components/utils';
+import { ResourceLink } from '@console/internal/components/utils/resource-link';
 
 import { NodeDashboardContext } from './NodeDashboardContext';
 import NodeStatus from '../NodeStatus';

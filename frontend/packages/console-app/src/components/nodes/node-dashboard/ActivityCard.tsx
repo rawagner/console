@@ -9,8 +9,8 @@ import ActivityBody, {
   OngoingActivityBody,
 } from '@console/shared/src/components/dashboard/activity-card/ActivityBody';
 import { EventModel, NodeModel } from '@console/internal/models';
-import { EventKind, NodeKind } from '@console/internal/module/k8s';
-import { resourcePathFromModel } from '@console/internal/components/utils';
+import { EventKind, NodeKind } from '@console/internal/module/k8s/types';
+import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
 
 import { NodeDashboardContext } from './NodeDashboardContext';

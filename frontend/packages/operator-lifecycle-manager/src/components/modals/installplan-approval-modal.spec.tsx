@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { ShallowWrapper, shallow } from 'enzyme';
-import * as k8sModels from '@console/internal/module/k8s';
+import * as k8sModels from '@console/internal/module/k8s/types';
 import {
   ModalTitle,
   ModalSubmitFooter,

@@ -3,19 +3,20 @@ import * as _ from 'lodash-es';
 import * as classNames from 'classnames';
 import { sortable } from '@patternfly/react-table';
 
-import { Status } from '@console/shared';
-import { DetailsPage, ListPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { Status } from '@console/shared/src/components/status/Status';
+import { Table, TableRow, TableData, RowFunction } from './factory/table';
+import { ListPage } from './factory/list-page';
+import { DetailsPage } from './factory/details';
 import { Conditions } from './conditions';
-import { getTemplateInstanceStatus, referenceFor, TemplateInstanceKind } from '../module/k8s';
-import {
-  EmptyBox,
-  Kebab,
-  navFactory,
-  ResourceKebab,
-  ResourceLink,
-  ResourceSummary,
-  SectionHeading,
-} from './utils';
+import { TemplateInstanceKind } from '../module/k8s/types';
+import { referenceFor } from '../module/k8s/k8s-models';
+import { getTemplateInstanceStatus } from '../module/k8s/template';
+import { ResourceLink } from './utils/resource-link';
+import { SectionHeading } from './utils/headings';
+import { EmptyBox } from './utils/status-box';
+import { ResourceSummary } from './utils/details-page';
+import { navFactory } from './utils/horizontal-nav';
+import { ResourceKebab, Kebab } from './utils/kebab';
 
 const menuActions = Kebab.factory.common;
 

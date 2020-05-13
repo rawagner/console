@@ -2,7 +2,7 @@ import {
   getResourceDetailsPages,
   getResourceListPages,
 } from '../../public/components/resource-pages';
-import { isGroupVersionKind } from '../../public/module/k8s';
+import { isGroupVersionKind } from '../../public/module/k8s/k8s';
 
 describe('resourceDetailsPages', () => {
   it('contains a map of promises which resolve to every resource detail view component', (done) => {

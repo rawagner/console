@@ -1,4 +1,4 @@
-import { ValidationErrorType } from '@console/shared/src';
+import { ValidationErrorType } from '@console/shared/src/utils/validation/types';
 import { hasVmSettingsChanged, iGetProvisionSource } from '../../selectors/immutable/vm-settings';
 import { VMSettingsField, VMWizardProps, VMWizardStorage, VMWizardStorageType } from '../../types';
 import { InternalActionType, UpdateOptions } from '../types';

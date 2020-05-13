@@ -1,11 +1,5 @@
 import * as _ from 'lodash';
-import * as k8s from '@console/internal/module/k8s';
-import { getPodStatus, podStatus } from '@console/shared';
-import {
-  TopologyDataResources,
-  WorkloadData,
-  transformTopologyData,
-} from '@console/dev-console/src/components/topology';
+import { getPodStatus, podStatus } from '@console/shared/src/utils/pod-utils';
 import { MockKnativeResources, sampleKnativeDeployments } from './topology-knative-test-data';
 import {
   sampleEventSourceApiServer,
@@ -13,6 +7,12 @@ import {
 } from '@console/dev-console/src/components/topology/__tests__/topology-knative-test-data';
 import { sampleDeployments } from '@console/dev-console/src/components/topology/__tests__/topology-test-data';
 import { filterNonKnativeDeployments } from '../data-transformer';
+import { DeploymentKind } from '@console/internal/module/k8s/types';
+import {
+  TopologyDataResources,
+  WorkloadData,
+} from '@console/dev-console/src/components/topology/topology-types';
+import { transformTopologyData } from '@console/dev-console/src/components/topology/data-transforms/data-transformer';
 
 export function getTranformedTopologyData(
   mockData: TopologyDataResources,
@@ -83,12 +83,12 @@ describe('knative data transformer ', () => {
   });
 
   it('should filter out deployments created for knative resources and event sources', () => {
-    const MockResources: k8s.DeploymentKind[] = [
+    const MockResources: DeploymentKind[] = [
       sampleEventSourceDeployments.data[0],
       sampleKnativeDeployments.data[0],
       sampleDeployments.data[0],
     ];
-    const filteredResources: k8s.DeploymentKind[] = filterNonKnativeDeployments(MockResources, [
+    const filteredResources: DeploymentKind[] = filterNonKnativeDeployments(MockResources, [
       sampleEventSourceApiServer.data[0],
     ]);
     expect(filteredResources).toHaveLength(1);

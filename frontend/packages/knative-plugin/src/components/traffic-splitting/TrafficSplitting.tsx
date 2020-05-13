@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import { Formik, FormikValues, FormikHelpers } from 'formik';
-import { K8sResourceKind, k8sUpdate } from '@console/internal/module/k8s';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
+import { k8sUpdate } from '@console/internal/module/k8s/resource';
 import { ServiceModel } from '../../models';
 import { getRevisionItems, constructObjForUpdate } from '../../utils/traffic-splitting-utils';
 import TrafficSplittingModal from './TrafficSplittingModal';

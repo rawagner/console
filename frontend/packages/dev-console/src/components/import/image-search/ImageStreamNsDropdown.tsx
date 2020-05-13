@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useFormikContext, FormikValues } from 'formik';
-import { k8sGet } from '@console/internal/module/k8s';
+import ResourceDropdownField from '@console/shared/src/components/formik-fields/ResourceDropdownField';
+import { k8sGet } from '@console/internal/module/k8s/resource';
 import { RoleBindingModel } from '@console/internal/models';
-import { checkAccess } from '@console/internal/components/utils';
-import { ResourceDropdownField } from '@console/shared';
+import { checkAccess } from '@console/internal/components/utils/rbac';
 import { getProjectResource, BuilderImagesNamespace } from '../../../utils/imagestream-utils';
 import { ImageStreamActions as Action } from '../import-types';
 import { ImageStreamContext } from './ImageStreamContext';

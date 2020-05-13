@@ -16,9 +16,10 @@ import {
   getQueryKey,
 } from '../../actions/dashboards';
 
-import { Firehose, FirehoseResource, FirehoseResult } from '../utils';
-import { K8sResourceKind } from '../../module/k8s';
+import { K8sResourceKind } from '../../module/k8s/types';
 import { PrometheusResponse } from '@console/shared/src/types/monitoring';
+import { Firehose } from '../utils/firehose';
+import { FirehoseResource, FirehoseResult } from '../utils/types';
 
 const mapDispatchToProps: DispatchToProps = (dispatch) => ({
   watchURL: (url, fetch) => dispatch(watchURL(url, fetch)),

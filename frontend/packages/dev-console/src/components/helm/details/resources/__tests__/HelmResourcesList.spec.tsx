@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { Table } from '@console/internal/components/factory';
+import { Table } from '@console/internal/components/factory/table';
 import HelmResourcesList from '../HelmReleaseResourcesList';
 import HelmReleaseResourcesHeader from '../HelmReleaseResourcesHeader';
 import HelmReleaseResourcesRow from '../HelmReleaseResourcesRow';

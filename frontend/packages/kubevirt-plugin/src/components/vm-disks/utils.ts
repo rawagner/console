@@ -1,5 +1,5 @@
 import * as classNames from 'classnames';
-import { Kebab } from '@console/internal/components/utils';
+import { Kebab } from '@console/internal/components/utils/kebab';
 
 export const diskTableColumnClasses = [
   classNames('col-lg-2'),

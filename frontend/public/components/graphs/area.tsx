@@ -16,14 +16,16 @@ import {
 } from '@patternfly/react-tokens';
 import { processFrame, ByteDataTypes } from '@console/shared/src/graph-helper/data-utils';
 import { twentyFourHourTime } from '../utils/datetime';
-import { humanizeNumber, useRefWidth, Humanize } from '../utils';
 import { PrometheusEndpoint } from './helpers';
 import { PrometheusGraph, PrometheusGraphLink } from './prometheus-graph';
 import { usePrometheusPoll } from './prometheus-poll-hook';
 import { areaTheme } from './themes';
-import { DataPoint } from './';
+import { DataPoint } from './types';
 import { getRangeVectorStats } from './utils';
 import { GraphEmpty } from './graph-empty';
+import { humanizeNumber } from '../utils/units';
+import { Humanize } from '../utils/types';
+import { useRefWidth } from '../utils/ref-width-hook';
 
 const DEFAULT_HEIGHT = 180;
 const DEFAULT_SAMPLES = 60;

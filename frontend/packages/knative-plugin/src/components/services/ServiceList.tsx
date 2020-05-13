@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, TableProps } from '@console/internal/components/factory';
+import { Table, TableProps } from '@console/internal/components/factory/table';
 import { ServiceModel } from '../../models';
 import ServiceHeader from './ServiceHeader';
 import ServiceRow from './ServiceRow';

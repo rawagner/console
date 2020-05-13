@@ -1,5 +1,5 @@
-import { TemplateKind } from '@console/internal/module/k8s';
-import { getName } from '@console/shared/src';
+import { TemplateKind } from '@console/internal/module/k8s/types';
+import { getName } from '@console/shared/src/selectors/common';
 import { ObjectEnum } from '../object-enum';
 
 export class OSSelection extends ObjectEnum<string> {

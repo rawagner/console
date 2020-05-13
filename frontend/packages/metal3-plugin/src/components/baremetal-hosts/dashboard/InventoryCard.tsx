@@ -11,9 +11,10 @@ import DashboardCardTitle from '@console/shared/src/components/dashboard/dashboa
 import InventoryItem, {
   ResourceInventoryItem,
 } from '@console/shared/src/components/dashboard/inventory-card/InventoryItem';
-import { K8sResourceKind, MachineKind } from '@console/internal/module/k8s';
+import { K8sResourceKind, MachineKind } from '@console/internal/module/k8s/types';
 import { PodModel, NodeModel } from '@console/internal/models';
-import { getNamespace, getMachineNodeName, getName } from '@console/shared';
+import { getMachineNodeName } from '@console/shared/src/selectors/machine';
+import { getNamespace, getName } from '@console/shared/src/selectors/common';
 import { getPodStatusGroups } from '@console/shared/src/components/dashboard/inventory-card/utils';
 import { resourcePathFromModel } from '@console/internal/components/utils/resource-link';
 import { Link } from 'react-router-dom';

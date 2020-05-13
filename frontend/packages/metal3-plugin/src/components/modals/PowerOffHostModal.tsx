@@ -2,20 +2,14 @@ import * as React from 'react';
 import { FormGroup, Checkbox, HelpBlock } from 'patternfly-react';
 import { Alert, Button } from '@patternfly/react-core';
 import {
-  withHandlePromise,
-  Firehose,
-  FirehoseResult,
-  HandlePromiseProps,
-} from '@console/internal/components/utils';
-import {
   createModalLauncher,
   ModalTitle,
   ModalBody,
   ModalSubmitFooter,
-} from '@console/internal/components/factory';
+} from '@console/internal/components/factory/modal';
 import { PodModel } from '@console/internal/models';
 import { useFlag } from '@console/shared/src/hooks/flag';
-import { PodKind } from '@console/internal/module/k8s';
+import { PodKind } from '@console/internal/module/k8s/types';
 import { powerOffHost } from '../../k8s/requests/bare-metal-host';
 import {
   NODE_STATUS_UNDER_MAINTENANCE,
@@ -27,6 +21,12 @@ import { startNodeMaintenanceModal } from './StartNodeMaintenanceModal';
 import { StatusProps } from '../types';
 import { StatusValidations, getStaticPods } from './PowerOffStatusValidations';
 import { NODE_MAINTENANCE_FLAG } from '../../features';
+import { FirehoseResult } from '@console/internal/components/utils/types';
+import {
+  withHandlePromise,
+  HandlePromiseProps,
+} from '@console/internal/components/utils/promise-component';
+import { Firehose } from '@console/internal/components/utils/firehose';
 
 type SafePowerOffDialogProps = { isUnderMaintenance: boolean };
 

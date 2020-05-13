@@ -1,4 +1,4 @@
-import { getRandomChars } from '@console/shared/src/utils';
+import { getRandomChars } from '@console/shared/src/utils/utils';
 import {
   PipelineResourceTask,
   PipelineTask,

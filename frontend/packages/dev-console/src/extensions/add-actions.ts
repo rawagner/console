@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Extension } from '@console/plugin-sdk/src/typings/base';
-import { AccessReviewResourceAttributes } from '@console/internal/module/k8s';
+import { AccessReviewResourceAttributes } from '@console/internal/module/k8s/types';
 
 namespace ExtensionProperties {
   export type AddAction = {

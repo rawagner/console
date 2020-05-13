@@ -1,5 +1,5 @@
-import { getName, getNamespace } from '@console/shared/src/selectors';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+import { getName, getNamespace } from '@console/shared/src/selectors/common';
+import { K8sResourceKind } from '@console/internal/module/k8s/types';
 import { VMIKind, VMKind } from '../../types/vm';
 import { getMigrationVMIName, isMigrating } from './selectors';
 

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { InProgressIcon } from '@patternfly/react-icons';
-import { RedExclamationCircleIcon } from '@console/shared';
-import { humanizeNumber, pluralize } from '@console/internal/components/utils';
+import { RedExclamationCircleIcon } from '@console/shared/src/components/status/icons';
+import { pluralize } from '@console/internal/components/utils/details-page';
+import { humanizeNumber } from '@console/internal/components/utils/units';
 
 const formatCount = (count: number) => {
   const hCount = humanizeNumber(count);

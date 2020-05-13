@@ -1,10 +1,5 @@
 import * as React from 'react';
 import { Tooltip, TooltipPosition } from '@patternfly/react-core';
-import {
-  truncateMiddle,
-  shouldTruncate,
-  TruncateOptions,
-} from '@console/internal/components/utils';
 import { Node, useSize, useHover } from '@console/topology';
 import { RESOURCE_NAME_TRUNCATE_LENGTH } from '../../../../const';
 import SvgCircledIcon from '../../../svg/SvgCircledIcon';
@@ -13,6 +8,11 @@ import { SvgResourceIcon } from '../../../svg/SvgResourceIcon';
 import { ResourceKindsInfo } from './ResourceKindsInfo';
 
 import './GroupNode.scss';
+import {
+  truncateMiddle,
+  shouldTruncate,
+  TruncateOptions,
+} from '@console/internal/components/utils/truncate-middle';
 
 const TOP_MARGIN = 20;
 const LEFT_MARGIN = 20;
