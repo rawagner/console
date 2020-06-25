@@ -99,7 +99,12 @@ const HostsTableRow: React.FC<RowFunctionArgs<BareMetalHostBundle>> = ({
         />
       </TableData>
       <TableData className={tableColumnClasses.status}>
-        <BareMetalHostStatus {...status} nodeMaintenance={nodeMaintenance} host={host} />
+        <BareMetalHostStatus
+          {...status}
+          nodeMaintenance={nodeMaintenance}
+          host={host}
+          showCredentials
+        />
         <BareMetalHostSecondaryStatus host={host} />
       </TableData>
       <TableData className={tableColumnClasses.node}>

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Button } from 'patternfly-react';
 import { AddCircleOIcon } from '@patternfly/react-icons';
+import { Alert } from '@patternfly/react-core';
+import { Link } from 'react-router-dom';
 import {
   ProgressStatus,
   SuccessStatus,
@@ -8,8 +10,10 @@ import {
   Status,
   StatusIconAndText,
   getNamespace,
+  PopoverStatus,
 } from '@console/shared';
-import { RequireCreatePermission } from '@console/internal/components/utils';
+import { RequireCreatePermission, resourcePathFromModel } from '@console/internal/components/utils';
+import { K8sResourceKind } from '@console/internal/module/k8s';
 import {
   HOST_STATUS_DISCOVERED,
   HOST_PROGRESS_STATES,
@@ -18,13 +22,15 @@ import {
   NODE_STATUS_UNDER_MAINTENANCE,
   NODE_STATUS_STARTING_MAINTENANCE,
   NODE_STATUS_STOPPING_MAINTENANCE,
+  HOST_NO_POWER_MGMT_INFO,
 } from '../../constants';
 import { BareMetalHostModel } from '../../models';
-import { getHostErrorMessage } from '../../selectors';
+import { getHostErrorMessage, hasPowerManagement } from '../../selectors';
 import { StatusProps } from '../types';
 import MaintenancePopover from '../maintenance/MaintenancePopover';
 import { BareMetalHostKind } from '../../types';
-import { K8sResourceKind } from '@console/internal/module/k8s';
+
+import './host-status.scss';
 
 // TODO(jtomasek): Update this with onClick handler once add discovered host functionality
 // is available
@@ -42,38 +48,106 @@ export const AddDiscoveredHostButton: React.FC<{ host: BareMetalHostKind }> = (
   );
 };
 
+type CredentialsInfoProps = {
+  host: BareMetalHostKind;
+  className?: string;
+  noAlert?: boolean;
+};
+
+export const CredentialsInfo: React.FC<CredentialsInfoProps> = ({ className, host, noAlert }) => {
+  const body = (
+    <>
+      <p>{HOST_NO_POWER_MGMT_INFO}</p>
+      <Link
+        to={`${resourcePathFromModel(
+          BareMetalHostModel,
+          host.metadata.name,
+          host.metadata.namespace,
+        )}/edit`}
+      >
+        Add credentials
+      </Link>
+    </>
+  );
+  return noAlert ? (
+    body
+  ) : (
+    <Alert variant="default" isInline title="Power management not available" className={className}>
+      {body}
+    </Alert>
+  );
+};
+
 const BareMetalHostStatus: React.FC<BareMetalHostStatusProps> = ({
   status,
   title,
   description,
   host,
   nodeMaintenance,
+  showCredentials,
 }) => {
   const statusTitle = title || status;
+  const credentialsInfo = showCredentials && !hasPowerManagement(host) && (
+    <CredentialsInfo className="bmh-credentials-info" host={host} />
+  );
+  let hostStatus: JSX.Element;
   switch (true) {
     case status === HOST_STATUS_DISCOVERED:
-      return <AddDiscoveredHostButton host={host} />;
+      hostStatus = <AddDiscoveredHostButton host={host}>{credentialsInfo}</AddDiscoveredHostButton>;
+      break;
     case [NODE_STATUS_STARTING_MAINTENANCE, NODE_STATUS_UNDER_MAINTENANCE].includes(status):
-      return <MaintenancePopover title={statusTitle} nodeMaintenance={nodeMaintenance} />;
+      hostStatus = (
+        <MaintenancePopover title={statusTitle} nodeMaintenance={nodeMaintenance}>
+          {credentialsInfo}
+        </MaintenancePopover>
+      );
+      break;
     case [NODE_STATUS_STOPPING_MAINTENANCE, ...HOST_PROGRESS_STATES].includes(status):
-      return <ProgressStatus title={statusTitle}>{description}</ProgressStatus>;
+      hostStatus = (
+        <ProgressStatus title={statusTitle}>
+          {description}
+          {credentialsInfo}
+        </ProgressStatus>
+      );
+      break;
     case HOST_ERROR_STATES.includes(status):
-      return (
+      hostStatus = (
         <ErrorStatus title={statusTitle}>
           <p>{description}</p>
           <p>{getHostErrorMessage(host)}</p>
+          {credentialsInfo}
         </ErrorStatus>
       );
+      break;
     case HOST_SUCCESS_STATES.includes(status):
-      return <SuccessStatus title={statusTitle}>{description}</SuccessStatus>;
-    default:
-      return <Status status={status} title={statusTitle} />;
+      hostStatus = (
+        <SuccessStatus title={statusTitle}>
+          {description}
+          {credentialsInfo}
+        </SuccessStatus>
+      );
+      break;
+    default: {
+      const statusBody = <Status status={status} title={statusTitle} />;
+
+      hostStatus = credentialsInfo ? (
+        <PopoverStatus title={statusTitle} statusBody={statusBody}>
+          {description}
+          {credentialsInfo}
+        </PopoverStatus>
+      ) : (
+        statusBody
+      );
+    }
   }
+
+  return hostStatus;
 };
 
 type BareMetalHostStatusProps = StatusProps & {
   host?: BareMetalHostKind;
   nodeMaintenance?: K8sResourceKind;
+  showCredentials?: boolean;
 };
 
 export default BareMetalHostStatus;

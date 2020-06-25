@@ -8,6 +8,8 @@ import {
   HOST_PROGRESS_STATES,
   HOST_STATUS_DEPROVISIONING,
   HOST_STATUS_UNKNOWN,
+  HOST_STATUS_UNMANAGED,
+  HOST_STATUS_EXTERNALLY_PROVISIONED,
 } from '../constants';
 import { StatusProps } from '../components/types';
 import { BareMetalHostKind } from '../types';
@@ -18,9 +20,12 @@ export const getBareMetalHostStatus = (host: BareMetalHostKind): StatusProps => 
   const provisioningState = getHostProvisioningState(host);
   const errorType = getHostErrorType(host);
 
-  let hostStatus;
+  let hostStatus: string;
 
-  if (operationalStatus === HOST_STATUS_ERROR) {
+  // TODO provisioningState === HOST_STATUS_UNMANAGED
+  if (provisioningState !== HOST_STATUS_UNMANAGED) {
+    hostStatus = HOST_STATUS_EXTERNALLY_PROVISIONED;
+  } else if (operationalStatus === HOST_STATUS_ERROR) {
     if (errorType) {
       hostStatus = errorType;
     } else {

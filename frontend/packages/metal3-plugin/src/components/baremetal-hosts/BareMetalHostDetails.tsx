@@ -23,6 +23,7 @@ import {
   StatusIconAndText,
   DetailPropertyList,
   DetailPropertyListItem,
+  PopoverStatus,
 } from '@console/shared';
 import { getHostStatus } from '../../status/host-status';
 import {
@@ -41,13 +42,14 @@ import {
   getHostProvisioningState,
   getHostBootMACAddress,
   isHostScheduledForRestart,
+  hasPowerManagement,
 } from '../../selectors';
 import { BareMetalHostKind } from '../../types';
 import { HOST_REGISTERING_STATES } from '../../constants/bare-metal-host';
 import MachineLink from './MachineLink';
 import BareMetalHostPowerStatusIcon from './BareMetalHostPowerStatusIcon';
-import BareMetalHostStatus from './BareMetalHostStatus';
-import { HOST_SCHEDULED_FOR_RESTART } from './BareMetalHostSecondaryStatus';
+import BareMetalHostStatus, { CredentialsInfo } from './BareMetalHostStatus';
+import { HOST_SCHEDULED_FOR_RESTART, HOST_NO_POWER_MGMT } from './BareMetalHostSecondaryStatus';
 
 type BareMetalHostDetailsProps = {
   obj: BareMetalHostKind;
@@ -147,15 +149,23 @@ const BareMetalHostDetails: React.FC<BareMetalHostDetailsProps> = ({
               <>
                 <dt>Power Status</dt>
                 <dd>
-                  <StatusIconAndText
-                    title={powerStatus}
-                    icon={<BareMetalHostPowerStatusIcon powerStatus={powerStatus} />}
-                  />
-                  {isHostScheduledForRestart(host) && (
-                    <StatusIconAndText
-                      title={HOST_SCHEDULED_FOR_RESTART}
-                      icon={<RebootingIcon />}
-                    />
+                  {!hasPowerManagement(host) ? (
+                    <PopoverStatus title={HOST_NO_POWER_MGMT} statusBody={HOST_NO_POWER_MGMT}>
+                      <CredentialsInfo host={host} noAlert />
+                    </PopoverStatus>
+                  ) : (
+                    <>
+                      <StatusIconAndText
+                        title={powerStatus}
+                        icon={<BareMetalHostPowerStatusIcon powerStatus={powerStatus} />}
+                      />
+                      {isHostScheduledForRestart(host) && (
+                        <StatusIconAndText
+                          title={HOST_SCHEDULED_FOR_RESTART}
+                          icon={<RebootingIcon />}
+                        />
+                      )}
+                    </>
                   )}
                 </dd>
               </>
