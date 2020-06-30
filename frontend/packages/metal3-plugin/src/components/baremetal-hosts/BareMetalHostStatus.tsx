@@ -63,7 +63,7 @@ export const CredentialsInfo: React.FC<CredentialsInfoProps> = ({ className, hos
           BareMetalHostModel,
           host.metadata.name,
           host.metadata.namespace,
-        )}/edit`}
+        )}/edit?powerMgmt`}
       >
         Add credentials
       </Link>

@@ -118,7 +118,7 @@ const HealthCard: React.FC<HealthCardProps> = ({
                   BareMetalHostModel,
                   obj.metadata.name,
                   obj.metadata.namespace,
-                )}/edit`}
+                )}/edit?powerMgmt`}
               >
                 Add credentials
               </Link>
