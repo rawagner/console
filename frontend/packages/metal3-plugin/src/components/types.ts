@@ -4,7 +4,7 @@ import {
   MachineSetKind,
   NodeKind,
 } from '@console/internal/module/k8s';
-import { BareMetalHostKind } from '../types';
+import { BareMetalHostKind, CertificateSigningRequestKind } from '../types';
 
 export type StatusProps = {
   status: string;
@@ -28,11 +28,11 @@ export type BareMetalHostBundle = {
 };
 
 export type BareMetalNodeBundle = {
-  metadata?: { name: string };
   node: NodeKind;
   machine: MachineKind;
   host: BareMetalHostKind;
   nodeMaintenance: K8sResourceKind;
+  csr: CertificateSigningRequestKind;
   // TODO(jtomasek): replace with new BareMetalNodeStatus
   status: StatusProps;
 };

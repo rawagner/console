@@ -338,14 +338,14 @@ type FilterToolbarProps = {
   kinds?: any;
 };
 
-export type RowFilter = {
+export type RowFilter<R = any> = {
   filterGroupName: string;
   type: string;
   items?: {
     [key: string]: string;
   }[];
   itemsGenerator?: (...args) => { [key: string]: string }[];
-  reducer: (param) => React.ReactText;
+  reducer: (param: R) => React.ReactText;
   filter?: any;
 };
 

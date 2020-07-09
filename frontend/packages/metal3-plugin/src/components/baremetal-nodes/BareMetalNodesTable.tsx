@@ -3,15 +3,10 @@ import * as classNames from 'classnames';
 import { Kebab, ResourceLink } from '@console/internal/components/utils';
 import { sortable } from '@patternfly/react-table';
 import { DASH, getName, getUID, getNamespace, SecondaryStatus } from '@console/shared';
-import {
-  TableRow,
-  TableData,
-  Table,
-  RowFunction,
-  RowFunctionArgs,
-} from '@console/internal/components/factory';
+import { TableRow, TableData, Table, RowFunction } from '@console/internal/components/factory';
 import { referenceForModel } from '@console/internal/module/k8s';
 import NodeRoles from '@console/app/src/components/nodes/NodeRoles';
+
 import { useFlag } from '@console/shared/src/hooks/flag';
 import { MachineModel, NodeModel } from '@console/internal/models';
 import { BareMetalNodeBundle } from '../types';
@@ -68,10 +63,17 @@ const BareMetalNodesTableHeader = () => [
   },
 ];
 
-const BareMetalNodesTableRow: React.FC<RowFunctionArgs<BareMetalNodeBundle>> = ({
-  obj: { host, node, nodeMaintenance, machine, status },
+type BareMetalNodesTableRowProps = {
+  obj: BareMetalNodeBundle;
+  index: number;
+  rowKey: string;
+  style: object;
+};
+
+const BareMetalNodesTableRow: React.FC<BareMetalNodesTableRowProps> = ({
+  obj: { host, node, nodeMaintenance, machine, status, csr },
   index,
-  key,
+  rowKey,
   style,
 }) => {
   const hasNodeMaintenanceCapability = useFlag(NODE_MAINTENANCE_FLAG);
@@ -82,7 +84,7 @@ const BareMetalNodesTableRow: React.FC<RowFunctionArgs<BareMetalNodeBundle>> = (
   const uid = getUID(node);
 
   return (
-    <TableRow id={uid} index={index} trKey={key} style={style}>
+    <TableRow id={uid} index={index} trKey={rowKey} style={style}>
       <TableData className={tableColumnClasses.name}>
         {node ? (
           <ResourceLink kind="Node" name={nodeName} />
@@ -116,7 +118,7 @@ const BareMetalNodesTableRow: React.FC<RowFunctionArgs<BareMetalNodeBundle>> = (
       <TableData className={tableColumnClasses.kebab}>
         <Kebab
           options={menuActions.map((action) =>
-            action(NodeModel, node, null, { nodeMaintenance, hasNodeMaintenanceCapability }),
+            action(NodeModel, node, { csr }, { nodeMaintenance, hasNodeMaintenanceCapability }),
           )}
           key={`kebab-for-${uid}`}
           id={`kebab-for-${uid}`}
@@ -132,7 +134,14 @@ type BareMetalNodesTableProps = React.ComponentProps<typeof Table> & {
 
 const BareMetalNodesTable: React.FC<BareMetalNodesTableProps> = (props) => {
   const row = React.useCallback<RowFunction<BareMetalNodeBundle>>(
-    (rowProps) => <BareMetalNodesTableRow {...rowProps} />,
+    (rowProps) => (
+      <BareMetalNodesTableRow
+        obj={rowProps.obj}
+        index={rowProps.index}
+        rowKey={rowProps.key}
+        style={rowProps.style}
+      />
+    ),
     [],
   );
   return (
