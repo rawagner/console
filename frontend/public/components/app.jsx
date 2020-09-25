@@ -14,7 +14,7 @@ import { getBrandingDetails, Masthead } from './masthead';
 import { ConsoleNotifier } from './console-notifier';
 import { ConnectedNotificationDrawer } from './notification-drawer';
 import { Navigation } from './nav';
-import { history, AsyncComponent } from './utils';
+import { history, AsyncComponent, LoadingBox } from './utils';
 import * as UIActions from '../actions/ui';
 import { fetchSwagger, getCachedResources } from '../module/k8s';
 import { receivedResources, watchAPIServices } from '../actions/k8s';
@@ -193,6 +193,7 @@ class App_ extends React.PureComponent {
 
 const App = withExtensions({ contextProviderExtensions: isContextProvider })(App_);
 
+render(<LoadingBox />, document.getElementById('app'));
 
 ready.setCallback(() => {
   const startDiscovery = () => store.dispatch(watchAPIServices());
@@ -258,7 +259,9 @@ ready.setCallback(() => {
         <Switch>
           <Route
             path="/k8s/ns/:ns/virtualmachineinstances/:name/standaloneconsole"
-            render={(componentProps) => <AsyncComponent loader={consoleLoader} {...componentProps} />}
+            render={(componentProps) => (
+              <AsyncComponent loader={consoleLoader} {...componentProps} />
+            )}
           />
           <Route path="/terminal" component={CloudShellTab} />
           <Route path="/" component={App} />

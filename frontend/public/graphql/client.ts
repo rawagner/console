@@ -12,7 +12,7 @@ import { URLQueryType, URLQueryVariables } from '../../@types/gql/schema';
 import { getImpersonateHeaders } from '../co-fetch';
 
 const isIOS = !!window.navigator.userAgent.match(/(iPhone|iPad)/);
-const IOS_WSS_ERRORS = "ios-wss-errors";
+let wssErrors = 0;
 
 class ReadyCallback {
   callback;
@@ -26,41 +26,41 @@ class ReadyCallback {
     }
   }
   setCallback(cb) {
-    this.callback = cb;
-    if (this.ready && !this.wasCalled) {
+    if (!isIOS) {
       this.wasCalled = true;
-      this.callback();
+      cb();
+    } else {
+      this.callback = cb;
+      if (this.ready && !this.wasCalled) {
+        this.wasCalled = true;
+        this.callback();
+      }
     }
   }
 }
 
 export const ready = new ReadyCallback();
 
-const useHTTP = () => parseInt(localStorage.getItem(IOS_WSS_ERRORS)) > 4;
-
 export const subsClient = new SubscriptionClient(
-  `${location.protocol === 'https:' ? 'wss://' : 'wss://'}${location.host}${
+  `${location.protocol === 'https:' ? 'wss://' : 'ws://'}${location.host}${
     window.SERVER_FLAGS.graphqlBaseURL
   }`,
   {
     reconnect: true,
     connectionParams: getImpersonateHeaders,
-    reconnectionAttempts: !isIOS ? useHTTP() ? 2 : 5 : undefined,
+    reconnectionAttempts: isIOS ? 5 : undefined,
     connectionCallback: () => {
       ready.setReady();
-      localStorage.removeItem(IOS_WSS_ERRORS)
+      wssErrors = 0;
     },
   },
 );
 
-subsClient.onError((err) => {
-  if (!isIOS && !useHTTP()) {
-    let wssErrors = parseInt(localStorage.getItem(IOS_WSS_ERRORS)) || 0;
+subsClient.onError(() => {
+  if (isIOS) {
     wssErrors++;
-    localStorage.setItem(IOS_WSS_ERRORS, `${wssErrors}`);
     if (wssErrors > 4) {
       ready.setReady();
-      // location.reload();
     }
   }
 });
@@ -72,7 +72,7 @@ const httpLink = new HttpLink({
 const wsLink = new WebSocketLink(subsClient);
 
 const link = split(
-  useHTTP, // iOS does not allow wss with self signed certificate
+  () => wssErrors > 4, // iOS does not allow wss with self signed certificate
   httpLink,
   wsLink,
 );
