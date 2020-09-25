@@ -1,7 +1,9 @@
 import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-link';
 
 import { getK8sResourcePath } from '../module/k8s/resource';
 import { K8sKind, K8sResourceCommon } from '../module/k8s/types';
@@ -9,17 +11,71 @@ import { URLQuery } from './client.gql';
 import { URLQueryType, URLQueryVariables } from '../../@types/gql/schema';
 import { getImpersonateHeaders } from '../co-fetch';
 
+const isIOS = !!window.navigator.userAgent.match(/(iPhone|iPad)/);
+const IOS_WSS_ERRORS = "ios-wss-errors";
+
+class ReadyCallback {
+  callback;
+  ready;
+  wasCalled;
+  setReady() {
+    this.ready = true;
+    if (!this.wasCalled && this.callback) {
+      this.wasCalled = true;
+      this.callback();
+    }
+  }
+  setCallback(cb) {
+    this.callback = cb;
+    if (this.ready && !this.wasCalled) {
+      this.wasCalled = true;
+      this.callback();
+    }
+  }
+}
+
+export const ready = new ReadyCallback();
+
+const useHTTP = () => parseInt(localStorage.getItem(IOS_WSS_ERRORS)) > 4;
+
 export const subsClient = new SubscriptionClient(
-  `${location.protocol === 'https:' ? 'wss://' : 'ws://'}${location.host}${
+  `${location.protocol === 'https:' ? 'wss://' : 'wss://'}${location.host}${
     window.SERVER_FLAGS.graphqlBaseURL
   }`,
   {
     reconnect: true,
     connectionParams: getImpersonateHeaders,
+    reconnectionAttempts: !isIOS ? useHTTP() ? 2 : 5 : undefined,
+    connectionCallback: () => {
+      ready.setReady();
+      localStorage.removeItem(IOS_WSS_ERRORS)
+    },
   },
 );
 
-const link = new WebSocketLink(subsClient);
+subsClient.onError((err) => {
+  if (!isIOS && !useHTTP()) {
+    let wssErrors = parseInt(localStorage.getItem(IOS_WSS_ERRORS)) || 0;
+    wssErrors++;
+    localStorage.setItem(IOS_WSS_ERRORS, `${wssErrors}`);
+    if (wssErrors > 4) {
+      ready.setReady();
+      // location.reload();
+    }
+  }
+});
+
+const httpLink = new HttpLink({
+  uri: window.SERVER_FLAGS.graphqlBaseURL,
+});
+
+const wsLink = new WebSocketLink(subsClient);
+
+const link = split(
+  useHTTP, // iOS does not allow wss with self signed certificate
+  httpLink,
+  wsLink,
+);
 
 const client = new ApolloClient({
   link,
