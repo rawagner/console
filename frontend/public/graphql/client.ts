@@ -9,15 +9,16 @@ import { getK8sResourcePath } from '../module/k8s/resource';
 import { K8sKind, K8sResourceCommon } from '../module/k8s/types';
 import { URLQuery } from './client.gql';
 import { URLQueryType, URLQueryVariables } from '../../@types/gql/schema';
-import { getImpersonateHeaders } from '../co-fetch';
+import { getImpersonateHeaders, coFetch } from '../co-fetch';
 
 const isIOS = !!window.navigator.userAgent.match(/(iPhone|iPad)/);
 let wssErrors = 0;
 
-class ReadyCallback {
-  callback;
-  ready;
-  wasCalled;
+class GraphQLReadyCallback {
+  private callback: VoidFunction;
+  private ready: boolean;
+  private wasCalled: boolean;
+
   setReady() {
     this.ready = true;
     if (!this.wasCalled && this.callback) {
@@ -25,7 +26,8 @@ class ReadyCallback {
       this.callback();
     }
   }
-  setCallback(cb) {
+
+  setCallback(cb: VoidFunction) {
     if (!isIOS) {
       this.wasCalled = true;
       cb();
@@ -39,7 +41,7 @@ class ReadyCallback {
   }
 }
 
-export const ready = new ReadyCallback();
+export const graphQLReady = new GraphQLReadyCallback();
 
 export const subsClient = new SubscriptionClient(
   `${location.protocol === 'https:' ? 'wss://' : 'ws://'}${location.host}${
@@ -50,7 +52,7 @@ export const subsClient = new SubscriptionClient(
     connectionParams: getImpersonateHeaders,
     reconnectionAttempts: isIOS ? 5 : undefined,
     connectionCallback: () => {
-      ready.setReady();
+      graphQLReady.setReady();
       wssErrors = 0;
     },
   },
@@ -60,13 +62,14 @@ subsClient.onError(() => {
   if (isIOS) {
     wssErrors++;
     if (wssErrors > 4) {
-      ready.setReady();
+      graphQLReady.setReady();
     }
   }
 });
 
 const httpLink = new HttpLink({
   uri: window.SERVER_FLAGS.graphqlBaseURL,
+  fetch: coFetch,
 });
 
 const wsLink = new WebSocketLink(subsClient);
@@ -103,7 +106,7 @@ export const fetchURL = async <R = any>(url: string): Promise<R> => {
     });
     return JSON.parse(response.data.fetchURL);
   } catch (err) {
-    return Promise.reject({ response: err.graphQLErrors[0].extensions });
+    return Promise.reject({ response: err.graphQLErrors[0]?.extensions });
   }
 };
 

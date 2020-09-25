@@ -40,7 +40,7 @@ const breakpointMD = 768;
 const NOTIFICATION_DRAWER_BREAKPOINT = 1800;
 // Edge lacks URLSearchParams
 import 'url-search-params-polyfill';
-import { ready } from '../graphql/client';
+import { graphQLReady } from '../graphql/client';
 
 // Disable linkify 'fuzzy links' across the app.
 // Only linkify url strings beginning with a proper protocol scheme.
@@ -195,7 +195,7 @@ const App = withExtensions({ contextProviderExtensions: isContextProvider })(App
 
 render(<LoadingBox />, document.getElementById('app'));
 
-ready.setCallback(() => {
+graphQLReady.setCallback(() => {
   const startDiscovery = () => store.dispatch(watchAPIServices());
 
   // Load cached API resources from localStorage to speed up page load.
