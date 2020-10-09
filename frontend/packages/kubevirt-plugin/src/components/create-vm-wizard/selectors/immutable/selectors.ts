@@ -1,6 +1,7 @@
 import { K8sResourceKind } from '@console/internal/module/k8s';
-import { iGetIn, iGetLoadedData } from '../../../../utils/immutable';
-import { CommonDataProp, VMWizardTab } from '../../types';
+import { InitialData } from '../../../../types/url';
+import { iGetIn, iGetLoadedData, toShallowJS } from '../../../../utils/immutable';
+import { CommonDataProp, VMWizardProps, VMWizardTab } from '../../types';
 import { iGetCreateVMWizard, iGetCreateVMWizardTabs } from './common';
 
 export const checkTabValidityChanged = (
@@ -63,3 +64,10 @@ export const immutableListToShallowMetadataJS = (list, defaultValue = []) =>
         },
       }))
     : defaultValue;
+
+export const getInitialData = (state, reduxID: string): InitialData => {
+  const initData = toShallowJS<InitialData>(
+    iGetCommonData(state, reduxID, VMWizardProps.initialData),
+  );
+  return initData || {};
+};
