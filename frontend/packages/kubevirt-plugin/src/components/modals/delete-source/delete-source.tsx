@@ -9,10 +9,10 @@ import {
 import { PersistentVolumeClaimModel } from '@console/internal/models';
 import { k8sKill } from '@console/internal/module/k8s';
 import { DataVolumeModel } from '../../../models';
-import { TemplateSourceStatusBundle } from '../../../statuses/template/types';
+import { TemplateSourceStatus } from '../../../statuses/template/types';
 
 type DeleteSourceModalProps = ModalComponentProps & {
-  sourceStatus: TemplateSourceStatusBundle;
+  sourceStatus: TemplateSourceStatus;
 };
 
 const DeleteSourceModal: React.FC<DeleteSourceModalProps> = ({ sourceStatus, cancel, close }) => {

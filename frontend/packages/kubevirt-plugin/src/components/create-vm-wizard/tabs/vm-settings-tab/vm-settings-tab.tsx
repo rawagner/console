@@ -63,6 +63,17 @@ export const VMSettingsTabComponent: React.FC<VMSettingsTabComponentProps> = ({
         </FormField>
       </FormFieldMemoRow>
       <FormFieldMemoRow
+        field={getField(VMSettingsField.TEMPLATE_PROVIDER)}
+        fieldType={FormFieldType.TEXT}
+      >
+        <FormField>
+          <TextInput onChange={onChange(VMSettingsField.TEMPLATE_PROVIDER)} />
+        </FormField>
+        <div className="pf-c-form__helper-text" aria-live="polite">
+          example: your company name
+        </div>
+      </FormFieldMemoRow>
+      <FormFieldMemoRow
         field={getField(VMSettingsField.DESCRIPTION)}
         fieldType={FormFieldType.TEXT_AREA}
       >

@@ -6,7 +6,7 @@ import { InitialStepStateGetter, VMSettings } from './types';
 
 export const getInitialVmSettings = (data: CommonData): VMSettings => {
   const {
-    data: { isCreateTemplate, isProviderImport, name, commonTemplateName },
+    data: { isCreateTemplate, isProviderImport, name, source, startVM },
   } = data;
 
   const hiddenByProvider = asHidden(isProviderImport, VMWizardProps.isProviderImport);
@@ -26,8 +26,10 @@ export const getInitialVmSettings = (data: CommonData): VMSettings => {
     },
     [VMSettingsField.HOSTNAME]: {},
     [VMSettingsField.DESCRIPTION]: {},
+    [VMSettingsField.TEMPLATE_PROVIDER]: {
+      isHidden: asHidden(!isCreateTemplate),
+    },
     [VMSettingsField.OPERATING_SYSTEM]: {
-      initialized: !commonTemplateName,
       isRequired: asRequired(true),
     },
     [VMSettingsField.CLONE_COMMON_BASE_DISK_IMAGE]: {
@@ -57,8 +59,9 @@ export const getInitialVmSettings = (data: CommonData): VMSettings => {
           ProvisionSource.URL,
           ProvisionSource.CONTAINER,
           ProvisionSource.DISK,
-        ].map((source) => source.getValue()),
+        ].map((s) => s.getValue()),
       ),
+      initialized: !(source?.url || source?.container || (source?.pvcName && source?.pvcNamespace)),
     },
     [VMSettingsField.CONTAINER_IMAGE]: {
       isHidden: hiddenByProviderOrCloneCommonBaseDiskImage,
@@ -67,7 +70,7 @@ export const getInitialVmSettings = (data: CommonData): VMSettings => {
       isHidden: hiddenByProviderOrCloneCommonBaseDiskImage,
     },
     [VMSettingsField.START_VM]: {
-      value: false,
+      value: !!startVM,
       isHidden: hiddenByProviderOrTemplate,
     },
   };

@@ -48,6 +48,11 @@ export class DiskWrapper extends ObjectWithTypePropertyWrapper<
 
   getName = () => this.get('name');
 
+  setName = (name: string) => {
+    this.data.name = name;
+    return this;
+  };
+
   getDiskBus = (): DiskBus => DiskBus.fromString(this.getIn([this.getTypeValue(), 'bus']));
 
   getReadableDiskBus = () => {
@@ -56,6 +61,11 @@ export class DiskWrapper extends ObjectWithTypePropertyWrapper<
   };
 
   getBootOrder = () => this.get('bootOrder');
+
+  setBootOrder = (bootOrder: number) => {
+    this.data.bootOrder = bootOrder;
+    return this;
+  };
 
   isFirstBootableDevice = () => this.getBootOrder() === 1;
 

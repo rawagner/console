@@ -20,7 +20,9 @@ import {
   hasVMSettingsValueChanged,
   iGetVmSettingValue,
 } from '../../selectors/immutable/vm-settings';
-import { iGetCommonData } from '../../selectors/immutable/selectors';
+import { iGetCommonData, iGetLoadedCommonData } from '../../selectors/immutable/selectors';
+import { toShallowJS } from '../../../../utils/immutable';
+import { getEmptyInstallStorage } from '../../../../utils/storage';
 
 export const prefillInitialDiskUpdater = ({ id, prevState, dispatch, getState }: UpdateOptions) => {
   const state = getState();
@@ -73,12 +75,29 @@ export const prefillInitialDiskUpdater = ({ id, prevState, dispatch, getState }:
         );
       }
     } else {
+      const iStorageClassConfigMap = iGetLoadedCommonData(
+        state,
+        id,
+        VMWizardProps.storageClassConfigMap,
+      );
       dispatch(
         vmWizardInternalActions[InternalActionType.UpdateStorage](id, {
           id: oldSourceStorage ? oldSourceStorage.id : getNextIDResolver(getStorages(state, id))(),
           ...newSourceStorage,
         }),
       );
+      if (newSourceStorage.disk.cdrom) {
+        const emptyDisk = {
+          id: getNextIDResolver(getStorages(state, id))(),
+          type: VMWizardStorageType.UI_INPUT,
+          ...getEmptyInstallStorage(toShallowJS(iStorageClassConfigMap)),
+        };
+
+        const storages = getStorages(getState(), id);
+        storages.push(emptyDisk);
+
+        dispatch(vmWizardInternalActions[InternalActionType.SetStorages](id, storages));
+      }
     }
   }
 };

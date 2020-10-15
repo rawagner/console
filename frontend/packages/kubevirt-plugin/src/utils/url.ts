@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { k8sBasePath, TemplateKind } from '@console/internal/module/k8s';
 import { history } from '@console/internal/components/utils/router';
 import { getName, getNamespace } from '@console/shared';
@@ -63,6 +64,15 @@ export const resolveURL = ({ urlObj, maxHostnameParts, maxPathnameParts }) =>
     ? urlObj.href
     : `${resolveOrigin(urlObj, maxHostnameParts)}${resolvePathname(urlObj, maxPathnameParts)}`;
 
+export type BootSourceParams = {
+  cdRom: boolean;
+  size: string;
+  url?: string;
+  pvcName?: string;
+  pvcNamespace?: string;
+  container?: string;
+};
+
 export const getVMWizardCreateLink = ({
   namespace,
   wizardName,
@@ -70,17 +80,32 @@ export const getVMWizardCreateLink = ({
   view,
   template,
   name,
+  bootSource,
+  startVM,
 }: {
-  namespace: string;
+  namespace?: string;
   wizardName: VMWizardName;
-  mode: VMWizardMode;
+  mode?: VMWizardMode;
   view?: VMWizardView;
   template?: TemplateKind;
   name?: string;
+  bootSource?: BootSourceParams;
+  startVM?: boolean;
 }) => {
-  const type = wizardName === VMWizardName.YAML ? '~new' : '~new-wizard';
-
   const params = new URLSearchParams();
+
+  if (wizardName === VMWizardName.BASIC) {
+    if (namespace) {
+      params.append('namespace', namespace);
+    }
+    if (template && isCommonTemplate(template)) {
+      params.append('common-template', template.metadata.name);
+    }
+    const paramsString = params.toString() ? `?${params}` : '';
+    return `/k8s/virtualization/~new-from-template${paramsString}`;
+  }
+
+  const type = wizardName === VMWizardName.YAML ? '~new' : '~new-wizard';
 
   if (mode && mode !== VMWizardMode.VM) {
     params.append('mode', mode);
@@ -91,11 +116,21 @@ export const getVMWizardCreateLink = ({
       params.append('common-template', template.metadata.name);
     } else {
       params.append('template', template.metadata.name);
+      params.append('template-ns', template.metadata.namespace);
     }
   }
 
   if (name) {
     params.append('name', name);
+  }
+
+  if (startVM) {
+    params.append('startVM', `${startVM}`);
+  }
+
+  if (bootSource) {
+    const source = _.pickBy(bootSource, _.identity);
+    params.append('source', JSON.stringify(source));
   }
 
   if (mode === VMWizardMode.IMPORT && view === VMWizardView.ADVANCED) {

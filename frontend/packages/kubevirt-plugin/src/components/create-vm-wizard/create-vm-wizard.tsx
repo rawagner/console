@@ -66,6 +66,7 @@ import { ValidTabGuard } from './tabs/valid-tab-guard';
 import { FirehoseResourceEnhanced } from '../../types/custom';
 
 import './create-vm-wizard.scss';
+import { BootSourceParams } from '../../utils/url';
 
 type CreateVMWizardComponentProps = {
   isSimpleView: boolean;
@@ -324,12 +325,14 @@ const wizardDispatchToProps = (dispatch, props) => ({
         data: {
           isCreateTemplate: props.isCreateTemplate,
           isProviderImport: props.isProviderImport,
-          isUserTemplateInitialized: false,
+          isTemplateInitialized: false,
           commonTemplateName: props.commonTemplateName,
+          source: props.source,
           storageClassConfigMap: undefined,
           openshiftCNVBaseImages: undefined,
           isSimpleView: props.isSimpleView,
           name: props.name,
+          startVM: props.startVM,
         },
         dataIDReferences: props.dataIDReferences,
       } as CommonData),
@@ -382,6 +385,7 @@ export const CreateVMWizardPageComponent: React.FC<CreateVMWizardPageComponentPr
   const searchParams = new URLSearchParams(location && location.search);
   const userMode = searchParams.get('mode') || VMWizardMode.VM;
   const userTemplateName = (userMode === VMWizardMode.VM && searchParams.get('template')) || '';
+  const userTemplateNs = (userMode === VMWizardMode.VM && searchParams.get('template-ns')) || '';
 
   let resources: FirehoseResourceEnhanced[] = [];
 
@@ -433,7 +437,7 @@ export const CreateVMWizardPageComponent: React.FC<CreateVMWizardPageComponentPr
         resources.push(
           getResource(TemplateModel, {
             name: userTemplateName,
-            namespace: activeNamespace,
+            namespace: userTemplateNs,
             prop: VMWizardProps.userTemplate,
             isList: false,
             matchLabels: { [TEMPLATE_TYPE_LABEL]: TEMPLATE_TYPE_VM },
@@ -470,11 +474,16 @@ export const CreateVMWizardPageComponent: React.FC<CreateVMWizardPageComponentPr
   dataIDReferences[VMWizardProps.activeNamespace] = ['UI', 'activeNamespace'];
   dataIDReferences[VMWizardProps.openshiftFlag] = [featureReducerName, FLAGS.OPENSHIFT];
 
-  const name =
-    (userMode === VMWizardMode.VM && searchParams.get('name')) ||
-    (userMode === VMWizardMode.TEMPLATE && searchParams.get('template')) ||
-    '';
+  const name = (userMode === VMWizardMode.VM && searchParams.get('name')) || '';
   const commonTemplateName = searchParams.get('common-template') || '';
+  const startVM = searchParams.get('startVM') === 'true' || false;
+  let source: BootSourceParams;
+  try {
+    source = JSON.parse(searchParams.get('source'));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('Cannot parse source params', e);
+  }
   const isSimpleView =
     userMode === VMWizardMode.IMPORT &&
     searchParams.get('view')?.toLowerCase() !== VMWizardView.ADVANCED; // normal mode defaults to advanced
@@ -492,6 +501,8 @@ export const CreateVMWizardPageComponent: React.FC<CreateVMWizardPageComponentPr
         openshiftCNVBaseImages={openshiftCNVBaseImages}
         reduxID={reduxID}
         onClose={history.goBack}
+        source={source}
+        startVM={startVM}
       />
     </Firehose>
   );

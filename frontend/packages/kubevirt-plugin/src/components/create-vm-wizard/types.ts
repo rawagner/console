@@ -7,6 +7,7 @@ import { V1Volume } from '../../types/vm/disk/V1Volume';
 import { V1alpha1DataVolume } from '../../types/vm/disk/V1alpha1DataVolume';
 import { V1PersistentVolumeClaim } from '../../types/vm/disk/V1PersistentVolumeClaim';
 import { UIStorageEditConfig, UIStorageValidation } from '../../types/ui/storage';
+import { BootSourceParams } from '../../utils/url';
 
 export enum VMWizardTab {
   IMPORT_PROVIDERS = 'IMPORT_PROVIDERS',
@@ -22,7 +23,7 @@ export enum VMWizardProps {
   isSimpleView = 'isSimpleView',
   isCreateTemplate = 'isCreateTemplate',
   isProviderImport = 'isProviderImport',
-  isUserTemplateInitialized = 'isUserTemplateInitialized',
+  isTemplateInitialized = 'isTemplateInitialized',
   userTemplates = 'userTemplates',
   userTemplate = 'userTemplate',
   activeNamespace = 'activeNamespace',
@@ -35,6 +36,7 @@ export enum VMWizardProps {
   openshiftCNVBaseImages = 'openshiftCNVBaseImages',
   storageClassConfigMap = 'storageClassConfigMap',
   nads = 'nads',
+  source = 'source',
 }
 
 // order important
@@ -73,6 +75,7 @@ export enum VMSettingsField {
   CONTAINER_IMAGE = 'CONTAINER_IMAGE',
   IMAGE_URL = 'IMAGE_URL',
   START_VM = 'START_VM',
+  TEMPLATE_PROVIDER = 'TEMPLATE_PROVIDER',
 }
 
 export enum ImportProvidersField {
@@ -234,8 +237,9 @@ export type CommonDataProp =
   | VMWizardProps.isSimpleView
   | VMWizardProps.isCreateTemplate
   | VMWizardProps.isProviderImport
-  | VMWizardProps.isUserTemplateInitialized
+  | VMWizardProps.isTemplateInitialized
   | VMWizardProps.commonTemplateName
+  | VMWizardProps.source
   | ChangedCommonDataProp;
 
 export type ChangedCommonData = Set<ChangedCommonDataProp>;
@@ -274,8 +278,10 @@ export type CommonData = {
     isSimpleView?: boolean;
     isCreateTemplate?: boolean;
     isProviderImport?: boolean;
-    isUserTemplateInitialized?: boolean;
+    isTemplateInitialized?: boolean;
     commonTemplateName?: string;
+    source?: BootSourceParams;
+    startVM?: boolean;
     storageClassConfigMap?: {
       loaded: boolean;
       loadError: string;
