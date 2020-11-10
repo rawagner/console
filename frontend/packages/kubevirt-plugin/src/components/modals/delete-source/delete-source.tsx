@@ -23,7 +23,8 @@ const DeleteSourceModal: React.FC<DeleteSourceModalProps> = ({ sourceStatus, can
   // programatically controlled popup is not responsive enough https://github.com/patternfly/patternfly-react/issues/4515
   React.useEffect(() => ref.current?.click(), []);
   const { dataVolume, pvc } = sourceStatus;
-  const submit = async () => {
+  const submit = async (e) => {
+    e.preventDefault();
     try {
       setInProgress(true);
       if (dataVolume) {
