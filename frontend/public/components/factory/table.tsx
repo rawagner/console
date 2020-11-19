@@ -193,7 +193,8 @@ const stateToProps = (
     staticFilters = [{}],
     rowFilters = [],
     columnManagementID = '',
-    isPinned,
+    secondarySortFunc = undefined,
+    isPinned = undefined,
   }: TableProps,
 ) => {
   const allFilters = staticFilters ? Object.assign({}, filters, ...staticFilters) : filters;
@@ -245,6 +246,9 @@ const stateToProps = (
         return currentSortOrder === SortByDirection.asc ? result : result * -1;
       }
 
+      if (secondarySortFunc) {
+        return (customSorts[secondarySortFunc] || sorts[secondarySortFunc])(a, b, currentSortFunc);
+      }
       // Use name as a secondary sort for a stable sort.
       const aName = a?.metadata?.name || '';
       const bName = b?.metadata?.name || '';
@@ -471,6 +475,7 @@ export type TableProps = {
   defaultSortFunc?: string;
   defaultSortField?: string;
   defaultSortOrder?: SortByDirection;
+  secondarySortFunc?: string;
   filters?: { [key: string]: any };
   Header: (...args) => any[];
   loadError?: string | Object;

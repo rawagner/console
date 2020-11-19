@@ -35,6 +35,7 @@ import {
   ALL_NAMESPACES_KEY,
   SuccessStatus,
   ErrorStatus,
+  ANNOTATIONS,
 } from '@console/shared';
 import {
   Button,
@@ -64,6 +65,7 @@ import { getTemplateOSIcon, PinnedIcon } from './os-icons';
 import {
   getTemplateSizeRequirement,
   getTemplateMemory,
+  getTemplateOperatingSystems,
 } from '../../selectors/vm-template/advanced';
 import { useBaseImages } from '../../hooks/use-base-images';
 import { getWorkloadProfile, getCPU, vCPUCount } from '../../selectors/vm';
@@ -73,6 +75,7 @@ import {
   getTemplateProvider,
   getTemplateProviderType,
   templateProviders,
+  isTemplateSupported,
 } from '../../selectors/vm-template/basic';
 import { Link } from 'react-router-dom';
 import { getTemplateSourceStatus } from '../../statuses/template/template-source-status';
@@ -85,6 +88,7 @@ import { useSupportModal } from '../../hooks/use-support-modal';
 import { CDI_APP_LABEL } from '../../constants';
 
 import './vm-template.scss';
+import { ignoreCaseSort } from '../../utils/sort';
 
 const tableColumnClasses = (showNamespace: boolean) => [
   'pf-u-w-33', // name
@@ -351,7 +355,48 @@ const VirtualMachineTemplates: React.FC<VirtualMachineTemplatesProps> = (props) 
             sourceLoadError: error,
           }}
           isPinned={isPinned}
-          defaultSortFunc="vmTemplateName"
+          defaultSortFunc="vmTemplateSupported"
+          secondarySortFunc="vmTemplateSec"
+          customSorts={{
+            vmTemplateSupported: (template: TemplateItem) => {
+              if (isTemplateSupported(template.variants[0])) {
+                return 0;
+              }
+              return 1;
+            },
+            vmTemplateSec: (a: TemplateItem, b: TemplateItem, currentSortFunc: string) => {
+              const lang = navigator.languages[0] || navigator.language;
+              // Use `localCompare` with `numeric: true` for a natural sort order (e.g., pv-1, pv-9, pv-10)
+              const compareOpts = { numeric: true, ignorePunctuation: true };
+              if (currentSortFunc === 'vmTemplateSupported') {
+                const aOS = ignoreCaseSort(getTemplateOperatingSystems([a.variants[0]]), [
+                  'name',
+                ])?.[0];
+
+                const bOS = ignoreCaseSort(getTemplateOperatingSystems([b.variants[0]]), [
+                  'name',
+                ])?.[0];
+
+                const osResult = aOS.id.localeCompare(bOS.id);
+                if (osResult !== 0) {
+                  return osResult;
+                }
+
+                return getTemplateProvider(a.variants[0]).localeCompare(
+                  getTemplateProvider(b.variants[0]),
+                );
+              }
+              return (
+                a?.variants?.[0]?.metadata?.annotations?.[ANNOTATIONS.displayName] ??
+                a?.metadata?.name
+              ).localeCompare(
+                b?.variants?.[0]?.metadata?.annotations?.[ANNOTATIONS.displayName] ??
+                  b?.metadata?.name,
+                lang,
+                compareOpts,
+              );
+            },
+          }}
         />
       </StackItem>
     </Stack>

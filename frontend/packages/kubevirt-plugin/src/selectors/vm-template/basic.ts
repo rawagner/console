@@ -23,8 +23,7 @@ export const isCommonTemplate = (template: TemplateKind): boolean =>
   template?.metadata?.labels?.[TEMPLATE_TYPE_LABEL] === TEMPLATE_TYPE_BASE;
 
 export const isTemplateSupported = (template: TemplateKind): boolean =>
-  isCommonTemplate(template) &&
-  (template.metadata.name.startsWith('rhel') || template.metadata.name.startsWith('win'));
+  template.metadata.name.startsWith('rhel') || template.metadata.name.startsWith('win');
 
 export const getTemplateType = (
   template: TemplateItem,
