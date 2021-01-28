@@ -157,6 +157,16 @@ export function exposeServices(services: Set<any>) {
   });
 }
 
+export const waitForTextStartsWith = (elem: any, text: string) => {
+  return async () => {
+    if (!(await elem.isPresent())) {
+      return false;
+    }
+    const content = await elem.getText();
+    return content.startsWith(text);
+  };
+};
+
 export function resolveStorageDataAttribute(configMap: any, attribute: string): string {
   const storageClassAttributePath = ['data', `${STORAGE_CLASS}.${attribute}`];
   if (_.has(configMap, storageClassAttributePath)) {
