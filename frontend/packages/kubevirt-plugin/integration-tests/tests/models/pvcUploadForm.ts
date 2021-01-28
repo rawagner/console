@@ -19,8 +19,8 @@ import { dropDownItem } from '../../views/uiResource.view';
 
 export class UploadForm {
   async openForm() {
-    await clickNavLink(['Storage', 'Persistent Volume Claims']);
-    // await clickNavLink(['Storage', 'PersistentVolumeClaims']);
+    // await clickNavLink(['Storage', 'Persistent Volume Claims']);
+    await clickNavLink(['Storage', 'PersistentVolumeClaims']);
     await isLoaded();
     await click(createItemButton);
     await click(pvcView.uploadCdiFormButton);
