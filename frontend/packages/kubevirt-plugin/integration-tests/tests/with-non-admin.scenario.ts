@@ -126,6 +126,7 @@ describe('Kubevirt non-admin Flow', () => {
       const wizard = new Wizard();
       await wizard.openWizard(VirtualMachineModel, true, TemplateByName.RHEL8);
       expect(uploadLink.isPresent()).toBe(false);
+      await wizard.closeWizard();
     });
 
     it(
