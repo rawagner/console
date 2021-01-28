@@ -77,6 +77,7 @@ export class VirtualMachine extends BaseVirtualMachine {
       waitForStringNotInElement(vmView.vmDetailNode(this.namespace, this.name), fromNode),
       timeout,
     );
+    await this.waitForStatus(VM_STATUS.Running, VM_MIGRATION_TIMEOUT_SECS);
   }
 
   async nodeSelectorsAction(action: string, labels: MatchLabels) {
