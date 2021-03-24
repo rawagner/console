@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "target": "es2018",
+    "module": "ESNext",
+    "allowJs": true,
+    "typeRoots": ["node_modules/@types", "../../@types"],
+    "types": ["node", "jest", "console"],
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "jsx": "react",
+    "declaration": true,
+    "outDir": "dist/declarations",
+    "baseUrl": "../../",
+    "paths": {
+      "@console/plugin-sdk/*": ["packages/console-plugin-sdk/*"],
+      "@console/dynamic-plugin-sdk/*": ["packages/console-dynamic-plugin-sdk/*"]
+    }
+  }
+}

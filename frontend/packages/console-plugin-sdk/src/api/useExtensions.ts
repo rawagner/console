@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { useForceRender } from '@console/shared/src/hooks/useForceRender';
 import { mergeExtensionProperties } from '../store';
 import { subscribeToExtensions } from './subscribeToExtensions';
-import { Extension, ExtensionTypeGuard, LoadedExtension } from '../typings';
+import { Extension, ExtensionTypeGuard, LoadedExtension } from '../typings/base';
 import useTranslationExt from '../utils/useTranslationExt';
 
 const translate = (obj: any, t: (str: string) => string): typeof obj => {

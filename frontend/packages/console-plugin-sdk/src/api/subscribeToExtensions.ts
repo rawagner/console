@@ -2,7 +2,7 @@ import { Store } from 'redux';
 import * as _ from 'lodash';
 import { RootState } from '@console/internal/redux';
 import { isExtensionInUse, PluginStore } from '../store';
-import { Extension, ExtensionTypeGuard, LoadedExtension } from '../typings';
+import { Extension, ExtensionTypeGuard, LoadedExtension } from '../typings/base';
 
 let subscriptionServiceInitialized = false;
 

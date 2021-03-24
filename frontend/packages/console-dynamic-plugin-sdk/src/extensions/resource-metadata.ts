@@ -1,6 +1,6 @@
 import { Extension } from '@console/plugin-sdk/src/typings/base';
 
-export namespace ExtensionProperties {
+namespace ExtensionProperties {
   /** Customize the display of models by overriding values retrieved and generated through API discovery. */
   export type ModelMetadata = {
     /** The model to customize. May specify only a group, or optional version and kind. */

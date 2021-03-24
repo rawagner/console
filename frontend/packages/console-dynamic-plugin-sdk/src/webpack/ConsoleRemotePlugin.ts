@@ -1,4 +1,4 @@
-import * as webpack from 'webpack';
+import { Compiler, container, RuntimeGlobals } from 'webpack';
 import { ReplaceSource } from 'webpack-sources';
 import * as readPkg from 'read-pkg';
 import * as _ from 'lodash';
@@ -12,7 +12,7 @@ export const validatePackageFileSchema = (
   pkg: ConsolePackageJSON,
   description = 'package.json',
 ) => {
-  const schema = require('../../dist/schema/plugin-package').default;
+  const schema = require(`../../dist/schema/plugin-package`).default;
   const validator = new SchemaValidator(description);
 
   if (pkg.consolePlugin) {
@@ -47,14 +47,14 @@ export class ConsoleRemotePlugin {
     validatePackageFileSchema(this.pkg).report();
   }
 
-  apply(compiler: webpack.Compiler) {
+  apply(compiler: Compiler) {
     if (!compiler.options.output.enabledLibraryTypes.includes(remoteEntryLibraryType)) {
       compiler.options.output.enabledLibraryTypes.push(remoteEntryLibraryType);
     }
 
     // Apply relevant webpack plugins
     compiler.hooks.afterPlugins.tap(ConsoleRemotePlugin.name, () => {
-      new webpack.container.ContainerPlugin({
+      new container.ContainerPlugin({
         name: this.pkg.consolePlugin.name,
         library: { type: remoteEntryLibraryType, name: remoteEntryCallback },
         filename: remoteEntryFile,
@@ -91,7 +91,7 @@ export class ConsoleRemotePlugin {
       compiler.hooks.thisCompilation.tap(ConsoleRemotePlugin.name, (compilation) => {
         compilation.mainTemplate.hooks.requireExtensions.tap(ConsoleRemotePlugin.name, () => {
           const pluginBaseURL = `/api/plugins/${this.pkg.consolePlugin.name}/`;
-          return `${webpack.RuntimeGlobals.publicPath} = "${pluginBaseURL}";`;
+          return `${RuntimeGlobals.publicPath} = "${pluginBaseURL}";`;
         });
       });
     }

@@ -5,12 +5,19 @@
   "private": true,
   "main": "src/index.ts",
   "scripts": {
-    "clean": "rm -rf ./dist",
+    "clean": "rm -rf ./dist ./schema",
+    "build": "yarn schema && yarn ts-node ./node_modules/.bin/webpack && yarn ts-node ./scripts/build-pkg.ts && yarn copy-to-dist && rm -rf dist/declarations",
+    "copy-to-dist": "cp ./README.md ./dist && cp ../../../LICENSE ./dist",
     "schema": "yarn clean && yarn ts-node ./scripts/generate-schema.ts",
-    "ts-node": "ts-node -O '{\"module\":\"commonjs\"}'"
+    "ts-node": "ts-node -O '{\"module\":\"commonjs\"}'",
+    "publish-sdk": "yarn build && yarn publish dist --no-git-tag-version"
+  },
+  "dependencies": {
+    "webpack": "5.0.0-beta.16"
   },
   "devDependencies": {
     "ts-json-schema-generator": "0.x",
-    "webpack": "5.0.0-beta.16"
+    "dts-bundle-webpack": "1.0.2",
+    "@zerollup/ts-transform-paths": "1.7.18"
   }
 }
