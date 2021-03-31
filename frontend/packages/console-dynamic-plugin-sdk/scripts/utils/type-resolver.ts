@@ -79,8 +79,21 @@ const parseExtensionTypeInfo = (
         docComments: getJSDocComments(ps),
       });
     });
+  } else if (ts.isTypeReferenceNode(typeArgP) || ts.isIntersectionTypeNode(typeArgP)) {
+    typeChecker
+      .getTypeFromTypeNode(typeArgP)
+      .getProperties()
+      .forEach((p) => {
+        consoleExtensionProperties.push({
+          name: p.getName(),
+          valueType: typeChecker.typeToString(typeChecker.getTypeOfSymbolAtLocation(p, typeArgP)),
+          docComments: getJSDocComments(p.getDeclarations()[0]),
+        });
+      });
   } else {
-    errorCallback(`Extension type '${typeString}' must declare P type parameter as object literal`);
+    errorCallback(
+      `Extension type '${typeString}' must declare P type parameter as object, reference, or intersection literal`,
+    );
     return null;
   }
 
