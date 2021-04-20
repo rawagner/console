@@ -12,7 +12,7 @@ import {
 import { PersistentVolumeClaimModel } from '@console/internal/models';
 import { PrometheusResponse } from '@console/internal/components/graphs';
 import { getPrometheusURL, PrometheusEndpoint } from '@console/internal/components/graphs/helpers';
-import { useURLPoll } from '@console/internal/components/utils/url-poll-hook';
+import { useNewURLPoll } from '@console/internal/components/utils/url-poll-hook';
 import { metricQueries, PipelineQuery } from './pipeline-metrics/pipeline-metrics-utils';
 import { PipelineRunModel } from '../../models';
 import { PipelineRunKind } from '../../types';
@@ -66,7 +66,7 @@ export const usePipelinePVC = (
 };
 
 export const usePipelineSuccessRatioPoll = ({ delay, namespace, name, timespan, queryPrefix }) => {
-  return useURLPoll<PrometheusResponse>(
+  return useNewURLPoll<PrometheusResponse>(
     getPrometheusURL({
       endpoint: PrometheusEndpoint.QUERY_RANGE,
       query: metricQueries(queryPrefix)[PipelineQuery.PIPELINE_SUCCESS_RATIO]({ name, namespace }),
@@ -75,13 +75,11 @@ export const usePipelineSuccessRatioPoll = ({ delay, namespace, name, timespan, 
       timespan,
     }),
     delay,
-    namespace,
-    timespan,
   );
 };
 
 export const usePipelineRunTaskRunPoll = ({ delay, namespace, name, timespan, queryPrefix }) => {
-  return useURLPoll<PrometheusResponse>(
+  return useNewURLPoll<PrometheusResponse>(
     getPrometheusURL({
       endpoint: PrometheusEndpoint.QUERY_RANGE,
       query: metricQueries(queryPrefix)[PipelineQuery.PIPELINE_RUN_TASK_RUN_DURATION]({
@@ -93,8 +91,6 @@ export const usePipelineRunTaskRunPoll = ({ delay, namespace, name, timespan, qu
       timespan,
     }),
     delay,
-    namespace,
-    timespan,
   );
 };
 
@@ -105,7 +101,7 @@ export const usePipelineRunDurationPoll = ({
   timespan,
   queryPrefix,
 }): any => {
-  return useURLPoll<PrometheusResponse>(
+  return useNewURLPoll<PrometheusResponse>(
     getPrometheusURL({
       endpoint: PrometheusEndpoint.QUERY_RANGE,
       query: metricQueries(queryPrefix)[PipelineQuery.PIPELINE_RUN_DURATION]({ name, namespace }),
@@ -114,13 +110,11 @@ export const usePipelineRunDurationPoll = ({
       timespan,
     }),
     delay,
-    namespace,
-    timespan,
   );
 };
 
 export const usePipelineRunPoll = ({ delay, namespace, name, timespan, queryPrefix }) => {
-  return useURLPoll<PrometheusResponse>(
+  return useNewURLPoll<PrometheusResponse>(
     getPrometheusURL({
       endpoint: PrometheusEndpoint.QUERY_RANGE,
       query: metricQueries(queryPrefix)[PipelineQuery.NUMBER_OF_PIPELINE_RUNS]({ name, namespace }),
@@ -129,7 +123,5 @@ export const usePipelineRunPoll = ({ delay, namespace, name, timespan, queryPref
       timespan,
     }),
     delay,
-    namespace,
-    timespan,
   );
 };

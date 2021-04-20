@@ -8,6 +8,7 @@ import k8sReducers, { K8sState } from './reducers/k8s';
 import UIReducers, { UIState } from './reducers/ui';
 import { dashboardsReducer, DashboardsState } from './reducers/dashboards';
 import { pluginStore } from './plugins';
+import { PollState, pollReducer } from './reducers/poll';
 
 const composeEnhancers =
   (process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -38,6 +39,7 @@ export type RootState = {
   plugins?: {
     [namespace: string]: any;
   };
+  poll: PollState;
 };
 
 const baseReducers = Object.freeze({
@@ -45,6 +47,7 @@ const baseReducers = Object.freeze({
   UI: UIReducers,
   [featureReducerName]: featureReducer,
   dashboards: dashboardsReducer,
+  poll: pollReducer,
 });
 
 const store = createStore(

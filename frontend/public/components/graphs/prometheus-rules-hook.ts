@@ -1,4 +1,4 @@
-import { useURLPoll } from '../utils/url-poll-hook';
+import { useNewURLPoll } from '../utils/url-poll-hook';
 import { getPrometheusURL, PrometheusEndpoint } from './helpers';
 import { PrometheusRulesResponse } from '../monitoring/types';
 
@@ -8,7 +8,7 @@ export const usePrometheusRulesPoll = ({ delay, namespace }: PrometheusPollProps
     namespace,
   });
 
-  return useURLPoll<PrometheusRulesResponse>(url, delay, namespace);
+  return useNewURLPoll<PrometheusRulesResponse>(url, delay);
 };
 
 type PrometheusPollProps = {

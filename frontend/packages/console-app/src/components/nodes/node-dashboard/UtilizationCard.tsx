@@ -36,6 +36,7 @@ import {
   getResourceQutoaQueries,
 } from './queries';
 import { NodeDashboardContext } from './NodeDashboardContext';
+import NodeUtilizationItem from './NodeUtilizationItem';
 
 const getPodConsumers = (query: string, nodeName: string) => ({
   query,
@@ -222,6 +223,19 @@ const UtilizationCard: React.FC = () => {
           duration={duration}
           setTimestamps={setTimestamps}
           setLimitReqState={setCPULimit}
+        />
+        <PrometheusUtilizationItem
+          title={t('nodes~CPU')}
+          humanizeValue={humanizeCpuCores}
+          utilizationQuery={queries[NodeQueries.CPU_USAGE]}
+          totalQuery={queries[NodeQueries.CPU_TOTAL]}
+          limitQuery={resourceQuotaQueries[NodeQueries.POD_RESOURCE_LIMIT_CPU]}
+          requestQuery={resourceQuotaQueries[NodeQueries.POD_RESOURCE_REQUEST_CPU]}
+          TopConsumerPopover={cpuPopover}
+          duration={duration}
+          setTimestamps={setTimestamps}
+          setLimitReqState={setCPULimit}
+          UtilizationComponent={NodeUtilizationItem}
         />
         <PrometheusUtilizationItem
           title={t('nodes~Memory')}

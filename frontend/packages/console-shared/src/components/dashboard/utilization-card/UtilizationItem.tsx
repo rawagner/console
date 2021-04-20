@@ -283,7 +283,7 @@ export type LimitRequested = {
   requested: LIMIT_STATE;
 };
 
-type UtilizationItemProps = {
+export type UtilizationItemProps = {
   title: string;
   utilization?: PrometheusResponse;
   limit?: PrometheusResponse;

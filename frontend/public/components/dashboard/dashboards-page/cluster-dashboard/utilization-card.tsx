@@ -168,6 +168,7 @@ export const PrometheusUtilizationItem = withDashboardResources<PrometheusUtiliz
     limitQuery,
     requestQuery,
     setLimitReqState,
+    UtilizationComponent = UtilizationItem,
   }) => {
     let utilization: PrometheusResponse, utilizationError: any;
     let total: PrometheusResponse, totalError: any;
@@ -241,7 +242,7 @@ export const PrometheusUtilizationItem = withDashboardResources<PrometheusUtiliz
     }
 
     return (
-      <UtilizationItem
+      <UtilizationComponent
         title={title}
         utilization={utilization}
         limit={limit}
@@ -521,7 +522,7 @@ type PrometheusCommonProps = {
   isDisabled?: boolean;
 };
 
-type PrometheusUtilizationItemProps = DashboardItemProps &
+export type PrometheusUtilizationItemProps = DashboardItemProps &
   PrometheusCommonProps & {
     utilizationQuery: string;
     totalQuery?: string;
@@ -530,6 +531,7 @@ type PrometheusUtilizationItemProps = DashboardItemProps &
     TopConsumerPopover?: React.ComponentType<TopConsumerPopoverProp>;
     setTimestamps?: (timestamps: Date[]) => void;
     setLimitReqState?: (state: LimitRequested) => void;
+    UtilizationComponent?: React.FC<UtilizationItemProps>;
   };
 
 type PrometheusMultilineUtilizationItemProps = DashboardItemProps &

@@ -25,8 +25,9 @@ import {
 } from '../../../utils/k8s-watch-hook';
 import { withDashboardResources, DashboardItemProps } from '../../with-dashboard-resources';
 import { uniqueResource } from './utils';
-import { getPrometheusQueryResponse } from '../../../../actions/dashboards';
+import { usePrometheusPolls } from '../../../graphs/prometheus-poll-hook';
 import { ClusterDashboardContext } from './context';
+import { PrometheusEndpoint } from '../../../graphs/helpers';
 
 export const OperatorsPopup: React.FC<OperatorsPopupProps> = ({
   resources,
@@ -166,42 +167,34 @@ export const URLHealthItem = withDashboardResources<URLHealthItemProps>(
 );
 
 export const PrometheusHealthItem = withDashboardResources<PrometheusHealthItemProps>(
-  ({
-    watchK8sResource,
-    stopWatchK8sResource,
-    resources,
-    watchPrometheus,
-    stopWatchPrometheusQuery,
-    prometheusResults,
-    subsystem,
-    models,
-  }) => {
+  ({ watchK8sResource, stopWatchK8sResource, resources, subsystem, models }) => {
     const { t } = useTranslation();
     const { infrastructure } = React.useContext(ClusterDashboardContext);
 
     const modelExists =
       subsystem.additionalResource && !!models.get(subsystem.additionalResource.kind);
+    const results = usePrometheusPolls({
+      initQueries: subsystem.queries,
+      endpoint: PrometheusEndpoint.QUERY,
+    });
     React.useEffect(() => {
-      subsystem.queries.forEach((q) => watchPrometheus(q));
       if (modelExists) {
         watchK8sResource(subsystem.additionalResource);
       }
       return () => {
-        subsystem.queries.forEach((q) => stopWatchPrometheusQuery(q));
         if (modelExists) {
           stopWatchK8sResource(subsystem.additionalResource);
         }
       };
-    }, [
-      watchK8sResource,
-      stopWatchK8sResource,
-      watchPrometheus,
-      stopWatchPrometheusQuery,
-      subsystem,
-      modelExists,
-    ]);
+    }, [watchK8sResource, stopWatchK8sResource, modelExists, subsystem.additionalResource]);
 
-    const queryResults = React.useMemo(
+    const queryResults = Object.values(results).map((v) => ({
+      response: v[0],
+      error: v[1],
+    }));
+
+    /*
+    const queryResults1 = React.useMemo(
       () =>
         subsystem.queries.map((q) => {
           const [response, error] = getPrometheusQueryResponse(prometheusResults, q);
@@ -212,6 +205,7 @@ export const PrometheusHealthItem = withDashboardResources<PrometheusHealthItemP
         }),
       [prometheusResults, subsystem.queries],
     );
+    */
     const k8sResult = subsystem.additionalResource
       ? resources[subsystem.additionalResource.prop]
       : null;
