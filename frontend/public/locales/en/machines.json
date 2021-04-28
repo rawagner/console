@@ -12,6 +12,6 @@
   "Name": "Name",
   "Namespace": "Namespace",
   "Machines": "Machines",
-  "by machine or node name": "by machine or node name",
+  "Create machine": "Create machine",
   "Provisioned as node": "Provisioned as node"
 }
