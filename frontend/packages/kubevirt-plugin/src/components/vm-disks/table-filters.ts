@@ -18,7 +18,9 @@ export const diskSourceFilter: RowFilter = {
   filter: (disks, obj) => {
     const diskType = typeReducer(obj);
     return (
-      disks.selected.size === 0 || disks.selected.has(diskType) || !_.includes(disks.all, diskType)
+      !disks.selected.length ||
+      disks.selected.includes(diskType) ||
+      !_.includes(disks.all, diskType)
     );
   },
 };

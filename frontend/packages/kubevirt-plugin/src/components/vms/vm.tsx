@@ -23,6 +23,7 @@ import {
   TableData,
   TableRow,
 } from '@console/internal/components/factory';
+import { RowFilter } from '@console/internal/components/filter-toolbar';
 import {
   FirehoseResult,
   history,
@@ -41,6 +42,7 @@ import {
 import { K8sKind, PersistentVolumeClaimKind, PodKind } from '@console/internal/module/k8s';
 import { VMWizardMode, VMWizardName } from '../../constants';
 import { V2VVMImportStatus } from '../../constants/v2v-import/ovirt/v2v-vm-import-status';
+import { VM_STATUS_SIMPLE_LABELS } from '../../constants/vm/vm-status';
 import { useNamespace } from '../../hooks/use-namespace';
 import { VMImportWrappper } from '../../k8s/wrapper/vm-import/vm-import-wrapper';
 import {
@@ -72,7 +74,6 @@ import { hasPendingChanges } from '../../utils/pending-changes';
 import { getVMWizardCreateLink } from '../../utils/url';
 import { VMStatus } from '../vm-status/vm-status';
 import { vmiMenuActions, vmImportMenuActions, vmMenuActions } from './menu-actions';
-import { vmStatusFilter } from './table-filters';
 import VMIP from './VMIP';
 
 import './vm.scss';
@@ -274,6 +275,26 @@ const VMList: React.FC<React.ComponentProps<typeof Table> & VMListProps> = (prop
 
 VMList.displayName = 'VMList';
 
+const rowFilters: RowFilter<VMRowObjType>[] = [
+  {
+    filterGroupName: 'Status',
+    type: 'vm-status',
+    reducer: (obj) => obj?.metadata?.vmStatusBundle?.status?.getSimpleLabel(),
+    items: VM_STATUS_SIMPLE_LABELS.map((status) => ({
+      id: status,
+      title: status,
+    })),
+    filter: (statuses, obj) => {
+      const status = obj?.metadata?.vmStatusBundle?.status.getSimpleLabel();
+      return (
+        !statuses.selected?.length ||
+        statuses.selected?.includes(status) ||
+        !_.includes(statuses.all, status)
+      );
+    },
+  },
+];
+
 const VirtualMachinesPage: React.FC<VirtualMachinesPageProps> = (props) => {
   const { t } = useTranslation();
   const { skipAccessReview, noProjectsAvailable, showTitle } = props.customData;
@@ -442,7 +463,7 @@ const VirtualMachinesPage: React.FC<VirtualMachinesPageProps> = (props) => {
       createButtonText={t('kubevirt-plugin~Create virtual machine')}
       title={VirtualMachineModel.labelPlural}
       showTitle={showTitle}
-      rowFilters={[vmStatusFilter]}
+      rowFilters={rowFilters}
       ListComponent={VMList}
       resources={resources}
       flatten={flatten}
@@ -457,7 +478,7 @@ type ObjectBundle = {
   vmImport: VMImportKind;
 };
 
-type VMRowObjType = {
+export type VMRowObjType = {
   metadata: {
     name: string;
     namespace: string;

@@ -6,11 +6,6 @@ import { MultiListPage } from '@console/internal/components/factory';
 import { RowFilter } from '@console/internal/components/filter-toolbar';
 import { FirehoseResourcesResult } from '@console/internal/components/utils';
 import { referenceForModel } from '@console/internal/module/k8s';
-<<<<<<< HEAD
-=======
-import { FirehoseResourcesResult } from '@console/internal/components/utils';
-import { ImageManifestVulnModel } from '../models';
->>>>>>> b324b3b7ad... Convert list page to ts
 import { Priority, priorityFor } from '../const';
 import { ImageManifestVulnModel } from '../models';
 import { Feature, ImageManifestVuln, Vulnerability } from '../types';
@@ -37,7 +32,7 @@ const ImageVulnerabilitiesList: React.FC<ImageVulnerabilitiesListProps> = (props
     },
   } = props;
 
-  const imageVulnerabilitiesRowFilters: RowFilter[] = [
+  const imageVulnerabilitiesRowFilters: RowFilter<ImageVuln>[] = [
     {
       filterGroupName: t('container-security~Severity'),
       items: [
@@ -52,7 +47,7 @@ const ImageVulnerabilitiesList: React.FC<ImageVulnerabilitiesListProps> = (props
       type: 'vulnerability-severity',
       reducer: (v) => v.vulnerability.severity,
       filter: (filter, vuln) =>
-        filter.selected.has(vuln.vulnerability.severity) || _.isEmpty(filter.selected),
+        filter.selected?.includes(vuln.vulnerability.severity) || _.isEmpty(filter.selected),
     },
   ];
 
