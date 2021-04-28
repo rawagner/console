@@ -33,7 +33,6 @@ import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watc
 import { NamespaceModel, NodeModel } from '@console/internal/models';
 import { K8sKind } from '@console/internal/module/k8s';
 import { VMWizardMode, VMWizardName } from '../../constants';
-import { V2VVMImportStatus } from '../../constants/v2v-import/ovirt/v2v-vm-import-status';
 import { useNamespace } from '../../hooks/use-namespace';
 import { VirtualMachineInstanceModel, VirtualMachineModel } from '../../models';
 import { kubevirtReferenceForModel } from '../../models/kubevirtReferenceForModel';
@@ -47,9 +46,7 @@ import {
 } from '../../selectors';
 import { isVM, isVMI } from '../../selectors/check-type';
 import { getVmiIpAddresses, getVMINodeName } from '../../selectors/vmi';
-import { VMStatusBundle } from '../../statuses/vm/types';
 import { VMIKind, VMKind } from '../../types';
-import { VMImportKind } from '../../types/vm-import/ovirt/vm-import';
 import { VMILikeEntityKind } from '../../types/vmLike';
 import {
   createLookup,
@@ -63,6 +60,7 @@ import { LazyVmRowKebab } from '../vm-status/lazy-vm-row-kebab';
 import { LazyVMStatus } from '../vm-status/lazy-vm-status';
 import { useVmStatusResources, VmStatusResourcesValue } from '../vm-status/use-vm-status-resources';
 import { useVmStatusFilter } from './table-filters';
+import { ObjectBundle, VMRowObjType } from './types';
 import VMIP from './VMIP';
 
 import './vm.scss';
@@ -257,7 +255,7 @@ const VirtualMachinesPage: React.FC<VirtualMachinesPageProps> = (props) => {
   const { skipAccessReview, noProjectsAvailable, showTitle } = props.customData;
   const namespace = props.match.params.ns;
   const vmStatusResources = useVmStatusResources(namespace);
-  const vmRowFilter = useVmStatusFilter(vmStatusResources);
+  const vmRowFilter = useVmStatusFilter(vmStatusResources, t);
 
   const resources = React.useMemo(
     () => [
@@ -334,7 +332,7 @@ const VirtualMachinesPage: React.FC<VirtualMachinesPageProps> = (props) => {
       createButtonText={t('kubevirt-plugin~Create virtual machine')}
       title={VirtualMachineModel.labelPlural}
       showTitle={showTitle}
-      rowFilters={vmStatusResources?.loaded ? [vmRowFilter] : []}
+      rowFilters={vmStatusResources?.loaded ? vmRowFilter : []}
       ListComponent={VMList}
       resources={resources}
       flatten={flatten}
@@ -343,26 +341,6 @@ const VirtualMachinesPage: React.FC<VirtualMachinesPageProps> = (props) => {
     />
   );
 };
-
-type ObjectBundle = {
-  vm: VMKind;
-  vmi: VMIKind;
-  vmImport: VMImportKind;
-};
-
-export type VMRowObjType = {
-  metadata: {
-    name: string;
-    namespace: string;
-    status: string;
-    node: string;
-    creationTimestamp: string;
-    uid: string;
-    lookupID: string;
-    vmStatusBundle: VMStatusBundle;
-    vmImportStatus?: V2VVMImportStatus;
-  };
-} & ObjectBundle;
 
 type VMListProps = {
   data: VMRowObjType[];
