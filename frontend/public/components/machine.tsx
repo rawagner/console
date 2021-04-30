@@ -16,7 +16,7 @@ import { MachineModel } from '../models';
 import { MachineKind, referenceForModel } from '../module/k8s';
 import { Conditions } from './conditions';
 import NodeIPList from '@console/app/src/components/nodes/NodeIPList';
-import { DetailsPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { DetailsPage, TableRow, TableData } from './factory';
 import ListPageFilter from './factory/ListPage/ListPageFilter';
 import ListPageHeader from './factory/ListPage/ListPageHeader';
 import ListPageBody from './factory/ListPage/ListPageBody';
@@ -34,6 +34,9 @@ import {
 } from './utils';
 import { ResourceEventStream } from './events';
 import { useK8sWatchResource } from './utils/k8s-watch-hook';
+import VirtualizedTable, { TableColumn } from './factory/Table/VirtualizedTable';
+import { sortResourceByValue } from './factory/Table/sort';
+
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(MachineModel), ...common];
 export const machineReference = referenceForModel(MachineModel);
@@ -52,7 +55,7 @@ const tableColumnClasses = [
 const getMachineProviderState = (obj: MachineKind): string =>
   obj?.status?.providerStatus?.instanceState;
 
-const MachineTableRow: RowFunction<MachineKind> = ({ obj, index, key, style }) => {
+const MachineTableRow: React.FC<any> = ({ obj, index, key, style }) => {
   const nodeName = getMachineNodeName(obj);
   const region = getMachineRegion(obj);
   const zone = getMachineZone(obj);
@@ -175,11 +178,16 @@ type MachineListProps = {
 
 export const MachineList: React.FC<MachineListProps> = (props) => {
   const { t } = useTranslation();
-  const MachineTableHeader = () => {
-    return [
+
+  const machineTableColumn = React.useMemo<TableColumn<MachineKind>[]>(
+    () => [
       {
         title: t('machines~Name'),
-        sortField: 'metadata.name',
+        sort: (data, direction) => {
+          const sortFunc = (a: MachineKind, b: MachineKind) =>
+            sortResourceByValue(a, b, direction, a.metadata.name, b.metadata.name);
+          return data.sort(sortFunc);
+        },
         transforms: [sortable],
         props: { className: tableColumnClasses[0] },
       },
@@ -224,15 +232,16 @@ export const MachineList: React.FC<MachineListProps> = (props) => {
         title: '',
         props: { className: tableColumnClasses[7] },
       },
-    ];
-  };
+    ],
+    [t],
+  );
+
   return (
-    <Table
+    <VirtualizedTable
       {...props}
       aria-label={t('machines~Machines')}
-      Header={MachineTableHeader}
+      columns={machineTableColumn}
       Row={MachineTableRow}
-      virtualize
     />
   );
 };
