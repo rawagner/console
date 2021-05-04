@@ -8,11 +8,12 @@ import {
   SortByDirection,
   ICell,
 } from '@patternfly/react-table';
+import { getParentScrollableElement } from '@console/shared/src/hooks/useScrollContainer';
 import { AutoSizer, WindowScroller } from '@patternfly/react-virtualized-extension';
 import { useNamespace } from '@console/shared/src/hooks/useNamespace';
 
 import VirtualizedTableBody from './VirtualizedTableBody';
-import { history, StatusBox, WithScrollContainer } from '../../utils';
+import { history, StatusBox } from '../../utils';
 
 const BREAKPOINT_SM = 576;
 const BREAKPOINT_MD = 768;
@@ -143,6 +144,12 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
   columnManagementID,
   showNamespaceOverride,
 }) => {
+  const [scrollContainer, setScrollContainer] = React.useState<HTMLElement>();
+  const ref = React.useCallback((node) => {
+    if (node) {
+      setScrollContainer(getParentScrollableElement(node));
+    }
+  }, []);
   const columnShift = onSelect ? 1 : 0; //shift indexes by 1 if select provided
   const [sortBy, setSortBy] = React.useState<{
     index: number;
@@ -222,27 +229,27 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
     [applySort],
   );
 
-  const renderVirtualizedTable = (scrollContainer) => (
-    <WindowScroller scrollElement={scrollContainer}>
-      {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
-        <AutoSizer disableHeight>
-          {({ width }) => (
-            <div ref={registerChild}>
-              <VirtualizedTableBody
-                Row={Row}
-                height={height}
-                isScrolling={isScrolling}
-                onChildScroll={onChildScroll}
-                data={data}
-                columns={columns}
-                scrollTop={scrollTop}
-                width={width}
-              />
-            </div>
-          )}
-        </AutoSizer>
-      )}
-    </WindowScroller>
+  const renderTable = React.useCallback(
+    ({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
+      <AutoSizer disableHeight>
+        {({ width }) => (
+          <div ref={registerChild}>
+            <VirtualizedTableBody
+              Row={Row}
+              height={height}
+              isScrolling={isScrolling}
+              onChildScroll={onChildScroll}
+              data={data}
+              columns={columns}
+              scrollTop={scrollTop}
+              width={width}
+              sortBy={sortBy}
+            />
+          </div>
+        )}
+      </AutoSizer>
+    ),
+    [Row, columns, data, sortBy],
   );
 
   return (
@@ -270,10 +277,12 @@ const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
           >
             <TableHeader />
           </PfTable>
-          {scrollNode ? (
-            renderVirtualizedTable(scrollNode)
+          {scrollNode || scrollContainer ? (
+            <WindowScroller scrollElement={scrollNode?.() || scrollContainer}>
+              {renderTable}
+            </WindowScroller>
           ) : (
-            <WithScrollContainer>{renderVirtualizedTable}</WithScrollContainer>
+            <span ref={ref} />
           )}
         </div>
       </StatusBox>
