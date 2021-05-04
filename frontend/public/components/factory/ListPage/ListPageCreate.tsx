@@ -118,7 +118,7 @@ const ListPageCreate: React.FC<ListPageCreateProps> = ({
   }
 
   return (
-    to && (
+    !!to && (
       <ListPageCreateLink createAccessReview={createAccessReview} to={to}>
         {children}
       </ListPageCreateLink>
