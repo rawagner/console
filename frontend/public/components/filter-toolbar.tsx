@@ -27,8 +27,8 @@ import { filterList } from '../actions/k8s';
 import AutocompleteInput from './autocomplete';
 import { storagePrefix } from './row-filter';
 import { createColumnManagementModal } from './modals';
-import { ColumnLayout } from './modals/column-management-modal';
-import { OnFilterChange } from './factory/ListPage/filter-hook';
+import { RowFilter } from '@console/dynamic-plugin-sdk/src/api/api-types';
+export { RowFilter } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 /**
  * Housing both the row filter and name/label filter in the same file.
@@ -421,18 +421,6 @@ type FilterToolbarProps = {
   // Used when multiple tables are in the same page
   uniqueFilterName?: string;
   onFilterChange?: OnFilterChange;
-};
-
-export type RowFilter<R = any> = {
-  defaultSelected?: string[];
-  filterGroupName: string;
-  type: string;
-  items: {
-    [key: string]: string;
-  }[];
-  isMatch?: (param: R, id: string) => boolean;
-  reducer?: (param: R) => React.ReactText;
-  filter?: (filter: { selected: Set<string>; all: string[] }, object: R) => boolean;
 };
 
 FilterToolbar.displayName = 'FilterToolbar';

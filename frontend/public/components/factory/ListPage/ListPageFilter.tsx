@@ -1,22 +1,8 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 
-import { FilterToolbar, RowFilter } from '../../filter-toolbar';
-import { ColumnLayout } from '../../modals/column-management-modal';
-import { OnFilterChange } from './filter-hook';
-
-type ListPageFilterProps<D = any> = {
-  data: D;
-  loaded: boolean;
-  rowFilters?: RowFilter[];
-  nameFilterPlaceholder?: string;
-  labelFilterPlaceholder?: string;
-  textFilter?: string;
-  hideNameLabelFilters?: boolean;
-  hideLabelFilter?: boolean;
-  columnLayout?: ColumnLayout;
-  onFilterChange: OnFilterChange;
-};
+import { FilterToolbar } from '../../filter-toolbar';
+import { ListPageFilterProps } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 const ListPageFilter: React.FC<ListPageFilterProps> = ({
   data,

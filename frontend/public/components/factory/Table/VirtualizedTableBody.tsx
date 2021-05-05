@@ -2,8 +2,8 @@ import * as React from 'react';
 import { VirtualTableBody } from './PFBody';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { Scroll } from '@patternfly/react-virtualized-extension/dist/js/components/Virtualized/types';
-import { TableColumn, RowProps } from './VirtualizedTable';
 import { usePrevious } from '@console/shared/src/hooks/previous';
+import { RowProps, TableColumn } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 type VirtualizedTableBodyProps<D = any> = {
   Row: React.ComponentType<RowProps<D>>;

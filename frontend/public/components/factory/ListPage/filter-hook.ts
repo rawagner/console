@@ -2,8 +2,9 @@ import * as React from 'react';
 
 import { getAllTableFilters } from '../table';
 import { RowFilter } from '../../filter-toolbar';
+import { OnFilterChange } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
-export type OnFilterChange = (type: string, value: string | string[]) => void;
+export { OnFilterChange } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 const filterData = <D>(
   data: D[],

@@ -17,6 +17,8 @@ import {
   COLUMN_MANAGEMENT_LOCAL_STORAGE_KEY,
 } from '@console/shared';
 import { createModalLauncher, ModalTitle, ModalBody, ModalSubmitFooter } from '../factory';
+import { ColumnLayout, ManagedColumn } from '@console/dynamic-plugin-sdk/src/api/api-types';
+export { ColumnLayout, ManagedColumn } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 export const MAX_VIEW_COLS = 9;
 
@@ -203,18 +205,4 @@ export type ColumnManagementModalProps = {
   cancel?: () => void;
   close?: () => void;
   columnLayout: ColumnLayout;
-};
-
-export type ColumnLayout = {
-  id: string;
-  columns: ManagedColumn[];
-  selectedColumns: Set<string>;
-  showNamespaceOverride?: boolean;
-  type: string;
-};
-
-export type ManagedColumn = {
-  id?: string;
-  title: string;
-  additional?: boolean;
 };

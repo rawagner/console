@@ -4,9 +4,7 @@ import {
   Table as PfTable,
   TableHeader,
   TableGridBreakpoint,
-  OnSelect,
   SortByDirection,
-  ICell,
 } from '@patternfly/react-table';
 import { getParentScrollableElement } from '@console/shared/src/hooks/useScrollContainer';
 import { AutoSizer, WindowScroller } from '@patternfly/react-virtualized-extension';
@@ -14,6 +12,9 @@ import { useNamespace } from '@console/shared/src/hooks/useNamespace';
 
 import VirtualizedTableBody from './VirtualizedTableBody';
 import { history, StatusBox } from '../../utils';
+import { TableColumn, VirtualizedTableProps } from '@console/dynamic-plugin-sdk/src/api/api-types';
+
+export { RowProps, TableColumn } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 const BREAKPOINT_SM = 576;
 const BREAKPOINT_MD = 768;
@@ -92,39 +93,6 @@ const getActiveColumns = (
     columns = columns.filter((column) => column.id !== 'namespace');
   }
   return columns;
-};
-
-export type TableColumn<D> = ICell & {
-  title: string;
-  id?: string;
-  additional?: boolean;
-  sort?: (data: D[], sortDirection: SortByDirection) => D[];
-};
-
-export type RowProps<D> = {
-  obj: D;
-  index: number;
-  columns: TableColumn<D>[];
-  isScrolling: boolean;
-  style: object;
-};
-
-type VirtualizedTableProps<D = any> = {
-  data: D[];
-  loaded: boolean;
-  loadError: any;
-  columns: TableColumn<D>[];
-  Row: React.ComponentType<RowProps<D>>;
-  NoDataEmptyMsg?: React.ComponentType<{}>;
-  EmptyMsg?: React.ComponentType<{}>;
-  scrollNode?: () => HTMLElement;
-  onSelect?: OnSelect;
-  label?: string;
-  'aria-label'?: string;
-  gridBreakPoint?: TableGridBreakpoint;
-  activeColumns?: Set<string>;
-  columnManagementID?: string;
-  showNamespaceOverride?: boolean;
 };
 
 const VirtualizedTable: React.FC<VirtualizedTableProps> = ({
