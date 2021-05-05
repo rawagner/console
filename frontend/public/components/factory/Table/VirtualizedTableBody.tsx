@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { VirtualTableBody } from './PFBody';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { Scroll } from '@patternfly/react-virtualized-extension/dist/js/components/Virtualized/types';
+import { VirtualTableBody } from '@patternfly/react-virtualized-extension';
+
 import { usePrevious } from '@console/shared/src/hooks/previous';
 import { RowProps, TableColumn } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
@@ -44,20 +45,11 @@ const VirtualizedTableBody: React.FC<VirtualizedTableBodyProps> = ({
   React.useMemo(() => cellMeasurementCache.clearAll(), [columns, width, sortBy]);
 
   const rowRenderer = React.useCallback(
-    ({
-      index,
-      isScrolling: scrolling,
-      isVisible,
-      key,
-      style,
-      parent,
-      datum,
-      columns: tableColumns,
-    }) => {
+    ({ index, isScrolling: scrolling, isVisible, key, style, parent }) => {
       const rowArgs: RowProps<any> = {
-        obj: datum,
+        obj: data[index],
         index,
-        columns: tableColumns,
+        columns,
         isScrolling: scrolling,
         style,
       };
@@ -78,7 +70,7 @@ const VirtualizedTableBody: React.FC<VirtualizedTableBodyProps> = ({
         </CellMeasurer>
       );
     },
-    [cellMeasurementCache],
+    [cellMeasurementCache, columns, data],
   );
 
   return (

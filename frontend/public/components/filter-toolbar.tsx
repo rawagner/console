@@ -27,8 +27,16 @@ import { filterList } from '../actions/k8s';
 import AutocompleteInput from './autocomplete';
 import { storagePrefix } from './row-filter';
 import { createColumnManagementModal } from './modals';
-import { RowFilter } from '@console/dynamic-plugin-sdk/src/api/api-types';
-export { RowFilter } from '@console/dynamic-plugin-sdk/src/api/api-types';
+import {
+  RowFilter,
+  ColumnLayout,
+  OnFilterChange,
+} from '@console/dynamic-plugin-sdk/src/api/api-types';
+export {
+  RowFilter,
+  ColumnLayout,
+  OnFilterChange,
+} from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 /**
  * Housing both the row filter and name/label filter in the same file.

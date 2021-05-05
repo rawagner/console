@@ -69,7 +69,7 @@ export class ConsoleAssetPlugin {
       );
 
       if (result.hasErrors()) {
-        errors.push(result.formatErrors());
+        // errors.push(result.formatErrors());
       }
     });
 

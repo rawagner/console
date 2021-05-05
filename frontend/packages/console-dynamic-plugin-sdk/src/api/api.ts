@@ -5,6 +5,8 @@ import {
   VirtualizedTableProps,
   ListPageHeaderProps,
   ListPageFilterProps,
+  TableRowProps,
+  TableDataProps,
 } from './api-types';
 
 export * from './api-types';
@@ -19,3 +21,5 @@ export const VirtualizedTable: React.FC<VirtualizedTableProps> = MockImpl;
 export const ListPageHeader: React.FC<ListPageHeaderProps> = MockImpl;
 export const ListPageBody: React.FC = MockImpl;
 export const ListPageFilter: React.FC<ListPageFilterProps> = MockImpl;
+export const TableRow: React.FC<TableRowProps> = MockImpl;
+export const TableData: React.FC<TableDataProps> = MockImpl;

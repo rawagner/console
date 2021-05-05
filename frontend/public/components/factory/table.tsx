@@ -74,6 +74,8 @@ import {
 import { tableFilters } from './table-filters';
 import { PackageManifestKind } from '@console/operator-lifecycle-manager/src/types';
 import { defaultChannelFor } from '@console/operator-lifecycle-manager/src/components';
+import { TableDataProps, TableRowProps } from '@console/dynamic-plugin-sdk/src/api/api-types';
+export { TableDataProps, TableRowProps } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 const rowFiltersToFilterFuncs = (rowFilters) => {
   return (rowFilters || [])
@@ -286,14 +288,6 @@ export const TableRow: React.SFC<TableRowProps> = ({
   );
 };
 TableRow.displayName = 'TableRow';
-export type TableRowProps = {
-  id: any;
-  index: number;
-  title?: string;
-  trKey: string;
-  style: object;
-  className?: string;
-};
 
 const BREAKPOINT_SM = 576;
 const BREAKPOINT_MD = 768;
@@ -353,13 +347,6 @@ export const TableData: React.SFC<TableDataProps> = ({
   ) : null;
 };
 TableData.displayName = 'TableData';
-export type TableDataProps = {
-  className?: string;
-  columnID?: string;
-  columns?: Set<string>;
-  id?: string;
-  showNamespaceOverride?: boolean;
-};
 
 const TableWrapper: React.SFC<TableWrapperProps> = ({
   virtualize,

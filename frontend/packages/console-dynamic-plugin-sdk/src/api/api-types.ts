@@ -119,3 +119,20 @@ export type ListPageHeaderProps = {
   helpText?: React.ReactNode;
   badge?: React.ReactNode;
 };
+
+export type TableRowProps = {
+  id: any;
+  index: number;
+  title?: string;
+  trKey: string;
+  style: object;
+  className?: string;
+};
+
+export type TableDataProps = {
+  className?: string;
+  columnID?: string;
+  columns?: Set<string>;
+  id?: string;
+  showNamespaceOverride?: boolean;
+};
