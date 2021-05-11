@@ -1,6 +1,14 @@
-import { K8sResourceCommon, K8sResourceKindReference, Selector } from '../extensions/console-types';
+import {
+  K8sResourceCommon,
+  K8sResourceKindReference,
+  Selector,
+  AccessReviewResourceAttributes,
+  K8sVerb,
+  FirehoseResource,
+} from '../extensions/console-types';
 
 import { TableGridBreakpoint, OnSelect, SortByDirection, ICell } from '@patternfly/react-table';
+import { match } from 'react-router-dom';
 
 export type WatchK8sResource = {
   kind: K8sResourceKindReference;
@@ -135,4 +143,100 @@ export type TableDataProps = {
   columns?: Set<string>;
   id?: string;
   showNamespaceOverride?: boolean;
+};
+
+export type KebabOption = {
+  hidden?: boolean;
+  label?: React.ReactNode;
+  labelKey?: string;
+  labelKind?: { [key: string]: string | string[] };
+  href?: string;
+  callback?: () => any;
+  accessReview?: AccessReviewResourceAttributes;
+  isDisabled?: boolean;
+  tooltip?: string;
+  // a `/` separated string where each segment denotes a new sub menu entry
+  // Eg. `Menu 1/Menu 2/Menu 3`
+  path?: string;
+  pathKey?: string;
+  icon?: React.ReactNode;
+};
+
+export type K8sKind = {
+  abbr: string;
+  kind: string;
+  label: string;
+  labelKey?: string;
+  labelPlural: string;
+  labelPluralKey?: string;
+  plural: string;
+  propagationPolicy?: 'Foreground' | 'Background';
+
+  id?: string;
+  crd?: boolean;
+  apiVersion: string;
+  apiGroup?: string;
+  namespaced?: boolean;
+  selector?: Selector;
+  labels?: { [key: string]: string };
+  annotations?: { [key: string]: string };
+  verbs?: K8sVerb[];
+  shortNames?: string[];
+  badge?: any;
+  color?: string;
+
+  // Legacy option for supporing plural names in URL paths when `crd: true`.
+  // This should not be set for new models, but is needed to avoid breaking
+  // existing links as we transition to using the API group in URL paths.
+  legacyPluralURL?: boolean;
+};
+
+export type KebabOptionsCreator = (
+  kindObj: K8sKind,
+  data: K8sResourceCommon,
+  extraResources?: { [prop: string]: K8sResourceCommon | K8sResourceCommon[] },
+  customData?: any,
+) => KebabOption[];
+
+export type PageComponentProps<R extends K8sResourceCommon = K8sResourceCommon> = {
+  filters?: any;
+  selected?: any;
+  match?: any;
+  obj?: R;
+  params?: any;
+  customData?: any;
+  showTitle?: boolean;
+  fieldSelector?: string;
+};
+
+export type Page = {
+  href?: string;
+  path?: string;
+  name?: string;
+  nameKey?: string;
+  component?: React.ComponentType<PageComponentProps>;
+  pageData?: any;
+};
+
+export type DetailsPageProps = {
+  match: match<any>;
+  title?: string | JSX.Element;
+  titleFunc?: (obj: K8sResourceCommon) => string | JSX.Element;
+  menuActions?: Function[] | KebabOptionsCreator; // FIXME should be "KebabAction[] |" refactor pipeline-actions.tsx, etc.
+  buttonActions?: any[];
+  pages?: Page[];
+  pagesFor?: (obj: K8sResourceCommon) => Page[];
+  kind: K8sResourceKindReference;
+  kindObj?: K8sKind;
+  label?: string;
+  name?: string;
+  namespace?: string;
+  resources?: FirehoseResource[];
+  breadcrumbsFor?: (obj: K8sResourceCommon) => { name: string; path: string }[];
+  customData?: any;
+  badge?: React.ReactNode;
+  icon?: React.ComponentType<{ obj: K8sResourceCommon }>;
+  getResourceStatus?: (resource: K8sResourceCommon) => string;
+  children?: React.ReactNode;
+  customKind?: string;
 };

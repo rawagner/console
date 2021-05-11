@@ -13,5 +13,6 @@ export const exposePluginAPI = () => {
     ListPageFilter: require('@console/internal/components/factory/ListPage/ListPageFilter').default,
     TableRow: require('@console/internal/components/factory/table').TableRow,
     TableData: require('@console/internal/components/factory/table').TableData,
+    DetailsPage: require('@console/internal/components/factory/details').DetailsPage,
   };
 };
