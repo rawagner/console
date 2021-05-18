@@ -5,6 +5,7 @@ import {
   AccessReviewResourceAttributes,
   K8sVerb,
   FirehoseResource,
+  GroupVersionKind,
 } from '../extensions/console-types';
 
 import { TableGridBreakpoint, OnSelect, SortByDirection, ICell } from '@patternfly/react-table';
@@ -239,4 +240,15 @@ export type DetailsPageProps = {
   getResourceStatus?: (resource: K8sResourceCommon) => string;
   children?: React.ReactNode;
   customKind?: string;
+};
+
+export type CreateWithPermissionsProps = {
+  createAccessReview?: {
+    model: K8sKind;
+    namespace?: string;
+  };
+};
+
+export type ListPageCreateProps = CreateWithPermissionsProps & {
+  groupVersionKind: GroupVersionKind;
 };

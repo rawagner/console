@@ -11,6 +11,7 @@ export const exposePluginAPI = () => {
     ListPageHeader: require('@console/internal/components/factory/ListPage/ListPageHeader').default,
     ListPageBody: require('@console/internal/components/factory/ListPage/ListPageBody').default,
     ListPageFilter: require('@console/internal/components/factory/ListPage/ListPageFilter').default,
+    ListPageCreate: require('@console/internal/components/factory/ListPage/ListPageCreate').default,
     TableRow: require('@console/internal/components/factory/table').TableRow,
     TableData: require('@console/internal/components/factory/table').TableData,
     DetailsPage: require('@console/internal/components/factory/details').DetailsPage,

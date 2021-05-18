@@ -5,16 +5,12 @@ import { Button, ButtonProps } from '@patternfly/react-core';
 import * as classNames from 'classnames';
 
 import { Dropdown, RequireCreatePermission } from '../../utils';
-import { K8sKind, GroupVersionKind } from '../../../module/k8s/types';
 import { useK8sModel } from '@console/shared/src/hooks/useK8sModel';
 import { useNamespace } from '@console/shared/src/hooks/useNamespace';
-
-type CreateWithPermissionsProps = {
-  createAccessReview?: {
-    model: K8sKind;
-    namespace?: string;
-  };
-};
+import {
+  ListPageCreateProps,
+  CreateWithPermissionsProps,
+} from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 const CreateWithPermissions: React.FC<CreateWithPermissionsProps> = ({
   createAccessReview,
@@ -90,10 +86,6 @@ export const ListPageCreateDropdown: React.FC<ListPageCreateDropdownProps> = ({
       </div>
     </CreateWithPermissions>
   );
-};
-
-type ListPageCreateProps = CreateWithPermissionsProps & {
-  groupVersionKind: GroupVersionKind;
 };
 
 const ListPageCreate: React.FC<ListPageCreateProps> = ({
