@@ -9,6 +9,8 @@ import {
   TableDataProps,
   DetailsPageProps,
   ListPageCreateProps,
+  UseK8sModel,
+  K8sCreate,
 } from './api-types';
 
 export * from './api-types';
@@ -27,3 +29,5 @@ export const ListPageCreate: React.FC<ListPageCreateProps> = MockImpl;
 export const TableRow: React.FC<TableRowProps> = MockImpl;
 export const TableData: React.FC<TableDataProps> = MockImpl;
 export const DetailsPage: React.FC<DetailsPageProps> = MockImpl;
+export const k8sCreate: K8sCreate = MockImpl;
+export const useK8sModel: UseK8sModel = MockImpl;

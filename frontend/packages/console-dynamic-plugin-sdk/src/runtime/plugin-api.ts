@@ -15,5 +15,7 @@ export const exposePluginAPI = () => {
     TableRow: require('@console/internal/components/factory/table').TableRow,
     TableData: require('@console/internal/components/factory/table').TableData,
     DetailsPage: require('@console/internal/components/factory/details').DetailsPage,
+    useK8sModel: require('@console/shared/src/hooks/useK8sModel').useK8sModel,
+    k8sCreate: require('@console/internal/module/k8s/resource').k8sCreate,
   };
 };
