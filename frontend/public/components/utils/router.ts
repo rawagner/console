@@ -1,7 +1,6 @@
 import * as _ from 'lodash-es';
-import { createBrowserHistory, createMemoryHistory, History } from 'history';
-
-type AppHistory = History & { pushPath: History['push'] };
+import { createBrowserHistory, createMemoryHistory } from 'history';
+import { AppHistory } from '@console/dynamic-plugin-sdk/src/api/api-types';
 
 let createHistory;
 

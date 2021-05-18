@@ -10,6 +10,7 @@ import {
 
 import { TableGridBreakpoint, OnSelect, SortByDirection, ICell } from '@patternfly/react-table';
 import { match } from 'react-router-dom';
+import { History } from 'history';
 
 export type WatchK8sResource = {
   kind: K8sResourceKindReference;
@@ -256,3 +257,5 @@ export type ListPageCreateProps = CreateWithPermissionsProps & {
 export type UseK8sModel = (groupVersionKind: GroupVersionKind) => [K8sKind, boolean];
 
 export type K8sCreate = <D = any, R = any>(kind: K8sKind, data: D) => Promise<R>;
+
+export type AppHistory = History & { pushPath: History['push'] };

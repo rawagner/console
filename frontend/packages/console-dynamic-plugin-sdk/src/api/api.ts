@@ -11,6 +11,7 @@ import {
   ListPageCreateProps,
   UseK8sModel,
   K8sCreate,
+  AppHistory,
 } from './api-types';
 
 export * from './api-types';
@@ -31,3 +32,4 @@ export const TableData: React.FC<TableDataProps> = MockImpl;
 export const DetailsPage: React.FC<DetailsPageProps> = MockImpl;
 export const k8sCreate: K8sCreate = MockImpl;
 export const useK8sModel: UseK8sModel = MockImpl;
+export const history: AppHistory = undefined;
