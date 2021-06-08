@@ -92,13 +92,14 @@ const ListPageCreate: React.FC<ListPageCreateProps> = ({
   createAccessReview,
   groupVersionKind,
   children,
+  namespace,
 }) => {
   const [k8sModel] = useK8sModel(groupVersionKind);
 
-  const namespace = useNamespace();
+  const currentNamespace = useNamespace();
   let to: string;
   if (k8sModel) {
-    const usedNamespace = k8sModel.namespaced ? namespace : undefined;
+    const usedNamespace = k8sModel.namespaced ? namespace || currentNamespace : undefined;
     to = usedNamespace
       ? `/k8s/ns/${usedNamespace || 'default'}/${k8sModel.plural}/~new`
       : `/k8s/cluster/${k8sModel.plural}/~new`;

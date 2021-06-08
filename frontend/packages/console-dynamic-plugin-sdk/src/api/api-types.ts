@@ -252,6 +252,7 @@ export type CreateWithPermissionsProps = {
 
 export type ListPageCreateProps = CreateWithPermissionsProps & {
   groupVersionKind: GroupVersionKind;
+  namespace?: string;
 };
 
 export type UseK8sModel = (groupVersionKind: GroupVersionKind) => [K8sKind, boolean];
