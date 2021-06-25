@@ -13,6 +13,7 @@ import {
   K8sCreate,
   AppHistory,
   K8sPatch,
+  K8sKill,
 } from './api-types';
 
 export * from './api-types';
@@ -33,5 +34,6 @@ export const TableData: React.FC<TableDataProps> = MockImpl;
 export const DetailsPage: React.FC<DetailsPageProps> = MockImpl;
 export const k8sCreate: K8sCreate = MockImpl;
 export const k8sPatch: K8sPatch = MockImpl;
+export const k8sKill: K8sKill = MockImpl;
 export const useK8sModel: UseK8sModel = MockImpl;
 export const history: AppHistory = undefined;
