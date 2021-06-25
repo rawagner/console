@@ -18,6 +18,7 @@ export const exposePluginAPI = () => {
     useK8sModel: require('@console/shared/src/hooks/useK8sModel').useK8sModel,
     k8sCreate: require('@console/internal/module/k8s/resource').k8sCreate,
     k8sPatch: require('@console/internal/module/k8s/resource').k8sPatch,
+    k8sKill: require('@console/internal/module/k8s/resource').k8sKill,
     history: require('@console/internal/components/utils/router').history,
   };
 };

@@ -259,5 +259,6 @@ export type UseK8sModel = (groupVersionKind: GroupVersionKind) => [K8sKind, bool
 
 export type K8sCreate = <D = any, R = any>(kind: K8sKind, data: D) => Promise<R>;
 export type K8sPatch = (kind, resource, data) => Promise<any>;
+export type K8sKill = (kind, resource, data) => Promise<any>;
 
 export type AppHistory = History & { pushPath: History['push'] };
