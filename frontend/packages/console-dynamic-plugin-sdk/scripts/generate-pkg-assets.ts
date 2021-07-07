@@ -9,11 +9,10 @@ const createPackageJson = (packagePath: string) => {
   packageJson.name = '@openshift-console/dynamic-plugin-sdk';
   delete packageJson.private;
   packageJson.license = 'Apache-2.0';
-  packageJson.main = 'lib/extensions/index.js';
+  packageJson.main = 'lib/index-lib.js';
   packageJson.exports = {
-    '.': './lib/extensions/index.js',
-    './webpack': './lib/webpack/ConsoleRemotePlugin.js',
-    './api': './lib/api/api.js',
+    '.': './lib/index-lib.js',
+    './webpack': './lib/index-webpack.js',
   };
   packageJson.readme = 'README.md';
   packageJson.peerDependencies = _.pick(packageJson.devDependencies, 'webpack');
