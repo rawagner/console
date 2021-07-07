@@ -4,11 +4,12 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { safeDump } from 'js-yaml';
 import * as _ from 'lodash';
 import { CreateYAML } from '@console/internal/components/create-yaml';
-import { BreadCrumbs } from '@console/internal/components/utils';
-import { Firehose } from '@console/internal/components/utils/firehose';
-import { CustomResourceDefinitionModel } from '@console/internal/models';
+import { BreadCrumbs, resourcePathFromModel } from '@console/internal/components/utils';
+import { useK8sWatchResource } from '@console/internal/components/utils/k8s-watch-hook';
 import * as k8s from '@console/internal/module/k8s';
+import { WatchK8sResource } from '@console/internal/module/k8s';
 import { EditorType } from '@console/shared/src/components/synced-editor/editor-toggle';
+import { CustomResourceDefinitionModel } from 'public/models';
 import { referenceForProvidedAPI } from '..';
 import {
   testClusterServiceVersion,
@@ -17,7 +18,7 @@ import {
   testCRD,
 } from '../../../mocks';
 import { ClusterServiceVersionModel } from '../../models';
-import { CreateOperandPage, CreateOperand, CreateOperandProps } from './create-operand';
+import { CreateOperand, CreateOperandProps } from './create-operand';
 import { OperandForm, OperandFormProps } from './operand-form';
 import { OperandYAML, OperandYAMLProps } from './operand-yaml';
 import Spy = jasmine.Spy;
@@ -26,40 +27,33 @@ jest.mock('react-i18next', () => {
   const reactI18next = require.requireActual('react-i18next');
   return {
     ...reactI18next,
-    useTranslation: () => ({ t: (key) => key }),
+    useTranslation: () => ({ t: (key) => key.split('~')[1] }),
   };
 });
+
+jest.mock('@console/shared/src/hooks/useK8sModel', () => ({
+  useK8sModel: () => [testModel, false],
+}));
+
+jest.mock('@console/internal/components/utils/k8s-watch-hook', () => ({
+  useK8sWatchResource: (res: WatchK8sResource) => [
+    res.kind === CustomResourceDefinitionModel.kind ? testCRD : testClusterServiceVersion,
+    true,
+    undefined,
+  ],
+}));
 
 xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () => {
   let wrapper: ShallowWrapper<CreateOperandProps>;
 
   beforeEach(() => {
     const match = {
-      params: { appName: 'app', ns: 'default', plural: k8s.referenceFor(testResourceInstance) },
+      params: { csvName: 'app', ns: 'default', plural: k8s.referenceFor(testResourceInstance) },
       isExact: true,
       url: '',
       path: '',
     };
-    wrapper = shallow(
-      <CreateOperand
-        initialEditorType={EditorType.YAML}
-        model={testModel}
-        clusterServiceVersion={{ data: testClusterServiceVersion, loaded: true, loadError: null }}
-        customResourceDefinition={{ data: testCRD, loaded: true, loadError: null }}
-        loaded
-        match={match}
-      />,
-    );
-  });
-
-  it('renders breadcrumb links for given ClusterServiceVersion', () => {
-    expect(wrapper.find(BreadCrumbs).props().breadcrumbs).toEqual([
-      {
-        name: testClusterServiceVersion.spec.displayName,
-        path: window.location.pathname.replace('/~new', ''),
-      },
-      { name: `Create ${testModel.label}`, path: window.location.pathname },
-    ]);
+    wrapper = shallow(<CreateOperand initialEditorType={EditorType.YAML} match={match} />);
   });
 
   it('renders YAML editor by default', () => {
@@ -77,8 +71,7 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () =>
     const data = _.cloneDeep(testClusterServiceVersion);
     const testResourceInstanceYAML = safeDump(testResourceInstance);
     data.metadata.annotations = { 'alm-examples': JSON.stringify([testResourceInstance]) };
-    wrapper = wrapper.setProps({ clusterServiceVersion: { data, loaded: true, loadError: null } });
-
+    (useK8sWatchResource as jest.Mock).mockImplementationOnce(() => [data, true, undefined]);
     expect(wrapper.find(OperandYAML).props().initialYAML).toEqual(testResourceInstanceYAML);
   });
 
@@ -94,34 +87,18 @@ xdescribe('[https://issues.redhat.com/browse/CONSOLE-2137] CreateOperand', () =>
     expect(wrapper.find(OperandYAML).exists()).toBe(false);
     expect(wrapper.find(OperandForm).exists()).toBe(true);
   });
-});
 
-describe('CreateOperandPage', () => {
-  const match = {
-    params: { appName: 'app', ns: 'default', plural: k8s.referenceFor(testResourceInstance) },
-    isExact: true,
-    url: '',
-    path: '',
-  };
-
-  it('renders a <Firehose> for the correct resources', () => {
-    const wrapper = shallow(<CreateOperandPage.WrappedComponent match={match} model={testModel} />);
-
-    expect(wrapper.find(Firehose).props().resources).toEqual([
+  it('renders breadcrumb links for given ClusterServiceVersion', () => {
+    expect(wrapper.find(BreadCrumbs).props().breadcrumbs).toEqual([
       {
-        kind: k8s.referenceForModel(ClusterServiceVersionModel),
-        name: match.params.appName,
-        namespace: match.params.ns,
-        isList: false,
-        prop: 'clusterServiceVersion',
+        name: testClusterServiceVersion.spec.displayName,
+        path: resourcePathFromModel(
+          ClusterServiceVersionModel,
+          testClusterServiceVersion.metadata.name,
+          testClusterServiceVersion.metadata.namespace,
+        ),
       },
-      {
-        kind: CustomResourceDefinitionModel.kind,
-        name: k8s.nameForModel(testModel),
-        isList: false,
-        prop: 'customResourceDefinition',
-        optional: true,
-      },
+      { name: `Create {{item}}`, path: window.location.pathname },
     ]);
   });
 });
@@ -223,7 +200,7 @@ describe(OperandYAML.displayName, () => {
           path: '',
           params: {
             ns: 'default',
-            appName: 'example',
+            csvName: 'example',
             plural: k8s.referenceFor(testResourceInstance),
           },
         }}
