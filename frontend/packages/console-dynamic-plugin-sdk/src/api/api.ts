@@ -10,6 +10,7 @@ import {
   DetailsPageProps,
   ListPageCreateProps,
   UseK8sModel,
+  K8sGet,
   K8sCreate,
   AppHistory,
   K8sPatch,
@@ -32,6 +33,7 @@ export const ListPageCreate: React.FC<ListPageCreateProps> = MockImpl;
 export const TableRow: React.FC<TableRowProps> = MockImpl;
 export const TableData: React.FC<TableDataProps> = MockImpl;
 export const DetailsPage: React.FC<DetailsPageProps> = MockImpl;
+export const k8sGet: K8sGet = MockImpl;
 export const k8sCreate: K8sCreate = MockImpl;
 export const k8sPatch: K8sPatch = MockImpl;
 export const k8sKill: K8sKill = MockImpl;
