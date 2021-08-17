@@ -16,7 +16,7 @@ import { MachineModel } from '../models';
 import { MachineKind, referenceForModel, Selector } from '../module/k8s';
 import { Conditions } from './conditions';
 import NodeIPList from '@console/app/src/components/nodes/NodeIPList';
-import { DetailsPage, Table, TableRow, TableData, RowFunction } from './factory';
+import { DetailsPage, TableData } from './factory';
 import ListPageFilter from './factory/ListPage/ListPageFilter';
 import ListPageHeader from './factory/ListPage/ListPageHeader';
 import ListPageBody from './factory/ListPage/ListPageBody';
@@ -34,6 +34,9 @@ import {
 } from './utils';
 import { ResourceEventStream } from './events';
 import { useK8sWatchResource } from './utils/k8s-watch-hook';
+import VirtualizedTable, { RowProps, TableColumn } from './factory/Table/VirtualizedTable';
+import { sortResourceByValue } from './factory/Table/sort';
+
 const { common } = Kebab.factory;
 const menuActions = [...Kebab.getExtensionsActionsForKind(MachineModel), ...common];
 export const machineReference = referenceForModel(MachineModel);
@@ -52,13 +55,13 @@ const tableColumnClasses = [
 const getMachineProviderState = (obj: MachineKind): string =>
   obj?.status?.providerStatus?.instanceState;
 
-const MachineTableRow: RowFunction<MachineKind> = ({ obj, index, key, style }) => {
+const MachineTableRow: React.FC<RowProps<MachineKind>> = ({ obj }) => {
   const nodeName = getMachineNodeName(obj);
   const region = getMachineRegion(obj);
   const zone = getMachineZone(obj);
   const providerState = getMachineProviderState(obj);
   return (
-    <TableRow id={obj.metadata.uid} index={index} trKey={key} style={style}>
+    <>
       <TableData className={classNames(tableColumnClasses[0], 'co-break-word')}>
         <ResourceLink
           kind={machineReference}
@@ -84,7 +87,7 @@ const MachineTableRow: RowFunction<MachineKind> = ({ obj, index, key, style }) =
       <TableData className={tableColumnClasses[7]}>
         <ResourceKebab actions={menuActions} kind={machineReference} resource={obj} />
       </TableData>
-    </TableRow>
+    </>
   );
 };
 
@@ -174,48 +177,53 @@ type MachineListProps = {
 
 export const MachineList: React.FC<MachineListProps> = (props) => {
   const { t } = useTranslation();
-  const MachineTableHeader = () => {
-    return [
+
+  const machineTableColumn = React.useMemo<TableColumn<MachineKind>[]>(
+    () => [
       {
         title: t('public~Name'),
-        sortField: 'metadata.name',
+        sort: 'metadata.name',
         transforms: [sortable],
         props: { className: tableColumnClasses[0] },
       },
       {
         title: t('public~Namespace'),
-        sortField: 'metadata.namespace',
+        sort: 'metadata.namespace',
         transforms: [sortable],
         props: { className: tableColumnClasses[1] },
         id: 'namespace',
       },
       {
         title: t('public~Node'),
-        sortField: 'status.nodeRef.name',
+        sort: 'status.nodeRef.name',
         transforms: [sortable],
         props: { className: tableColumnClasses[2] },
       },
       {
         title: t('public~Phase'),
-        sortFunc: 'machinePhase',
+        sort: (data, direction) => {
+          const sortFunc = (a: MachineKind, b: MachineKind) =>
+            sortResourceByValue(a, b, direction, getMachinePhase);
+          return data.sort(sortFunc);
+        },
         transforms: [sortable],
         props: { className: tableColumnClasses[3] },
       },
       {
         title: t('public~Provider state'),
-        sortField: 'status.providerStatus.instanceState',
+        sort: 'status.providerStatus.instanceState',
         transforms: [sortable],
         props: { className: tableColumnClasses[4] },
       },
       {
         title: t('public~Region'),
-        sortField: "metadata.labels['machine.openshift.io/region']",
+        sort: "metadata.labels['machine.openshift.io/region']",
         transforms: [sortable],
         props: { className: tableColumnClasses[5] },
       },
       {
         title: t('public~Availability zone'),
-        sortField: "metadata.labels['machine.openshift.io/zone']",
+        sort: "metadata.labels['machine.openshift.io/zone']",
         transforms: [sortable],
         props: { className: tableColumnClasses[6] },
       },
@@ -223,15 +231,16 @@ export const MachineList: React.FC<MachineListProps> = (props) => {
         title: '',
         props: { className: tableColumnClasses[7] },
       },
-    ];
-  };
+    ],
+    [t],
+  );
+
   return (
-    <Table
+    <VirtualizedTable<MachineKind>
       {...props}
       aria-label={t('public~Machines')}
-      Header={MachineTableHeader}
+      columns={machineTableColumn}
       Row={MachineTableRow}
-      virtualize
     />
   );
 };
