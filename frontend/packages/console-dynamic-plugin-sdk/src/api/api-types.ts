@@ -255,9 +255,19 @@ export type ListPageCreateProps = CreateWithPermissionsProps & {
   namespace?: string;
 };
 
+// Based on getK8sResourcePath in resource.js
+export type K8sListParamsType = {
+  ns?: string;
+  name?: string;
+  path?: string;
+  labelSelector?: Selector;
+  queryParams?: (obj: { [k: string]: string }) => string;
+};
+
 export type UseK8sModel = (groupVersionKind: GroupVersionKind) => [K8sKind, boolean];
 
 export type K8sGet = (kind, name, namespace, opts?) => Promise<any>;
+export type K8sList = (kind, params?: K8sListParamsType, raw?: boolean, options?) => Promise<any>;
 export type K8sCreate = <D = any, R = any>(kind: K8sKind, data: D) => Promise<R>;
 export type K8sPatch = (kind, resource, data) => Promise<any>;
 export type K8sKill = (kind, resource, data?: any) => Promise<any>;
