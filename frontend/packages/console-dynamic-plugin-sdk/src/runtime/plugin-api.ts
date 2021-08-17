@@ -17,6 +17,7 @@ export const exposePluginAPI = () => {
     DetailsPage: require('@console/internal/components/factory/details').DetailsPage,
     useK8sModel: require('@console/shared/src/hooks/useK8sModel').useK8sModel,
     k8sGet: require('@console/internal/module/k8s/resource').k8sGet,
+    k8sList: require('@console/internal/module/k8s/resource').k8sList,
     k8sCreate: require('@console/internal/module/k8s/resource').k8sCreate,
     k8sPatch: require('@console/internal/module/k8s/resource').k8sPatch,
     k8sKill: require('@console/internal/module/k8s/resource').k8sKill,
